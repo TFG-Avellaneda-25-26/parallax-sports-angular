@@ -1,0 +1,22 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <app-auth-form-tabs 
+      [currentMode]="store.currentFormMode()"
+      (modeChange)="switchMode($event)"
+    ></app-auth-form-tabs>
+
+    <div class="auth-form-container">
+      @if (store.currentFormMode() === 'login') {
+        <app-login-form></app-login-form>
+      } @else if (store.currentFormMode() === 'register') {
+        <app-register-form></app-register-form>
+      }
+    </div>
+
+    @if (store.hasError()) {
+      <div class="auth-error-message">
+        {{ store.error() }}
+      </div>
+    }
+  </div>
+</div>
