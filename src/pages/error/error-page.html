@@ -1,0 +1,9 @@
+<main class="page-container">
+  <app-error-display
+    [title]="errorData()?.title ?? 'Error Inesperado'"
+  [detail]="errorData()?.detail ?? 'No se ha proporcionado información adicional.'"
+  [status]="errorData()?.status ?? 500"
+  [instance]="errorData()?.instance ?? ''"
+  >
+  </app-error-display>
+</main>
