@@ -2,11 +2,13 @@ import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProblemDetails } from '@entities/error';
+import { ErrorStateStore } from '@shared/model';
 import { catchError, throwError } from 'rxjs';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
-  const router = inject(Router)
+  const router = inject(Router);
+  const errorStateStore = inject(ErrorStateStore);
 
   // TESTING PURPOSES: Simulate an error response for a specific endpoint
   // if (req.url.endsWith('/test')) {
@@ -18,15 +20,13 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   //     instance: req.url
   //   };
 
-  //   // Navegamos con los datos personalizados
-  //   router.navigate(['error'], { state: { data: customProblem } });
+  //   errorStateStore.set(customProblem);
 
-  //   // Cortamos la petición real y lanzamos el error
-  //   return throwError(() => new HttpErrorResponse({
-  //     error: customProblem,
-  //     status: 503,
-  //     url: req.url
-  //   }));
+  //   if (router.url !== '/error') {
+  //     void router.navigate(['error'], { state: { data: customProblem } });
+  //   }
+
+  //   return throwError(() => customProblem);
   // }
 
   return next(req).pipe(
@@ -34,6 +34,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       let problem: ProblemDetails;
 
       if (error.error && typeof error.error == 'object' && 'type' in error.error) {
+        console.log("error.error: ", error.error);
         problem = error.error as ProblemDetails;
       } else {
         problem = {
@@ -48,7 +49,11 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       if (problem.status == 0 || problem.status == 404 || problem.status >= 500) {
         console.log("Error interceptor: ", problem);
 
-        router.navigate(['error'], { state: { data: problem}});
+        errorStateStore.set(problem);
+
+        if (router.url !== '/error') {
+          void router.navigate(['error'], { state: { data: problem } });
+        }
       }
 
       return throwError(() => problem);
