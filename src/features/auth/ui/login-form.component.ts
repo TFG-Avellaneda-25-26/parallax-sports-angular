@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -46,9 +46,9 @@ import { FormFieldComponent } from './form-field.component';
       <button 
         type="submit" 
         class="submit-button"
-        [disabled]="!loginForm.valid || store.isLoading()"
+        [disabled]="!loginForm.valid || authService.getAuthLoading()()"
       >
-        @if (store.isLoading()) {
+        @if (authService.getAuthLoading()()) {
           <span>Iniciando sesión...</span>
         } @else {
           <span>Iniciar sesión</span>
@@ -60,7 +60,7 @@ import { FormFieldComponent } from './form-field.component';
 })
 export class LoginFormComponent {
   protected store = inject(AuthStore);
-  private authService = inject(AuthService);
+  protected authService = inject(AuthService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
 
@@ -75,6 +75,30 @@ export class LoginFormComponent {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
+    });
+
+    // Effect para reaccionar a cambios en la respuesta de login
+    effect(() => {
+      const response = this.authService.getAuthResponse()();
+      if (response) {
+        const credentials = this.loginForm.value;
+        const authUser: AuthUser = {
+          id: response.userId,
+          email: credentials.email,
+          displayName: credentials.email,
+        };
+        this.store.setAuthenticatedUser(response, authUser);
+        this.router.navigate(['/dashboard']);
+      }
+    });
+
+    // Effect para reaccionar a errores
+    effect(() => {
+      const error = this.authService.getAuthError()();
+      if (error) {
+        const errorMessage = error.error?.message || 'Error al iniciar sesión';
+        this.store.setError(errorMessage);
+      }
     });
   }
 
@@ -96,24 +120,7 @@ export class LoginFormComponent {
   onSubmit(): void {
     if (this.loginForm.invalid) return;
 
-    this.store.setLoading();
     const credentials: AuthCredentials = this.loginForm.value;
-
-    this.authService.login(credentials).subscribe({
-      next: (response: AuthResponse) => {
-        // Create user object with email from form
-        const authUser = {
-          id: response.userId,
-          email: credentials.email,
-          displayName: '', // We don't know displayName yet, will be fetched on next load
-        };
-        this.store.setAuthenticatedUser(response, authUser);
-        this.router.navigate(['/dashboard']);
-      },
-      error: (err: any) => {
-        const errorMessage = err.error?.message || 'Error al iniciar sesión';
-        this.store.setError(errorMessage);
-      },
-    });
+    this.authService.login(credentials);
   }
 }

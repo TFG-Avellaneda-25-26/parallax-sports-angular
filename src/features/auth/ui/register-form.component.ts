@@ -1,9 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
 import { AuthService } from '../api/auth.service';
 import { AuthStore } from '../model/auth.store';
 import { passwordStrength } from '@shared/lib/form-validators';
@@ -46,9 +44,9 @@ import { FormFieldComponent } from './form-field.component';
       <button 
         type="submit" 
         class="submit-button"
-        [disabled]="!registerForm.valid || store.isLoading()"
+        [disabled]="!registerForm.valid || authService.getRegisterLoading()()"
       >
-        @if (store.isLoading()) {
+        @if (authService.getRegisterLoading()()) {
           <span>Registrando...</span>
         } @else {
           <span>Registrarse</span>
@@ -60,7 +58,7 @@ import { FormFieldComponent } from './form-field.component';
 })
 export class RegisterFormComponent {
   protected store = inject(AuthStore);
-  private authService = inject(AuthService);
+  protected authService = inject(AuthService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
 
@@ -94,37 +92,79 @@ export class RegisterFormComponent {
     });
 
     this.setupEmailExistenceCheck();
+
+    // Effect for successful registration
+    effect(() => {
+      const response = this.authService.getRegisterResponse()();
+      if (response) {
+        const authUser: AuthUser = {
+          id: response.userId,
+          email: this.registerForm.get('email')?.value,
+          displayName: this.registerForm.get('displayName')?.value,
+        };
+        this.store.setAuthenticatedUser(response, authUser);
+        this.router.navigate(['/dashboard']);
+      }
+    });
+
+    // Effect for registration errors
+    effect(() => {
+      const error = this.authService.getRegisterError()();
+      if (error) {
+        const errorMessage = error.error?.message || 'Error al registrarse';
+        this.store.setError(errorMessage);
+      }
+    });
   }
 
   private setupEmailExistenceCheck(): void {
     const emailControl = this.registerForm.get('email');
     if (emailControl) {
-      emailControl.statusChanges
-        .pipe(
-          debounceTime(300),
-          distinctUntilChanged(),
-          switchMap(() => {
-            if (emailControl.valid && emailControl.dirty) {
-              this.checkingEmail.set(true);
-              return this.authService.checkEmailExists(emailControl.value);
-            }
-            return of(null);
-          })
-        )
-        .subscribe({
-          next: (response: CheckEmailResponse | null) => {
-            this.checkingEmail.set(false);
-            if (response) {
-              this.emailExists.set(response.exists);
-              if (response.exists) {
-                emailControl.setErrors({ emailExists: true });
+      let debounceTimer: any;
+
+      // Watch for email control changes
+      effect(() => {
+        // Re-run whenever registerForm value changes
+        this.registerForm.valueChanges;
+
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          if (emailControl.valid && emailControl.dirty) {
+            this.checkingEmail.set(true);
+            this.authService.checkEmailExists(emailControl.value);
+          }
+        }, 300);
+      });
+
+      // Watch for email check response
+      effect(() => {
+        const response = this.authService.getCheckEmailResponse()();
+        this.checkingEmail.set(false);
+        if (response) {
+          this.emailExists.set(response.exists);
+          if (response.exists) {
+            emailControl.setErrors({ emailExists: true });
+          } else {
+            const errors = emailControl.errors;
+            if (errors) {
+              delete errors['emailExists'];
+              if (Object.keys(errors).length === 0) {
+                emailControl.setErrors(null);
+              } else {
+                emailControl.setErrors(errors);
               }
             }
-          },
-          error: () => {
-            this.checkingEmail.set(false);
-          },
-        });
+          }
+        }
+      });
+
+      // Watch for email check errors
+      effect(() => {
+        const error = this.authService.getCheckEmailError()();
+        if (error) {
+          this.checkingEmail.set(false);
+        }
+      });
     }
   }
 
@@ -149,25 +189,7 @@ export class RegisterFormComponent {
 
   onSubmit(): void {
     if (this.registerForm.invalid || this.emailExists()) return;
-
-    this.store.setLoading();
     const credentials: RegisterCredentials = this.registerForm.value;
-
-    this.authService.register(credentials).subscribe({
-      next: (response: AuthResponse) => {
-        // Create user object with data from form
-        const authUser: AuthUser = {
-          id: response.userId,
-          email: credentials.email,
-          displayName: credentials.displayName,
-        };
-        this.store.setAuthenticatedUser(response, authUser);
-        this.router.navigate(['/dashboard']);
-      },
-      error: (err: any) => {
-        const errorMessage = err.error?.message || 'Error al registrarse';
-        this.store.setError(errorMessage);
-      },
-    });
+    this.authService.register(credentials);
   }
 }
