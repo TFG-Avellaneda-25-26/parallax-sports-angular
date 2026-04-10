@@ -17,6 +17,7 @@ export interface RegisterCredentials {
 
 export interface AuthResponse {
   userId: string;
+  displayName: string;
   accessToken: string;
   refreshToken: string;
   emailVerified: boolean;

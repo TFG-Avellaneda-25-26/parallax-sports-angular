@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthStore } from '@features/auth';
-import { AuthService } from '@features/auth';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +18,7 @@ import { AuthService } from '@features/auth';
 
       <main class="dashboard-content">
         <section class="welcome-section">
-          <h2>Bienvenido usuario con id, {{ nombre }}!</h2>
+          <h2>Bienvenido, {{ user()?.displayName || user()?.email }}!</h2>
           <p>Estás autenticado en el sistema.</p>
         </section>
 
@@ -97,8 +96,6 @@ import { AuthService } from '@features/auth';
 export class DashboardComponent {
   private store = inject(AuthStore);
   private router = inject(Router);
-  private authService = inject(AuthService);
-  protected nombre = this.authService.getAuthResponse()()?.userId || 'Usuario';
 
   user = this.store.user;
 

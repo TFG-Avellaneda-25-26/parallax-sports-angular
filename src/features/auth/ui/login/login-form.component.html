@@ -1,0 +1,79 @@
+<div class="login-form">
+  <!-- Mensaje de error -->
+  @if (errorMessage()) {
+    <div class="error-alert">
+      <p class="error-text">{{ errorMessage() }}</p>
+    </div>
+  }
+
+  <!-- Campo Email -->
+  <div class="form-group">
+    <label for="email" class="label">Correo electrónico</label>
+    <input
+      id="email"
+      type="email"
+      placeholder="Correo electrónico"
+      class="input"
+      [formField]="loginForm.email"
+      [class.input--error]="loginForm.email().touched() && !loginForm.email().valid()"
+      autocomplete="off"
+    />
+    @if (loginForm.email().touched() && loginForm.email().errors().length > 0) {
+      <div class="error-messages">
+        @for (error of loginForm.email().errors(); track error.kind) {
+          <span class="error-message">{{ error.message }}</span>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Campo Contraseña -->
+  <div class="form-group">
+    <label for="password" class="label">Contraseña</label>
+    <input
+      id="password"
+      type="password"
+      placeholder="Contraseña"
+      class="input"
+      [formField]="loginForm.password"
+      [class.input--error]="loginForm.password().touched() && !loginForm.password().valid()"
+      autocomplete="off"
+    />
+    @if (loginForm.password().touched() && loginForm.password().errors().length > 0) {
+      <div class="error-messages">
+        @for (error of loginForm.password().errors(); track error.kind) {
+          <span class="error-message">{{ error.message }}</span>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Botón Submit -->
+  <button
+    type="button"
+    class="btn btn--primary"
+    (click)="onSubmit()"
+    [disabled]="!loginForm.email().valid() || !loginForm.password().valid() || isLoading()"
+  >
+    @if (isLoading()) {
+      <span class="btn__spinner"></span>
+      <span>Iniciando sesión...</span>
+    } @else {
+      <span>Iniciar sesión</span>
+    }
+  </button>
+
+  <!-- Proveedores sociales -->
+  <div class="divider">
+    <span>O continúa con</span>
+  </div>
+
+  <div class="social-buttons">
+    <button type="button" class="btn btn--social btn--google" disabled>
+      <span>Google</span>
+    </button>
+    <button type="button" class="btn btn--social btn--discord" disabled>
+      <span>Discord</span>
+    </button>
+  </div>
+</div>

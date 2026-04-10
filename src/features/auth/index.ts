@@ -11,4 +11,6 @@ export * from './lib/token.storage';
 export * from './lib/auth.interceptor';
 
 // UI
-export * from './ui/login-register.component';
+export * from './ui/both/login-register.component';
+export * from './ui/login/login-form.component';
+export * from './ui/register/register-form.component';
