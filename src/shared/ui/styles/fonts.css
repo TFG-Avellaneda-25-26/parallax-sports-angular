@@ -1,0 +1,23 @@
+/* ── Inter (Google Fonts) ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* ── Test Söhne Breit ──
+   Place your .otf files in public/fonts/ and adjust the filenames below.
+   local() picks up the system-installed font during development. */
+@font-face {
+  font-family: 'Test Söhne Breit';
+  src: local('Test Söhne Breit'),
+       url('/fonts/TestSohneBreit-Buch.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Test Söhne Breit';
+  src: local('Test Söhne Breit Halbfett'),
+       url('/fonts/TestSohneBreit-Buch.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
