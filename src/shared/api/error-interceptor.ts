@@ -10,25 +10,6 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const errorStateStore = inject(ErrorStateStore);
 
-  // TESTING PURPOSES: Simulate an error response for a specific endpoint
-  // if (req.url.endsWith('/test')) {
-  //   const customProblem: ProblemDetails = {
-  //     type: '/problems/testing-error',
-  //     title: 'Testing Error',
-  //     status: 503,
-  //     detail: 'This is a simulated error for testing purposes.',
-  //     instance: req.url
-  //   };
-
-  //   errorStateStore.set(customProblem);
-
-  //   if (router.url !== '/error') {
-  //     void router.navigate(['error'], { state: { data: customProblem } });
-  //   }
-
-  //   return throwError(() => customProblem);
-  // }
-
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       let problem: ProblemDetails;
@@ -46,7 +27,9 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         };
       }
 
-      if (problem.status == 0 || problem.status == 404 || problem.status >= 500) {
+      const isRefreshFailure = req.url.includes('/api/auth/refresh') && error.status === 401;
+
+      if (problem.status == 0 || problem.status == 404 || problem.status >= 500 || isRefreshFailure) {
         console.log("Error interceptor: ", problem);
 
         errorStateStore.set(problem);

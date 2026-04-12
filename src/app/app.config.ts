@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { API_BASE_URL } from '@shared/config';
 import { errorInterceptor } from '@shared/api/error-interceptor';
+import { authInterceptor } from '@shared/api/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,11 +13,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(
       withFetch(),
-      withInterceptors([errorInterceptor])
+      withInterceptors([errorInterceptor, authInterceptor])
     ),
     {
       provide: API_BASE_URL,
-      useValue: 'https://localhost:8080'
+      useValue: 'http://localhost:8080'
     }
   ]
 };
