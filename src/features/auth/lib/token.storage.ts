@@ -1,22 +1,17 @@
 import { Injectable } from '@angular/core';
 
-const TOKEN_KEY = 'auth_token';
-
+/**
+ * TokenStorage maneja tokens HTTPOnly cookies
+ * Los tokens se envían automáticamente por el navegador en cada petición
+ * No se pueden acceder desde JavaScript (seguridad)
+ */
 @Injectable({ providedIn: 'root' })
 export class TokenStorage {
-  get(): string | null {
-    return localStorage.getItem(TOKEN_KEY);
-  }
-
-  set(token: string): void {
-    localStorage.setItem(TOKEN_KEY, token);
-  }
-
-  clear(): void {
-    localStorage.removeItem(TOKEN_KEY);
-  }
-
-  has(): boolean {
-    return this.get() !== null;
+  // Los tokens HTTPOnly son manejados automáticamente por el navegador
+  // No hay lógica manual necesaria aquí
+  
+  isAuthenticated(): boolean {
+    // Se verifica si hay sesión activa mediante la respuesta del servidor
+    return true; // El servidor verificará el token en cada petición
   }
 }

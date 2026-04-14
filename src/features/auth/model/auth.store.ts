@@ -12,13 +12,12 @@ export class AuthStore {
 
   // Signals
   user = signal<AuthUser | null>(null);
-  refreshToken = signal<string | null>(null);
   status = signal<'idle' | 'loading' | 'authenticated' | 'error'>('idle');
   error = signal<string | null>(null);
   currentFormMode = signal<FormMode>('login');
 
   // Computed signals
-  isAuthenticated = signal(this.tokenStorage.has());
+  isAuthenticated = signal(this.tokenStorage.isAuthenticated());
   isLoading() {
     return this.status() === 'loading';
   }
@@ -33,11 +32,10 @@ export class AuthStore {
   }
 
   setAuthenticatedUser(response: AuthResponse, user: AuthUser): void {
-    // Store tokens
-    this.tokenStorage.set(response.accessToken);
-    this.refreshToken.set(response.refreshToken);
+    // Los tokens HTTPOnly se envían automáticamente por el navegador
+    // No hay que guardarlos manualmente
     
-    // Store user info
+    // Guardar info del usuario
     this.user.set(user);
     
     this.status.set('authenticated');
@@ -51,8 +49,7 @@ export class AuthStore {
   }
 
   logout(): void {
-    this.tokenStorage.clear();
-    this.refreshToken.set(null);
+    // Los tokens HTTPOnly se limpian en el servidor
     this.user.set(null);
     this.status.set('idle');
     this.error.set(null);

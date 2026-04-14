@@ -9,21 +9,29 @@ export class ApiClient {
 
   get<T>(path: string) {
     const fullPath = path.startsWith('/') ? path : `/${path}`;
-    return this.http.get<T>(`${this.baseUrl}${fullPath}`);
+    return this.http.get<T>(`${this.baseUrl}${fullPath}`, {
+      withCredentials: true,
+    });
   }
 
   post<T>(path: string, body: unknown) {
     const fullPath = path.startsWith('/') ? path : `/${path}`;
-    return this.http.post<T>(`${this.baseUrl}${fullPath}`, body);
+    return this.http.post<T>(`${this.baseUrl}${fullPath}`, body, {
+      withCredentials: true,
+    });
   }
 
   put<T>(path: string, body: unknown) {
     const fullPath = path.startsWith('/') ? path : `/${path}`;
-    return this.http.put<T>(`${this.baseUrl}${fullPath}`, body);
+    return this.http.put<T>(`${this.baseUrl}${fullPath}`, body, {
+      withCredentials: true,
+    });
   }
 
   delete<T>(path: string) {
     const fullPath = path.startsWith('/') ? path : `/${path}`;
-    return this.http.delete<T>(`${this.baseUrl}${fullPath}`);
+    return this.http.delete<T>(`${this.baseUrl}${fullPath}`, {
+      withCredentials: true,
+    });
   }
 }

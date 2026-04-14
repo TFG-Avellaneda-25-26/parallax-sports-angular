@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -6,26 +6,16 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TokenStorage } from './token.storage';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private tokenStorage = inject(TokenStorage);
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const token = this.tokenStorage.get();
-    
-    if (token) {
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    }
-
+    // Los tokens HTTPOnly se envían automáticamente por el navegador
+    // No hay necesidad de añadir manualmente el header Authorization
     return next.handle(request);
   }
 }

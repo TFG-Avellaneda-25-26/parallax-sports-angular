@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { LoginRegisterComponent, authGuard } from '@features/auth';
+import { AuthFormComponent, authGuard } from '@features/auth';
 
 export const routes: Routes = [
   {
@@ -9,7 +9,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginRegisterComponent,
+    component: AuthFormComponent,
   },
   {
     path: 'register',
