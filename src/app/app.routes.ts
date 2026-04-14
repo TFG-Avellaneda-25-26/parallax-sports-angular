@@ -4,8 +4,7 @@ import { AuthFormComponent, authGuard } from '@features/auth';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
-    pathMatch: 'full',
+    loadComponent: () => import('@pages/landing').then(m => m.LandingPage),
   },
   {
     path: 'login',
@@ -20,5 +19,12 @@ export const routes: Routes = [
     loadComponent: () => import('@pages/dashboard/ui/dashboard.component').then(m => m.DashboardComponent),
     canActivate: [authGuard],
   },
+  {
+    path: 'error',
+    loadComponent: () => import('@pages/error/error-page').then(m => m.ErrorPage),
+  },
+  {
+    path: '**',
+    redirectTo: 'error',
+  },
 ];
-

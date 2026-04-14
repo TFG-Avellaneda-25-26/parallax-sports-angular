@@ -1,0 +1,76 @@
+/* ── Design tokens ── */
+:root {
+  --font-display: 'Test Söhne Breit', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 9999px;
+
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  --anim-hold:   1.15;
+  --anim-snap:   0.24;
+  --anim-phrase: 1;
+}
+
+/* ── Dark theme (IT IS THE DEFAULT) ── */
+:root,
+[data-theme='dark'] {
+
+  --stroke-logo: 2.4;
+  --color-bg-primary: #011627;
+  --color-bg-secondary: #021d34;
+  --color-bg-surface: #0a2540;
+  --color-bg-elevated: #0f3460;
+
+  --color-text-primary: #c0c7d1;
+  --color-text-secondary: #5f7d97;
+  --color-text-muted: #3d5a73;
+
+  --color-accent: #4ecdc4;
+  --color-accent-hover: #45b7af;
+  --color-accent-subtle: rgba(78, 205, 196, 0.1);
+
+  --color-border: #1a3a54;
+  --color-border-subtle: #132d45;
+
+  --color-error: #ff6b6b;
+  --color-success: #51cf66;
+  --color-warning: #ffd43b;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Light theme ── */
+[data-theme='light'] {
+  --stroke-logo: 1.8;
+  --color-bg-primary: #f0f4f8;
+  --color-bg-secondary: #ffffff;
+  --color-bg-surface: #ffffff;
+  --color-bg-elevated: #ffffff;
+
+  --color-text-primary: #1a2b3d;
+  --color-text-secondary: #4a6580;
+  --color-text-muted: #8a9bb0;
+
+  --color-accent: #0891b2;
+  --color-accent-hover: #0e7490;
+  --color-accent-subtle: rgba(8, 145, 178, 0.08);
+
+  --color-border: #d1d9e0;
+  --color-border-subtle: #e8ecf0;
+
+  --color-error: #dc2626;
+  --color-success: #16a34a;
+  --color-warning: #ca8a04;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+}

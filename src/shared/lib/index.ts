@@ -1,1 +1,1 @@
-export { passwordStrength, matchField } from './form-validators';
+export { gsap, SplitText } from './gsap';

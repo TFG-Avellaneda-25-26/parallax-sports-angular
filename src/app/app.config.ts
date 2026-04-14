@@ -5,6 +5,8 @@ import { API_BASE_URL } from '@shared/config';
 
 import { routes } from './app.routes';
 import { AuthInterceptor } from '@features/auth';
+import { errorInterceptor } from '@shared/api/error-interceptor';
+import { authInterceptor } from '@shared/api/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,7 +17,8 @@ export const appConfig: ApplicationConfig = {
       withXsrfConfiguration({
         cookieName: 'XSRF-TOKEN',
         headerName: 'X-XSRF-TOKEN',
-      })
+      }),
+      withInterceptors([errorInterceptor, authInterceptor])
     ),
     {
       provide: HTTP_INTERCEPTORS,

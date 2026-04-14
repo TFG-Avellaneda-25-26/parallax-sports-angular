@@ -1,1 +1,2 @@
-export type { ProblemDetails } from './problem-details.types';
+export { ErrorStateStore } from './error-state.store';
+
