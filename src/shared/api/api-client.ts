@@ -9,18 +9,22 @@ export class ApiClient {
   private readonly options = { withCredentials: true };
 
   get<T>(path: string) {
-    return this.http.get<T>(`${this.baseUrl}${path}`, this.options);
+    const fullPath = path.startsWith('/') ? path : `/${path}`;
+    return this.http.get<T>(`${this.baseUrl}${fullPath}`, this.options);
   }
 
   post<T>(path: string, body: unknown) {
-    return this.http.post<T>(`${this.baseUrl}${path}`, body, this.options);
+    const fullPath = path.startsWith('/') ? path : `/${path}`;
+    return this.http.post<T>(`${this.baseUrl}${fullPath}`, body, this.options);
   }
 
   put<T>(path: string, body: unknown) {
-    return this.http.put<T>(`${this.baseUrl}${path}`, body, this.options);
+    const fullPath = path.startsWith('/') ? path : `/${path}`;
+    return this.http.put<T>(`${this.baseUrl}${fullPath}`, body, this.options);
   }
 
   delete<T>(path: string) {
-    return this.http.delete<T>(`${this.baseUrl}${path}`, this.options);
+    const fullPath = path.startsWith('/') ? path : `/${path}`;
+    return this.http.delete<T>(`${this.baseUrl}${fullPath}`, this.options);
   }
 }
