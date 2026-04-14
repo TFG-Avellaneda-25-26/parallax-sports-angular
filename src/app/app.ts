@@ -1,12 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
 import { ThemeStore } from '@features/theme-switch/model/theme.store';
 import { ThemeToggleComponent } from '@features/theme-switch/ui/theme-toggle';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HttpClientModule, ThemeToggleComponent],
+  imports: [RouterOutlet, ThemeToggleComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
