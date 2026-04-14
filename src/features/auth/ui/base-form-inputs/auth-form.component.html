@@ -96,12 +96,34 @@
       }
     </div>
 
+    <!-- Campo Repetir Contraseña (Solo para registro) -->
+    @if (currentMode() === 'register') {
+      <div class="form-group">
+        <label for="confirmPassword" class="label">Repetir contraseña</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          placeholder="Repite tu contraseña"
+          class="input"
+          [class.input--error]="passwordMismatchError() !== null && formData().confirmPassword !== ''"
+          [(ngModel)]="formData().confirmPassword"
+          (blur)="onConfirmPasswordBlur()"
+          autocomplete="off"
+        />
+        @if (passwordMismatchError()) {
+          <div class="error-messages">
+            <span class="error-message">{{ passwordMismatchError() }}</span>
+          </div>
+        }
+      </div>
+    }
+
     <!-- Botón Submit -->
     <button
       type="button"
       class="btn btn--primary"
       (click)="onSubmit()"
-      [disabled]="!authForm.email().valid() || !authForm.password().valid() || (currentMode() === 'register' && !authForm.displayName().valid()) || isLoading()"
+      [disabled]="!authForm.email().valid() || !authForm.password().valid() || (currentMode() === 'register' && (!authForm.displayName().valid() || formData().password !== formData().confirmPassword)) || isLoading()"
     >
       @if (isLoading()) {
         <span class="btn__spinner"></span>
@@ -119,10 +141,10 @@
 
   <!-- Social Buttons -->
   <div class="social-buttons">
-    <button type="button" class="btn btn--social btn--google" disabled>
+    <button type="button" class="btn btn--social btn--google" (click)="loginWithOAuth('google')">
       <span>Google</span>
     </button>
-    <button type="button" class="btn btn--social btn--discord" disabled>
+    <button type="button" class="btn btn--social btn--discord" (click)="loginWithOAuth('discord')">
       <span>Discord</span>
     </button>
   </div>

@@ -1,5 +1,6 @@
 import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { form, FormField, email, required, minLength } from '@angular/forms/signals';
 import { AuthService } from '../../api/auth.service';
@@ -10,12 +11,13 @@ interface AuthFormData {
   displayName: string;
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
 @Component({
   selector: 'app-auth-form',
   standalone: true,
-  imports: [CommonModule, FormField],
+  imports: [CommonModule, FormsModule, FormField],
   templateUrl: './auth-form.component.html',
   styleUrl: './auth-form.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,6 +29,7 @@ export class AuthFormComponent {
 
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
+  passwordMismatchError = signal<string | null>(null);
   
   // Modo actual: login o register
   currentMode = this.store.currentFormMode;
@@ -35,6 +38,7 @@ export class AuthFormComponent {
     displayName: '',
     email: '',
     password: '',
+    confirmPassword: '',
   });
 
   authForm = form(this.formData, (schemaPath) => {
@@ -97,10 +101,31 @@ export class AuthFormComponent {
     });
   }
 
+  onConfirmPasswordBlur(): void {
+    const password = this.formData().password;
+    const confirmPassword = this.formData().confirmPassword;
+
+    if (confirmPassword && password !== confirmPassword) {
+      this.passwordMismatchError.set('Las contraseñas no coinciden');
+    } else {
+      this.passwordMismatchError.set(null);
+    }
+  }
+
+  loginWithOAuth(provider: 'google' | 'discord'): void {
+    window.location.href = `http://localhost:8080/oauth2/authorization/${provider}`;
+  }
+
   private submitRegister(): void {
     if (!this.authForm.displayName().valid() ||
         !this.authForm.email().valid() ||
         !this.authForm.password().valid()) {
+      return;
+    }
+
+    // Validar que las contraseñas coincidan
+    if (this.formData().password !== this.formData().confirmPassword) {
+      this.passwordMismatchError.set('Las contraseñas no coinciden');
       return;
     }
 
