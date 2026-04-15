@@ -22,7 +22,7 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         // TODO?: Add Event Resolver in case we want to load events before loading the dashboard page
-        loadComponent: () => import('@pages/dashboard').then(m => m.DashboardPage)
+        //loadComponent: () => import('@pages/dashboard').then(m => m.DashboardPage)
       },
       // TODO: Add next protected pages
     ]
