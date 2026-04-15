@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { form, FormField, email, required, minLength } from '@angular/forms/signals';
-import { AuthService } from '../../api/auth.service';
-import { AuthStore } from '../../model/auth.store';
-import { AuthCredentials, RegisterCredentials } from '../../model/auth.types';
+import { AuthService, AuthStore, AuthCredentials, RegisterCredentials } from '@features/auth';
 
 interface AuthFormData {
   displayName: string;

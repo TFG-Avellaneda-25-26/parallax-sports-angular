@@ -8,7 +8,6 @@ import { TokenStorage } from '../lib/token.storage';
 export class AuthStore {
   private tokenStorage = inject(TokenStorage);
 
-  // Signals
   currentFormMode = signal<FormMode>('login');
   isAuthenticated = signal(this.tokenStorage.isAuthenticated());
 
@@ -17,7 +16,6 @@ export class AuthStore {
   }
 
   logout(): void {
-    // Los tokens HTTPOnly se limpian en el servidor
     this.isAuthenticated.set(false);
   }
 

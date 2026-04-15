@@ -4,7 +4,7 @@ import { provideHttpClient, withInterceptors, HTTP_INTERCEPTORS, withXsrfConfigu
 import { API_BASE_URL } from '@shared/config';
 
 import { routes } from './app.routes';
-import { AuthInterceptor } from '@pages/auth';
+import { AuthInterceptor } from '@features/auth';
 import { errorInterceptor } from '@shared/api/error-interceptor';
 import { authInterceptor } from '@shared/api/auth-interceptor';
 

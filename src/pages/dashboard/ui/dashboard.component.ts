@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthStore } from '@pages/auth';
+import { AuthStore } from '@features/auth';
 
 @Component({
   selector: 'app-dashboard',
