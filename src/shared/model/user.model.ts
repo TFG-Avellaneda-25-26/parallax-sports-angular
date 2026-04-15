@@ -26,7 +26,7 @@ export interface UserIdentity {
 
 export interface UserSettings {
   theme: 'light' | 'dark' | 'system';
-  defaultView: 'cards' | 'table' | 'calendar';
+  defaultView: 'cards' | 'table';
   timeZone: string;
   locale: string;
   updatedAt: string;
@@ -46,5 +46,5 @@ export interface UserSportFollow {
   competitionId?: string;
   participantId?: string;
   eventTypeFilter: string[];
-  notify: boolean;
+  notifyEnabled: boolean;
 }
