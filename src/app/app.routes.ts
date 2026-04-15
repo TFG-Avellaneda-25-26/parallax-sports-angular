@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { userResolver } from '@shared/resolver';
 
 export const routes: Routes = [
   // Unprotected pages
@@ -13,8 +14,7 @@ export const routes: Routes = [
   {
     path: '',
     // TODO: Add AuthGuard
-    // TODO: Add UserResolver
-
+    resolve: { user: userResolver },
     // Adding the UserResolver here will make sure that the user data is loaded before loading any of the protected pages
     // for example if we want to load events and filter with user preferences
     children: [
