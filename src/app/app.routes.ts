@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { userResolver } from '@shared/resolver';
+import { userResolver, eventResolver } from '@shared/resolver';
 
 export const routes: Routes = [
   // Unprotected pages
@@ -20,7 +20,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        // TODO?: Add Event Resolver in case we want to load events before loading the dashboard page
+        resolve: { events: eventResolver },
         loadComponent: () => import('@pages/dashboard').then(m => m.DashboardPage)
       },
       // TODO: Add next protected pages

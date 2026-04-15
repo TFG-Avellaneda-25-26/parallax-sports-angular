@@ -1,7 +1,7 @@
 <main>
-  @if (store.isloading()) {
-    <p>Loading user...</p>
-  } @else {
-    <h1>Welcome, {{ user()?.displayName }}</h1>
-  }
+  <h2>User Data</h2>
+  <pre>{{ user() | json }}</pre>
+
+  <h2>Events Data ({{ events().length }} events)</h2>
+  <pre>{{ events() | json }}</pre>
 </main>
