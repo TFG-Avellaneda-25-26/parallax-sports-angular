@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { UserStore } from '@features/user/store/user.store';
 
 @Component({
   imports: [],
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard.page.css',
 })
 export class DashboardPage {
+  protected readonly store = inject(UserStore);
 
+  readonly user = this.store.user;
 }

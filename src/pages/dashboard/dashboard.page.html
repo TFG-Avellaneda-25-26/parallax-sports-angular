@@ -1,3 +1,7 @@
 <main>
-  <p>Welcome to the Dashboard!</p>
+  @if (store.isloading()) {
+    <p>Loading user...</p>
+  } @else {
+    <h1>Welcome, {{ user()?.displayName }}</h1>
+  }
 </main>
