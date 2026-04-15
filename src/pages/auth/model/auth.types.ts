@@ -1,9 +1,3 @@
-export interface AuthUser {
-  id: string;
-  email: string;
-  displayName: string;
-}
-
 export interface BaseAuthCredentials {
   email: string;
   password: string;
@@ -17,15 +11,9 @@ export interface RegisterCredentials extends BaseAuthCredentials {
   displayName: string;
 }
 
+// Los tokens vienen en HTTPOnly cookies, no necesitamos guardarlos en frontend
 export interface AuthResponse {
-  userId: string;
-  accessToken: string;
-  refreshToken: string | null;
-  emailVerified: boolean;
-}
-
-export interface RefreshTokenRequest {
-  refreshToken: string;
+  // Respuesta vacía o confirmación, los tokens vienen en cookies
 }
 
 export interface CheckEmailResponse {

@@ -18,7 +18,7 @@ import { AuthStore } from '@pages/auth';
 
       <main class="dashboard-content">
         <section class="welcome-section">
-          <h2>Bienvenido, {{ user()?.displayName || user()?.email }}!</h2>
+          <h2>Bienvenido!</h2>
           <p>Estás autenticado en el sistema.</p>
         </section>
 
@@ -33,42 +33,41 @@ import { AuthStore } from '@pages/auth';
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: #f5f5f5;
     }
 
     .dashboard-header {
-      background-color: rgba(0, 0, 0, 0.1);
-      padding: 20px 40px;
+      background-color: #333;
+      padding: 16px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       color: white;
+    }
 
-      h1 {
-        margin: 0;
-        font-size: 28px;
-      }
+    .dashboard-header h1 {
+      margin: 0;
+      font-size: 20px;
     }
 
     .logout-btn {
-      padding: 10px 20px;
+      padding: 8px 16px;
       background-color: #dc3545;
       color: white;
       border: none;
       border-radius: 4px;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
-      transition: background-color 0.3s;
+    }
 
-      &:hover {
-        background-color: #c82333;
-      }
+    .logout-btn:hover {
+      background-color: #c82333;
     }
 
     .dashboard-content {
       flex: 1;
-      padding: 40px;
-      max-width: 1200px;
+      padding: 24px;
+      max-width: 1000px;
       margin: 0 auto;
       width: 100%;
     }
@@ -76,28 +75,29 @@ import { AuthStore } from '@pages/auth';
     .welcome-section,
     .placeholder-section {
       background: white;
-      padding: 24px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 16px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      border: 1px solid #ddd;
+    }
 
-      h2 {
-        margin-top: 0;
-        color: #333;
-      }
+    .welcome-section h2 {
+      margin: 0 0 8px 0;
+      font-size: 18px;
+      color: #333;
+    }
 
-      p {
-        color: #666;
-        margin: 0;
-      }
+    .welcome-section p,
+    .placeholder-section p {
+      margin: 0;
+      color: #666;
+      font-size: 14px;
     }
   `],
 })
 export class DashboardComponent {
   private store = inject(AuthStore);
   private router = inject(Router);
-
-  user = this.store.user;
 
   logout(): void {
     this.store.logout();

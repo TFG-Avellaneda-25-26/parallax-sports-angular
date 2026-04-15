@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { form, FormField, email, required, minLength } from '@angular/forms/signals';
 import { AuthService } from '../../api/auth.service';
 import { AuthStore } from '../../model/auth.store';
-import { AuthCredentials, RegisterCredentials, AuthResponse, AuthUser } from '../../model/auth.types';
+import { AuthCredentials, RegisterCredentials } from '../../model/auth.types';
 
 interface AuthFormData {
   displayName: string;
@@ -30,8 +30,6 @@ export class AuthFormComponent {
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
   passwordMismatchError = signal<string | null>(null);
-  
-  // Modo actual: login o register
   currentMode = this.store.currentFormMode;
 
   formData = signal<AuthFormData>({
@@ -82,21 +80,15 @@ export class AuthFormComponent {
     };
 
     this.authService.login(credentials).subscribe({
-      next: (response: AuthResponse) => {
+      next: () => {
         this.isLoading.set(false);
-        const authUser: AuthUser = {
-          id: response.userId,
-          email: credentials.email,
-          displayName: credentials.email, // Use email as displayName
-        };
-        this.store.setAuthenticatedUser(response, authUser);
+        this.store.setAuthenticated();
         this.router.navigate(['/dashboard']);
       },
       error: (err: any) => {
         this.isLoading.set(false);
         const errorMsg = err.error?.message || 'Error al iniciar sesión';
         this.errorMessage.set(errorMsg);
-        this.store.setError(errorMsg);
       },
     });
   }
@@ -123,7 +115,6 @@ export class AuthFormComponent {
       return;
     }
 
-    // Validar que las contraseñas coincidan
     if (this.formData().password !== this.formData().confirmPassword) {
       this.passwordMismatchError.set('Las contraseñas no coinciden');
       return;
@@ -139,21 +130,15 @@ export class AuthFormComponent {
     };
 
     this.authService.register(credentials).subscribe({
-      next: (response: AuthResponse) => {
+      next: () => {
         this.isLoading.set(false);
-        const authUser: AuthUser = {
-          id: response.userId,
-          email: credentials.email,
-          displayName: credentials.displayName,
-        };
-        this.store.setAuthenticatedUser(response, authUser);
+        this.store.setAuthenticated();
         this.router.navigate(['/dashboard']);
       },
       error: (err: any) => {
         this.isLoading.set(false);
         const errorMsg = err.error?.message || 'Error al registrarse';
         this.errorMessage.set(errorMsg);
-        this.store.setError(errorMsg);
       },
     });
   }
