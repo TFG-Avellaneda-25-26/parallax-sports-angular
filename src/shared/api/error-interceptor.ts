@@ -29,14 +29,16 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
       const isRefreshFailure = req.url.includes('/api/auth/refresh') && error.status === 401;
 
-      if (problem.status == 0 || problem.status == 404 || problem.status >= 500 || isRefreshFailure) {
+      if (problem.status == 0 || problem.status == 404 || problem.status >= 500) {
         console.log("Error interceptor: ", problem);
 
         errorStateStore.set(problem);
 
         if (router.url !== '/error') {
-          void router.navigate(['error'], { state: { data: problem } });
+          void router.navigate(['error']);
         }
+      } else if (isRefreshFailure) {
+        errorStateStore.set(problem)
       }
 
       return throwError(() => problem);
