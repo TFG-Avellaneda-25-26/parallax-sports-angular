@@ -6,12 +6,12 @@ import { User } from "@shared/model/user.model";
 
 interface UserState {
   user: User | null;
-  isloading: boolean;
+  isLoading: boolean;
 }
 
 const initialState: UserState = {
   user: null,
-  isloading: false,
+  isLoading: false,
 }
 
 export const UserStore = signalStore(
@@ -27,13 +27,13 @@ export const UserStore = signalStore(
 
     async loadUser(): Promise<void> {
       if (store.user()) return;
-      patchState(store, { isloading: true});
+      patchState(store, { isLoading: true});
 
       try {
         const user = await lastValueFrom(userService.fetchCurrentUser());
-        patchState(store, { user, isloading: false });
+        patchState(store, { user, isLoading: false });
       } catch (error) {
-        patchState(store, { user: null, isloading: false });
+        patchState(store, { user: null, isLoading: false });
         throw error;
       }
     },

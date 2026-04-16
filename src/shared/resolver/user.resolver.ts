@@ -10,6 +10,6 @@ export const userResolver: ResolveFn<boolean> = async (route, state) => {
     await userStore.loadUser();
     return true;
   } catch (error) {
-    return false;
+    throw error;
   }
 };

@@ -10,6 +10,6 @@ export const eventResolver: ResolveFn<boolean> = async (route, state) => {
     await eventStore.loadInitialEvents();
     return true;
   } catch (error) {
-    return false;
+    throw error;
   }
 };

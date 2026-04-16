@@ -10,7 +10,7 @@ export const routes: Routes = [
     loadComponent: () => import('@pages/landing').then(m => m.LandingPage),
   },
   // TODO: Add AuthForm page
-  // Added separated '' path for protected pages to easily add AuthGuard and UserResolver wihout affecting landing, error, authform pages
+  // Added a separate '' path for protected pages to easily add AuthGuard and UserResolver without affecting landing, error, and auth form pages
   {
     path: '',
     // TODO: Add AuthGuard

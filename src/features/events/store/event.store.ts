@@ -1,7 +1,6 @@
 import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { EventService } from '@entities/sport-event';
-import { SportEvent } from '@entities/sport-event';
+import { EventService, SportEvent } from '@entities/sport-event';
 import { lastValueFrom } from 'rxjs';
 
 interface EventState {
