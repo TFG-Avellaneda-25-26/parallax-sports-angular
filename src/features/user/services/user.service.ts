@@ -10,6 +10,6 @@ export class UserService {
   private readonly apiClient = inject(ApiClient);
 
   fetchCurrentUser(): Observable<User> {
-    return this.apiClient.get<User>('/api/users/me');
+    return this.apiClient.get<User>('/api/auth/me');
   }
 }

@@ -12,14 +12,14 @@ export class AuthService {
   private readonly apiClient = inject(ApiClient);
 
   login(credentials: AuthCredentials) {
-    return this.apiClient.post<AuthResponse>('/auth/login', credentials);
+    return this.apiClient.post<AuthResponse>('/api/auth/login', credentials);
   }
 
   register(credentials: RegisterCredentials) {
-    return this.apiClient.post<AuthResponse>('/auth/register', credentials);
+    return this.apiClient.post<AuthResponse>('/api/auth/register', credentials);
   }
 
   checkEmailExists(email: string) {
-    return this.apiClient.get<CheckEmailResponse>(`/auth/check-email?email=${encodeURIComponent(email)}`);
+    return this.apiClient.get<CheckEmailResponse>(`/api/auth/check-email?email=${encodeURIComponent(email)}`);
   }
 }

@@ -1,33 +1,32 @@
 import { Routes } from '@angular/router';
 import { AuthFormComponent } from '@pages/authForm';
 import { authGuard } from '@features/auth';
-import { userResolver, eventResolver } from '@shared/resolver';
 
 export const routes: Routes = [
   // Unprotected pages
   {
     path: '',
     pathMatch: 'full',
-    // TODO?: Add Guard to redirect to dashboard if user is already authenticated
     loadComponent: () => import('@pages/landing').then(m => m.LandingPage),
   },
-  // TODO: Add AuthForm page
-  // Added a separate '' path for protected pages to easily add AuthGuard and UserResolver without affecting landing, error, and auth form pages
+  {
+    path: 'login',
+    component: AuthFormComponent,
+  },
+  {
+    path: 'register',
+    redirectTo: '/login',
+  },
+  // Protected pages with resolver and guard
   {
     path: '',
-    // TODO: Add AuthGuard
-    resolve: { user: userResolver },
-    // Adding the UserResolver here will make sure that the user data is loaded before loading any of the protected pages
-    // for example if we want to load events and filter with user preferences
+    canActivate: [authGuard],
     children: [
       {
         path: 'dashboard',
-        resolve: { events: eventResolver },
         loadComponent: () => import('@pages/dashboard').then(m => m.DashboardPage)
       },
-      // TODO: Add next protected pages
     ]
-
   },
   // Error pages
   {
