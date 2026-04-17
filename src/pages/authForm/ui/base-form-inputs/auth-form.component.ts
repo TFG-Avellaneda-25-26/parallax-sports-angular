@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { form, FormField, email, required, minLength } from '@angular/forms/signals';
-import { AuthService, AuthStore, AuthCredentials, RegisterCredentials } from '@features/auth';
+import { AuthService, AuthCredentials, RegisterCredentials, type FormMode } from '@features/auth';
 
 interface AuthFormData {
   displayName: string;
@@ -21,14 +21,13 @@ interface AuthFormData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthFormComponent {
-  private store = inject(AuthStore);
   private authService = inject(AuthService);
   private router = inject(Router);
 
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
   passwordMismatchError = signal<string | null>(null);
-  currentMode = this.store.currentFormMode;
+  currentMode = signal<FormMode>('login');
 
   formData = signal<AuthFormData>({
     displayName: '',
@@ -52,7 +51,7 @@ export class AuthFormComponent {
   });
 
   switchMode(mode: 'login' | 'register'): void {
-    this.store.switchFormMode(mode);
+    this.currentMode.set(mode);
     this.errorMessage.set(null);
   }
 
@@ -78,9 +77,11 @@ export class AuthFormComponent {
     };
 
     this.authService.login(credentials).subscribe({
-      next: () => {
+      next: (response: any) => {
         this.isLoading.set(false);
-        this.store.setAuthenticated();
+        if (response?.userId) {
+          localStorage.setItem('userId', response.userId);
+        }
         this.router.navigate(['/dashboard']);
       },
       error: (err: any) => {
@@ -128,9 +129,11 @@ export class AuthFormComponent {
     };
 
     this.authService.register(credentials).subscribe({
-      next: () => {
+      next: (response: any) => {
         this.isLoading.set(false);
-        this.store.setAuthenticated();
+        if (response?.userId) {
+          localStorage.setItem('userId', response.userId);
+        }
         this.router.navigate(['/dashboard']);
       },
       error: (err: any) => {

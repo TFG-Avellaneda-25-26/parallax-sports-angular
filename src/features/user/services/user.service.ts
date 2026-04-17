@@ -10,6 +10,10 @@ export class UserService {
   private readonly apiClient = inject(ApiClient);
 
   fetchCurrentUser(): Observable<User> {
-    return this.apiClient.get<User>('/api/auth/me');
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      throw new Error('User ID not found');
+    }
+    return this.apiClient.get<User>(`/api/users/${userId}`);
   }
 }

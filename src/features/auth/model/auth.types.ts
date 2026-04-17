@@ -11,6 +11,7 @@ export interface RegisterCredentials extends BaseAuthCredentials {
 }
 
 export interface AuthResponse {
+  userId: string;
 }
 
 export interface CheckEmailResponse {
