@@ -1,5 +1,3 @@
-import { signal } from "@angular/core";
-
 export interface AuthData extends PasswordData {
   displayName: string;
   email: string;

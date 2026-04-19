@@ -45,7 +45,7 @@ export const AuthStore = signalStore(
           await lastValueFrom(request);
           router.navigate(['/dashboard']);
           return null;
-        } catch (error) {
+        } catch {
           return { kind: 'authError', message: store.authErrorSubmitMessage() };
         }
       },

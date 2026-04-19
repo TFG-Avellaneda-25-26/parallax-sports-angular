@@ -4,6 +4,6 @@ export interface ProblemDetails {
   status: number;
   detail: string;
   instance?: string;
-  invalid_params?: Array<{ name: string; reason: string }>;
-  [key: string]: any
+  invalid_params?: { name: string; reason: string }[];
+  [key: string]: unknown
 }

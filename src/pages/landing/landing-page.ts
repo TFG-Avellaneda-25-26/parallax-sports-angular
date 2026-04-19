@@ -140,7 +140,7 @@ export class LandingPage {
             redraw: false,
             persist: true,
           },
-        } as any,
+        } as gsap.plugins.MorphSVGVars,
         duration: morphDurationSec,
         ease: 'power2.inOut',
       }, 'morph');
@@ -180,7 +180,7 @@ export class LandingPage {
           redraw: false,
           persist: true,
         },
-      } as any,
+      } as gsap.plugins.MorphSVGVars,
       duration: titleSnapSec,
       ease: 'power4.inOut',
     }, titleHoldSec);

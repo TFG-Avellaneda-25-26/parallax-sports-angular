@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { Router, type CanActivateFn } from '@angular/router';
 import { UserStore } from '@entities/user';
 
-export const redirectIfAuthenticatedGuard: CanActivateFn = async (route, state) => {
+export const redirectIfAuthenticatedGuard: CanActivateFn = async () => {
   const userStore = inject(UserStore);
   const router = inject(Router);
 
@@ -12,8 +12,7 @@ export const redirectIfAuthenticatedGuard: CanActivateFn = async (route, state) 
     if (userStore.isAuthenticated()) {
       return router.parseUrl('/dashboard');
     }
-  } catch (error) {
-    console.log('Error loading user in redirectIfAuthenticatedGuard', error);
+  } catch {
     return true;
   }
 
