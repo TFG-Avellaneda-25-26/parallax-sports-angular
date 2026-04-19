@@ -1,4 +1,2 @@
-// API
-export * from './api/auth.service';
-// Model
-export * from './model/auth.types';
+export { AuthFormComponent } from './ui/auth-form/auth-form.component';
+export { AuthStore } from './store/auth.store';

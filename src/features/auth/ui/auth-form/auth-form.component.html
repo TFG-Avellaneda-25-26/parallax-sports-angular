@@ -1,0 +1,26 @@
+<button (click)="authStore.toggleMode()">{{ authStore.formButtonText() }}</button>
+<form [formRoot]="form">
+  @if (authStore.isRegisterMode()) {
+    <app-stateful-input label="Display Name" fieldId="displayName" [formField]="form.displayName" />
+  }
+  <app-stateful-input type="email" label="Email" fieldId="email" [formField]="form.email" />
+  <app-stateful-input type="password" label="Password" fieldId="password" [formField]="form.password" />
+
+  @if (authStore.isRegisterMode()) {
+    <app-stateful-input type="password" label="Confirm Password" fieldId="confirmPassword" [formField]="form.confirmPassword" />
+  }
+  <div>
+    <button type="submit" [disabled]="form().submitting() || form().invalid()">
+      @if (form().submitting()) {
+        Submitting...
+      } @else {
+        {{ authStore.formSubmissionText() }}
+      }
+    </button>
+    @if (form().errors(); as errs) {
+      @for (err of errs; track err) {
+        <span>{{ err.message }}</span>
+      }
+    }
+  </div>
+</form>

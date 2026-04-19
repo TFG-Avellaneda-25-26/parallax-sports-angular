@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
-import { authGuard, redirectIfAuthenticatedGuard } from '@features/user/guards';
-import { eventResolver } from '@shared/resolver';
-import { AuthFormComponent } from '@pages/authForm';
+import { authGuard, redirectIfAuthenticatedGuard } from '@shared/guards';
+import { eventResolver } from '@features/event';
 
 
 export const routes: Routes = [
@@ -13,14 +12,10 @@ export const routes: Routes = [
     loadComponent: () => import('@pages/landing').then(m => m.LandingPage),
   },
   {
-    path: 'login',
-    component: AuthFormComponent,
+    path: 'auth',
+    canActivate: [redirectIfAuthenticatedGuard],
+    loadComponent: () => import('@pages/auth').then(m => m.AuthPage),
   },
-  {
-    path: 'register',
-    redirectTo: '/login',
-  },
-
   // Protected pages
   {
     path: '',
@@ -37,7 +32,7 @@ export const routes: Routes = [
   // Error pages
   {
     path: 'error',
-    loadComponent: () => import('@pages/error/error-page').then(m => m.ErrorPage),
+    loadComponent: () => import('@pages/error').then(m => m.ErrorPage),
   },
   {
     path: '**',
