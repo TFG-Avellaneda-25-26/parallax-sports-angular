@@ -1,0 +1,24 @@
+<section class="landing">
+  <div class="landing__animation" #svgWrap>
+    <svg class="landing__svg" [attr.viewBox]="logos[0].viewBox" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        @for (logo of logos; track logo.id) {
+          <path [id]="'logo-' + logo.id" [attr.d]="logo.path" />
+        }
+      </defs>
+      <path class="landing__logo-path" [attr.d]="logos[0].path" />
+    </svg>
+  </div>
+
+  <h1 class="landing__title" #title>Parallax-Sports</h1>
+
+  <div class="landing__description-group" #descWrap>
+    <span class="landing__description">Track sports.</span>
+    <span class="landing__description">Get alerts.</span>
+    <span class="landing__description">Never miss a moment.</span>
+  </div>
+
+  <div class="landing__actions">
+    <a routerLink="/register" class="landing__btn landing__btn--filled">Get Started</a>
+  </div>
+</section>
