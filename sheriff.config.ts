@@ -1,8 +1,8 @@
 import { SheriffConfig } from '@softarc/sheriff-core';
 
-export const sheriffConfig: SheriffConfig = {
+export default {
   tagging: {
-    'src/app':                'app',
+    'src/app/<_>':                'app',
     'src/shared/<type>':      'shared',
     'src/entities/<slice>':   'entity',
     'src/features/<slice>':   'feature',
@@ -11,6 +11,7 @@ export const sheriffConfig: SheriffConfig = {
   },
 
   depRules: {
+    'root':     ['app', 'shared', 'entity', 'feature', 'widget', 'page'],
     'app':      ['shared', 'entity', 'feature', 'widget', 'page'],
     'page':     ['shared', 'entity', 'feature', 'widget'],
     'widget':   ['shared', 'entity', 'feature'],
@@ -18,4 +19,4 @@ export const sheriffConfig: SheriffConfig = {
     'entity':   ['shared'],
     'shared':   ['shared'],
   }
-};
+} satisfies SheriffConfig;

@@ -14,7 +14,6 @@ module.exports = defineConfig([
       tseslint.configs.stylistic,
       angular.configs.tsRecommended,
     ],
-    plugins: { sheriff },
     processor: angular.processInlineTemplates,
     rules: {
       "@angular-eslint/directive-selector": [
@@ -42,5 +41,9 @@ module.exports = defineConfig([
       angular.configs.templateAccessibility,
     ],
     rules: {},
+  },
+  {
+    files: ["**/*.ts"],
+    extends: [ sheriff.configs.all ]
   }
 ]);
