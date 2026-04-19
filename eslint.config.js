@@ -16,6 +16,14 @@ module.exports = defineConfig([
     ],
     processor: angular.processInlineTemplates,
     rules: {
+      "no-restricted-imports": ['error', {
+        patterns: [
+          {
+            group: ['../*'],
+            message: 'User path aliases (@shared, @entities, @features, @widgets, @pages)',
+          }
+        ]
+      }],
       "@angular-eslint/directive-selector": [
         "error",
         {
