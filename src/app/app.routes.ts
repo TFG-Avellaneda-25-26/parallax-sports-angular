@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard, redirectIfAuthenticatedGuard } from '@shared/guards';
+import { authGuard, redirectIfAuthenticatedGuard } from '@entities/user';
 import { eventResolver } from '@features/event';
 
 
