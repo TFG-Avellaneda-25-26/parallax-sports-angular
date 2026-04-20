@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { JsonPipe } from '@angular/common';
-import { UserStore } from '@features/user/store/user.store';
-import { EventStore } from '@features/events/store/event.store';
+import { UserStore } from '@entities/user';
+import { EventStore } from '@features/event';
 
 @Component({
   imports: [JsonPipe],

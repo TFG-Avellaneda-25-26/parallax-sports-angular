@@ -1,0 +1,18 @@
+<div>
+  <label [for]="fieldId()">{{ label() }}</label>
+  <input
+    [type]="type()"
+    [id]="fieldId()"
+    [value]="value()"
+    (input)="value.set($event.target.value)"
+    (blur)="touched.set(true)"
+  />
+
+  @if (invalid() && touched()) {
+    <div role="alert">
+      @for (error of errors(); track error.kind) {
+        <span>{{ error.message }}</span>
+      }
+    </div>
+  }
+</div>
