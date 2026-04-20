@@ -1,22 +1,25 @@
 import { Routes } from '@angular/router';
-import { userResolver, eventResolver } from '@shared/resolver';
+import { authGuard, redirectIfAuthenticatedGuard } from '@entities/user';
+import { eventResolver } from '@features/event';
+
 
 export const routes: Routes = [
   // Unprotected pages
   {
     path: '',
     pathMatch: 'full',
-    // TODO?: Add Guard to redirect to dashboard if user is already authenticated
+    canActivate: [redirectIfAuthenticatedGuard],
     loadComponent: () => import('@pages/landing').then(m => m.LandingPage),
   },
-  // TODO: Add AuthForm page
-  // Added a separate '' path for protected pages to easily add AuthGuard and UserResolver without affecting landing, error, and auth form pages
+  {
+    path: 'auth',
+    canActivate: [redirectIfAuthenticatedGuard],
+    loadComponent: () => import('@pages/auth').then(m => m.AuthPage),
+  },
+  // Protected pages
   {
     path: '',
-    // TODO: Add AuthGuard
-    resolve: { user: userResolver },
-    // Adding the UserResolver here will make sure that the user data is loaded before loading any of the protected pages
-    // for example if we want to load events and filter with user preferences
+    canActivateChild: [authGuard],
     children: [
       {
         path: 'dashboard',
@@ -25,12 +28,11 @@ export const routes: Routes = [
       },
       // TODO: Add next protected pages
     ]
-
   },
   // Error pages
   {
     path: 'error',
-    loadComponent: () => import('@pages/error/error-page').then(m => m.ErrorPage),
+    loadComponent: () => import('@pages/error').then(m => m.ErrorPage),
   },
   {
     path: '**',

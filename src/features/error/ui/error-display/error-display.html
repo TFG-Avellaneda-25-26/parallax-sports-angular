@@ -1,0 +1,9 @@
+<div>
+  <h1>title: {{ errorStore.error()?.title }}</h1>
+  <p>detail: {{ errorStore.error()?.detail }}</p>
+  <p>Status: {{ errorStore.status() }}</p>
+
+  @if (errorStore.haveInstance()) {
+    <p>Instance: {{ errorStore.error()?.instance }}</p>
+  }
+</div>

@@ -1,0 +1,24 @@
+<button
+  type="button"
+  class="theme-toggle"
+  (click)="onToggleTheme()"
+  [attr.aria-label]="themeStore.isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
+  [attr.title]="themeStore.isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
+  >
+  <svg
+    class="theme-toggle__icon"
+    viewBox="0 0 22 22"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <path id="theme-icon-sun"  [attr.d]="sunPath" />
+      <path id="theme-icon-moon" [attr.d]="moonPath" />
+    </defs>
+    <path
+      #iconPath
+      fill="currentColor"
+      fill-rule="evenodd"
+      [attr.d]="initialIsDark ? sunPath : moonPath"
+    />
+  </svg>
+</button>
