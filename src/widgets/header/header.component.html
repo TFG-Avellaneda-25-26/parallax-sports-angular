@@ -1,7 +1,10 @@
-<div>
-  <! -- TODO: Add logo component -->
+<header>
   @if (userStore.isAuthenticated()) {
-    <button (click)="logout()">Logout</button>
+    <app-logout-button />
+
+    @if (!userStore.isVerified()) {
+      <app-verify-email />
+    }
   }
   <app-theme-toggle />
-</div>
+</header>
