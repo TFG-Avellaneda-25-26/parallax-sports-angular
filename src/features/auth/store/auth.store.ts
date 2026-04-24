@@ -16,7 +16,7 @@ const formModel = signal<AuthData>({
 })
 
 export const AuthStore = signalStore(
-  withState({ mode: 'login' as AuthMode }),
+  withState({ mode: 'register' as AuthMode }),
 
   withComputed(({ mode }) => ({
     isRegisterMode: computed(() => mode() === 'register'),
