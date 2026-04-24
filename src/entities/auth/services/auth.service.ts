@@ -13,4 +13,8 @@ export class AuthService {
   register(credentials: RegisterCredentials) {
     return this.apiClient.post<AuthResponse>('/api/auth/register', credentials);
   }
+
+  logout() {
+    return this.apiClient.post('/api/auth/logout', {});
+  }
 }

@@ -1,4 +1,4 @@
-/* ── Design tokens ── */
+/* - Design tokens - */
 :root {
   --font-display: 'Test Söhne Breit', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
@@ -11,13 +11,9 @@
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
   --transition-slow: 350ms ease;
-
-  --anim-hold:   1.15;
-  --anim-snap:   0.24;
-  --anim-phrase: 1;
 }
 
-/* ── Dark theme (IT IS THE DEFAULT) ── */
+/* - Dark theme (IT IS THE DEFAULT) - */
 :root,
 [data-theme='dark'] {
 
@@ -47,7 +43,7 @@
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
-/* ── Light theme ── */
+/* - Light theme - */
 [data-theme='light'] {
   --stroke-logo: 1.8;
   --color-bg-primary: #f0f4f8;

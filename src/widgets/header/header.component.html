@@ -1,0 +1,7 @@
+<div>
+  <! -- TODO: Add logo component -->
+  @if (userStore.isAuthenticated()) {
+    <button (click)="logout()">Logout</button>
+  }
+  <app-theme-toggle />
+</div>
