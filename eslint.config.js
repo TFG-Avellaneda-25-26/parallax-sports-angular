@@ -19,7 +19,7 @@ module.exports = defineConfig([
       "no-restricted-imports": ['error', {
         patterns: [
           {
-            group: ['../*'],
+            group: ['../../*'],
             message: 'User path aliases (@shared, @entities, @features, @widgets, @pages)',
           }
         ]

@@ -1,0 +1,27 @@
+<div>
+  <h2>Enter verification code</h2>
+
+  <form [formGroup]="otpForm" (ngSubmit)="verify()">
+
+    <ng-otp-input
+      formControlName="code"
+      [config]="{
+        length: 6,
+        allowNumbersOnly: true,
+        inputClass: 'otp-cell',
+        containerClass: 'otp-container'
+      }"
+    />
+
+    @if (otpForm.controls.code.touched && otpForm.controls.code.invalid) {
+      <div>
+        @if (otpForm.controls.code.errors?.['required']) { <span>Code is required.</span> }
+        @if (otpForm.controls.code.errors?.['minlength']) { <span>Must be 6 digits.</span> }
+        @if (otpForm.controls.code.errors?.['verifyError']) { <span>Invalid code. Please try again.</span> }
+      </div>
+    }
+
+    <button type="submit" [disabled]="otpForm.invalid">Verify Account</button>
+  </form>
+</div>
+

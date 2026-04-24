@@ -20,6 +20,7 @@ export const UserStore = signalStore(
   withComputed((store) => ({
     isAuthenticated: computed(() => !!store.user()),
     userPreferences: computed(() => store.user()?.settings),
+    isVerified: computed(() => store.user()?.emailVerified),
   })),
 
   withMethods((store, userService = inject(UserService)) => ({
@@ -35,6 +36,13 @@ export const UserStore = signalStore(
         patchState(store, { user: null, isLoading: false });
         throw error;
       }
+    },
+
+    async markEmailVerified(): Promise<void> {
+      const currentUser = store.user();
+
+      if (!currentUser) return;
+      patchState(store, { user: { ...currentUser, emailVerified: true } });
     },
 
     clearUser(): void {

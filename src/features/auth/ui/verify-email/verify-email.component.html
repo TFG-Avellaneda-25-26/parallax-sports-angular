@@ -1,0 +1,8 @@
+<p>
+  Email Not verified
+  <button (click)="openModal()">Verify now</button>
+</p>
+
+<dialog #otpModal>
+  <app-otp-dialog (verified)="closeModal()" />
+</dialog>

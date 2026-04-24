@@ -6,7 +6,7 @@ import { UserStore } from '@entities/user';
 @Component({
   selector: 'app-logout-button',
   imports: [],
-  template: `<p>logout-button.component works!</p>`,
+  templateUrl: './logout-button.component.html',
   styleUrl: './logout-button.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

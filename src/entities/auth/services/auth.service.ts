@@ -14,6 +14,10 @@ export class AuthService {
     return this.apiClient.post<AuthResponse>('/api/auth/register', credentials);
   }
 
+  verifyEmail(code: string) {
+    return this.apiClient.post('/api/auth/verify-email', { code });
+  }
+
   logout() {
     return this.apiClient.post('/api/auth/logout', {});
   }
