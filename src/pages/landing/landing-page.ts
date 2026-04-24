@@ -74,36 +74,33 @@ export class LandingPage {
     if (!activePath || !svgEl) return;
 
     const phraseElements = Array.from(descWrap.querySelectorAll<HTMLElement>('.landing__description'));
-    const rootStyles = getComputedStyle(document.documentElement);
-    const readCssTiming = (varName: string, fallback: number): number => {
-      const parsed = parseFloat(rootStyles.getPropertyValue(varName));
-      return Number.isFinite(parsed) ? parsed : fallback;
-    };
+    const descriptionSplit = new SplitText(phraseElements, { type: 'chars' });
 
-    const titleHoldSec = readCssTiming('--anim-hold', 0.95);
-    const titleSnapSec = readCssTiming('--anim-snap', 0.26);
-    const phraseRevealSec = readCssTiming('--anim-phrase', 1);
-    const ctaRevealSec = 0.5;
+    gsap.fromTo(titleEl,
+      { scale: 1.36, transformOrigin: 'center center' },
+      { scale: 1, duration: 0.5, ease: 'power4.in' },
+    );
 
-    const phraseCharsFrom: gsap.TweenVars = {
-      autoAlpha: 0,
-      yPercent: 'random([-100,100])' as unknown as number,
-      rotation: 'random(-30,30)' as unknown as number,
-    };
-    const phraseCharsTo: gsap.TweenVars = {
-      autoAlpha: 1,
-      yPercent: 0,
-      rotation: 0,
-      duration: 0.5,
-      ease: 'back.out',
-      stagger: { amount: 0.5, from: 'random' },
-    };
+    gsap.fromTo(descriptionSplit.chars,
+      {
+        autoAlpha: 0,
+        yPercent: 'random([-100,100])' as unknown as number,
+        rotation: 'random(-30,30)' as unknown as number,
+      },
+      {
+        autoAlpha: 1,
+        yPercent: 0,
+        rotation: 0,
+        duration: 0.8,
+        ease: 'back.out',
+        stagger: { amount: 0.8, from: 'random' },
+      },
+    );
 
-    const splitPhrases = phraseElements.map(el => new SplitText(el, { type: 'chars' }));
-
-    gsap.set(titleEl, { scale: 1.36, transformOrigin: 'center center' });
-    gsap.set([phraseElements[1], phraseElements[2]], { autoAlpha: 0 });
-    gsap.set('.landing__actions', { autoAlpha: 0, y: 20 });
+    gsap.fromTo('.landing__actions',
+      { autoAlpha: 0, y: 20 },
+      { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+    );
 
     let morphLoopTimeline: gsap.core.Timeline | null = null;
     let currentLogoIndex = 0;
@@ -156,58 +153,11 @@ export class LandingPage {
       }, 'morph');
     };
 
-    const startMorphLoop = (): void => runNextMorph();
-
-    const phrase2At = phraseRevealSec;
-    const phrase3At = phraseRevealSec * 2;
-    const phrase3EndAt = phraseRevealSec * 3;
-
-    const introTimeline = gsap.timeline();
-
-    introTimeline.fromTo(splitPhrases[0].chars, phraseCharsFrom, phraseCharsTo, 0);
-
-    introTimeline.to(
-      titleEl,
-      { scale: 1, duration: titleSnapSec, ease: 'power4.in' },
-      titleHoldSec,
-    );
-
-    introTimeline.to(activePath, {
-      morphSVG: {
-        shape: `#logo-${this.logos[0].id}`,
-        smooth: {
-          points: 'auto',
-          redraw: false,
-          persist: true,
-        },
-      } as gsap.plugins.MorphSVGVars,
-      duration: titleSnapSec,
-      ease: 'power4.inOut',
-    }, titleHoldSec);
-
-    introTimeline.call(() => {
-      gsap.set(phraseElements[1], { autoAlpha: 1 });
-    }, undefined, phrase2At);
-    introTimeline.fromTo(splitPhrases[1].chars, phraseCharsFrom, phraseCharsTo, phrase2At);
-
-    introTimeline.call(() => {
-      gsap.set(phraseElements[2], { autoAlpha: 1 });
-    }, undefined, phrase3At);
-    introTimeline.fromTo(splitPhrases[2].chars, phraseCharsFrom, phraseCharsTo, phrase3At);
-
-    introTimeline.to('.landing__actions', {
-      autoAlpha: 1,
-      y: 0,
-      duration: ctaRevealSec,
-      ease: 'power2.out',
-    }, phrase3EndAt);
-
-    introTimeline.call(() => startMorphLoop(), undefined, phrase3EndAt);
+    runNextMorph();
 
     this.destroyRef.onDestroy(() => {
-      introTimeline.kill();
       morphLoopTimeline?.kill();
-      splitPhrases.forEach(split => split.revert());
+      descriptionSplit.revert();
     });
   }
 }
