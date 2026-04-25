@@ -1,6 +1,7 @@
 import { Component, ElementRef, DestroyRef, afterNextRender, inject, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { gsap, SplitText } from '@shared/lib';
+import { delay } from 'rxjs';
 
 interface SportLogo {
   id: string;
@@ -78,7 +79,7 @@ export class LandingPage {
 
     gsap.fromTo(titleEl,
       { scale: 1.36, transformOrigin: 'center center' },
-      { scale: 1, duration: 0.5, ease: 'power4.in' },
+      { scale: 1, duration: 0.5, ease: 'power4.in', delay: 0.5 },
     );
 
     gsap.fromTo(descriptionSplit.chars,

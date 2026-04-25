@@ -1,10 +1,36 @@
-<header>
-  @if (userStore.isAuthenticated()) {
-    <app-logout-button />
+<header class="header">
+  <div class="header__bg" aria-hidden="true"></div>
+  <div class="header__inner">
+    <a class="header__brand" routerLink="/" aria-label="Parallax Sports — home">
+      <span class="header__brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="14" r="11.5" fill="none" stroke="currentColor" stroke-width="1.5" />
+          <path d="M3 14 H25" fill="none" stroke="currentColor" stroke-width="1.5" />
+          <path d="M14 3 Q22 14 14 25 Q6 14 14 3 Z" fill="none" stroke="currentColor" stroke-width="1.5" />
+        </svg>
+      </span>
+      <span class="header__brand-text">
+        <span class="header__brand-primary">PARALLAX</span>
+        <span class="header__brand-sep" aria-hidden="true">·</span>
+        <span class="header__brand-secondary">SPORTS</span>
+      </span>
+    </a>
 
-    @if (!userStore.isVerified()) {
-      <app-verify-email />
-    }
-  }
-  <app-theme-toggle />
+    <div class="header__center">
+      @if (userStore.isAuthenticated() && !userStore.isVerified()) {
+        <app-verify-email />
+      }
+    </div>
+
+    <div class="header__actions">
+      <app-theme-toggle />
+      @if (userStore.isAuthenticated()) {
+        <app-logout-button />
+      }
+    </div>
+  </div>
+
+  <svg class="header__border" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true">
+    <path #borderPath class="header__border-line" d="M0 1 L1000 1" />
+  </svg>
 </header>

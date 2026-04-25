@@ -1,3 +1,157 @@
 :host {
   display: block;
 }
+
+.otp-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.otp-modal__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+/* ── Cell grid ───────────────────────────── */
+
+.otp-cells {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+
+.otp-cells__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 0;
+}
+
+.otp-cells__rect {
+  fill: transparent;
+  stroke: var(--color-border);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  transition: filter var(--transition-base);
+}
+
+.otp-cells.is-success .otp-cells__rect {
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-success) 70%, transparent));
+}
+
+.otp-cells.is-error .otp-cells__rect {
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-error) 65%, transparent));
+}
+
+.otp-cells.is-verifying .otp-cells__rect {
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-accent) 55%, transparent));
+}
+
+/* ng-otp-input v2 renders:
+     <div class="ng-otp-input-wrapper wrapper {containerClass}">
+       <div class="n-o-c">
+         <input class="otp-input {inputClass}" />
+         <input ... />
+         ...
+       </div>
+     </div>
+   The default CSS for .otp-input is width:50px height:50px font-size:32px
+   plus a margin:0 .51rem on every input (which is what was offsetting the
+   numbers by ~8px per cell). We override using CSS Grid on .n-o-c so the
+   columns are guaranteed to be exactly 52px with a 10px gap. */
+.otp-cells ::ng-deep .ng-otp-input-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.otp-cells ::ng-deep .n-o-c {
+  display: grid !important;
+  grid-template-columns: repeat(6, 52px) !important;
+  gap: 10px !important;
+  width: 100%;
+  height: 100%;
+  align-items: stretch !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.otp-cells ::ng-deep .otp-input {
+  width: 52px !important;
+  height: 52px !important;
+  min-width: 52px !important;
+  min-height: 52px !important;
+  max-width: 52px !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  text-align: center !important;
+  line-height: 52px !important;
+  font-family: var(--font-display) !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  /* The OTP modal is always shown over a dark backdrop (regardless of
+     light/dark theme), so use a fixed light color for legibility. */
+  color: #f5f7fa !important;
+  caret-color: var(--color-accent);
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.otp-cells ::ng-deep .otp-input::-webkit-outer-spin-button,
+.otp-cells ::ng-deep .otp-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ── Submit ─────────────────────────────── */
+
+.otp-modal__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  padding: 0.75rem 1.5rem;
+  border: 1.5px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: var(--color-bg-primary);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 0 30px color-mix(in srgb, var(--color-accent) 35%, transparent);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.otp-modal__submit:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  box-shadow: 0 0 40px color-mix(in srgb, var(--color-accent) 55%, transparent);
+  transform: translateY(-1px);
+}
+
+.otp-modal__submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}

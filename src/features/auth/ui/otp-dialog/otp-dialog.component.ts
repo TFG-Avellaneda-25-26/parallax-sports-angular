@@ -1,9 +1,27 @@
-import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  afterNextRender,
+  inject,
+  output,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '@entities/auth';
 import { UserStore } from '@entities/user';
+import { gsap } from '@shared/lib';
 import { lastValueFrom } from 'rxjs';
-import { NgOtpInputModule } from 'ng-otp-input'
+import { NgOtpInputModule } from 'ng-otp-input';
+
+type OtpState = 'idle' | 'verifying' | 'success' | 'error';
+
+const CELL_COUNT = 6;
+const CELL_SIZE = 52;
+const CELL_GAP = 10;
+const TOTAL_WIDTH = CELL_COUNT * CELL_SIZE + (CELL_COUNT - 1) * CELL_GAP;
 
 @Component({
   selector: 'app-otp-dialog',
@@ -13,33 +31,152 @@ import { NgOtpInputModule } from 'ng-otp-input'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OtpDialogComponent {
+  protected readonly verified = output<void>();
 
-  verified = output<void>();
+  private readonly authService = inject(AuthService);
+  private readonly userStore = inject(UserStore);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly cellsLayerRef = viewChild.required<ElementRef<SVGSVGElement>>('cellsLayer');
 
-  readonly authService = inject(AuthService);
-  readonly userStore = inject(UserStore);
+  protected readonly state = signal<OtpState>('idle');
 
-  otpForm = new FormGroup({
-    code: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-      Validators.maxLength(6),
-      Validators.pattern(/^\d+$/)
-    ])
+  protected readonly otpForm = new FormGroup({
+    code: new FormControl('', {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.minLength(CELL_COUNT),
+        Validators.maxLength(CELL_COUNT),
+        Validators.pattern(/^\d+$/),
+      ],
+    }),
   });
 
-  async verify() {
-    if (this.otpForm.valid) {
-      const code = this.otpForm.controls.code.value!;
+  protected readonly cells = Array.from({ length: CELL_COUNT });
 
-      try {
-        await lastValueFrom(this.authService.verifyEmail(code));
-        this.userStore.markEmailVerified();
+  protected readonly cellSize = CELL_SIZE;
+  protected readonly cellGap = CELL_GAP;
+  protected readonly totalWidth = TOTAL_WIDTH;
+  protected readonly cellSizePx = `${CELL_SIZE}px`;
+  protected readonly totalWidthPx = `${TOTAL_WIDTH}px`;
 
-        this.verified.emit();
-      } catch {
-        this.otpForm.setErrors({ verifyError: true });
-      }
+  protected readonly otpConfig = {
+    length: CELL_COUNT,
+    allowNumbersOnly: true,
+  };
+
+  constructor() {
+    afterNextRender(() => this.runIntro());
+  }
+
+  protected async verify(): Promise<void> {
+    if (!this.otpForm.valid || this.state() === 'verifying') return;
+
+    this.state.set('verifying');
+    const code = this.otpForm.controls.code.value;
+
+    try {
+      await lastValueFrom(this.authService.verifyEmail(code));
+      this.userStore.markEmailVerified();
+      await this.playSuccess();
+      this.verified.emit();
+    } catch {
+      this.otpForm.setErrors({ verifyError: true });
+      this.otpForm.controls.code.markAsTouched();
+      this.playError();
     }
+  }
+
+  // ── Animations ─────────────────────────────────────────
+
+  private getRects(): SVGRectElement[] {
+    return Array.from(
+      this.cellsLayerRef().nativeElement.querySelectorAll<SVGRectElement>('.otp-cells__rect'),
+    );
+  }
+
+  private runIntro(): void {
+    const rects = this.getRects();
+    const tl = gsap.timeline();
+
+    tl.from(rects, {
+      drawSVG: 0,
+      duration: 1.6,
+      stagger: 0.14,
+      ease: 'power2.inOut',
+    });
+
+    tl.from(
+      '.otp-modal__submit',
+      {
+        autoAlpha: 0,
+        y: 8,
+        duration: 0.45,
+        ease: 'power2.out',
+      },
+      '<0.4',
+    );
+
+    this.destroyRef.onDestroy(() => tl.kill());
+  }
+
+  private playError(): void {
+    const rects = this.getRects();
+    const wrap = this.cellsLayerRef().nativeElement.parentElement;
+
+    gsap.to(rects, {
+      stroke: 'var(--color-error)',
+      duration: 0.25,
+      ease: 'power2.out',
+    });
+
+    if (wrap) {
+      gsap.fromTo(
+        wrap,
+        { x: -8 },
+        {
+          x: 0,
+          duration: 0.5,
+          ease: 'elastic.out(1, 0.3)',
+        },
+      );
+    }
+
+    gsap.to(rects, {
+      stroke: 'var(--color-border)',
+      duration: 0.6,
+      delay: 1.4,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        if (this.state() === 'error') this.state.set('idle');
+        this.otpForm.setErrors(null);
+      },
+    });
+
+    this.state.set('error');
+  }
+
+  private playSuccess(): Promise<void> {
+    const rects = this.getRects();
+    this.state.set('success');
+
+    return new Promise((resolve) => {
+      const tl = gsap.timeline({ onComplete: () => resolve() });
+      tl.to(rects, {
+        stroke: 'var(--color-success)',
+        duration: 0.3,
+        ease: 'power2.out',
+      });
+      tl.to(
+        rects,
+        {
+          autoAlpha: 0,
+          duration: 0.55,
+          stagger: 0.04,
+          ease: 'power2.in',
+        },
+        '+=0.3',
+      );
+    });
   }
 }
