@@ -1,1 +1,1 @@
-export { gsap, SplitText } from './gsap';
+export { gsap, SplitText, Flip } from './gsap';
