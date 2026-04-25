@@ -26,6 +26,10 @@ export const routes: Routes = [
         resolve: { events: eventResolver },
         loadComponent: () => import('@pages/dashboard').then(m => m.DashboardPage)
       },
+      {
+        path: 'settings',
+        loadComponent: () => import('@pages/settings').then(m => m.SettingsPage)
+      }
       // TODO: Add next protected pages
     ]
   },
@@ -36,6 +40,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'error',
+    redirectTo: '/',
   },
 ];

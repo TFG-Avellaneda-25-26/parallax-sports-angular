@@ -21,6 +21,7 @@ export const UserStore = signalStore(
     isAuthenticated: computed(() => !!store.user()),
     userPreferences: computed(() => store.user()?.settings),
     isVerified: computed(() => store.user()?.emailVerified),
+    isAdmin: computed(() => store.user()?.role === 'ADMIN'),
   })),
 
   withMethods((store, userService = inject(UserService)) => ({
