@@ -1,11 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { UserStore } from '@entities/user';
 import { SettingsNavStore } from '@shared/stores';
 import { Tree, TreeItem, TreeItemGroup } from '@angular/aria/tree';
 import { NgTemplateOutlet } from '@angular/common';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { filter, map } from 'rxjs';
 
 
 @Component({
@@ -20,18 +18,20 @@ export class SettingsNavComponent {
   readonly userStore = inject(UserStore);
   readonly router = inject(Router);
 
-  private readonly currentUrl = toSignal(
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
-      map(event => event.urlAfterRedirects),
-    ),
-    { initialValue: this.router.url }
-  )
+  readonly selected = signal(['account']);
 
-  readonly selected = computed(() => {
-    const segment = this.currentUrl().replace('/settings/', '');
-    return [segment];
-  })
+  constructor() {
+    effect(() => {
+      const [value] = this.selected();
+      if (!value) return;
+
+      const [route, fragment] = value.split('/');
+
+      void this.router.navigate(['/settings', route], {
+        fragment: fragment ?? undefined
+      });
+    });
+  }
 
   visibleTree = computed(() =>
     this.userStore.isAdmin()
