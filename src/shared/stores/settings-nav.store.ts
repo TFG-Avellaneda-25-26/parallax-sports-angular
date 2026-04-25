@@ -1,12 +1,21 @@
 import { computed } from "@angular/core";
-import { signalStore, withComputed, withState } from "@ngrx/signals";
+import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { SETTINGS_TREE, TreeNode } from "@shared/models";
 
 export const SettingsNavStore = signalStore(
-  withState({ tree: cloneTree(SETTINGS_TREE) }),
+  withState({
+    tree: cloneTree(SETTINGS_TREE),
+    selected: ['account'] as string[]
+  }),
 
   withComputed(({ tree }) => ({
     flatNodes: computed(() => flatten(tree()))
+  })),
+
+  withMethods((store) => ({
+    setSelected(value: string[]) {
+      patchState(store, { selected: value });
+    }
   }))
 );
 

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserStore } from '@entities/user';
 import { SettingsNavStore } from '@shared/stores';
 import { Tree, TreeItem, TreeItemGroup } from '@angular/aria/tree';
@@ -8,7 +8,7 @@ import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-settings-nav',
-  imports: [Tree, TreeItem, TreeItemGroup, RouterLink, NgTemplateOutlet],
+  imports: [Tree, TreeItem, TreeItemGroup, NgTemplateOutlet],
   templateUrl: './settings-nav.component.html',
   styleUrl: './settings-nav.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,7 +18,7 @@ export class SettingsNavComponent {
   readonly userStore = inject(UserStore);
   readonly router = inject(Router);
 
-  readonly selected = signal(['account']);
+  readonly selected = this.navStore.selected;
 
   constructor() {
     effect(() => {
