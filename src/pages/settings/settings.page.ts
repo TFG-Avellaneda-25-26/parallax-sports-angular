@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SettingsNavStore } from '@shared/stores';
 import { SettingsNavComponent } from "@widgets/settings-nav";
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  imports: [SettingsNavComponent],
+  imports: [SettingsNavComponent, RouterOutlet],
   templateUrl: './settings.page.html',
   styleUrl: './settings.page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
