@@ -1,7 +1,6 @@
 import { Component, ElementRef, DestroyRef, afterNextRender, inject, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { gsap, SplitText } from '@shared/lib';
-import { delay } from 'rxjs';
 
 interface SportLogo {
   id: string;

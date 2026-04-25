@@ -13,6 +13,15 @@ import {
 import { gsap } from '@shared/lib';
 import { OtpDialogComponent } from '../otp-dialog/otp-dialog.component';
 
+const FOCUSABLE_SELECTOR = [
+  'button:not([disabled])',
+  '[href]',
+  'input:not([disabled])',
+  'select:not([disabled])',
+  'textarea:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(',');
+
 @Component({
   selector: 'app-verify-email',
   imports: [OtpDialogComponent],
@@ -30,6 +39,7 @@ export class VerifyEmailComponent {
   private readonly panelRef = viewChild<ElementRef<HTMLElement>>('panel');
 
   private storedBadgeRect: DOMRect | null = null;
+  private previouslyFocused: HTMLElement | null = null;
   private activeTweens: gsap.core.Tween[] = [];
 
   constructor() {
@@ -46,6 +56,7 @@ export class VerifyEmailComponent {
     }
 
     this.storedBadgeRect = badge.getBoundingClientRect();
+    this.previouslyFocused = (document.activeElement as HTMLElement | null) ?? badge;
     this.isOpen.set(true);
 
     afterNextRender(
@@ -78,6 +89,7 @@ export class VerifyEmailComponent {
               autoAlpha: 1,
               duration: 0.7,
               ease: 'power3.inOut',
+              onComplete: () => this.moveFocusIntoPanel(panel),
             },
           ),
           gsap.fromTo(
@@ -99,6 +111,7 @@ export class VerifyEmailComponent {
 
     if (!panel || !backdrop || !this.storedBadgeRect) {
       this.isOpen.set(false);
+      this.restoreFocus();
       return;
     }
 
@@ -116,7 +129,10 @@ export class VerifyEmailComponent {
       duration: 0.5,
       ease: 'power3.inOut',
       transformOrigin: 'center center',
-      onComplete: () => this.isOpen.set(false),
+      onComplete: () => {
+        this.isOpen.set(false);
+        this.restoreFocus();
+      },
     });
 
     const fadeBackdrop = gsap.to(backdrop, {
@@ -131,6 +147,38 @@ export class VerifyEmailComponent {
   protected onBackdropClick(event: MouseEvent): void {
     if (event.target === this.backdropRef()?.nativeElement) {
       this.closeModal();
+    }
+  }
+
+  /**
+   * Trap focus inside the panel while the modal is open. Wrapping Tab from
+   * the last focusable element back to the first (and vice-versa) keeps
+   * keyboard users from tabbing into the page behind the backdrop.
+   */
+  protected onPanelKeydown(event: KeyboardEvent): void {
+    if (event.key !== 'Tab') return;
+    const panel = this.panelRef()?.nativeElement;
+    if (!panel) return;
+
+    const focusables = Array.from(
+      panel.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+    ).filter((el) => !el.hasAttribute('disabled') && el.tabIndex !== -1);
+
+    if (focusables.length === 0) {
+      event.preventDefault();
+      return;
+    }
+
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    const active = document.activeElement as HTMLElement | null;
+
+    if (event.shiftKey && active === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && active === last) {
+      event.preventDefault();
+      first.focus();
     }
   }
 
@@ -153,6 +201,31 @@ export class VerifyEmailComponent {
       sx: fromRect.width / toRect.width,
       sy: fromRect.height / toRect.height,
     };
+  }
+
+  private moveFocusIntoPanel(panel: HTMLElement): void {
+    const firstInput = panel.querySelector<HTMLElement>('input.otp-input');
+    if (firstInput) {
+      firstInput.focus();
+      return;
+    }
+    const fallback = panel.querySelector<HTMLElement>(FOCUSABLE_SELECTOR);
+    fallback?.focus();
+  }
+
+  private restoreFocus(): void {
+    const target = this.previouslyFocused;
+    this.previouslyFocused = null;
+    if (target && document.contains(target)) {
+      target.focus();
+      return;
+    }
+    // The badge is re-rendered after isOpen flips back to false, so query
+    // for it after the next paint and focus that instead.
+    afterNextRender(
+      () => this.badgeRef()?.nativeElement?.focus(),
+      { injector: this.injector },
+    );
   }
 
   private killTweens(): void {
