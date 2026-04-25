@@ -37,30 +37,15 @@
       class="verify-panel"
       role="dialog"
       aria-modal="true"
+      aria-labelledby="verify-panel-heading"
+      aria-describedby="verify-panel-status"
+      tabindex="-1"
+      (keydown)="onPanelKeydown($event)"
     >
-      <button
-        type="button"
-        class="verify-panel__close"
-        (click)="closeModal()"
-        aria-label="Close"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M18 6 6 18" />
-          <path d="m6 6 12 12" />
-        </svg>
-      </button>
-      <app-otp-dialog (verified)="closeModal()" />
+      <app-otp-dialog
+        (verified)="closeModal()"
+        (closed)="closeModal()"
+      />
     </div>
   </div>
 }

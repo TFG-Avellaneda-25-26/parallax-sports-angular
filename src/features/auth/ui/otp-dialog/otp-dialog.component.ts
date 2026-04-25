@@ -4,6 +4,7 @@ import {
   DestroyRef,
   ElementRef,
   afterNextRender,
+  computed,
   inject,
   output,
   signal,
@@ -32,6 +33,7 @@ const TOTAL_WIDTH = CELL_COUNT * CELL_SIZE + (CELL_COUNT - 1) * CELL_GAP;
 })
 export class OtpDialogComponent {
   protected readonly verified = output<void>();
+  protected readonly closed = output<void>();
 
   private readonly authService = inject(AuthService);
   private readonly userStore = inject(UserStore);
@@ -39,6 +41,8 @@ export class OtpDialogComponent {
   private readonly cellsLayerRef = viewChild.required<ElementRef<SVGSVGElement>>('cellsLayer');
 
   protected readonly state = signal<OtpState>('idle');
+  protected readonly isResending = signal(false);
+  protected readonly resendError = signal(false);
 
   protected readonly otpForm = new FormGroup({
     code: new FormControl('', {
@@ -65,8 +69,34 @@ export class OtpDialogComponent {
     allowNumbersOnly: true,
   };
 
+  /** Visually hidden status line for assistive tech. */
+  protected readonly statusMessage = computed(() => {
+    if (this.isResending()) return 'Resending verification email.';
+    if (this.resendError()) return 'Could not resend the verification email. Please try again.';
+
+    switch (this.state()) {
+      case 'verifying':
+        return 'Verifying your code, please wait.';
+      case 'success':
+        return 'Code verified successfully.';
+      case 'error':
+        return 'The code is invalid. Please try again.';
+      default: {
+        const code = this.otpForm.controls.code;
+        if (code.touched && code.invalid && !code.errors?.['verifyError']) {
+          return 'Enter the 6-digit verification code.';
+        }
+        return '';
+      }
+    }
+  });
+
+
+  private readonly animations: gsap.core.Animation[] = [];
+
   constructor() {
     afterNextRender(() => this.runIntro());
+    this.destroyRef.onDestroy(() => this.killAnimations());
   }
 
   protected async verify(): Promise<void> {
@@ -87,7 +117,27 @@ export class OtpDialogComponent {
     }
   }
 
-  // ── Animations ─────────────────────────────────────────
+  protected async resend(): Promise<void> {
+    if (this.isResending()) return;
+
+    this.isResending.set(true);
+    this.resendError.set(false);
+
+    try {
+      await lastValueFrom(this.authService.resendVerification());
+      this.otpForm.reset();
+    } catch {
+      this.resendError.set(true);
+    } finally {
+      this.isResending.set(false);
+    }
+  }
+
+  protected close(): void {
+    this.closed.emit();
+  }
+
+  // ANIMATIONS
 
   private getRects(): SVGRectElement[] {
     return Array.from(
@@ -95,9 +145,19 @@ export class OtpDialogComponent {
     );
   }
 
+  private track<T extends gsap.core.Animation>(animation: T): T {
+    this.animations.push(animation);
+    return animation;
+  }
+
+  private killAnimations(): void {
+    this.animations.forEach((a) => a.kill());
+    this.animations.length = 0;
+  }
+
   private runIntro(): void {
     const rects = this.getRects();
-    const tl = gsap.timeline();
+    const tl = this.track(gsap.timeline());
 
     tl.from(rects, {
       drawSVG: 0,
@@ -107,53 +167,58 @@ export class OtpDialogComponent {
     });
 
     tl.from(
-      '.otp-modal__submit',
+      '.otp-cells__action',
       {
         autoAlpha: 0,
-        y: 8,
-        duration: 0.45,
-        ease: 'power2.out',
+        scale: 0.6,
+        duration: 0.4,
+        stagger: 0.06,
+        ease: 'back.out(1.6)',
       },
-      '<0.4',
+      '<0.5',
     );
-
-    this.destroyRef.onDestroy(() => tl.kill());
   }
 
   private playError(): void {
     const rects = this.getRects();
     const wrap = this.cellsLayerRef().nativeElement.parentElement;
 
-    gsap.to(rects, {
-      stroke: 'var(--color-error)',
-      duration: 0.25,
-      ease: 'power2.out',
-    });
+    this.state.set('error');
+
+    this.track(
+      gsap.to(rects, {
+        stroke: 'var(--color-error)',
+        duration: 0.25,
+        ease: 'power2.out',
+      }),
+    );
 
     if (wrap) {
-      gsap.fromTo(
-        wrap,
-        { x: -8 },
-        {
-          x: 0,
-          duration: 0.5,
-          ease: 'elastic.out(1, 0.3)',
-        },
+      this.track(
+        gsap.fromTo(
+          wrap,
+          { x: -8 },
+          {
+            x: 0,
+            duration: 0.5,
+            ease: 'elastic.out(1, 0.3)',
+          },
+        ),
       );
     }
 
-    gsap.to(rects, {
-      stroke: 'var(--color-border)',
-      duration: 0.6,
-      delay: 1.4,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        if (this.state() === 'error') this.state.set('idle');
-        this.otpForm.setErrors(null);
-      },
-    });
-
-    this.state.set('error');
+    this.track(
+      gsap.to(rects, {
+        stroke: 'var(--color-border)',
+        duration: 0.6,
+        delay: 1.4,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          if (this.state() === 'error') this.state.set('idle');
+          this.otpForm.setErrors(null);
+        },
+      }),
+    );
   }
 
   private playSuccess(): Promise<void> {
@@ -161,7 +226,12 @@ export class OtpDialogComponent {
     this.state.set('success');
 
     return new Promise((resolve) => {
-      const tl = gsap.timeline({ onComplete: () => resolve() });
+      const tl = this.track(
+        gsap.timeline({
+          onComplete: () => resolve(),
+          onInterrupt: () => resolve(),
+        }),
+      );
       tl.to(rects, {
         stroke: 'var(--color-success)',
         duration: 0.3,
