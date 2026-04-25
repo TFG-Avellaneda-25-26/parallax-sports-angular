@@ -18,6 +18,10 @@ export class AuthService {
     return this.apiClient.post('/api/auth/verify-email', { code });
   }
 
+  resendVerification() {
+    return this.apiClient.post('/api/auth/resend-verification', {});
+  }
+
   logout() {
     return this.apiClient.post('/api/auth/logout', {});
   }
