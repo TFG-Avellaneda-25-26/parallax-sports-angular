@@ -1,3 +1,27 @@
 :host {
   display: block;
 }
+
+.settings-layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "search search"
+    "nav    content";
+  height: 100%;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.settings-search {
+  grid-area: search;
+}
+
+.settings-nav {
+  grid-area: nav;
+}
+
+.settings-content {
+  grid-area: content;
+}
