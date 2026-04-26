@@ -1,4 +1,4 @@
-<ul ngTree [nav]="true" #tree="ngTree" [values]="selected()" selectionMode="follow" class="basic-tree">
+<ul ngTree [nav]="true" #tree="ngTree" [values]="selected()" (valuesChange)="navStore.setSelected($event)" selectionMode="follow" class="basic-tree">
   <ng-template
     [ngTemplateOutlet]="treeNodes"
     [ngTemplateOutletContext]="{nodes: visibleTree(), parent: tree}"
@@ -10,7 +10,6 @@
       ngTreeItem
       [parent]="parent"
       [value]="node.value"
-      [routerLink]="node.value"
       [label]="node.name"
       [(expanded)]="node.expanded"
       #treeItem="ngTreeItem"
@@ -41,5 +40,3 @@
     }
   }
 </ng-template>
-
-<p>{{ selected() }}</p>
