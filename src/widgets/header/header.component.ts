@@ -28,29 +28,21 @@ export class HeaderComponent {
   constructor() {
     afterNextRender(() => this.runIntro());
   }
+private runIntro(): void {
+  const borderEl = this.borderRef().nativeElement;
 
-  private runIntro(): void {
-    const borderEl = this.borderRef().nativeElement;
+  const tl = gsap.timeline();
 
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  gsap.set(borderEl, {
+    transformOrigin: '50% 50%',
+    transformBox: 'fill-box',
+    scaleX: 0,
+  });
 
-    tl.from(borderEl, {
-      drawSVG: '50% 50%',
-      duration: 1.4,
-      ease: 'power2.inOut',
-    });
+  tl.to(borderEl, { scaleX: 1, duration: 1.4, ease: 'power2.inOut' });
 
-    tl.from(
-      '.header__brand, .header__actions > *',
-      {
-        autoAlpha: 0,
-        y: -8,
-        duration: 0.4,
-        stagger: 0.06,
-      },
-      '<0.1',
-    );
 
-    this.destroyRef.onDestroy(() => tl.kill());
-  }
+
+  this.destroyRef.onDestroy(() => tl.kill());
+}
 }
