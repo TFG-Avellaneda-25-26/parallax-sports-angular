@@ -161,9 +161,9 @@ export class OtpDialogComponent {
 
     tl.from(rects, {
       drawSVG: 0,
-      duration: 1.6,
-      stagger: 0.14,
-      ease: 'power2.inOut',
+      duration: 0.85,
+      stagger: 0.10,
+      ease: 'power2.out',
     });
 
     tl.from(
@@ -171,11 +171,11 @@ export class OtpDialogComponent {
       {
         autoAlpha: 0,
         scale: 0.6,
-        duration: 0.4,
-        stagger: 0.06,
+        duration: 0.35,
+        stagger: 0.05,
         ease: 'back.out(1.6)',
       },
-      '<0.5',
+      '<0.4',
     );
   }
 

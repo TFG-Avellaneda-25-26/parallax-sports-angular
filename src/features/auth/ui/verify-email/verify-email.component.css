@@ -11,88 +11,64 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 0.95rem;
-  border: 1px solid color-mix(in srgb, var(--error) 55%, transparent);
-  border-radius: var(--radius-full);
-  background: color-mix(in srgb, var(--error) 12%, var(--color-bg-elevated));
+  padding: 0.35rem 0.7rem;
+  border: 0;
+  background: transparent;
   color: var(--error);
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   cursor: pointer;
   isolation: isolate;
-  box-shadow:
-    0 0 0 0 color-mix(in srgb, var(--error) 0%, transparent),
-    0 0 18px color-mix(in srgb, var(--error) 35%, transparent);
-  transition:
-    transform var(--transition-fast),
-    background var(--transition-fast),
-    box-shadow var(--transition-fast),
-    border-color var(--transition-fast);
+  transition: color var(--transition-fast);
+}
+
+/* Two staggered rings expand outward and fade — a slow radar pulse. The
+   rings are pseudo-elements so the badge itself stays a clean text button. */
+.verify-badge::before,
+.verify-badge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border: 1px solid var(--error);
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: center;
+  animation: verifyRadar 2.4s cubic-bezier(0.22, 0.86, 0.4, 1) infinite;
+}
+
+.verify-badge::after {
+  animation-delay: 1.2s;
+}
+
+@keyframes verifyRadar {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
 }
 
 .verify-badge:hover {
-  transform: translateY(-1px);
-  background: color-mix(in srgb, var(--error) 22%, var(--color-bg-elevated));
-  border-color: var(--error);
-  box-shadow:
-    0 2px 0 0 color-mix(in srgb, var(--error) 0%, transparent),
-    0 0 28px color-mix(in srgb, var(--error) 55%, transparent);
+  color: color-mix(in srgb, var(--error) 70%, white);
 }
 
 .verify-badge:focus-visible {
   outline: 2px solid var(--error);
-  outline-offset: 2px;
-}
-
-.verify-badge__icon {
-  width: 1rem;
-  height: 1rem;
-  flex-shrink: 0;
-}
-
-.verify-badge__pulse {
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  border: 1px solid var(--error);
-  opacity: 0.7;
-  z-index: -1;
-  animation: verifyPulse 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes verifyPulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  70% {
-    transform: scale(1.18);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1.18);
-    opacity: 0;
-  }
-}
-
-@media (max-width: 640px) {
-  .verify-badge__label {
-    display: none;
-  }
-
-  .verify-badge {
-    padding: 0.45rem;
-    width: 2.25rem;
-    height: 2.25rem;
-    justify-content: center;
-  }
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .verify-badge__pulse {
+  .verify-badge::before,
+  .verify-badge::after {
     animation: none;
   }
 }
