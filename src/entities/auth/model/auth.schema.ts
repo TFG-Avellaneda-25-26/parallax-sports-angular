@@ -9,17 +9,13 @@ export const displayNameSchema = schema<string>((displayNamePath) => {
 
 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-export const emailSchema = (API_BASE_URL: string) => (isRegisterMode: () => boolean) => schema<string>((emailPath) => {
-  required(emailPath, { message: 'Email required' });
-  pattern(emailPath, emailPattern, { message: 'Invalid email format' });
+export const emailAsyncSchema = (API_BASE_URL: string) => schema<string>((emailPath) => {
   debounce(emailPath, 1000);
-
-  // TODO
   validateHttp<string, EmailAvailabilityResponse>(emailPath, {
     request: ({value}) => {
       const email = value();
 
-      if (email && isRegisterMode()) {
+      if (email) {
         return email ? `${API_BASE_URL}/api/users/email?email=${email}` : undefined;
       }
 
@@ -41,6 +37,11 @@ export const emailSchema = (API_BASE_URL: string) => (isRegisterMode: () => bool
       };
     }
   });
+});
+
+export const emailSchema = schema<string>((emailPath) => {
+  required(emailPath, { message: 'Email required' });
+  pattern(emailPath, emailPattern, { message: 'Invalid email format' });
 });
 
 export const loginPasswordSchema = schema<string>((passwordPath) => {
