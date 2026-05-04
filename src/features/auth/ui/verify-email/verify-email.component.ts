@@ -144,12 +144,6 @@ export class VerifyEmailComponent {
     this.activeTweens.push(closeTween, fadeBackdrop);
   }
 
-  protected onBackdropClick(event: MouseEvent): void {
-    if (event.target === this.backdropRef()?.nativeElement) {
-      this.closeModal();
-    }
-  }
-
   /**
    * Trap focus inside the panel while the modal is open. Wrapping Tab from
    * the last focusable element back to the first (and vice-versa) keeps
