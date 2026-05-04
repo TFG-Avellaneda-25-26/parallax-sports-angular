@@ -55,8 +55,9 @@ export const UserStore = signalStore(
       const user = store.user();
       if (!user) return;
 
-      await lastValueFrom(userService.updateEmail(newEmail));
+      await lastValueFrom(userService.updateEmail(store.email(),newEmail));
       patchState(store, { user: { ...user, email: newEmail, emailVerified: false } });
+      console.log('Email updated, marked as unverified');
     },
 
     async updatePassword(password: string): Promise<void> {

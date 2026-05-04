@@ -23,7 +23,8 @@ export const createPasswordForm = () => {
           return {
             url: `${apiBaseUrl}/api/users/validate-password`,
             method: 'POST',
-            body: { password: currentPassword }
+            body: { password: currentPassword },
+            withCredentials: true
           }
         },
         onSuccess: (isValid) => {
@@ -64,6 +65,7 @@ export const createPasswordForm = () => {
 
           try {
             await userStore.updatePassword(password);
+            field().value.set({ currentPassword: '', password: '', confirmPassword: '' });
             return null;
           } catch {
             return {

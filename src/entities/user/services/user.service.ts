@@ -13,12 +13,12 @@ export class UserService {
     return this.apiClient.get<User>('/api/users/me');
   }
 
-  updateEmail(newEmail: string): Observable<void> {
-    return this.apiClient.put<void>('/api/users/update/email', { email: newEmail });
+  updateEmail(email: string,newEmail: string): Observable<void> {
+    return this.apiClient.put<void>('/api/users/email', { email: email, newEmail: newEmail });
   }
 
   updatePassword(password: string): Observable<void> {
-    return this.apiClient.put<void>('/api/users/update/password', { password: password });
+    return this.apiClient.put<void>('/api/users/password', { password: password });
   }
 
   updateDisplayName(newDisplayName: string): Observable<void> {
