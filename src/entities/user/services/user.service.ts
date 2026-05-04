@@ -21,8 +21,8 @@ export class UserService {
     return this.apiClient.put<void>('/api/users/password', { password: password });
   }
 
-  updateDisplayName(newDisplayName: string): Observable<void> {
-    return this.apiClient.put<void>('/api/users/me/update/display-name', { displayName: newDisplayName });
+  updateDisplayName(displayName: string): Observable<void> {
+    return this.apiClient.put<void>('/api/users/display-name', displayName);
   }
 
   updateSettings(settings: Partial<User['settings']>): Observable<void> {

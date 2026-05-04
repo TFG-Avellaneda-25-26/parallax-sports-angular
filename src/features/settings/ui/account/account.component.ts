@@ -7,6 +7,7 @@ import { StatefulInput } from "@shared/ui";
 import { createEmailForm } from './forms/email-form';
 import { createPasswordForm } from './forms/password-form';
 import { TIMEZONE_OPTIONS } from '@entities/timezone';
+import { createdisplayNameForm } from './forms/display-name-form';
 
 @Component({
   selector: 'app-settings-account',
@@ -26,6 +27,7 @@ export class AccountComponent {
     signal({ timeZone: this.userStore.timeZone()})
   );
 
+  readonly displayNameForm = createdisplayNameForm();
   readonly emailForm = createEmailForm();
   readonly passwordForm = createPasswordForm();
 }

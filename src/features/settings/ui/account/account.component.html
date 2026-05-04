@@ -41,6 +41,11 @@
   <header>
     <h2>Display name</h2>
     <p>Used for display purposes. Can be changed at any time.</p>
+    <form [formRoot]="displayNameForm">
+      <app-stateful-input type="text" label="Current Display Name" fieldId="currentDisplayName" [formField]="displayNameForm.currentDisplayName" />
+      <app-stateful-input type="text" label="New Display Name" fieldId="newDisplayName" [formField]="displayNameForm.newDisplayName" />
+      <button type="submit" [disabled]="displayNameForm().invalid() || displayNameForm().submitting()">Change Display Name</button>
+    </form>
   </header>
 </section>
 
