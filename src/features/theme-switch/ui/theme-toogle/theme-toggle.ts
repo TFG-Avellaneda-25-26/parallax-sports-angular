@@ -32,7 +32,7 @@ export class ThemeToggleComponent {
 
   protected onToggleTheme(): void {
     const iconPath = this.iconPathRef().nativeElement as SVGPathElement;
-    const targetId = this.themeStore.isDark() ? '#theme-icon-moon' : '#theme-icon-sun';
+    const targetId = this.themeStore.isDark() ? '#theme-icon-sun' : '#theme-icon-moon';
 
     this.morphTween?.kill();
     this.morphTween = gsap.to(iconPath, {

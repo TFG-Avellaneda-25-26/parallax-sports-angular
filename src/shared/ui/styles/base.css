@@ -20,6 +20,9 @@ html {
 
 body {
   min-height: 100dvh;
+  background-image: var(--grid-pattern);
+  background-size: var(--grid-cell) var(--grid-cell);
+  background-repeat: repeat;
 }
 
 /* ── Elements ── */

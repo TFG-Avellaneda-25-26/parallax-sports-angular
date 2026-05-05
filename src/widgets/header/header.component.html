@@ -26,6 +26,13 @@
       <app-theme-toggle />
       @if (userStore.isAuthenticated()) {
         <app-logout-button />
+        <a
+          class="header__text-link"
+          routerLink="/settings"
+          aria-label="Settings"
+        >
+          Settings
+        </a>
       }
     </div>
   </div>

@@ -61,7 +61,6 @@
   width: 28px;
   height: 28px;
   color: var(--color-accent);
-  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-accent) 35%, transparent));
 }
 
 .header__brand-mark svg {
@@ -99,7 +98,7 @@
   justify-self: end;
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 1.4rem;
 }
 
 /* ── Animated border ─────────────────────── */
@@ -117,9 +116,34 @@
 .header__border-line {
   fill: none;
   stroke: var(--color-accent);
-  stroke-width: 1.25;
+  stroke-width: 1;
   vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--color-accent) 60%, transparent));
+  opacity: 0.55;
+}
+
+/* ── Text link (settings / logout share this look) ─────────── */
+
+.header__text-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.header__text-link:hover,
+.header__text-link:focus-visible {
+  color: var(--color-text-primary);
+  outline: none;
 }
 
 /* ── Compact layout ──────────────────────── */
@@ -128,5 +152,9 @@
   .header__brand-secondary,
   .header__brand-sep {
     display: none;
+  }
+
+  .header__actions {
+    gap: 0.9rem;
   }
 }
