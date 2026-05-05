@@ -16,19 +16,15 @@ export class UserService {
   }
 
   updateEmail(email: string,newEmail: string): Observable<void> {
-    return this.apiClient.put<void>('/api/users/email', { email: email, newEmail: newEmail });
+    return this.apiClient.put<void>('/api/users/email', newEmail);
   }
 
   updatePassword(password: string): Observable<void> {
-    return this.apiClient.put<void>('/api/users/password', { password: password });
+    return this.apiClient.put<void>('/api/users/password', password);
   }
 
   updateDisplayName(displayName: string): Observable<void> {
     return this.apiClient.put<void>('/api/users/display-name', displayName);
-  }
-
-  updateSettings(settings: Partial<User['settings']>): Observable<void> {
-    return this.apiClient.put<void>('/api/users/me/settings', { settings });
   }
 
   initiateOAuth2(provider: string): void {

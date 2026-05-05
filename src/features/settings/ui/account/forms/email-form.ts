@@ -37,11 +37,13 @@ export const createEmailForm = () =>  {
           try {
             await userStore.updateEmail(newEmail);
             field().value.set({ currentEmail: newEmail, newEmail: '' });
+            field().reset();
             return null;
           } catch {
             return { kind: 'updateError', message: 'Failed to update email. Please try again.' };
           }
-        }
+        },
+        ignoreValidators: 'none'
       }
     }
   );

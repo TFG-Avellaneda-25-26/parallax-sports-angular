@@ -23,7 +23,7 @@ export const createPasswordForm = () => {
           return {
             url: `${apiBaseUrl}/api/users/validate-password`,
             method: 'POST',
-            body: { password: currentPassword },
+            body: currentPassword,
             withCredentials: true
           }
         },
@@ -66,6 +66,7 @@ export const createPasswordForm = () => {
           try {
             await userStore.updatePassword(password);
             field().value.set({ currentPassword: '', password: '', confirmPassword: '' });
+            field().reset();
             return null;
           } catch {
             return {
@@ -73,7 +74,8 @@ export const createPasswordForm = () => {
               message: 'Failed to update password. Please try again.'
             }
           }
-        }
+        },
+        ignoreValidators: 'none'
       }
     }
   );

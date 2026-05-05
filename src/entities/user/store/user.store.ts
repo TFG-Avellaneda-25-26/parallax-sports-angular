@@ -66,43 +66,72 @@ export const UserStore = signalStore(
       const user = store.user();
       if (!user) return;
 
-      await lastValueFrom(userService.updateEmail(store.email(),newEmail));
-      patchState(store, { user: { ...user, email: newEmail, emailVerified: false } });
-      console.log('Email updated, marked as unverified');
+      try {
+        await lastValueFrom(userService.updateEmail(store.email(),newEmail));
+        patchState(store, { user: { ...user, email: newEmail, emailVerified: false } });
+      } catch (error) {
+        console.error('Failed to update email. Reverting to previous state.');
+        throw error;
+      }
     },
 
     async updatePassword(password: string): Promise<void> {
       const user = store.user();
       if (!user) return;
 
-      await lastValueFrom(userService.updatePassword(password));
+      try {
+        await lastValueFrom(userService.updatePassword(password));
+      } catch (error) {
+        console.error('Failed to update password.');
+        throw error;
+      }
     },
 
     async updateDisplayName(displayName: string): Promise<void> {
       const user = store.user();
       if (!user) return;
 
-      await lastValueFrom(userService.updateDisplayName(displayName));
-      patchState(store, { user: { ...user, displayName } });
+      try {
+        await lastValueFrom(userService.updateDisplayName(displayName));
+        patchState(store, { user: { ...user, displayName } });
+      } catch (error) {
+        console.error('Failed to update display name.');
+        throw error;
+      }
     },
 
     async disconnectIdentity(identityId: number): Promise<void> {
       const user = store.user();
       if (!user) return;
 
-      await lastValueFrom(userService.disconnectIdentity(identityId));
-      const updatedIdentities = user.identities?.filter(id => id.id !== identityId) ?? [];
-      patchState(store, { user: { ...user, identities: updatedIdentities }});
+      try {
+        await lastValueFrom(userService.disconnectIdentity(identityId));
+        const updatedIdentities = user.identities?.filter(id => id.id !== identityId) ?? [];
+        patchState(store, { user: { ...user, identities: updatedIdentities }});
+      } catch (error) {
+        console.error('Failed to disconnect identity.');
+        throw error;
+      }
     },
 
     async linkIdentity(provider: string): Promise<void> {
-      userService.initiateOAuth2(provider);
+      try {
+        userService.initiateOAuth2(provider);
+      } catch (error) {
+        console.error('Failed to link identity.');
+        throw error;
+      }
     },
 
     async deleteAccount(): Promise<void> {
-      await lastValueFrom(userService.deleteAccount());
-      patchState(store, initialState);
-      router.navigate(['/']);
+      try {
+        await lastValueFrom(userService.deleteAccount());
+        patchState(store, initialState);
+        router.navigate(['/']);
+      } catch (error) {
+        console.error('Failed to delete account.');
+        throw error;
+      }
     },
 
     clearUser(): void {

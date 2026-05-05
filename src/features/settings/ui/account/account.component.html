@@ -5,7 +5,7 @@
     <form [formRoot]="emailForm">
       <app-stateful-input type="email" label="Current Email" fieldId="currentEmail" [formField]="emailForm.currentEmail" />
       <app-stateful-input type="email" label="New Email" fieldId="newEmail" [formField]="emailForm.newEmail" />
-      <button type="submit" [disabled]="emailForm().invalid() || emailForm().submitting()">Change Email</button>
+      <button type="submit" [disabled]="emailForm().submitting()">Change Email</button>
     </form>
   </header>
 
@@ -18,7 +18,7 @@
       <app-stateful-input type="password" label="Current Password" fieldId="currentPassword" [formField]="passwordForm.currentPassword" />
       <app-stateful-input type="password" label="New Password" fieldId="newPassword" [formField]="passwordForm.password" />
       <app-stateful-input type="password" label="Confirm New Password" fieldId="confirmNewPassword" [formField]="passwordForm.confirmPassword" />
-      <button type="submit" [disabled]="passwordForm().invalid() || passwordForm().submitting()">Change Password</button>
+      <button type="submit" [disabled]="passwordForm().submitting()">Change Password</button>
     </form>
   </header>
 </section>
@@ -30,7 +30,7 @@
     <form [formRoot]="displayNameForm">
       <app-stateful-input type="text" label="Current Display Name" fieldId="currentDisplayName" [formField]="displayNameForm.currentDisplayName" />
       <app-stateful-input type="text" label="New Display Name" fieldId="newDisplayName" [formField]="displayNameForm.newDisplayName" />
-      <button type="submit" [disabled]="displayNameForm().invalid() || displayNameForm().submitting()">Change Display Name</button>
+      <button type="submit" [disabled]="displayNameForm().submitting()">Change Display Name</button>
     </form>
   </header>
 </section>

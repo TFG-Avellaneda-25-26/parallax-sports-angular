@@ -35,11 +35,13 @@ export const createdisplayNameForm = () => {
           try {
             await userStore.updateDisplayName(newDisplayName);
             field().value.set({ currentDisplayName: newDisplayName, newDisplayName: '' });
+            field().reset();
             return null;
           } catch {
             return { kind: 'updateError', message: 'Failed to update display name. Please try again.' };
           }
-        }
+        },
+        ignoreValidators: 'none'
       }
     }
   );
