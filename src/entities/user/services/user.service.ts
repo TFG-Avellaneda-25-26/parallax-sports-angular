@@ -38,4 +38,8 @@ export class UserService {
   disconnectIdentity(identityId: number): Observable<void> {
     return this.apiClient.delete<void>(`/api/users/identities/${identityId}`);
   }
+
+  deleteAccount(): Observable<void> {
+    return this.apiClient.delete<void>('/api/users/me');
+  }
 }

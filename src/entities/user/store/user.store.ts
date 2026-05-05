@@ -2,6 +2,7 @@ import { computed, inject } from "@angular/core";
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { UserService, User } from "@entities/user";
 import { lastValueFrom } from "rxjs";
+import { Router } from "@angular/router";
 
 interface UserState {
   user: User | null;
@@ -39,7 +40,7 @@ export const UserStore = signalStore(
     }),
   })),
 
-  withMethods((store, userService = inject(UserService)) => ({
+  withMethods((store, userService = inject(UserService), router = inject(Router)) => ({
 
     async loadUser(): Promise<void> {
       if (store.user()) return;
@@ -96,6 +97,12 @@ export const UserStore = signalStore(
 
     async linkIdentity(provider: string): Promise<void> {
       userService.initiateOAuth2(provider);
+    },
+
+    async deleteAccount(): Promise<void> {
+      await lastValueFrom(userService.deleteAccount());
+      patchState(store, initialState);
+      router.navigate(['/']);
     },
 
     clearUser(): void {
