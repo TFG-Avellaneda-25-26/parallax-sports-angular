@@ -30,4 +30,5 @@ export class AccountComponent {
   readonly displayNameForm = createdisplayNameForm();
   readonly emailForm = createEmailForm();
   readonly passwordForm = createPasswordForm();
+  readonly identites = this.userStore.linkedProviders;
 }

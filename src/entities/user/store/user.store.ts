@@ -13,6 +13,8 @@ const initialState: UserState = {
   isLoading: false,
 }
 
+const SUPPORTED_PROVIDERS = ['google', 'discord'] as const;
+
 export const UserStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
@@ -26,7 +28,15 @@ export const UserStore = signalStore(
     identities: computed(() => store.user()?.identities ?? []),
     displayName: computed(() => store.user()?.displayName ?? ''),
     timeZone: computed(() => store.user()?.settings?.timeZone ?? 'UTC'),
-    locale: computed(() => store.user()?.settings?.locale ?? 'en')
+    locale: computed(() => store.user()?.settings?.locale ?? 'en'),
+    linkedProviders: computed(() => {
+      const linked = store.user()?.identities ?? [];
+      return SUPPORTED_PROVIDERS.map(provider => ({
+        provider,
+        identity: linked.find(i => i.provider === provider) ?? null,
+        isLinked: linked.some(i => i.provider === provider)
+      }))
+    }),
   })),
 
   withMethods((store, userService = inject(UserService)) => ({
@@ -75,35 +85,17 @@ export const UserStore = signalStore(
       patchState(store, { user: { ...user, displayName } });
     },
 
-    async updateTimeZone(timeZone: string): Promise<void> {
-      const user = store.user();
-      if (!user?.settings) return;
-
-      const settings = { ...user.settings, timeZone };
-      await lastValueFrom(userService.updateSettings(settings));
-      patchState(store, { user: { ...user, settings }});
-    },
-
-    async updateLocale(locale: string): Promise<void> {
-      const user = store.user();
-      if (!user?.settings) return;
-
-      const settings = { ...user.settings, locale };
-      await lastValueFrom(userService.updateSettings(settings));
-      patchState(store, { user: { ...user, settings }});
-    },
-
     async disconnectIdentity(identityId: number): Promise<void> {
       const user = store.user();
       if (!user) return;
 
+      await lastValueFrom(userService.disconnectIdentity(identityId));
       const updatedIdentities = user.identities?.filter(id => id.id !== identityId) ?? [];
       patchState(store, { user: { ...user, identities: updatedIdentities }});
     },
 
-    async connectIdentity(provider: string): Promise<void> {
-      await lastValueFrom(userService.initiateOAuth2(provider));
-      await this.loadUser();
+    async linkIdentity(provider: string): Promise<void> {
+      userService.initiateOAuth2(provider);
     },
 
     clearUser(): void {
