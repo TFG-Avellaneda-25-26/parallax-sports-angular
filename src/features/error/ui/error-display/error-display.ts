@@ -70,7 +70,7 @@ export class ErrorDisplay {
         skewY: (i: number) => [-15, 30][i],
         scaleX: (i: number) => [0.85, 0.6][i],
       });
-      tl.progress(0.5);
+      tl.progress(0);
 
       const texts = Array.from(svgEl.querySelectorAll('text')) as SVGTextElement[];
       const tl2 = gsap.timeline({ paused: true });
@@ -83,11 +83,15 @@ export class ErrorDisplay {
           0,
         );
       });
-      tl2.progress(0.5);
+      tl2.progress(0);
+
+      let mouseActive = false;
+      const unlockTimer = setTimeout(() => { mouseActive = true; }, 2000);
 
       const onPointerMove = (e: PointerEvent) => {
+        if (!mouseActive) return;
         gsap.to([tl, tl2], {
-          duration: 2,
+          duration: 0.50,
           ease: 'power4',
           progress: e.clientX / window.innerWidth,
         });
@@ -95,6 +99,7 @@ export class ErrorDisplay {
       window.addEventListener('pointermove', onPointerMove, { passive: true });
 
       this.destroyRef.onDestroy(() => {
+        clearTimeout(unlockTimer);
         window.removeEventListener('pointermove', onPointerMove);
         tl.kill();
         tl2.kill();
@@ -103,7 +108,6 @@ export class ErrorDisplay {
   }
 
   goHome(): void {
-    this.errorStore.clear();
-    void this.router.navigate(['/']);
+    void this.router.navigate(['/']).then(() => this.errorStore.clear());
   }
 }

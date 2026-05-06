@@ -22,7 +22,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           type: 'about:blank',
           title: 'Network Error',
           status: 0,
-          detail: 'Unable to reach the server. Please check your connection and try again.',
+          detail: 'Unable to reach the server.',
           instance: req.url
         };
       } else {
