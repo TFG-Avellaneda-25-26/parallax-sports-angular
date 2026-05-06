@@ -155,7 +155,21 @@ export class LandingPage {
 
     runNextMorph();
 
+    const onTransitionStart = () => {
+      morphLoopTimeline?.kill();
+      morphLoopTimeline = null;
+      const cleanLogo = this.logos[currentLogoIndex];
+      gsap.set(activePath, { attr: { d: cleanLogo.path } });
+      svgEl.setAttribute('viewBox', cleanLogo.viewBox);
+      isFirstMorph = true;
+    };
+    const onTransitionEnd = () => runNextMorph();
+    window.addEventListener('theme-transition-start', onTransitionStart);
+    window.addEventListener('theme-transition-end', onTransitionEnd);
+
     this.destroyRef.onDestroy(() => {
+      window.removeEventListener('theme-transition-start', onTransitionStart);
+      window.removeEventListener('theme-transition-end', onTransitionEnd);
       morphLoopTimeline?.kill();
       descriptionSplit.revert();
     });

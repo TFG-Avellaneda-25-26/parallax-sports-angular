@@ -30,17 +30,60 @@ export class ThemeToggleComponent {
     this.destroyRef.onDestroy(() => this.morphTween?.kill());
   }
 
-  protected onToggleTheme(): void {
+  protected onToggleTheme(event: MouseEvent): void {
     const iconPath = this.iconPathRef().nativeElement as SVGPathElement;
-    const targetId = this.themeStore.isDark() ? '#theme-icon-sun' : '#theme-icon-moon';
+    const goingDark = !this.themeStore.isDark();
+    const targetId = goingDark ? '#theme-icon-moon' : '#theme-icon-sun';
 
     this.morphTween?.kill();
     this.morphTween = gsap.to(iconPath, {
       morphSVG: targetId,
-      duration: 0.4,
-      ease: 'power2.inOut',
+      duration: 1.2,
+      ease: 'power3.inOut',
     });
 
-    this.themeStore.toggleTheme();
+    this.runThemeTransition(event, goingDark);
+  }
+
+  private runThemeTransition(event: MouseEvent, goingDark: boolean): void {
+    const root = document.documentElement;
+    const nextTheme = goingDark ? 'dark' : 'light';
+
+    const apply = () => {
+      this.themeStore.toggleTheme();
+      root.setAttribute('data-theme', nextTheme);
+    };
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const supported = 'startViewTransition' in document;
+    if (!supported || reduced) {
+      apply();
+      return;
+    }
+
+    const button = event.currentTarget as HTMLElement;
+    const rect = button.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y),
+    );
+
+    root.style.setProperty('--theme-transition-x', `${x}px`);
+    root.style.setProperty('--theme-transition-y', `${y}px`);
+    root.style.setProperty('--theme-transition-end-radius', `${endRadius}px`);
+    root.dataset['themeTransition'] = goingDark ? 'to-dark' : 'to-light';
+
+    window.dispatchEvent(new CustomEvent('theme-transition-start'));
+
+    const transition = (document as Document & {
+      startViewTransition: (cb: () => void) => { finished: Promise<void> };
+    }).startViewTransition(apply);
+
+    transition.finished.finally(() => {
+      delete root.dataset['themeTransition'];
+      window.dispatchEvent(new CustomEvent('theme-transition-end'));
+    });
   }
 }

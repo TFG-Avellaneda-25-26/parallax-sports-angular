@@ -80,3 +80,48 @@
 
   --grid-pattern: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><g fill='none' stroke='%230891b2' stroke-width='0.7' opacity='0.42'><path d='M0 0 L3.5 0 M0 0 L0 3.5'/><path d='M80 0 L76.5 0 M80 0 L80 3.5'/><path d='M0 80 L3.5 80 M0 80 L0 76.5'/><path d='M80 80 L76.5 80 M80 80 L80 76.5'/></g><circle cx='40' cy='40' r='0.8' fill='%230891b2' opacity='0.28'/></svg>");
 }
+
+/* - Theme switch: View Transitions API circular reveal -
+   The new theme either expands from the button center (to-dark) or the old
+   theme retracts toward it (to-light). Coordinates and radius are written
+   to the root element by the toggle component before triggering the
+   transition. Browsers without support fall back to an instant swap. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html[data-theme-transition='to-dark']::view-transition-old(root) {
+  z-index: 0;
+}
+html[data-theme-transition='to-dark']::view-transition-new(root) {
+  z-index: 1;
+  animation: theme-reveal-expand 1600ms cubic-bezier(0.83, 0, 0.17, 1) forwards;
+}
+
+html[data-theme-transition='to-light']::view-transition-new(root) {
+  z-index: 0;
+}
+html[data-theme-transition='to-light']::view-transition-old(root) {
+  z-index: 1;
+  animation: theme-reveal-retract 1600ms cubic-bezier(0.83, 0, 0.17, 1) forwards;
+}
+
+@keyframes theme-reveal-expand {
+  from {
+    clip-path: circle(0 at var(--theme-transition-x) var(--theme-transition-y));
+  }
+  to {
+    clip-path: circle(var(--theme-transition-end-radius) at var(--theme-transition-x) var(--theme-transition-y));
+  }
+}
+
+@keyframes theme-reveal-retract {
+  from {
+    clip-path: circle(var(--theme-transition-end-radius) at var(--theme-transition-x) var(--theme-transition-y));
+  }
+  to {
+    clip-path: circle(0 at var(--theme-transition-x) var(--theme-transition-y));
+  }
+}

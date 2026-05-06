@@ -1,7 +1,7 @@
 <button
   type="button"
   class="theme-toggle"
-  (click)="onToggleTheme()"
+  (click)="onToggleTheme($event)"
   [attr.aria-label]="themeStore.isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
   [attr.title]="themeStore.isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
   >
