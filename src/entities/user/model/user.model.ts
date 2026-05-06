@@ -18,7 +18,7 @@ export interface User {
 }
 
 export interface UserIdentity {
-  id: string;
+  id: number;
   provider: string;
   providerUsername: string | null;
   providerEmail: string | null;

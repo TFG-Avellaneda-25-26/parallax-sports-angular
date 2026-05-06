@@ -1,7 +1,7 @@
 import { API_BASE_URL } from '@shared/config';
 import { computed, inject, signal } from "@angular/core";
 import { Router } from "@angular/router";
-import { displayNameSchema, emailSchema, loginPasswordSchema, passwordSchema, AuthService, AuthData } from "@entities/auth"
+import { displayNameSchema, emailSchema, loginPasswordSchema, passwordSchema, AuthService, AuthData, emailAsyncSchema } from "@entities/auth"
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { apply, applyWhen, form } from "@angular/forms/signals";
 import { lastValueFrom } from "rxjs";
@@ -30,7 +30,8 @@ export const AuthStore = signalStore(
 
   withMethods((store, authService = inject(AuthService), router = inject(Router), apiBaseUrl = inject(API_BASE_URL)) => {
   const authForm = form(formModel, (schemaPath) => {
-    apply(schemaPath.email, emailSchema(apiBaseUrl)(() => store.isRegisterMode()));
+    apply(schemaPath.email, emailSchema);
+    applyWhen(schemaPath.email, () => store.isRegisterMode(), emailAsyncSchema(apiBaseUrl));
     applyWhen(schemaPath.password, () => !store.isRegisterMode(), loginPasswordSchema);
     applyWhen(schemaPath, () => store.isRegisterMode(), passwordSchema);
     applyWhen(schemaPath.displayName, () => store.isRegisterMode(), displayNameSchema);

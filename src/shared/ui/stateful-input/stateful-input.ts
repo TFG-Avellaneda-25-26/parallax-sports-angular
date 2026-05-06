@@ -30,6 +30,7 @@ export class StatefulInput {
   touched = model<boolean>(false);
   invalid = input<boolean>(false);
   errors = input<readonly WithOptionalFieldTree<ValidationError>[]>([]);
+  readonly = input<boolean>(false);
 
   type = input<'text' | 'email' | 'password'>('text');
   label = input<string>('');
