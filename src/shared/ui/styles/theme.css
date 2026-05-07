@@ -11,6 +11,7 @@
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
   --transition-slow: 350ms ease;
+  
 
   /* Grid background — cell scales with viewport. The SVG draws the four
      visible arm-stubs of a + crosshair at each tile corner; when tiled, four
