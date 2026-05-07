@@ -2,8 +2,12 @@
   <header>
     <h2>Timezone</h2>
     <p>Set your preferred timezone</p>
-    <form>
-
+    <form [formRoot]="timeZoneForm">
+      <select [formField]="timeZoneForm.timeZone">
+        @for (timezone of timezonesOptions; track timezone.value) {
+          <option [value]="timezone.value" [selected]="timezone.value === userStore.timeZone()">{{ timezone.label }}</option>
+        }
+      </select>
     </form>
   </header>
 </section>

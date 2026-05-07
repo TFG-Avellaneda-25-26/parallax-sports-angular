@@ -38,4 +38,8 @@ export class UserService {
   deleteAccount(): Observable<void> {
     return this.apiClient.delete<void>('/api/users/me');
   }
+
+  updateTimeZone(timeZone: string): Observable<void> {
+    return this.apiClient.put<void>('/api/users/timezone', timeZone);
+  }
 }
