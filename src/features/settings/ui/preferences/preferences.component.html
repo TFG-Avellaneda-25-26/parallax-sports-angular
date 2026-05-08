@@ -3,11 +3,23 @@
     <h2>Timezone</h2>
     <p>Set your preferred timezone</p>
     <form [formRoot]="timeZoneForm">
-      <select [formField]="timeZoneForm.timeZone">
-        @for (timezone of timezonesOptions; track timezone.value) {
-          <option [value]="timezone.value" [selected]="timezone.value === userStore.timeZone()">{{ timezone.label }}</option>
-        }
-      </select>
+      <app-stateful-combox-autocomplete-select [list]="ALL_COUNTRIES" />
     </form>
+
+    <!-- <form [formRoot]="timeZoneForm">
+      <input
+        [formField]="timeZoneForm.timeZone"
+        list="timezone-options"
+        placeholder="Search timezone..."
+      />
+      <datalist id="timezone-options">
+        @for (timezone of timezonesOptions; track timezone.value) {
+          <option [value]="timezone.value">{{ timezone.label }}</option>
+        }
+      </datalist>
+      <button type="submit">Save Timezone</button>
+    </form> -->
   </header>
+
+
 </section>

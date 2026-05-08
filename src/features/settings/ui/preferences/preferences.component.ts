@@ -3,10 +3,11 @@ import { FormRoot, FormField } from '@angular/forms/signals';
 import { TIMEZONE_OPTIONS } from '@entities/timezone';
 import { UserStore } from '@entities/user';
 import { createTimeZoneForm } from './forms/timezone-form';
+import { StatefulComboxAutocompleteSelectComponent } from "@shared/ui";
 
 @Component({
   selector: 'app-settings-preferences',
-  imports: [FormRoot, FormField],
+  imports: [FormRoot, FormField, StatefulComboxAutocompleteSelectComponent],
   templateUrl: './preferences.component.html',
   styleUrl: './preferences.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,4 +17,14 @@ export class PreferencesComponent {
   readonly userStore = inject(UserStore);
 
   readonly timeZoneForm = createTimeZoneForm();
+
+  ALL_COUNTRIES = [
+  'Afghanistan',
+  'Albania',
+  'Algeria',
+  'Andorra',
+  'Angola',
+  'Antigua and Barbuda',
+  'Argentina',
+  ];
 }
