@@ -1,0 +1,165 @@
+:host {
+  display: block;
+}
+
+.row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.5rem 0.35rem calc(0.5rem + var(--indent, 0) * 1rem);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-text-primary);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.row:hover {
+  background: var(--color-accent-subtle);
+}
+
+.row--show-only {
+  background: var(--color-accent-subtle);
+  color: var(--color-text-primary);
+  box-shadow: inset 2px 0 0 var(--color-accent);
+}
+
+.row--hidden {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+.row[data-level='sport'] .row__label {
+  font-weight: 600;
+}
+
+.row[data-level='participant'] .row__label {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.row[data-level='eventType'] .row__label {
+  font-size: 0.78rem;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+  color: var(--color-text-secondary);
+}
+
+.row__expand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.row__expand--placeholder {
+  cursor: default;
+  pointer-events: none;
+}
+
+.row__expand:hover:not(.row__expand--placeholder) {
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+}
+
+.row__chevron {
+  transition: transform var(--transition-fast);
+}
+
+.row__chevron--open {
+  transform: rotate(90deg);
+}
+
+.row__label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.row__count {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.row--show-only .row__count {
+  background: var(--color-accent);
+  color: var(--color-bg-primary);
+}
+
+.row__menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+}
+
+.row:hover .row__menu-btn,
+.row__menu-btn[aria-expanded='true'] {
+  opacity: 1;
+}
+
+.row__menu-btn:hover {
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+}
+
+.row__menu {
+  position: absolute;
+  top: 100%;
+  right: 0.5rem;
+  z-index: 10;
+  margin: 0.25rem 0 0;
+  padding: 0.25rem;
+  list-style: none;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  min-width: 9rem;
+}
+
+.row__menu li { list-style: none; margin: 0; }
+
+.row__menu-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.4rem 0.65rem;
+  background: transparent;
+  color: var(--color-text-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.row__menu-item:hover {
+  background: var(--color-accent-subtle);
+}

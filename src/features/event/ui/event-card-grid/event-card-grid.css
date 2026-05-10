@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.event-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.event-card-grid__empty {
+  padding: 2rem;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+}

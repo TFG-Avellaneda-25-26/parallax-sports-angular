@@ -1,0 +1,71 @@
+<header class="tree-header">
+  <h3 class="tree-header__title">Filters</h3>
+  @if (isAnyFilterActive()) {
+    <button type="button" class="tree-header__clear" (click)="clearAll()">Clear all</button>
+  }
+</header>
+
+@if (!hasNodes()) {
+  <p class="tree-empty">No events loaded.</p>
+} @else {
+  <div class="tree" role="tree">
+    @for (sport of nodes(); track sport.key) {
+      <app-filter-tree-row
+        level="sport"
+        [label]="sport.name"
+        [count]="sport.count"
+        [isShowOnly]="includeSports().has(sport.key)"
+        [isHidden]="excludeSports().has(sport.key)"
+        [isExpandable]="sport.competitions.length > 0"
+        [isExpanded]="isSportExpanded(sport.key)"
+        (action)="onSportAction(sport, $event)"
+        (toggleExpand)="toggleSport(sport.key)"
+      />
+
+      @if (isSportExpanded(sport.key)) {
+        @for (comp of sport.competitions; track comp.key) {
+          <app-filter-tree-row
+            level="competition"
+            [label]="comp.name"
+            [count]="comp.count"
+            [isShowOnly]="includeCompetitions().has(comp.key)"
+            [isHidden]="excludeCompetitions().has(comp.key)"
+            [isExpandable]="comp.eventTypes.length > 1 || comp.participants.length > 0"
+            [isExpanded]="isCompetitionExpanded(comp.key)"
+            (action)="onCompetitionAction(comp, $event)"
+            (toggleExpand)="toggleCompetition(comp.key)"
+          />
+
+          @if (isCompetitionExpanded(comp.key)) {
+            @if (comp.eventTypes.length > 1) {
+              @for (eventType of comp.eventTypes; track eventType.key) {
+                <app-filter-tree-row
+                  level="eventType"
+                  [label]="eventType.type"
+                  [count]="eventType.count"
+                  [isShowOnly]="includeEventTypes().has(eventType.key)"
+                  [isHidden]="excludeEventTypes().has(eventType.key)"
+                  [isExpandable]="false"
+                  [isExpanded]="false"
+                  (action)="onEventTypeAction(eventType, $event)"
+                />
+              }
+            }
+            @for (participant of comp.participants; track participant.id) {
+              <app-filter-tree-row
+                level="participant"
+                [label]="participant.name"
+                [count]="participant.count"
+                [isShowOnly]="includeParticipants().has(participant.id)"
+                [isHidden]="excludeParticipants().has(participant.id)"
+                [isExpandable]="false"
+                [isExpanded]="false"
+                (action)="onParticipantAction(participant, $event)"
+              />
+            }
+          }
+        }
+      }
+    }
+  </div>
+}

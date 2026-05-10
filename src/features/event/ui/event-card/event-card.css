@@ -1,0 +1,127 @@
+:host {
+  display: block;
+}
+
+.event-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-elevated);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  overflow: hidden;
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+  min-height: 12rem;
+}
+
+.event-card--has-venue {
+  color: #f4f7fb;
+}
+
+.event-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-accent);
+}
+
+.event-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.event-card__sport-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+.event-card__sport-name {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+
+.event-card--has-venue .event-card__sport-name {
+  color: rgba(244, 247, 251, 0.85);
+}
+
+.event-card__status {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-bg-primary);
+  background: var(--color-text-muted);
+}
+
+.event-card__status[data-status='live']      { background: var(--color-success); color: #03110d; }
+.event-card__status[data-status='cancelled'] { background: var(--color-error); color: #fff; }
+.event-card__status[data-status='postponed'] { background: var(--color-warning); color: #1a1100; }
+.event-card__status[data-status='finished']  { background: var(--color-text-muted); color: #fff; }
+
+.event-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.event-card--has-venue .event-card__title {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.event-card__competition {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.event-card--has-venue .event-card__competition {
+  color: rgba(244, 247, 251, 0.8);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.event-card__footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border-subtle);
+  font-size: 0.8rem;
+}
+
+.event-card--has-venue .event-card__footer {
+  border-top-color: rgba(244, 247, 251, 0.18);
+}
+
+.event-card__time {
+  font-variant-numeric: tabular-nums;
+}
+
+.event-card__venue {
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+.event-card--has-venue .event-card__venue {
+  color: rgba(244, 247, 251, 0.75);
+}

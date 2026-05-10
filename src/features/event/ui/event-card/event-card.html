@@ -1,0 +1,26 @@
+<article
+  class="event-card"
+  [class.event-card--has-venue]="hasVenueImage()"
+  [style.background-image]="cardBackground()"
+>
+  <header class="event-card__header">
+    @if (event().sportIconUrl) {
+      <img class="event-card__sport-icon" [src]="event().sportIconUrl" [alt]="event().sportName + ' icon'" />
+    }
+    <span class="event-card__sport-name">{{ event().sportName }}</span>
+    @if (showStatus()) {
+      <span class="event-card__status" [attr.data-status]="event().status">{{ event().status }}</span>
+    }
+  </header>
+
+  <h3 class="event-card__title">{{ event().name }}</h3>
+
+  <p class="event-card__competition">{{ event().competitionName ?? '—' }}</p>
+
+  <footer class="event-card__footer">
+    <time class="event-card__time">{{ event().startTimeUtc | eventTime: locale() : timeZone() }}</time>
+    @if (event().venueName) {
+      <span class="event-card__venue">{{ event().venueName }}</span>
+    }
+  </footer>
+</article>
