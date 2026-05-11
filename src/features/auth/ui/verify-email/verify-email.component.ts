@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   DestroyRef,
   ElementRef,
@@ -34,6 +35,7 @@ export class VerifyEmailComponent {
 
   private readonly injector = inject(Injector);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly cdr = inject(ChangeDetectorRef);
   private readonly badgeRef = viewChild<ElementRef<HTMLElement>>('badge');
   private readonly backdropRef = viewChild<ElementRef<HTMLElement>>('backdrop');
   private readonly panelRef = viewChild<ElementRef<HTMLElement>>('panel');
@@ -57,50 +59,56 @@ export class VerifyEmailComponent {
 
     this.storedBadgeRect = badge.getBoundingClientRect();
     this.previouslyFocused = (document.activeElement as HTMLElement | null) ?? badge;
+
+    // Force the @if(isOpen()) block to render synchronously before GSAP
+    // tries to access the panel/backdrop DOM nodes. With OnPush, a plain
+    // signal set only schedules a future CD tick, so afterNextRender can
+    // fire before the @if has created the elements — resulting in the panel
+    // never appearing until something else (e.g. theme toggle) triggers CD.
     this.isOpen.set(true);
+    this.cdr.detectChanges();
 
-    afterNextRender(
-      () => {
-        const panel = this.panelRef()?.nativeElement;
-        const backdrop = this.backdropRef()?.nativeElement;
-        if (!panel || !backdrop || !this.storedBadgeRect) return;
+    // A resolved microtask lets the browser paint the freshly-created nodes
+    // before GSAP reads their DOMRects.
+    Promise.resolve().then(() => {
+      const panel = this.panelRef()?.nativeElement;
+      const backdrop = this.backdropRef()?.nativeElement;
+      if (!panel || !backdrop || !this.storedBadgeRect) return;
 
-        this.killTweens();
+      this.killTweens();
 
-        const panelRect = panel.getBoundingClientRect();
-        const { dx, dy, sx, sy } = this.computeTransform(this.storedBadgeRect, panelRect);
+      const panelRect = panel.getBoundingClientRect();
+      const { dx, dy, sx, sy } = this.computeTransform(this.storedBadgeRect, panelRect);
 
-        this.activeTweens.push(
-          gsap.fromTo(
-            panel,
-            {
-              x: dx,
-              y: dy,
-              scaleX: sx,
-              scaleY: sy,
-              autoAlpha: 0.2,
-              transformOrigin: 'center center',
-            },
-            {
-              x: 0,
-              y: 0,
-              scaleX: 1,
-              scaleY: 1,
-              autoAlpha: 1,
-              duration: 0.7,
-              ease: 'power3.inOut',
-              onComplete: () => this.moveFocusIntoPanel(panel),
-            },
-          ),
-          gsap.fromTo(
-            backdrop,
-            { autoAlpha: 0 },
-            { autoAlpha: 1, duration: 0.45, ease: 'power2.out' },
-          ),
-        );
-      },
-      { injector: this.injector },
-    );
+      this.activeTweens.push(
+        gsap.fromTo(
+          panel,
+          {
+            x: dx,
+            y: dy,
+            scaleX: sx,
+            scaleY: sy,
+            autoAlpha: 0.2,
+            transformOrigin: 'center center',
+          },
+          {
+            x: 0,
+            y: 0,
+            scaleX: 1,
+            scaleY: 1,
+            autoAlpha: 1,
+            duration: 0.7,
+            ease: 'power3.inOut',
+            onComplete: () => this.moveFocusIntoPanel(panel),
+          },
+        ),
+        gsap.fromTo(
+          backdrop,
+          { autoAlpha: 0 },
+          { autoAlpha: 1, duration: 0.45, ease: 'power2.out' },
+        ),
+      );
+    });
   }
 
   protected closeModal(): void {
