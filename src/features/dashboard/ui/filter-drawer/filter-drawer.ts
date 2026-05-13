@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FilterDrawerStore } from '../../store/filter-drawer.store';
+import { FilterDrawerStore } from '@features/dashboard/store/filter-drawer.store';
 import { FilterTreeComponent } from '../filter-tree/filter-tree';
 
 @Component({
