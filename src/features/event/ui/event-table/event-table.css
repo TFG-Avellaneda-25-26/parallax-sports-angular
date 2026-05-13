@@ -5,11 +5,28 @@
 
 .event-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
   font-family: var(--font-body);
   font-size: 0.9rem;
   color: var(--color-text-primary);
+}
+
+.event-table__col-time  { width: 13rem; }
+.event-table__col-sport { width: 10rem; }
+.event-table__col-comp  { width: 18rem; }
+.event-table__col-event { width: auto; }
+
+.event-table th,
+.event-table td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.event-table__group-header td {
+  white-space: normal;
 }
 
 .event-table thead th {

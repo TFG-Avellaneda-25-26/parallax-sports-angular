@@ -4,9 +4,12 @@
 }
 
 .event-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
 }
 
 .event-card-grid__empty {

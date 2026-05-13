@@ -1,26 +1,36 @@
 <article
   class="event-card"
-  [class.event-card--has-venue]="hasVenueImage()"
-  [style.background-image]="cardBackground()"
+  [class.event-card--has-circuit]="!!event().venueImageUrl"
+  [style.--circuit]="circuitMask()"
 >
-  <header class="event-card__header">
-    @if (event().sportIconUrl) {
-      <img class="event-card__sport-icon" [src]="event().sportIconUrl" [alt]="event().sportName + ' icon'" />
-    }
-    <span class="event-card__sport-name">{{ event().sportName }}</span>
-    @if (showStatus()) {
-      <span class="event-card__status" [attr.data-status]="event().status">{{ event().status }}</span>
-    }
-  </header>
+  <div class="event-card__main">
+    <h3 class="event-card__title">
+      <span class="event-card__sport">{{ event().sportName }}</span>
+      <span class="event-card__sep" aria-hidden="true">–</span>
+      <span class="event-card__name">{{ event().name }}</span>
+    </h3>
 
-  <h3 class="event-card__title">{{ event().name }}</h3>
+    <p class="event-card__sub">
+      @if (event().competitionName) {
+        <span>{{ event().competitionName }}</span>
+      }
+      @if (event().venueName) {
+        <span class="event-card__dot" aria-hidden="true">·</span>
+        <span class="event-card__venue">{{ event().venueName }}</span>
+      }
+    </p>
 
-  <p class="event-card__competition">{{ event().competitionName ?? '—' }}</p>
+    <div class="event-card__tags">
+      <span class="event-card__tag event-card__tag--type">{{ event().eventType }}</span>
+      @if (showStatus()) {
+        <span class="event-card__tag event-card__tag--status" [attr.data-status]="event().status">
+          {{ event().status }}
+        </span>
+      }
+    </div>
+  </div>
 
-  <footer class="event-card__footer">
+  <div class="event-card__meta">
     <time class="event-card__time">{{ event().startTimeUtc | eventTime: locale() : timeZone() }}</time>
-    @if (event().venueName) {
-      <span class="event-card__venue">{{ event().venueName }}</span>
-    }
-  </footer>
+  </div>
 </article>
