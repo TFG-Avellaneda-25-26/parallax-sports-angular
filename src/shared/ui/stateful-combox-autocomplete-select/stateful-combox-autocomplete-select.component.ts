@@ -1,4 +1,5 @@
-import { afterRenderEffect, ChangeDetectionStrategy, Component, computed, input, signal, untracked, viewChild } from '@angular/core';
+import { WithOptionalFieldTree, ValidationError } from '@angular/forms/signals';
+import { afterRenderEffect, ChangeDetectionStrategy, Component, computed, input, model, signal, untracked, viewChild } from '@angular/core';
 import { Combobox, ComboboxDialog, ComboboxInput, ComboboxPopupContainer } from '@angular/aria/combobox';
 import { Listbox, Option } from '@angular/aria/listbox';
 
@@ -9,37 +10,65 @@ import { Listbox, Option } from '@angular/aria/listbox';
   styleUrl: './stateful-combox-autocomplete-select.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StatefulComboxAutocompleteSelectComponent {
-  readonly list = input<string[]>([]);
+export class StatefulComboxAutocompleteSelectComponent<T extends { label: string; value: string}> {
+  value = model<string>('');
+  touched = model<boolean>(false);
+  invalid = input<boolean>(false);
+  errors = input<readonly WithOptionalFieldTree<ValidationError>[]>([]);
+
+  readonly list = input<T[]>([]);
+  label = input<string>('');
+  fieldId = input<string>('');
 
   dialog = viewChild(ComboboxDialog);
   listbox = viewChild<Listbox<string>>(Listbox);
   combobox = viewChild<Combobox<string>>(Combobox);
 
-  value = signal('');
   searchString = signal('');
 
   options = computed(() => {
+    const search = this.searchString().toLowerCase();
     return this.list().filter((option) =>
-      option.toLocaleLowerCase().startsWith(this.searchString().toLocaleLowerCase()),
+      option.label.toLowerCase().includes(search)
     );
   });
 
-  selectedOptions = signal<string[]>([]);
+  displayValue = computed(() => {
+    const currentVal = this.value();
+    return this.list().find(opt => opt.value === currentVal)?.label || currentVal;
+  })
+
+  selectedOptions = signal<T[]>([]);
 
   constructor() {
     afterRenderEffect(() => {
-      if (this.dialog() && this.combobox()?.expanded()) {
-        untracked(() => this.listbox()?.gotoFirst());
-        this.positionDialog();
+      const selection = this.selectedOptions();
+      if (selection.length > 0) {
+        console.log('Selected option:', selection[0]);
+        untracked(() => {
+          this.selectedOptions.set([]);
+          this.dialog()?.close();
+          this.selectedOptions.set([]);
+          this.touched.set(true);
+        });
+        this.value.set(selection[0].value);
+        this.searchString.set('');
       }
     });
 
     afterRenderEffect(() => {
-      if (this.selectedOptions().length > 0) {
-        untracked(() => this.dialog()?.close());
-        this.value.set(this.selectedOptions()[0]);
-        this.searchString.set('');
+      if (this.combobox()?.expanded()) {
+        untracked(() => {
+          this.touched.set(true);
+          this.searchString.set('');
+        });
+      }
+    });
+
+    afterRenderEffect(() => {
+      if (this.dialog() && this.combobox()?.expanded()) {
+        untracked(() => this.listbox()?.gotoFirst());
+        this.positionDialog();
       }
     });
 
@@ -51,7 +80,6 @@ export class StatefulComboxAutocompleteSelectComponent {
     const comboBox = this.combobox()!;
 
     const comboboxRect = comboBox.inputElement()?.getBoundingClientRect();
-
     const scrollY = window.scrollY;
 
     if (comboboxRect) {

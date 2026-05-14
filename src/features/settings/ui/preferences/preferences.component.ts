@@ -17,14 +17,4 @@ export class PreferencesComponent {
   readonly userStore = inject(UserStore);
 
   readonly timeZoneForm = createTimeZoneForm();
-
-  ALL_COUNTRIES = [
-  'Afghanistan',
-  'Albania',
-  'Algeria',
-  'Andorra',
-  'Angola',
-  'Antigua and Barbuda',
-  'Argentina',
-  ];
 }
