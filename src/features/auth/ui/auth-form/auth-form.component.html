@@ -8,28 +8,28 @@
     </p>
   </div>
 
-  <form #formRef [formRoot]="form" class="auth-form">
+  <form [formRoot]="form" class="auth-form">
     @if (authStore.isRegisterMode()) {
-      <div class="field" data-flip-id="displayName">
+      <div class="field">
         <app-stateful-input label="Display Name" fieldId="displayName" [formField]="form.displayName" />
       </div>
     }
 
-    <div class="field" data-flip-id="email">
+    <div class="field">
       <app-stateful-input type="email" label="Email" fieldId="email" [formField]="form.email" />
     </div>
 
-    <div class="field" data-flip-id="password">
+    <div class="field">
       <app-stateful-input type="password" label="Password" fieldId="password" [formField]="form.password" />
     </div>
 
     @if (authStore.isRegisterMode()) {
-      <div class="field" data-flip-id="confirmPassword">
+      <div class="field">
         <app-stateful-input type="password" label="Confirm Password" fieldId="confirmPassword" [formField]="form.confirmPassword" />
       </div>
     }
 
-    <div class="field" data-flip-id="submit">
+    <div class="field">
       <button class="btn-submit" type="submit" [disabled]="form().submitting() || form().invalid()">
         @if (form().submitting()) {
           <span class="spinner"></span>

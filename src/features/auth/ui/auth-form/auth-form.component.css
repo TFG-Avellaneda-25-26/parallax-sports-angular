@@ -49,16 +49,10 @@
   margin: 0;
 }
 
-/* position: relative is required so absoluteOnLeave elements stay anchored here */
 .auth-form {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: 18px;
-}
-
-.field {
-  box-sizing: border-box;
 }
 
 .btn-submit {
