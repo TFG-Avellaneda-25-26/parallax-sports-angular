@@ -9,4 +9,9 @@
   >
     Verify
   </button>
+} @else {
+  <div #backdrop class="otp-backdrop" (click)="closeModal()"></div>
+  <div #panel class="otp-panel" (keydown)="onPanelKeydown($event)">
+    <app-otp-dialog (verified)="closeModal()" (closed)="closeModal()" />
+  </div>
 }

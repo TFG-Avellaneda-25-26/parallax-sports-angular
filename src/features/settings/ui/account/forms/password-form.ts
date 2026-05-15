@@ -1,6 +1,6 @@
 import { inject, signal } from "@angular/core";
 import { apply, debounce, form, validate, validateHttp } from "@angular/forms/signals";
-import { loginPasswordSchema, passwordSchema } from "@entities/auth";
+import { loginPasswordSchema, passwordSchema, differentFromCurrentValidator } from "@entities/auth";
 import { UserStore } from "@entities/user";
 import { API_BASE_URL } from "@shared/config";
 
@@ -43,19 +43,7 @@ export const createPasswordForm = () => {
           };
         }
       });
-      validate(schemaPath.password, ({value, valueOf}) => {
-        const newPassword = value();
-        const currentPassword = valueOf(schemaPath.currentPassword);
-
-        if (newPassword && currentPassword && newPassword === currentPassword) {
-          return {
-            kind: 'sameAsCurrent',
-              message: 'New password must be different from current password'
-            };
-          }
-
-        return null;
-      });
+      differentFromCurrentValidator(schemaPath.password, schemaPath.currentPassword);
     },
     {
       submission: {

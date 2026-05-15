@@ -1,6 +1,7 @@
 export interface AuthData extends PasswordData {
   displayName: string;
   email: string;
+  otp: string;
 }
 
 export interface PasswordData {

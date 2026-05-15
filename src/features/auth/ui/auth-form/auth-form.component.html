@@ -1,10 +1,22 @@
 <div class="auth-card">
   <div class="auth-header">
     <h1 class="auth-title">
-      {{ authStore.isRegisterMode() ? 'Create account' : 'Welcome back' }}
+      {{ authStore.isRegisterMode() ? 'Create account' : (authStore.isForgotPasswordMode() ? 'Reset password' : 'Welcome back') }}
     </h1>
     <p class="auth-subtitle">
-      {{ authStore.isRegisterMode() ? 'Fill in the details below to get started' : 'Sign in to continue' }}
+      @if (authStore.isRegisterMode()) {
+        Fill in the details below to get started
+      } @else if (authStore.isForgotPasswordMode()) {
+        @if (authStore.forgotPasswordStep() === 'request') {
+          Enter your email to receive a verification code
+        } @else if (authStore.forgotPasswordStep() === 'verify') {
+          Enter the 6-digit code sent to your email
+        } @else {
+          Choose a new secure password
+        }
+      } @else {
+        Sign in to continue
+      }
     </p>
   </div>
 
@@ -15,18 +27,39 @@
       </div>
     }
 
-    <div class="field">
-      <app-stateful-input type="email" label="Email" fieldId="email" [formField]="form.email" />
-    </div>
+    @if (!authStore.isForgotPasswordMode() || authStore.forgotPasswordStep() === 'request') {
+      <div class="field">
+        <app-stateful-input type="email" label="Email" fieldId="email" [formField]="form.email" />
+      </div>
+    } @else {
+       <div class="field email-preview">
+          <p>Email: <strong>{{ form().value().email }}</strong></p>
+       </div>
+    }
 
-    <div class="field">
-      <app-stateful-input type="password" label="Password" fieldId="password" [formField]="form.password" />
-    </div>
+    @if (authStore.isLoginMode()) {
+      <div class="field">
+        <app-stateful-input type="password" label="Password" fieldId="password" [formField]="form.password" />
+        <div class="field-actions">
+           <button type="button" class="link-btn" (click)="forgotPassword()">¿Has olvidado tu contraseña?</button>
+        </div>
+      </div>
+    }
 
-    @if (authStore.isRegisterMode()) {
+    @if (authStore.isRegisterMode() || (authStore.isForgotPasswordMode() && authStore.forgotPasswordStep() === 'reset')) {
+      <div class="field">
+        <app-stateful-input type="password" label="Password" fieldId="password" [formField]="form.password" />
+      </div>
       <div class="field">
         <app-stateful-input type="password" label="Confirm Password" fieldId="confirmPassword" [formField]="form.confirmPassword" />
       </div>
+    }
+
+    @if (authStore.isForgotPasswordMode() && authStore.forgotPasswordStep() === 'verify') {
+       <div class="field otp-field">
+          <label>Verification Code</label>
+          <ng-otp-input (onInputChange)="authStore.updateOtp($event)" [config]="{length: 6, allowNumbersOnly: true}" />
+       </div>
     }
 
     <div class="field">
@@ -46,9 +79,11 @@
   </form>
 
   <p class="auth-switch">
-    {{ authStore.isRegisterMode() ? 'Already have an account?' : "Don't have an account?" }}
+    @if (!authStore.isForgotPasswordMode()) {
+      {{ authStore.isRegisterMode() ? 'Already have an account?' : "Don't have an account?" }}
+    }
     <button class="switch-btn" (click)="switchMode()">
-      {{ authStore.isRegisterMode() ? 'Sign in' : 'Register' }}
+      {{ authStore.formButtonText() }}
     </button>
   </p>
 </div>

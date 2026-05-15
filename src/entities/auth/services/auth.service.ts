@@ -25,4 +25,16 @@ export class AuthService {
   logout() {
     return this.apiClient.post('/api/auth/logout', {});
   }
+
+  requestForgotPassword(email: string) {
+    return this.apiClient.post('/api/auth/forgot-password/request', { email });
+  }
+
+  verifyForgotPassword(email: string, code: string) {
+    return this.apiClient.post('/api/auth/forgot-password/verify', { email, code });
+  }
+
+  resetPassword(email: string, code: string, password: string) {
+    return this.apiClient.post('/api/auth/forgot-password/reset', { email, code, password });
+  }
 }

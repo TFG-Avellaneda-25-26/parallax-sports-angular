@@ -9,6 +9,34 @@ export const displayNameSchema = schema<string>((displayNamePath) => {
 
 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+export const emailExistsAsyncSchema = (API_BASE_URL: string) => schema<string>((emailPath) => {
+  debounce(emailPath, 1000);
+  validateHttp<string, EmailAvailabilityResponse>(emailPath, {
+    request: ({value}) => {
+      const email = value();
+      if (email) {
+        return email ? `${API_BASE_URL}/api/users/email?email=${email}` : undefined;
+      }
+      return undefined;
+    },
+    onSuccess: (response) => {
+      return response
+      ? null
+      : {
+        kind: 'emailNotFound',
+        message: 'Email not found'
+      };
+    },
+    onError: (error) => {
+      console.error('Error validating email', error);
+      return {
+        kind: 'serverError',
+        message: 'Could not verify email at this time. Please try again later'
+      };
+    }
+  });
+});
+
 export const emailAsyncSchema = (API_BASE_URL: string) => schema<string>((emailPath) => {
   debounce(emailPath, 1000);
   validateHttp<string, EmailAvailabilityResponse>(emailPath, {
@@ -44,6 +72,11 @@ export const emailSchema = schema<string>((emailPath) => {
   pattern(emailPath, emailPattern, { message: 'Invalid email format' });
 });
 
+export const otpSchema = schema<string>((otpPath) => {
+  required(otpPath, { message: 'Verification code required' });
+  pattern(otpPath, /^\d{6}$/, { message: 'Verification code must be 6 digits' });
+});
+
 export const loginPasswordSchema = schema<string>((passwordPath) => {
   required(passwordPath, { message: 'Password required' });
 });
@@ -68,3 +101,19 @@ export const passwordSchema = schema<PasswordData>((passwordPath) => {
     return null;
   });
 });
+
+export const differentFromCurrentValidator = (passwordPath: any, currentPasswordPath: any) => {
+  validate(passwordPath, ({value, valueOf}) => {
+    const newPassword = value();
+    const currentPassword = valueOf(currentPasswordPath);
+
+    if (newPassword && currentPassword && newPassword === currentPassword) {
+      return {
+        kind: 'sameAsCurrent',
+        message: 'New password must be different from current password'
+      };
+    }
+
+    return null;
+  });
+};
