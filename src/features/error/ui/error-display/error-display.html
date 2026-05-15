@@ -1,0 +1,70 @@
+@let error = errorStore.error();
+
+<section class="error">
+  <svg
+    #svgRef
+    class="error__svg"
+    viewBox="0 0 1600 700"
+    preserveAspectRatio="xMidYMid meet"
+    role="img"
+    [attr.aria-label]="'Error ' + statusText()"
+  >
+    <defs>
+      <mask id="errMaskLeft" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="700">
+        <rect x="0" y="0" width="800" height="700" fill="#fff" />
+      </mask>
+      <mask id="errMaskRight" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="700">
+        <rect x="800" y="0" width="800" height="700" fill="#fff" />
+      </mask>
+    </defs>
+
+    <g #leftRef class="error__svg-half error__svg-half--left" mask="url(#errMaskLeft)">
+      <text class="error__svg-status" x="800" y="160" text-anchor="middle" dominant-baseline="central" font-size="220">{{ statusText() }}</text>
+      <text class="error__svg-title" x="800" y="320" text-anchor="middle" dominant-baseline="central" font-size="68">{{ error?.title ?? 'Unknown Error' }}</text>
+      @if (error?.detail) {
+        <text class="error__svg-detail" x="800" y="400" text-anchor="middle" dominant-baseline="central" font-size="30">{{ error?.detail }}</text>
+      }
+      @if (errorStore.haveInstance()) {
+        <text class="error__svg-path" x="800" y="460" text-anchor="middle" dominant-baseline="central" font-size="24">{{ error?.instance }}</text>
+      }
+      <text class="error__svg-button" x="800" y="580" text-anchor="middle" dominant-baseline="central" font-size="42">Go home</text>
+    </g>
+
+    <g #rightRef class="error__svg-half error__svg-half--right" mask="url(#errMaskRight)">
+      <text class="error__svg-status" x="800" y="160" text-anchor="middle" dominant-baseline="central" font-size="220">{{ statusText() }}</text>
+      <text class="error__svg-title" x="800" y="320" text-anchor="middle" dominant-baseline="central" font-size="68">{{ error?.title ?? 'Unknown Error' }}</text>
+      @if (error?.detail) {
+        <text class="error__svg-detail" x="800" y="400" text-anchor="middle" dominant-baseline="central" font-size="30">{{ error?.detail }}</text>
+      }
+      @if (errorStore.haveInstance()) {
+        <text class="error__svg-path" x="800" y="460" text-anchor="middle" dominant-baseline="central" font-size="24">{{ error?.instance }}</text>
+      }
+      <text class="error__svg-button" x="800" y="580" text-anchor="middle" dominant-baseline="central" font-size="42">Go home</text>
+    </g>
+
+    <rect
+      class="error__svg-btn-hit"
+      x="670" y="550" width="260" height="60"
+      fill="transparent"
+      cursor="pointer"
+      role="button"
+      tabindex="0"
+      aria-label="Go home"
+      (click)="goHome()"
+      (keydown.enter)="goHome()"
+      (keydown.space)="goHome()"
+    />
+  </svg>
+
+  <div class="error__plain">
+    <h1 class="error__plain-status">{{ statusText() }}</h1>
+    <h2 class="error__plain-title">{{ error?.title ?? 'Unknown Error' }}</h2>
+    @if (error?.detail) {
+      <p class="error__plain-detail">{{ error?.detail }}</p>
+    }
+    @if (errorStore.haveInstance()) {
+      <p class="error__plain-path">{{ error?.instance }}</p>
+    }
+    <button type="button" class="error__plain-btn" (click)="goHome()">Go home</button>
+  </div>
+</section>

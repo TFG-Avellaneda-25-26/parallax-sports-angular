@@ -1,0 +1,12 @@
+@if (!isOpen()) {
+  <button
+    #badge
+    type="button"
+    class="verify-badge"
+    (click)="openModal()"
+    aria-label="Email is not verified — click to verify"
+    title="Email is not verified — click to verify"
+  >
+    Verify
+  </button>
+}

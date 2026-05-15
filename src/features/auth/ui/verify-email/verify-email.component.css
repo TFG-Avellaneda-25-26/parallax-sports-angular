@@ -1,0 +1,70 @@
+:host {
+  display: inline-flex;
+}
+
+.verify-badge {
+  --error: var(--color-error);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  border: 0;
+  background: transparent;
+  color: var(--error);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  isolation: isolate;
+  transition: color var(--transition-fast);
+}
+
+/* Two staggered rings expand outward and fade — a slow radar pulse. The
+   rings are pseudo-elements so the badge itself stays a clean text button. */
+.verify-badge::before,
+.verify-badge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border: 1px solid var(--error);
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: center;
+  animation: verifyRadar 2.4s cubic-bezier(0.22, 0.86, 0.4, 1) infinite;
+}
+
+.verify-badge::after {
+  animation-delay: 1.2s;
+}
+
+@keyframes verifyRadar {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+.verify-badge:hover {
+  color: color-mix(in srgb, var(--error) 70%, white);
+}
+
+.verify-badge:focus-visible {
+  outline: 2px solid var(--error);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .verify-badge::before,
+  .verify-badge::after {
+    animation: none;
+  }
+}

@@ -1,0 +1,42 @@
+<div class="toolbar">
+  <button
+    type="button"
+    class="toolbar__filter-btn"
+    (click)="openFilters()"
+    aria-label="Open filters"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+    </svg>
+    <span>Filters</span>
+  </button>
+
+  <div class="toolbar__view-switcher" role="tablist" aria-label="View mode">
+    <button
+      type="button"
+      class="toolbar__view-btn"
+      [class.toolbar__view-btn--active]="view() === 'table'"
+      [attr.aria-selected]="view() === 'table'"
+      role="tab"
+      aria-label="Table view"
+      (click)="setView('table')"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 3v18"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="18" rx="2"/>
+      </svg>
+    </button>
+    <button
+      type="button"
+      class="toolbar__view-btn"
+      [class.toolbar__view-btn--active]="view() === 'cards'"
+      [attr.aria-selected]="view() === 'cards'"
+      role="tab"
+      aria-label="Card view"
+      (click)="setView('cards')"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/>
+      </svg>
+    </button>
+  </div>
+</div>

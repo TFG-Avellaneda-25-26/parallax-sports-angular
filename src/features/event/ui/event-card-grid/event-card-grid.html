@@ -1,0 +1,9 @@
+@if (events().length === 0) {
+  <p class="event-card-grid__empty">No events match the current filters.</p>
+} @else {
+  <div class="event-card-grid">
+    @for (ev of events(); track ev.id) {
+      <app-event-card [event]="ev" />
+    }
+  </div>
+}

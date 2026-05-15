@@ -1,0 +1,128 @@
+/* - Design tokens - */
+:root {
+  --font-display: 'Test Söhne Breit', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 9999px;
+
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+  
+
+  /* Grid background — cell scales with viewport. The SVG draws the four
+     visible arm-stubs of a + crosshair at each tile corner; when tiled, four
+     adjacent tiles converge at every intersection to form a complete +. A
+     small centered dot fills the visual rhythm between intersections. */
+  --grid-cell: clamp(110px, 9.5vw, 200px);
+}
+
+/* - Dark theme (IT IS THE DEFAULT) - */
+:root,
+[data-theme='dark'] {
+
+  --stroke-logo: 2.4;
+  --color-bg-primary: #011627;
+  --color-bg-secondary: #021d34;
+  --color-bg-surface: #0a2540;
+  --color-bg-elevated: #0f3460;
+
+  --color-text-primary: #c0c7d1;
+  --color-text-secondary: #5f7d97;
+  --color-text-muted: #3d5a73;
+
+  --color-accent: #4ecdc4;
+  --color-accent-hover: #45b7af;
+  --color-accent-subtle: rgba(78, 205, 196, 0.1);
+
+  --color-border: #1a3a54;
+  --color-border-subtle: #132d45;
+
+  --color-error: #ff6b6b;
+  --color-success: #51cf66;
+  --color-warning: #ffd43b;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+
+  --grid-pattern: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><g fill='none' stroke='%234ecdc4' stroke-width='0.7' opacity='0.45'><path d='M0 0 L3.5 0 M0 0 L0 3.5'/><path d='M80 0 L76.5 0 M80 0 L80 3.5'/><path d='M0 80 L3.5 80 M0 80 L0 76.5'/><path d='M80 80 L76.5 80 M80 80 L80 76.5'/></g><circle cx='40' cy='40' r='0.8' fill='%234ecdc4' opacity='0.3'/></svg>");
+}
+
+/* - Light theme - */
+[data-theme='light'] {
+  --stroke-logo: 1.8;
+  --color-bg-primary: #f0f4f8;
+  --color-bg-secondary: #ffffff;
+  --color-bg-surface: #ffffff;
+  --color-bg-elevated: #ffffff;
+
+  --color-text-primary: #1a2b3d;
+  --color-text-secondary: #4a6580;
+  --color-text-muted: #8a9bb0;
+
+  --color-accent: #0891b2;
+  --color-accent-hover: #0e7490;
+  --color-accent-subtle: rgba(8, 145, 178, 0.08);
+
+  --color-border: #d1d9e0;
+  --color-border-subtle: #e8ecf0;
+
+  --color-error: #dc2626;
+  --color-success: #16a34a;
+  --color-warning: #ca8a04;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  --grid-pattern: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><g fill='none' stroke='%230891b2' stroke-width='0.7' opacity='0.42'><path d='M0 0 L3.5 0 M0 0 L0 3.5'/><path d='M80 0 L76.5 0 M80 0 L80 3.5'/><path d='M0 80 L3.5 80 M0 80 L0 76.5'/><path d='M80 80 L76.5 80 M80 80 L80 76.5'/></g><circle cx='40' cy='40' r='0.8' fill='%230891b2' opacity='0.28'/></svg>");
+}
+
+/* - Theme switch: View Transitions API circular reveal -
+   The new theme either expands from the button center (to-dark) or the old
+   theme retracts toward it (to-light). Coordinates and radius are written
+   to the root element by the toggle component before triggering the
+   transition. Browsers without support fall back to an instant swap. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html[data-theme-transition='to-dark']::view-transition-old(root) {
+  z-index: 0;
+}
+html[data-theme-transition='to-dark']::view-transition-new(root) {
+  z-index: 1;
+  animation: theme-reveal-expand 1600ms cubic-bezier(0.83, 0, 0.17, 1) forwards;
+}
+
+html[data-theme-transition='to-light']::view-transition-new(root) {
+  z-index: 0;
+}
+html[data-theme-transition='to-light']::view-transition-old(root) {
+  z-index: 1;
+  animation: theme-reveal-retract 1600ms cubic-bezier(0.83, 0, 0.17, 1) forwards;
+}
+
+@keyframes theme-reveal-expand {
+  from {
+    clip-path: circle(0 at var(--theme-transition-x) var(--theme-transition-y));
+  }
+  to {
+    clip-path: circle(var(--theme-transition-end-radius) at var(--theme-transition-x) var(--theme-transition-y));
+  }
+}
+
+@keyframes theme-reveal-retract {
+  from {
+    clip-path: circle(var(--theme-transition-end-radius) at var(--theme-transition-x) var(--theme-transition-y));
+  }
+  to {
+    clip-path: circle(0 at var(--theme-transition-x) var(--theme-transition-y));
+  }
+}

@@ -1,0 +1,45 @@
+<div>
+  <label [for]="fieldId()">{{ label() }}</label>
+  <div class="input-wrap">
+    <input
+      [type]="effectiveType()"
+      [id]="fieldId()"
+      [value]="value()"
+      (input)="value.set($any($event.target).value)"
+      (blur)="touched.set(true)"
+      [readonly]="readonly()"
+    />
+
+    @if (type() === 'password') {
+      <button
+        type="button"
+        class="visibility-toggle"
+        [class.is-visible]="passwordVisible()"
+        (click)="toggleVisibility()"
+        [attr.aria-label]="passwordVisible() ? 'Hide password' : 'Show password'"
+        [attr.title]="passwordVisible() ? 'Hide password' : 'Show password'"
+      >
+        <svg
+          class="visibility-toggle__icon"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path #eyePath [attr.d]="eyeClosedPath" />
+        </svg>
+      </button>
+    }
+  </div>
+
+  @if (invalid() && touched()) {
+    <div role="alert">
+      @for (error of errors(); track error.kind) {
+        <span>{{ error.message }}</span>
+      }
+    </div>
+  }
+</div>
