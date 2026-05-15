@@ -1,0 +1,67 @@
+/* ──────────────────────────────────────────────
+   ng-otp-input overrides
+   ──────────────────────────────────────────────
+   These styles target ng-otp-input's internal DOM (.ng-otp-input-wrapper,
+   .n-o-c, .otp-input) which lives inside its own component view, so
+   component-encapsulated CSS can't reach them. Keeping them in a global
+   stylesheet avoids ::ng-deep (deprecated) and makes the dependency on
+   library internals explicit. They are scoped to the .otp-cells wrapper so
+   they only apply where the visual cell grid is being rendered.
+
+   The library's default styles set width:50px, height:50px, font-size:32px,
+   plus margin:0 .51rem on every input — which would offset each cell by
+   ~8px and break the SVG-rect alignment. We force a CSS Grid layout on
+   .n-o-c so column width and gap are guaranteed regardless of the library
+   internals. */
+
+.otp-cells .ng-otp-input-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.otp-cells .n-o-c {
+  display: grid !important;
+  grid-template-columns: repeat(6, 52px) !important;
+  gap: 10px !important;
+  width: 100%;
+  height: 100%;
+  align-items: stretch !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.otp-cells .otp-input {
+  width: 52px !important;
+  height: 52px !important;
+  min-width: 52px !important;
+  min-height: 52px !important;
+  max-width: 52px !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  text-align: center !important;
+  line-height: 52px !important;
+  font-family: var(--font-display) !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  /* The OTP modal is always shown over a dark backdrop (regardless of
+     light/dark theme), so use a fixed light color for legibility. */
+  color: #f5f7fa !important;
+  caret-color: var(--color-accent);
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.otp-cells .otp-input::-webkit-outer-spin-button,
+.otp-cells .otp-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

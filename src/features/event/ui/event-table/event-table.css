@@ -1,0 +1,109 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.event-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text-primary);
+}
+
+.event-table__col-time  { width: 13rem; }
+.event-table__col-sport { width: 10rem; }
+.event-table__col-comp  { width: 18rem; }
+.event-table__col-event { width: auto; }
+
+.event-table th,
+.event-table td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.event-table__group-header td {
+  white-space: normal;
+}
+
+.event-table thead th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-primary);
+}
+
+.event-table__group {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.event-table__group::before {
+  content: '';
+  display: block;
+  height: 0.5rem;
+}
+
+.event-table__group-header td {
+  padding: 0.6rem 1rem 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  background: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border);
+  border-top-left-radius: var(--radius-md);
+  border-top-right-radius: var(--radius-md);
+}
+
+.event-table__meeting-venue {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.event-table__row td {
+  padding: 0.55rem 1rem;
+  border-bottom: 1px solid var(--color-border-subtle);
+  vertical-align: middle;
+}
+
+.event-table__group .event-table__row:last-child td {
+  border-bottom: none;
+}
+
+.event-table__row:hover {
+  background: var(--color-accent-subtle);
+}
+
+.event-table__time {
+  white-space: nowrap;
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.event-table__name {
+  font-weight: 500;
+}
+
+.event-table__name--bold {
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.event-table__empty {
+  padding: 2rem;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+}

@@ -13,4 +13,16 @@ export class AuthService {
   register(credentials: RegisterCredentials) {
     return this.apiClient.post<AuthResponse>('/api/auth/register', credentials);
   }
+
+  verifyEmail(code: string) {
+    return this.apiClient.post('/api/auth/verify-email', { code });
+  }
+
+  resendVerification() {
+    return this.apiClient.post('/api/auth/resend-verification', {});
+  }
+
+  logout() {
+    return this.apiClient.post('/api/auth/logout', {});
+  }
 }

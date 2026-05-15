@@ -1,0 +1,60 @@
+<div
+  class="row"
+  [class.row--show-only]="isShowOnly()"
+  [class.row--hidden]="isHidden()"
+  [attr.data-level]="level()"
+  [style.--indent]="indent()"
+  (click)="onPrimaryClick()"
+  (contextmenu)="onContextMenu($event)"
+>
+  <button
+    type="button"
+    class="row__expand"
+    [class.row__expand--placeholder]="!isExpandable()"
+    [attr.aria-expanded]="isExpandable() ? isExpanded() : null"
+    [attr.aria-label]="isExpandable() ? (isExpanded() ? 'Collapse' : 'Expand') : null"
+    [attr.tabindex]="isExpandable() ? 0 : -1"
+    (click)="isExpandable() ? onExpandClick($event) : null"
+  >
+    @if (isExpandable()) {
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" [class.row__chevron--open]="isExpanded()" class="row__chevron">
+        <path d="m9 18 6-6-6-6"/>
+      </svg>
+    }
+  </button>
+
+  <span class="row__label">{{ label() }}</span>
+  <span class="row__count">{{ count() }}</span>
+
+  <button
+    type="button"
+    class="row__menu-btn"
+    aria-label="Filter options"
+    [attr.aria-expanded]="menuOpen()"
+    (click)="onMenuToggle($event)"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/>
+    </svg>
+  </button>
+
+  @if (menuOpen()) {
+    <ul class="row__menu" role="menu">
+      <li role="none">
+        <button type="button" role="menuitem" class="row__menu-item" (click)="dispatch('showOnly', $event)">
+          Show only
+        </button>
+      </li>
+      <li role="none">
+        <button type="button" role="menuitem" class="row__menu-item" (click)="dispatch('hide', $event)">
+          Hide
+        </button>
+      </li>
+      <li role="none">
+        <button type="button" role="menuitem" class="row__menu-item" (click)="dispatch('clear', $event)">
+          Clear
+        </button>
+      </li>
+    </ul>
+  }
+</div>

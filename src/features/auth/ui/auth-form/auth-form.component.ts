@@ -11,7 +11,10 @@ import { StatefulInput } from '@shared/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthFormComponent {
-
   readonly authStore = inject(AuthStore);
   readonly form = this.authStore.authForm;
+
+  switchMode(): void {
+    this.authStore.toggleMode();
+  }
 }

@@ -26,6 +26,28 @@ export const routes: Routes = [
         resolve: { events: eventResolver },
         loadComponent: () => import('@pages/dashboard').then(m => m.DashboardPage)
       },
+      {
+        path: 'settings',
+        loadComponent: () => import('@pages/settings').then(m => m.SettingsPage),
+        children: [
+          {
+            path: 'account',
+            loadComponent: () => import('@features/settings').then(m => m.AccountComponent)
+          },
+          {
+            path: 'preferences',
+            loadComponent: () => import('@features/settings').then(m => m.PreferencesComponent)
+          },
+          {
+            path: 'follows',
+            loadComponent: () => import('@features/settings').then(m => m.FollowsComponent)
+          },
+          {
+            path: 'admin',
+            loadComponent: () => import('@features/settings').then(m => m.AdminComponent)
+          }
+        ]
+      }
       // TODO: Add next protected pages
     ]
   },
@@ -36,6 +58,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'error',
+    redirectTo: '/',
   },
 ];

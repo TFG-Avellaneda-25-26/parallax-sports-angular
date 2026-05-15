@@ -1,0 +1,80 @@
+.cta-btn {
+  --plus-size: 11px;
+  --plus-svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M6 0 V12 M0 6 H12' stroke='%234ecdc4' stroke-width='1.4' fill='none'/></svg>");
+  --border-inset-x: 0.95rem;
+  --border-inset-y: 0.45rem;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4rem 3.4rem;
+  border: 0;
+  background-color: transparent;
+  background-image:
+    var(--plus-svg),
+    var(--plus-svg),
+    var(--plus-svg),
+    var(--plus-svg);
+  background-size: var(--plus-size) var(--plus-size);
+  background-repeat: no-repeat;
+  background-position:
+    left  calc(var(--plus-size) / -2) top    calc(var(--plus-size) / -2),
+    right calc(var(--plus-size) / -2) top    calc(var(--plus-size) / -2),
+    left  calc(var(--plus-size) / -2) bottom calc(var(--plus-size) / -2),
+    right calc(var(--plus-size) / -2) bottom calc(var(--plus-size) / -2);
+  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-fast);
+}
+
+.cta-btn::before {
+  content: "";
+  position: absolute;
+  top: var(--border-inset-y);
+  right: var(--border-inset-x);
+  bottom: var(--border-inset-y);
+  left: var(--border-inset-x);
+  border: 1.4px solid var(--color-accent);
+  border-radius: 2.2rem;
+  pointer-events: none;
+  transition:
+    top var(--transition-base),
+    right var(--transition-base),
+    bottom var(--transition-base),
+    left var(--transition-base),
+    border-radius var(--transition-base);
+}
+
+.cta-btn:hover::before,
+.cta-btn:focus-visible::before {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 0;
+}
+
+.cta-btn:hover,
+.cta-btn:focus-visible {
+  background-color: color-mix(in srgb, var(--color-accent) 14%, var(--color-bg-elevated));
+  color: var(--color-accent);
+  outline: none;
+}
+
+.cta-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[data-theme='light'] .cta-btn {
+  --plus-svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M6 0 V12 M0 6 H12' stroke='%230891b2' stroke-width='1.4' fill='none'/></svg>");
+}

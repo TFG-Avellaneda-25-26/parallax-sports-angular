@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined');
+
+:host {
+  display: flex;
+  justify-content: center;
+  font-family: var(--font-body);
+}
+
+.autocomplete {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.material-symbols-outlined {
+  font-size: 1.25rem;
+  pointer-events: none;
+}
+
+.search-icon {
+  left: 0.75rem;
+  position: absolute;
+  color: var(--color-text-muted);
+}
+
+[ngComboboxInput] {
+  width: 13rem;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  border-radius: var(--radius-full);
+  padding: 0.75rem 0.5rem 0.75rem 2.5rem;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-surface);
+  transition: outline var(--transition-fast);
+}
+
+[ngComboboxInput]::placeholder {
+  color: var(--color-text-muted);
+}
+
+[ngCombobox]:has([aria-expanded='false']) .popup {
+  display: none;
+}
+
+.popup {
+  width: 100%;
+  margin-top: 8px;
+  padding: 0.5rem;
+  max-height: 11rem;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  font-size: 0.9rem;
+}
+
+.no-results {
+  padding: 1rem;
+  color: var(--color-text-muted);
+}
+
+[ngListbox] {
+  gap: 2px;
+  height: 100%;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+}
+
+[ngOption] {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  margin: 1px;
+  padding: 0 1rem;
+  min-height: 2.25rem;
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  transition: background-color var(--transition-fast);
+}
+
+[ngOption] mark {
+  background-color: transparent;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+[ngOption]:hover,
+[ngOption][data-active='true'] {
+  background-color: var(--color-accent-subtle);
+}
+
+[ngOption][data-active='true'] {
+  outline-offset: -2px;
+  outline: 2px solid var(--color-accent);
+}
+
+[ngOption][aria-selected='true'] {
+  color: var(--color-accent);
+  background-color: var(--color-accent-subtle);
+}
+
+[ngOption]:not([aria-selected='true']) .check-icon {
+  display: none;
+}
+
+.option-label {
+  flex: 1;
+}
+
+.check-icon {
+  font-size: 0.9rem;
+  color: var(--color-accent);
+}

@@ -1,9 +1,5 @@
 .theme-toggle {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 20;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 2.25rem;

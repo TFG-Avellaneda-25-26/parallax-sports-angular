@@ -1,0 +1,32 @@
+<div ngCombobox filter-mode="highlight" #comboboxRef="ngCombobox">
+  <div #origin class="autocomplete">
+    <span class="search-icon material-symbols-outlined" translate="no" aria-hidden="true">search</span>
+    <input
+      aria-label="search-settings"
+      placeholder="Search settings"
+      [(ngModel)]="query"
+      ngComboboxInput
+    />
+  </div>
+
+  <ng-template ngComboboxPopupContainer>
+    <ng-template
+      [cdkConnectedOverlay]="{ origin, usePopover: 'inline', matchWidth: true }"
+      [cdkConnectedOverlayOpen]="true"
+    >
+      <div class="popup">
+        @if (filtered().length === 0) {
+          <div class="no-results">No results found</div>
+        }
+        <div ngListbox (valuesChange)="onSelect($event)">
+          @for (node of filtered(); track node.value) {
+            <div ngOption [value]="node" [label]="node.name">
+              <span class="option-label">{{ node.name }}</span>
+              <span class="check-icon material-symbols-outlined" translate="no" aria-hidden="true">check</span>
+            </div>
+          }
+        </div>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>

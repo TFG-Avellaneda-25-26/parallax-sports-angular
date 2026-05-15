@@ -1,7 +1,19 @@
-<main>
-  <h2>User Data</h2>
-  <pre>{{ user() | json }}</pre>
+<section class="dashboard">
+  <aside class="dashboard__aside">
+    <app-filter-tree/>
+  </aside>
 
-  <h2>Events Data ({{ events().length }} events)</h2>
-  <pre>{{ events() | json }}</pre>
-</main>
+  <div class="dashboard__content">
+    <app-dashboard-toolbar/>
+
+    <main class="dashboard__main">
+      @if (view() === 'table') {
+        <app-event-table [events]="filteredEvents()" />
+      } @else {
+        <app-event-card-grid [events]="filteredEvents()" />
+      }
+    </main>
+  </div>
+
+  <app-filter-drawer/>
+</section>
