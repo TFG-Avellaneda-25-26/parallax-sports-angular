@@ -17,7 +17,10 @@ export const appConfig: ApplicationConfig = {
     ),
     {
       provide: API_BASE_URL,
-      useValue: 'http://localhost:8080'
+      // Empty = same-origin: nginx proxies /api/* to spring-boot, browser hits
+      // whatever host serves the SPA (localhost in dev, the LXC IP / cloudflared
+      // hostname in prod). No CORS headaches.
+      useValue: ''
     }
   ]
 };
