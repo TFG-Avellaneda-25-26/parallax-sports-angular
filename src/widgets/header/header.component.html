@@ -17,7 +17,7 @@
     </a>
 
     <div class="header__center">
-      @if (userStore.isAuthenticated() && !userStore.isVerified()) {
+      @if (shouldShowVerifyBadge()) {
         <app-verify-email />
       }
     </div>

@@ -4,6 +4,7 @@ import {
   DestroyRef,
   ElementRef,
   afterNextRender,
+  computed,
   inject,
   viewChild,
 } from '@angular/core';
@@ -24,6 +25,15 @@ export class HeaderComponent {
   protected readonly userStore = inject(UserStore);
   private readonly destroyRef = inject(DestroyRef);
   private readonly borderRef = viewChild.required<ElementRef<SVGPathElement>>('borderPath');
+
+  // Local computed signal that aggregates the cross-component @ngrx
+  // signalStore signals. Reading a *local* computed in the OnPush template
+  // makes Angular's reactive CD reliably re-render this component when either
+  // source flips — works around a quirk in zoneless + OnPush where store
+  // signals read across component boundaries can miss the first update.
+  protected readonly shouldShowVerifyBadge = computed(
+    () => this.userStore.isAuthenticated() && !this.userStore.isVerified(),
+  );
 
   constructor() {
     afterNextRender(() => this.runIntro());
