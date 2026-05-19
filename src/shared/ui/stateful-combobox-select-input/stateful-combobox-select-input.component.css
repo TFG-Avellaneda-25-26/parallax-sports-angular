@@ -6,7 +6,7 @@
 
 :host > div {
   display: grid;
-  grid-template-rows: auto auto 1.1rem;
+  grid-template-rows: auto auto auto 1.1rem;
   gap: 6px;
 }
 
@@ -24,139 +24,108 @@ label {
   color: var(--color-accent);
 }
 
-[ngCombobox] {
-  position: relative;
-  width: 100%;
+.select {
   display: flex;
-  flex-direction: column;
+  position: relative;
+  align-items: center;
   background: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-base);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-base),
+    background var(--transition-fast);
 }
 
-[ngCombobox]:has([readonly='true']):hover {
+.select:hover {
   border-color: color-mix(in srgb, var(--color-border) 60%, var(--color-accent) 40%);
 }
 
-[ngCombobox]:focus-within:has([readonly='true']) {
+[ngCombobox]:focus-within .select {
   border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-bg-elevated) 92%, var(--color-accent) 8%);
   box-shadow:
     0 0 0 3px color-mix(in srgb, var(--color-accent) 22%, transparent),
     0 0 16px color-mix(in srgb, var(--color-accent) 35%, transparent);
 }
 
-.combobox-input-container {
-  display: flex;
-  position: relative;
-  align-items: center;
-  border-radius: var(--radius-md);
+.select:has([ngComboboxInput][aria-disabled='true']) {
+  opacity: 0.5;
+  cursor: default;
 }
 
 [ngComboboxInput] {
-  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+  padding: 0 3rem;
+  height: 2.5rem;
   border: none;
-  outline: none;
+  background: transparent;
+}
+
+.combobox-label {
+  left: 1rem;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  pointer-events: none;
+  color: var(--color-text-primary);
   font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 500;
-  padding: 12px 40px 12px 14px;
-  background: transparent;
-  color: var(--color-text-primary);
-  caret-color: var(--color-accent);
-  border-radius: var(--radius-md);
 }
 
-[ngComboboxInput]::placeholder {
+.combobox-label:has(+ [ngComboboxInput][aria-expanded='false']:placeholder-shown) {
   color: var(--color-text-muted);
 }
 
-[ngComboboxInput][readonly='true'] {
-  cursor: pointer;
-}
-
-[ngCombobox]:focus-within [ngComboboxInput] {
-  outline: none;
-  box-shadow: none;
-}
-
-.icon {
-  width: 24px;
-  height: 24px;
-  font-size: 20px;
-  display: grid;
-  place-items: center;
+.example-arrow {
+  right: 0.75rem;
+  position: absolute;
   pointer-events: none;
   color: var(--color-text-secondary);
-}
-
-.search-icon {
-  padding: 0 0.5rem;
-  position: absolute;
-  opacity: 0.8;
-}
-
-.arrow-icon {
-  padding: 0 0.5rem;
-  position: absolute;
-  right: 0;
   transition: transform var(--transition-fast), color var(--transition-fast);
 }
 
-[ngComboboxInput][aria-expanded='true'] + .arrow-icon {
+[ngComboboxInput][aria-expanded='true'] ~ .example-arrow {
   transform: rotate(180deg);
   color: var(--color-accent);
 }
 
-.dialog {
-  position: absolute;
-  left: auto;
-  right: auto;
-  top: auto;
-  bottom: auto;
-  padding: 0;
-  border: 1px solid var(--color-border);
+.example-popup-container {
+  width: 100%;
+  padding: 0.375rem;
+  margin-top: 6px;
   border-radius: var(--radius-md);
   background-color: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
   box-shadow: var(--shadow-md);
-  color: var(--color-text-primary);
-}
-
-.dialog .combobox-input-container {
-  border-radius: 0;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.dialog .combobox-input-container {
-  border-bottom: 1px solid var(--color-border);
-}
-
-.dialog [ngComboboxInput] {
-  padding: 10px 14px 10px 40px;
-  background: var(--color-bg-surface);
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-[ngCombobox]:focus-within [ngComboboxInput]:not(.combobox-input) {
-  outline: none;
-}
-
-[ngCombobox]:focus-within .combobox-input {
-  caret-color: var(--color-accent);
-}
-
-.dialog::backdrop {
-  opacity: 0;
+  font-size: 0.875rem;
+  max-height: 11rem;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    max-height var(--transition-fast) ease-out,
+    visibility 0s,
+    opacity 25ms ease-out;
 }
 
 [ngListbox] {
   gap: 2px;
-  max-height: 200px;
+  height: 100%;
   display: flex;
   overflow: auto;
   flex-direction: column;
-  padding: 0.375rem;
+}
+
+[ngCombobox]:has([ngComboboxInput][aria-expanded='false']) .example-popup-container {
+  max-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    max-height var(--transition-fast) ease-in,
+    visibility 0s var(--transition-fast),
+    opacity var(--transition-fast) ease-in;
 }
 
 [ngOption] {
@@ -186,24 +155,39 @@ label {
   background-color: var(--color-accent-subtle);
 }
 
-[ngOption]:not([aria-selected='true']) .check-icon {
+[ngOption]:not([aria-selected='true']) .example-option-check {
   display: none;
 }
 
-.option-label {
+.format-label {
   flex: 1;
 }
 
-.check-icon {
+.example-option-check {
   font-size: 0.9rem;
   color: var(--color-accent);
 }
 
-.no-results {
-  padding: 1rem;
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
-  text-align: center;
+.example-option-example {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+  padding-right: 0.5rem;
+}
+
+[ngOption][aria-selected='true'] .example-option-example {
+  color: var(--color-accent-hover);
+}
+
+.preview {
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.preview strong {
+  color: var(--color-text-primary);
+  font-weight: 600;
 }
 
 [role='alert'] {
@@ -218,12 +202,12 @@ label {
   animation: fieldErrorIn var(--transition-base) forwards;
 }
 
-:host:has([role='alert']) [ngCombobox] {
+:host:has([role='alert']) .select {
   border-color: color-mix(in srgb, var(--color-error) 70%, var(--color-border) 30%);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-error) 18%, transparent);
 }
 
-:host:has([role='alert']) [ngCombobox]:focus-within {
+:host:has([role='alert']) [ngCombobox]:focus-within .select {
   border-color: var(--color-error);
   box-shadow:
     0 0 0 3px color-mix(in srgb, var(--color-error) 25%, transparent),
@@ -239,9 +223,9 @@ label {
 
 @media (prefers-reduced-motion: reduce) {
   label,
-  [ngComboboxInput],
+  .select,
   [ngOption],
-  .arrow-icon {
+  .example-arrow {
     transition: none;
   }
   [role='alert'] {

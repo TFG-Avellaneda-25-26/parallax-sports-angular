@@ -3,14 +3,51 @@
     <h2>Timezone</h2>
     <p>Set your preferred timezone</p>
     <form [formRoot]="timeZoneForm">
+      <app-stateful-input type="text" label="Current Timezone" [formField]="timeZoneForm.currentTimezone" />
       <app-stateful-combox-autocomplete-select
-      label="Select Timezone"
-      fieldId="TimezoneSelector"
-      [list]="timezonesOptions"
-      [formField]="timeZoneForm.timeZone"
+        label="Select Timezone"
+        fieldId="TimezoneSelector"
+        displayLabel="Select a timezone"
+        [list]="timezonesOptions"
+        [formField]="timeZoneForm.timeZone"
       />
+      <button type="submit">Change Timezone</button>
     </form>
   </header>
+</section>
 
+<section>
+  <header>
+    <h2>Date Format</h2>
+    <p>Set your preferred date format</p>
+    <form [formRoot]="dateFormatForm">
+      <app-stateful-input type="text" label="Current Date Format" [formField]="dateFormatForm.currentFormat" />
+      <app-stateful-combobox-select-input
+        label="Select Date Format"
+        fieldId="DateFormatSelector"
+        displayLabel="Select a date format"
+        [list]="formats"
+        [formField]="dateFormatForm.newFormat"
+      />
+      <button type="submit">Change Date Format</button>
+    </form>
+  </header>
+</section>
 
+<section>
+  <header>
+    <h2>Default View</h2>
+    <p>Set your preferred default view for the dashboard</p>
+    <form [formRoot]="defaultViewForm">
+      <app-stateful-input type="text" label="Current Default View" [formField]="defaultViewForm.currentView" />
+      <app-stateful-combobox-select-input
+        label="Select Default View"
+        fieldId="DefaultViewSelector"
+        displayLabel="Select a default view"
+        [list]="defaultViewOptions"
+        [formField]="defaultViewForm.newView"
+      />
+      <button type="submit">Change Default View</button>
+    </form>
+  </header>
 </section>

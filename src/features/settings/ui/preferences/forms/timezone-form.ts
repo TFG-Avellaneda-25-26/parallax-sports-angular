@@ -1,6 +1,5 @@
 import { inject, signal } from "@angular/core";
 import { form, readonly, required, validate } from "@angular/forms/signals";
-import { TIMEZONE_OPTIONS } from "@entities/timezone";
 import { UserStore } from "@entities/user";
 
 export const createTimeZoneForm = () =>{
@@ -8,13 +7,15 @@ export const createTimeZoneForm = () =>{
   const userStore = inject(UserStore);
 
   return form(
-    signal({ currentTimezone: userStore.timeZone(), timeZone: userStore.timeZone() }),
+    signal({ currentTimezone: userStore.timeZone(), timeZone: '' }),
     (schemaPath) => {
       readonly(schemaPath.currentTimezone);
-      required(schemaPath.timeZone);
+      required(schemaPath.timeZone, { message: 'Time zone is required' });
       validate(schemaPath.timeZone, ({ value, valueOf }) => {
         const timeZone = value();
         const currentTimeZone = valueOf(schemaPath.currentTimezone);
+
+        if (!timeZone) return null;
 
         if (timeZone && currentTimeZone && timeZone === currentTimeZone) {
           return {
@@ -22,17 +23,6 @@ export const createTimeZoneForm = () =>{
             message: 'New time zone must be different from current time zone'
           };
         }
-        return null;
-      });
-      validate(schemaPath.timeZone, ({ value }) => {
-        const tz = value();
-        if (!tz) return null;
-
-        const isValid = TIMEZONE_OPTIONS.some(option => option.value === tz);
-        if (!isValid) {
-          return { kind: 'invalidTimeZone', message: 'Selected time zone is not valid' };
-        }
-
         return null;
       });
     },

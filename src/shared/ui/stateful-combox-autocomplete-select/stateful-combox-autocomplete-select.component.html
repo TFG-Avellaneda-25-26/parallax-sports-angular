@@ -1,55 +1,59 @@
-<div ngCombobox #combobox="ngCombobox" [readonly]="true">
-  <div class="combobox-input-container">
-    <input ngComboboxInput placeholder="Select an option..." [value]="displayValue()" />
-    <span class="material-symbols-outlined icon arrow-icon" translate="no" aria-hidden="true">
-      arrow_drop_down
-    </span>
-  </div>
+<div>
+  <label [for]="fieldId()">{{ label() }}</label>
 
-  <ng-template ngComboboxPopupContainer>
-    <dialog ngComboboxDialog class="dialog">
-      <div ngCombobox #combobox="ngCombobox" filterMode="manual" [alwaysExpanded]="true">
-        <div class="combobox-input-container">
-          <span class="material-symbols-outlined icon search-icon" translate="no">
-            search
-          </span>
-          <input
-            ngComboboxInput
-            class="combobox-input"
-            placeholder="Search..."
-            [(value)]="searchString"
-          />
-        </div>
+  <div ngCombobox #combobox="ngCombobox" [readonly]="true" [id]="fieldId()">
+    <div class="combobox-input-container">
+      <input ngComboboxInput placeholder="Select an option..." [value]="displayValue()" />
+      <span class="material-symbols-outlined icon arrow-icon" translate="no" aria-hidden="true">
+        arrow_drop_down
+      </span>
+    </div>
 
-        <ng-template ngComboboxPopupContainer>
-          @if (options().length === 0) {
-            <div class="no-results">No results found</div>
-          }
-
-          <div ngListbox [(values)]="selectedOptions">
-            @for (option of options(); track option) {
-              <div ngOption [value]="option" [label]="option.label">
-                <span class="option-label">{{ option.label }}</span>
-                <span
-                  class="material-symbols-outlined icon check-icon"
-                  translate="no"
-                  aria-hidden="true"
-                  >
-                  check
-                </span>
-              </div>
-            }
+    <ng-template ngComboboxPopupContainer>
+      <dialog ngComboboxDialog class="dialog">
+        <div ngCombobox #combobox="ngCombobox" filterMode="manual" [alwaysExpanded]="true">
+          <div class="combobox-input-container">
+            <span class="material-symbols-outlined icon search-icon" translate="no">
+              search
+            </span>
+            <input
+              ngComboboxInput
+              class="combobox-input"
+              placeholder="Search..."
+              [(value)]="searchString"
+            />
           </div>
-        </ng-template>
-      </div>
-    </dialog>
-  </ng-template>
-</div>
 
-@if (invalid() && touched()) {
-  <div role="alert" class="error-container">
-    @for (error of errors(); track error.kind) {
-      <span>{{ error.message }}</span>2
-    }
+          <ng-template ngComboboxPopupContainer>
+            @if (options().length === 0) {
+              <div class="no-results">No results found</div>
+            }
+
+            <div ngListbox [(values)]="selectedOptions">
+              @for (option of options(); track option) {
+                <div ngOption [value]="option" [label]="option.label">
+                  <span class="option-label">{{ option.label }}</span>
+                  <span
+                    class="material-symbols-outlined icon check-icon"
+                    translate="no"
+                    aria-hidden="true"
+                  >
+                    check
+                  </span>
+                </div>
+              }
+            </div>
+          </ng-template>
+        </div>
+      </dialog>
+    </ng-template>
   </div>
-}
+
+  @if (invalid() && touched()) {
+    <div role="alert">
+      @for (error of errors(); track error.kind) {
+        <span>{{ error.message }}</span>
+      }
+    </div>
+  }
+</div>

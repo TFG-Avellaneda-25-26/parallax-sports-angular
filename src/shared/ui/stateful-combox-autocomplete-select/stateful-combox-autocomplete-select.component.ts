@@ -19,12 +19,14 @@ export class StatefulComboxAutocompleteSelectComponent<T extends { label: string
   readonly list = input<T[]>([]);
   label = input<string>('');
   fieldId = input<string>('');
+  displayLabel = input<string>('Select an option');
 
   dialog = viewChild(ComboboxDialog);
   listbox = viewChild<Listbox<string>>(Listbox);
   combobox = viewChild<Combobox<string>>(Combobox);
 
   searchString = signal('');
+  private wasOpened = signal(false);
 
   options = computed(() => {
     const search = this.searchString().toLowerCase();
@@ -35,7 +37,7 @@ export class StatefulComboxAutocompleteSelectComponent<T extends { label: string
 
   displayValue = computed(() => {
     const currentVal = this.value();
-    return this.list().find(opt => opt.value === currentVal)?.label || currentVal;
+    return this.list().find(opt => opt.value === currentVal)?.label || this.displayLabel();
   })
 
   selectedOptions = signal<T[]>([]);
@@ -57,11 +59,13 @@ export class StatefulComboxAutocompleteSelectComponent<T extends { label: string
     });
 
     afterRenderEffect(() => {
-      if (this.combobox()?.expanded()) {
-        untracked(() => {
-          this.touched.set(true);
-          this.searchString.set('');
-        });
+      const expanded = this.combobox()?.expanded();
+
+      if (expanded) {
+        this.wasOpened.set(true);
+        untracked(() => this.searchString.set(''));
+      } else if (this.wasOpened()) {
+        untracked(() => this.touched.set(true));
       }
     });
 

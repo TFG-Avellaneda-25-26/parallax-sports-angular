@@ -42,4 +42,12 @@ export class UserService {
   updateTimeZone(timeZone: string): Observable<void> {
     return this.apiClient.put<void>('/api/users/timezone', timeZone);
   }
+
+  updateDefaultView(defaultView: string): Observable<void> {
+    return this.apiClient.put<void>('/api/users/default-view', defaultView);
+  }
+
+  updateDateFormat(dateFormat: string): Observable<void> {
+    return this.apiClient.put<void>('/api/users/date-format', dateFormat);
+  }
 }

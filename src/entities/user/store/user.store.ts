@@ -150,6 +150,36 @@ export const UserStore = signalStore(
       }
     },
 
+    async updateDefaultView(defaultView: string): Promise<void> {
+      const user = store.user();
+      if (!user) return;
+
+      try {
+        await lastValueFrom(userService.updateDefaultView(defaultView));
+        patchState(store, { user: {
+          ...user, settings: { ...user.settings, defaultView } as UserSettings
+        }});
+      } catch (error) {
+        console.error('Failed to update default view.');
+        throw error;
+      }
+    },
+
+    async updateDateFormat(dateFormat: string): Promise<void> {
+      const user = store.user();
+      if (!user) return;
+
+      try {
+        await lastValueFrom(userService.updateDateFormat(dateFormat));
+        patchState(store, { user: {
+          ...user, settings: { ...user.settings, dateFormat } as UserSettings
+        }});
+      } catch (error) {
+        console.error('Failed to update date format.');
+        throw error;
+      }
+    },
+
     clearUser(): void {
       patchState(store, initialState);
     }

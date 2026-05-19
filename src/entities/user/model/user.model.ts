@@ -27,6 +27,7 @@ export interface UserIdentity {
 export interface UserSettings {
   theme: 'light' | 'dark' | 'system';
   defaultView: 'cards' | 'table';
+  dateFormat: string;
   timeZone: string;
   locale: string;
   updatedAt: string;
