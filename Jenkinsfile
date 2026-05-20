@@ -47,8 +47,8 @@ pipeline {
             steps {
                 sh """
                     cd ${STACK_PATH}
-                    docker compose pull angular || true
-                    COMPOSE_PROFILES=apps docker compose up -d --no-deps --force-recreate angular
+                    COMPOSE_PROFILES=apps docker compose pull angular
+                    COMPOSE_PROFILES=apps docker compose up -d --no-deps --force-recreate --pull=always angular
                 """
             }
         }
