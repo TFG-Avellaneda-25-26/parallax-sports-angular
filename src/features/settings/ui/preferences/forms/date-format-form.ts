@@ -7,7 +7,7 @@ export const createDateFormatForm = () => {
   const userStore = inject(UserStore);
 
   return form(
-    signal({ currentFormat: '', newFormat: '' }),
+    signal({ currentFormat: userStore.dateFormat(), newFormat: '' }),
     (schemaPath) => {
       required(schemaPath.newFormat, { message: 'Date format is required' });
       readonly(schemaPath.currentFormat);
@@ -30,6 +30,7 @@ export const createDateFormatForm = () => {
 
           try {
             await userStore.updateDateFormat(newFormat);
+            field().value.set({ currentFormat: newFormat, newFormat: '' });
             field().reset();
             return null;
           } catch {
