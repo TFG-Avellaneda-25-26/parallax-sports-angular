@@ -7,7 +7,7 @@ export const createTimeZoneForm = () =>{
   const userStore = inject(UserStore);
 
   return form(
-    signal({ currentTimezone: userStore.timeZone(), timeZone: '' }),
+    signal({ currentTimezone: userStore.timezone(), timeZone: '' }),
     (schemaPath) => {
       readonly(schemaPath.currentTimezone);
       required(schemaPath.timeZone, { message: 'Time zone is required' });
@@ -34,6 +34,7 @@ export const createTimeZoneForm = () =>{
 
           try {
             await userStore.updateTimeZone(timeZone);
+            field().value.set({ currentTimezone: timeZone, timeZone: '' });
             field().reset();
             return null;
           } catch {
