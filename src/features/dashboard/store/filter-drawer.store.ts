@@ -1,10 +1,10 @@
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 
 interface FilterDrawerState {
-  open: boolean;
+  isOpen: boolean;
 }
 
-const initialState: FilterDrawerState = { open: false };
+const initialState: FilterDrawerState = { isOpen: false };
 
 export const FilterDrawerStore = signalStore(
   { providedIn: 'root' },
@@ -12,13 +12,13 @@ export const FilterDrawerStore = signalStore(
 
   withMethods((store) => ({
     open(): void {
-      patchState(store, { open: true });
+      patchState(store, { isOpen: true });
     },
     close(): void {
-      patchState(store, { open: false });
+      patchState(store, { isOpen: false });
     },
     toggle(): void {
-      patchState(store, { open: !store.open() });
+      patchState(store, { isOpen: !store.isOpen() });
     },
   })),
 );
