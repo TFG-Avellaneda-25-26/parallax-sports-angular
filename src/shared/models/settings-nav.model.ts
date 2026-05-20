@@ -16,7 +16,7 @@ export const SETTINGS_TREE: TreeNode[] = [
       { name: 'Password', value: 'account/password', route: 'account', section: 'password' },
       { name: 'Display Name', value: 'account/display-name', route: 'account', section: 'display-name' },
       { name: 'Identities', value: 'account/identities', route: 'account', section: 'identities' },
-      { name: 'Delete Account', value: 'account/delete', route: 'account', section: 'delete' },
+      { name: 'Delete Account', value: 'account/delete', route: 'account', section: 'delete-account' },
     ],
     expanded: true
   },
@@ -25,7 +25,7 @@ export const SETTINGS_TREE: TreeNode[] = [
     value: 'preferences',
     children: [
       { name: 'Timezone', value: 'preferences/timezone', route: 'preferences', section: 'timezone' },
-      { name: 'Theme', value: 'preferences/theme', route: 'preferences', section: 'theme' },
+      { name: 'Date Format', value: 'preferences/date-format', route: 'preferences', section: 'date-format' },
       { name: 'Default View', value: 'preferences/default-view', route: 'preferences', section: 'default-view' },
     ],
     expanded: true

@@ -5,11 +5,18 @@ import { SETTINGS_TREE, TreeNode } from "@shared/models";
 export const SettingsNavStore = signalStore(
   withState({
     tree: cloneTree(SETTINGS_TREE),
-    selected: ['account'] as string[]
+    selected: ['account'] as string[],
+    activeSection: null as string | null
   }),
 
-  withComputed(({ tree }) => ({
-    flatNodes: computed(() => flatten(tree()))
+  withComputed(({ tree, selected }) => ({
+    flatNodes: computed(() => flatten(tree())),
+    activeSectionId: computed(() => {
+      const [value] = selected();
+      if (!value) return null;
+      const node = flatten(tree()).find(n => n.value === value);
+      return node?.section ?? null;
+    })
   })),
 
   withMethods((store) => ({

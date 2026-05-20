@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 import { FormRoot, FormField } from '@angular/forms/signals';
 import { TIMEZONE_OPTIONS } from '@entities/timezone';
 import { UserStore } from '@entities/user';
@@ -6,6 +6,7 @@ import { createTimeZoneForm } from './forms/timezone-form';
 import { StatefulComboxAutocompleteSelectComponent, StatefulComboboxSelectInputComponent, StatefulInput } from "@shared/ui";
 import { createDefaultViewForm } from './forms/default-view-form';
 import { createDateFormatForm } from './forms/date-format-form';
+import { SettingsNavStore } from '@shared/stores';
 
 @Component({
   selector: 'app-settings-preferences',
@@ -15,6 +16,8 @@ import { createDateFormatForm } from './forms/date-format-form';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PreferencesComponent {
+
+  readonly navStore = inject(SettingsNavStore);
   readonly timezonesOptions = TIMEZONE_OPTIONS;
   readonly userStore = inject(UserStore);
 
@@ -33,5 +36,19 @@ export class PreferencesComponent {
   readonly defaultViewOptions = [
     { value: 'CARDS' },
     { value: 'TABLE' },
-  ]
+  ];
+
+  constructor() {
+    effect(() => {
+      const section = this.navStore.activeSectionId();
+      if (!section) return;
+
+      const el = document.getElementById(section);
+      if (!el) return;
+
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.classList.add('section--active');
+      setTimeout(() => el.classList.remove('section--active'), 1500);
+    })
+  }
 }
