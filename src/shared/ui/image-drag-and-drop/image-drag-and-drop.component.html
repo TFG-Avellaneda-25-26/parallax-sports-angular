@@ -1,0 +1,41 @@
+<div
+  class="drop-zone"
+  [class.is-dragging]="isDraggingOver()"
+  [class.has-image]="preview()"
+  [class.is-invalid]="invalid() && touched()"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave()"
+  (drop)="onDrop($event)"
+>
+  @if (preview()) {
+    <img [src]="preview()" alt="Event image preview" class="preview-image" />
+    <div class="preview-overlay">
+      <button type="button" class="clear-btn" (click)="clear()">
+        <span class="material-symbols-outlined">delete</span>
+        Remove
+      </button>
+    </div>
+  } @else {
+    <label class="drop-label" for="image-input">
+      <span class="material-symbols-outlined drop-icon">image</span>
+      <span class="drop-title">Drag & drop event image</span>
+      <span class="drop-subtitle">or <strong>click to browse</strong></span>
+      <span class="drop-hint">PNG, JPG, WEBP up to 10MB</span>
+    </label>
+    <input
+      id="image-input"
+      type="file"
+      accept="image/*"
+      class="file-input"
+      (change)="onFileSelected($event)"
+    />
+  }
+</div>
+
+@if (invalid() && touched()) {
+  <div role="alert">
+    @for (error of errors(); track error.kind) {
+      <span>{{ error.message }}</span>
+    }
+  </div>
+}
