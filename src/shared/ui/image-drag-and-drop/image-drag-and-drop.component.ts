@@ -1,5 +1,6 @@
 import { ValidationError, WithOptionalFieldTree } from '@angular/forms/signals';
 import { ChangeDetectionStrategy, Component, input, model, signal } from '@angular/core';
+import imageCompression from 'browser-image-compression';
 
 @Component({
   selector: 'app-image-drag-and-drop',
@@ -46,10 +47,17 @@ export class ImageDragAndDropComponent {
     this.preview.set(null);
   }
 
-  private setFile(file: File) {
-    this.value.set(file);
+  private async setFile(file: File) {
+    const compressed = await imageCompression(file, {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 500,
+      useWebWorker: true,
+    });
+
+    this.value.set(compressed);
+    this.touched.set(true);
     const reader = new FileReader();
     reader.onload = () => this.preview.set(reader.result as string);
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(compressed);
   }
 }
