@@ -10,26 +10,3 @@
     Verify
   </button>
 }
-
-@if (isOpen()) {
-  <div
-    #backdrop
-    class="verify-backdrop"
-  >
-    <div
-      #panel
-      class="verify-panel"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="verify-panel-heading"
-      aria-describedby="verify-panel-status"
-      tabindex="-1"
-      (keydown)="onPanelKeydown($event)"
-    >
-      <app-otp-dialog
-        (verified)="closeModal()"
-        (closed)="closeModal()"
-      />
-    </div>
-  </div>
-}

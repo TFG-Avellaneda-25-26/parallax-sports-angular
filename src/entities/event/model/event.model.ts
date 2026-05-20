@@ -1,5 +1,6 @@
 export interface SportEvent {
   id: number;
+  parentEventId: number | null;
   sportKey: string;
   sportName: string;
   eventType: string;
@@ -9,6 +10,9 @@ export interface SportEvent {
   endTimeUtc: string | null;
   competitionName: string | null;
   venueName: string | null;
+  sportIconUrl: string | null;
+  competitionLogoUrl: string | null;
+  venueImageUrl: string | null;
   participants: EventParticipant[];
   logos: string[];
 }

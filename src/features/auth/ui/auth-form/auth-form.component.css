@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100svh;
+  min-height: calc(100dvh - 64px);
   padding: 24px;
 }
 
@@ -49,16 +49,10 @@
   margin: 0;
 }
 
-/* position: relative is required so absoluteOnLeave elements stay anchored here */
 .auth-form {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: 18px;
-}
-
-.field {
-  box-sizing: border-box;
 }
 
 .btn-submit {

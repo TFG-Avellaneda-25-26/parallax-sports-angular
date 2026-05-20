@@ -1,0 +1,42 @@
+@if (groups().length === 0) {
+  <p class="event-table__empty">No events match the current filters.</p>
+} @else {
+  <table class="event-table">
+    <colgroup>
+      <col class="event-table__col-time" />
+      <col class="event-table__col-sport" />
+      <col class="event-table__col-comp" />
+      <col class="event-table__col-event" />
+    </colgroup>
+    <thead>
+      <tr>
+        <th scope="col">Start</th>
+        <th scope="col">Sport</th>
+        <th scope="col">Competition</th>
+        <th scope="col">Event</th>
+      </tr>
+    </thead>
+    @for (group of groups(); track group.id) {
+      <tbody class="event-table__group">
+        @if (group.parent) {
+          <tr class="event-table__group-header">
+            <td colspan="4">
+              <span class="event-table__meeting-name">{{ group.parent.name }}</span>
+              @if (group.parent.venueName) {
+                <span class="event-table__meeting-venue"> · {{ group.parent.venueName }}</span>
+              }
+            </td>
+          </tr>
+        }
+        @for (ev of group.children; track ev.id) {
+          <tr class="event-table__row">
+            <td class="event-table__time">{{ ev.startTimeUtc | eventTime: timeZone() }}</td>
+            <td>{{ ev.sportName }}</td>
+            <td>{{ ev.competitionName ?? '—' }}</td>
+            <td class="event-table__name" [class.event-table__name--bold]="!group.parent">{{ ev.name }}</td>
+          </tr>
+        }
+      </tbody>
+    }
+  </table>
+}

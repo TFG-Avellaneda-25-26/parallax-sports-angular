@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -8,6 +8,7 @@ import { errorInterceptor, authInterceptor } from '@shared/interceptors';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideZonelessChangeDetection(),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideHttpClient(
@@ -16,7 +17,10 @@ export const appConfig: ApplicationConfig = {
     ),
     {
       provide: API_BASE_URL,
-      useValue: 'http://localhost:8080'
+      // Empty = same-origin: nginx proxies /api/* to spring-boot, browser hits
+      // whatever host serves the SPA (localhost in dev, the LXC IP / cloudflared
+      // hostname in prod). No CORS headaches.
+      useValue: ''
     }
   ]
 };

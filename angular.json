@@ -10,7 +10,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "temp-name": {
+    "parallax-sports": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:class": {
@@ -83,12 +83,15 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
-              "buildTarget": "temp-name:build:production"
+              "buildTarget": "parallax-sports:build:production"
             },
             "development": {
-              "buildTarget": "temp-name:build:development"
+              "buildTarget": "parallax-sports:build:development"
             }
           },
           "defaultConfiguration": "development"
