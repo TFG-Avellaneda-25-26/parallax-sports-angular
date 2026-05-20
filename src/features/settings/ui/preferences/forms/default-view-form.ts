@@ -7,7 +7,7 @@ export const createDefaultViewForm = () => {
   const userStore = inject(UserStore);
 
   return form(
-    signal({ currentView: '', newView: '' }),
+    signal({ currentView: userStore.defaultView().toUpperCase(), newView: '' }),
     (schemePath) => {
       readonly(schemePath.currentView);
       required(schemePath.newView, { message: 'Default view is required' });
@@ -35,6 +35,7 @@ export const createDefaultViewForm = () => {
 
           try {
             await userStore.updateDefaultView(newView);
+            field().value.set({ currentView: newView.toUpperCase(), newView: '' });
             field().reset();
             return null;
           } catch {

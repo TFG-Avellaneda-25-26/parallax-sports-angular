@@ -29,6 +29,7 @@ export const UserStore = signalStore(
     identities: computed(() => store.user()?.identities ?? []),
     displayName: computed(() => store.user()?.displayName ?? ''),
     timezone: computed(() => store.user()?.settings?.timezone ?? 'UTC'),
+    defaultView: computed(() => store.user()?.settings?.defaultView ?? 'cards'),
     linkedProviders: computed(() => {
       const linked = store.user()?.identities ?? [];
       return SUPPORTED_PROVIDERS.map(provider => ({
@@ -156,7 +157,7 @@ export const UserStore = signalStore(
       try {
         await lastValueFrom(userService.updateDefaultView(defaultView));
         patchState(store, { user: {
-          ...user, settings: { ...user.settings, defaultView } as UserSettings
+          ...user, settings: { ...user.settings, defaultView: defaultView.toLowerCase() } as UserSettings
         }});
       } catch (error) {
         console.error('Failed to update default view.');
