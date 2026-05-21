@@ -1,0 +1,46 @@
+<div>
+  <label [for]="fieldId()">{{ label() }}</label>
+
+  <div ngCombobox readonly>
+    <div #origin class="select">
+      <span class="combobox-label">
+        <span class="selected-label-text">{{ displayValue() }}</span>
+      </span>
+      <input [id]="fieldId()" [attr.aria-label]="label()" ngComboboxInput />
+      <span class="example-arrow material-symbols-outlined" translate="no" aria-hidden="true">
+        arrow_drop_down
+      </span>
+    </div>
+
+    <ng-template ngComboboxPopupContainer>
+      <ng-template
+        [cdkConnectedOverlay]="{origin, usePopover: 'inline', matchWidth: true}"
+        [cdkConnectedOverlayOpen]="true"
+      >
+        <div class="example-popup-container">
+          <div ngListbox [values]="[value()]" (valuesChange)="onSelect($event)">
+            @for (item of list(); track item.value) {
+              <div ngOption [value]="item.value" [label]="item.value">
+                <span class="format-label">{{ item.value }}</span>
+                @if (item.example) {
+                  <span class="example-option-example">{{ item.example }}</span>
+                }
+                <span class="material-symbols-outlined example-option-check" aria-hidden="true">
+                  check
+                </span>
+              </div>
+            }
+          </div>
+        </div>
+      </ng-template>
+    </ng-template>
+  </div>
+
+  @if (invalid() && touched()) {
+    <div role="alert">
+      @for (error of errors(); track error.kind) {
+        <span>{{ error.message }}</span>
+      }
+    </div>
+  }
+</div>
