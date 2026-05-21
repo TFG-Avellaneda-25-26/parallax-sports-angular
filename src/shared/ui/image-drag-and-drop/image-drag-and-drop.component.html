@@ -1,41 +1,76 @@
-<div
-  class="drop-zone"
-  [class.is-dragging]="isDraggingOver()"
-  [class.has-image]="preview()"
-  [class.is-invalid]="invalid() && touched()"
-  (dragover)="onDragOver($event)"
-  (dragleave)="onDragLeave()"
-  (drop)="onDrop($event)"
->
-  @if (preview()) {
-    <img [src]="preview()" alt="Event image preview" class="preview-image" />
-    <div class="preview-overlay">
-      <button type="button" class="clear-btn" (click)="clear()">
-        <span class="material-symbols-outlined">delete</span>
-        Remove
-      </button>
-    </div>
-  } @else {
-    <label class="drop-label" for="image-input">
-      <span class="material-symbols-outlined drop-icon">image</span>
-      <span class="drop-title">Drag & drop event image</span>
-      <span class="drop-subtitle">or <strong>click to browse</strong></span>
-      <span class="drop-hint">Any image format - converted to WebP automatically</span>
-    </label>
-    <input
-      id="image-input"
-      type="file"
-      accept="image/*"
-      class="file-input"
-      (change)="onFileSelected($event)"
-    />
-  }
-</div>
+<div class="upload-container">
 
-@if (invalid() && touched()) {
-  <div role="alert">
-    @for (error of errors(); track error.kind) {
-      <span>{{ error.message }}</span>
-    }
-  </div>
-}
+  @if (!allFilled()) {
+    <div
+      class="drop-zone"
+      [class.is-dragging]="isDraggingOver()"
+      [class.is-invalid]="invalid() && touched()"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave()"
+      (drop)="onDrop($event)"
+    >
+      @if (isCompressing()) {
+        <div class="compressing">
+          <span class="material-symbols-outlined spinning">progress_activity</span>
+          Processing image...
+        </div>
+      } @else {
+        <label class="drop-label" for="image-input">
+          <span class="material-symbols-outlined drop-icon">image</span>
+          <span class="drop-title">Drag & drop image</span>
+          <span class="drop-subtitle">or <strong>click to browse</strong></span>
+          <span class="drop-hint">
+            Goes to: <strong>{{ slots()[slots().findIndex(s => !s.file)]?.label }}</strong>
+          </span>
+        </label>
+        <input
+          id="image-input"
+          type="file"
+          accept="image/*"
+          class="file-input"
+          (change)="onFileSelected($event)"
+        />
+      }
+    </div>
+  }
+
+  @if (hasAny()) {
+    <div
+      cdkDropList
+      class="slots-list"
+      (cdkDropListDropped)="onSlotDrop($event)"
+    >
+      @for (slot of slots(); track slot.label; let i = $index) {
+        @if (slot.file) {
+          <div class="slot" cdkDrag>
+            <div class="slot-drag-handle" cdkDragHandle>
+              <span class="material-symbols-outlined">drag_indicator</span>
+            </div>
+
+            <img [src]="slot.preview" [alt]="slot.label" class="slot-preview" />
+
+            <div class="slot-info">
+              <span class="slot-label">{{ slot.label }}</span>
+              <span class="slot-filename">{{ slot.file.name }}</span>
+            </div>
+
+            <button type="button" class="slot-remove" (click)="removeSlot(i)">
+              <span class="material-symbols-outlined">delete</span>
+            </button>
+
+            <div class="slot-placeholder" *cdkDragPlaceholder></div>
+          </div>
+        }
+      }
+    </div>
+  }
+
+  @if (invalid() && touched()) {
+    <div role="alert">
+      @for (error of errors(); track error.kind) {
+        <span>{{ error.message }}</span>
+      }
+    </div>
+  }
+
+</div>
