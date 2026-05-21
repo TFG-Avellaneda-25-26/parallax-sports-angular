@@ -42,7 +42,7 @@
     >
       @for (slot of slots(); track slot.label; let i = $index) {
         @if (slot.file) {
-          <div class="slot" cdkDrag>
+          <div class="slot" cdkDrag cdkDragLockAxis="y" cdkDragBoundary=".slots-list">
             <div class="slot-drag-handle" cdkDragHandle>
               <span class="material-symbols-outlined">drag_indicator</span>
             </div>
@@ -57,8 +57,6 @@
             <button type="button" class="slot-remove" (click)="removeSlot(i)">
               <span class="material-symbols-outlined">delete</span>
             </button>
-
-            <div class="slot-placeholder" *cdkDragPlaceholder></div>
           </div>
         }
       }
