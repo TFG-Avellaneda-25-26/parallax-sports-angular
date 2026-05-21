@@ -52,6 +52,7 @@ export class ImageDragAndDropComponent {
       maxSizeMB: 1,
       maxWidthOrHeight: 500,
       useWebWorker: true,
+      fileType: 'image/webp',
     });
 
     this.value.set(compressed);
