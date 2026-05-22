@@ -6,6 +6,7 @@ export type FilterLevel = 'sport' | 'competition' | 'eventType' | 'participant';
 
 export interface ParticipantNode {
   id: number;
+  sportKey: string;
   name: string;
   count: number;
 }
@@ -33,6 +34,9 @@ export interface SportNode {
   competitions: CompetitionNode[];
 }
 
+export const participantKey = (sportKey: string, id: number): string =>
+  `${sportKey}::${id}`;
+
 interface EventFilterState {
   includeSports: Set<string>;
   excludeSports: Set<string>;
@@ -40,8 +44,8 @@ interface EventFilterState {
   excludeCompetitions: Set<string>;
   includeEventTypes: Set<string>;
   excludeEventTypes: Set<string>;
-  includeParticipants: Set<number>;
-  excludeParticipants: Set<number>;
+  includeParticipants: Set<string>;
+  excludeParticipants: Set<string>;
 }
 
 const STORAGE_KEY = 'parallax.dashboard.filter';
@@ -77,31 +81,91 @@ function withRemoved<T>(set: Set<T>, value: T): Set<T> {
 }
 
 function eventPasses(event: SportEvent, state: EventFilterState): boolean {
-  // sport
+  // 1. sport exclusion — siempre aplica globalmente
   if (state.excludeSports.has(event.sportKey)) return false;
-  if (state.includeSports.size > 0 && !state.includeSports.has(event.sportKey)) return false;
 
-  // competition (only if event has one)
+  // 2. Determina si hay filtros activos para el deporte de este evento
+  const hasIncludeSport = state.includeSports.has(event.sportKey);
+  const hasIncludeCompetitionForSport = event.competitionName
+    ? state.includeCompetitions.has(competitionKey(event.sportKey, event.competitionName))
+    : false;
+  const hasIncludeEventTypeForSport = state.includeEventTypes.has(
+    eventTypeKey(event.sportKey, event.competitionName, event.eventType)
+  );
+  const hasIncludeParticipantForSport = event.participants.length > 0 &&
+    event.participants.some(p =>
+      state.includeParticipants.has(participantKey(event.sportKey, p.id))
+    );
+
+  // 3. Hay algún filtro include activo en cualquier deporte?
+  const anyIncludeActive =
+    state.includeSports.size > 0 ||
+    state.includeCompetitions.size > 0 ||
+    state.includeEventTypes.size > 0 ||
+    state.includeParticipants.size > 0;
+
+  // 4. Si hay includes activos, el evento debe satisfacer al menos uno
+  //    que sea relevante para su propio deporte
+  if (anyIncludeActive) {
+    const hasAnyIncludeForThisSport =
+      hasIncludeSport ||
+      hasIncludeCompetitionForSport ||
+      hasIncludeEventTypeForSport ||
+      hasIncludeParticipantForSport;
+
+    if (!hasAnyIncludeForThisSport) {
+      // comprueba si hay algún filtro include del mismo deporte
+      // si los hay y ninguno aplica, excluir
+      const hasAnyFilterForThisSport =
+        state.includeSports.has(event.sportKey) ||
+        [...state.includeCompetitions].some(k => k.startsWith(event.sportKey + '::')) ||
+        [...state.includeEventTypes].some(k => k.startsWith(event.sportKey + '::')) ||
+        [...state.includeParticipants].some(k => k.startsWith(event.sportKey + '::'));
+
+      if (hasAnyFilterForThisSport) return false;
+
+      // no hay filtros del deporte de este evento pero hay filtros de otros deportes
+      // este evento no pasa porque solo queremos los deportes con filtros activos
+      const hasFilterForAnyOtherSport =
+        state.includeSports.size > 0 ||
+        [...state.includeCompetitions].some(k => !k.startsWith(event.sportKey + '::')) ||
+        [...state.includeEventTypes].some(k => !k.startsWith(event.sportKey + '::')) ||
+        [...state.includeParticipants].some(k => !k.startsWith(event.sportKey + '::'));
+
+      if (hasFilterForAnyOtherSport) return false;
+    }
+
+    // si tiene filtros para este deporte, verifica exclusiones
+    if (event.competitionName) {
+      const ck = competitionKey(event.sportKey, event.competitionName);
+      if (state.excludeCompetitions.has(ck)) return false;
+    }
+
+    const etk = eventTypeKey(event.sportKey, event.competitionName, event.eventType);
+    if (state.excludeEventTypes.has(etk)) return false;
+
+    if (event.participants.length > 0) {
+      if (event.participants.some(p =>
+        state.excludeParticipants.has(participantKey(event.sportKey, p.id))
+      )) return false;
+    }
+
+    return true;
+  }
+
+  // 5. Sin includes activos — solo aplican exclusiones
   if (event.competitionName) {
     const ck = competitionKey(event.sportKey, event.competitionName);
     if (state.excludeCompetitions.has(ck)) return false;
-    if (state.includeCompetitions.size > 0 && !state.includeCompetitions.has(ck)) return false;
-  } else if (state.includeCompetitions.size > 0) {
-    return false;
   }
 
-  // event type
   const etk = eventTypeKey(event.sportKey, event.competitionName, event.eventType);
   if (state.excludeEventTypes.has(etk)) return false;
-  if (state.includeEventTypes.size > 0 && !state.includeEventTypes.has(etk)) return false;
 
-  // participant: only filter if event has participants
   if (event.participants.length > 0) {
-    if (event.participants.some(p => state.excludeParticipants.has(p.id))) return false;
-    if (state.includeParticipants.size > 0 &&
-        !event.participants.some(p => state.includeParticipants.has(p.id))) {
-      return false;
-    }
+    if (event.participants.some(p =>
+      state.excludeParticipants.has(participantKey(event.sportKey, p.id))
+    )) return false;
   }
 
   return true;
@@ -156,7 +220,7 @@ export function buildTree(events: SportEvent[]): SportNode[] {
       for (const p of ev.participants) {
         const existing = comp.participants.get(p.id);
         if (existing) existing.count++;
-        else comp.participants.set(p.id, { id: p.id, name: p.shortName ?? p.name, count: 1 });
+        else comp.participants.set(p.id, { id: p.id, sportKey: ev.sportKey, name: p.shortName ?? p.name, count: 1 });
       }
     }
   }
@@ -188,8 +252,6 @@ function loadFromStorage(): Partial<EventFilterState> {
     const parsed = JSON.parse(raw) as Record<string, unknown>;
     const asStringSet = (key: string) =>
       Array.isArray(parsed[key]) ? new Set((parsed[key] as unknown[]).filter((v): v is string => typeof v === 'string')) : undefined;
-    const asNumberSet = (key: string) =>
-      Array.isArray(parsed[key]) ? new Set((parsed[key] as unknown[]).filter((v): v is number => typeof v === 'number')) : undefined;
 
     const result: Partial<EventFilterState> = {};
     const inS = asStringSet('includeSports'); if (inS) result.includeSports = inS;
@@ -198,8 +260,8 @@ function loadFromStorage(): Partial<EventFilterState> {
     const exC = asStringSet('excludeCompetitions'); if (exC) result.excludeCompetitions = exC;
     const inET = asStringSet('includeEventTypes'); if (inET) result.includeEventTypes = inET;
     const exET = asStringSet('excludeEventTypes'); if (exET) result.excludeEventTypes = exET;
-    const inP = asNumberSet('includeParticipants'); if (inP) result.includeParticipants = inP;
-    const exP = asNumberSet('excludeParticipants'); if (exP) result.excludeParticipants = exP;
+    const inP = asStringSet('includeParticipants'); if (inP) result.includeParticipants = inP;
+    const exP = asStringSet('excludeParticipants'); if (exP) result.excludeParticipants = exP;
     return result;
   } catch {
     return {};
@@ -239,6 +301,16 @@ export const EventFilterStore = signalStore(
       store.includeParticipants().size > 0 ||
       store.excludeParticipants().size > 0
     ),
+    activeFilters: computed(() => ({
+      includeSports: store.includeSports(),
+      excludeSports: store.excludeSports(),
+      includeCompetitions: store.includeCompetitions(),
+      excludeCompetitions: store.excludeCompetitions(),
+      includeEventTypes: store.includeEventTypes(),
+      excludeEventTypes: store.excludeEventTypes(),
+      includeParticipants: store.includeParticipants(),
+      excludeParticipants: store.excludeParticipants(),
+    })),
   })),
 
   withMethods((store) => ({
@@ -309,22 +381,25 @@ export const EventFilterStore = signalStore(
         excludeEventTypes: withRemoved(store.excludeEventTypes(), key),
       });
     },
-    showOnlyParticipant(id: number): void {
+    showOnlyParticipant(sportKey: string, id: number): void {
+      const key = participantKey(sportKey, id);
       patchState(store, {
-        includeParticipants: withAdded(store.includeParticipants(), id),
-        excludeParticipants: withRemoved(store.excludeParticipants(), id),
+        includeParticipants: withAdded(store.includeParticipants(), key),
+        excludeParticipants: withRemoved(store.excludeParticipants(), key),
       });
     },
-    hideParticipant(id: number): void {
+    hideParticipant(sportKey: string, id: number): void {
+      const key = participantKey(sportKey, id);
       patchState(store, {
-        excludeParticipants: withAdded(store.excludeParticipants(), id),
-        includeParticipants: withRemoved(store.includeParticipants(), id),
+        excludeParticipants: withAdded(store.excludeParticipants(), key),
+        includeParticipants: withRemoved(store.includeParticipants(), key),
       });
     },
-    clearParticipant(id: number): void {
+    clearParticipant(sportKey: string, id: number): void {
+      const key = participantKey(sportKey, id);
       patchState(store, {
-        includeParticipants: withRemoved(store.includeParticipants(), id),
-        excludeParticipants: withRemoved(store.excludeParticipants(), id),
+        includeParticipants: withRemoved(store.includeParticipants(), key),
+        excludeParticipants: withRemoved(store.excludeParticipants(), key),
       });
     },
     clearAll(): void {

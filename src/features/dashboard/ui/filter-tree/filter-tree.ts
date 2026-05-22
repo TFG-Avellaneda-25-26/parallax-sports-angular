@@ -7,6 +7,7 @@ import {
   ParticipantNode,
   SportNode,
   competitionKey,
+  participantKey,
 } from '@features/dashboard/store/event-filter.store';
 import { FilterRowAction, FilterTreeRowComponent } from '../filter-tree-row/filter-tree-row';
 
@@ -72,7 +73,7 @@ export class FilterTreeComponent {
   }
 
   protected onParticipantAction(participant: ParticipantNode, action: FilterRowAction): void {
-    this.dispatch('participant', participant.id, action);
+    this.dispatch('participant', { id: participant.id, sportKey: participant.sportKey}, action);
   }
 
   protected clearAll(): void {
@@ -83,7 +84,7 @@ export class FilterTreeComponent {
     return competitionKey(sportKey, name);
   }
 
-  private dispatch(level: FilterLevel, id: string | number, action: FilterRowAction): void {
+  private dispatch(level: FilterLevel, id: string | { id: number; sportKey: string }, action: FilterRowAction): void {
     if (level === 'sport') {
       const key = id as string;
       if (action === 'showOnly') this.filterStore.showOnlySport(key);
@@ -100,11 +101,15 @@ export class FilterTreeComponent {
       else if (action === 'hide') this.filterStore.hideEventType(key);
       else this.filterStore.clearEventType(key);
     } else {
-      const pid = id as number;
-      if (action === 'showOnly') this.filterStore.showOnlyParticipant(pid);
-      else if (action === 'hide') this.filterStore.hideParticipant(pid);
-      else this.filterStore.clearParticipant(pid);
+      const { id: pid, sportKey } = id as { id: number; sportKey: string };
+      if (action === 'showOnly') this.filterStore.showOnlyParticipant(sportKey, pid);
+      else if (action === 'hide') this.filterStore.hideParticipant(sportKey, pid);
+      else this.filterStore.clearParticipant(sportKey, pid);
     }
+  }
+
+  protected participantKey(sportKey: string, participantId: number): string {
+    return participantKey(sportKey, participantId);
   }
 }
 
@@ -114,3 +119,4 @@ function toggle<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
   else next.add(value);
   return next;
 }
+
