@@ -37,6 +37,7 @@
     "@softarc/eslint-plugin-sheriff": "^0.19.6",
     "@softarc/sheriff-core": "^0.19.6",
     "@vvo/tzdb": "^6.198.0",
+    "browser-image-compression": "^2.0.2",
     "gsap": "^3.14.2",
     "ng-otp-input": "^2.0.10",
     "rxjs": "~7.8.0",
