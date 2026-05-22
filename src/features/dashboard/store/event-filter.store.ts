@@ -7,6 +7,7 @@ export type FilterLevel = 'sport' | 'competition' | 'eventType' | 'participant';
 export interface ParticipantNode {
   id: number;
   sportKey: string;
+  competitionName: string;
   name: string;
   count: number;
 }
@@ -34,8 +35,8 @@ export interface SportNode {
   competitions: CompetitionNode[];
 }
 
-export const participantKey = (sportKey: string, id: number): string =>
-  `${sportKey}::${id}`;
+export const participantKey = (sportKey: string, competitionName: string, id: number): string =>
+  `${sportKey}::${competitionName}::${id}`;
 
 interface EventFilterState {
   includeSports: Set<string>;
@@ -81,94 +82,101 @@ function withRemoved<T>(set: Set<T>, value: T): Set<T> {
 }
 
 function eventPasses(event: SportEvent, state: EventFilterState): boolean {
-  // 1. sport exclusion — siempre aplica globalmente
   if (state.excludeSports.has(event.sportKey)) return false;
 
-  // 2. Determina si hay filtros activos para el deporte de este evento
-  const hasIncludeSport = state.includeSports.has(event.sportKey);
-  const hasIncludeCompetitionForSport = event.competitionName
-    ? state.includeCompetitions.has(competitionKey(event.sportKey, event.competitionName))
-    : false;
-  const hasIncludeEventTypeForSport = state.includeEventTypes.has(
-    eventTypeKey(event.sportKey, event.competitionName, event.eventType)
-  );
-  const hasIncludeParticipantForSport = event.participants.length > 0 &&
-    event.participants.some(p =>
-      state.includeParticipants.has(participantKey(event.sportKey, p.id))
-    );
-
-  // 3. Hay algún filtro include activo en cualquier deporte?
   const anyIncludeActive =
     state.includeSports.size > 0 ||
     state.includeCompetitions.size > 0 ||
     state.includeEventTypes.size > 0 ||
     state.includeParticipants.size > 0;
 
-  // 4. Si hay includes activos, el evento debe satisfacer al menos uno
-  //    que sea relevante para su propio deporte
-  if (anyIncludeActive) {
-    const hasAnyIncludeForThisSport =
-      hasIncludeSport ||
-      hasIncludeCompetitionForSport ||
-      hasIncludeEventTypeForSport ||
-      hasIncludeParticipantForSport;
+  const ck = event.competitionName
+    ? competitionKey(event.sportKey, event.competitionName)
+    : null;
+  const etk = eventTypeKey(event.sportKey, event.competitionName, event.eventType);
+  const compName = event.competitionName ?? '';
 
-    if (!hasAnyIncludeForThisSport) {
-      // comprueba si hay algún filtro include del mismo deporte
-      // si los hay y ninguno aplica, excluir
-      const hasAnyFilterForThisSport =
-        state.includeSports.has(event.sportKey) ||
-        [...state.includeCompetitions].some(k => k.startsWith(event.sportKey + '::')) ||
-        [...state.includeEventTypes].some(k => k.startsWith(event.sportKey + '::')) ||
-        [...state.includeParticipants].some(k => k.startsWith(event.sportKey + '::'));
-
-      if (hasAnyFilterForThisSport) return false;
-
-      // no hay filtros del deporte de este evento pero hay filtros de otros deportes
-      // este evento no pasa porque solo queremos los deportes con filtros activos
-      const hasFilterForAnyOtherSport =
-        state.includeSports.size > 0 ||
-        [...state.includeCompetitions].some(k => !k.startsWith(event.sportKey + '::')) ||
-        [...state.includeEventTypes].some(k => !k.startsWith(event.sportKey + '::')) ||
-        [...state.includeParticipants].some(k => !k.startsWith(event.sportKey + '::'));
-
-      if (hasFilterForAnyOtherSport) return false;
-    }
-
-    // si tiene filtros para este deporte, verifica exclusiones
-    if (event.competitionName) {
-      const ck = competitionKey(event.sportKey, event.competitionName);
-      if (state.excludeCompetitions.has(ck)) return false;
-    }
-
-    const etk = eventTypeKey(event.sportKey, event.competitionName, event.eventType);
+  if (!anyIncludeActive) {
+    if (ck && state.excludeCompetitions.has(ck)) return false;
     if (state.excludeEventTypes.has(etk)) return false;
-
-    if (event.participants.length > 0) {
-      if (event.participants.some(p =>
-        state.excludeParticipants.has(participantKey(event.sportKey, p.id))
-      )) return false;
-    }
-
+    if (event.participants.some(p =>
+      state.excludeParticipants.has(participantKey(event.sportKey, compName, p.id))
+    )) return false;
     return true;
   }
 
-  // 5. Sin includes activos — solo aplican exclusiones
-  if (event.competitionName) {
-    const ck = competitionKey(event.sportKey, event.competitionName);
-    if (state.excludeCompetitions.has(ck)) return false;
+  // ¿hay algún filtro include para este deporte?
+  const hasAnyFilterScopedToThisSport =
+    state.includeSports.has(event.sportKey) ||
+    [...state.includeCompetitions].some(k => k.startsWith(event.sportKey + '::')) ||
+    [...state.includeEventTypes].some(k => k.startsWith(event.sportKey + '::')) ||
+    [...state.includeParticipants].some(k => k.startsWith(event.sportKey + '::'));
+
+  if (!hasAnyFilterScopedToThisSport) return false;
+
+  // sport seleccionado directamente sin hijos más específicos
+  if (state.includeSports.has(event.sportKey)) {
+    const hasMoreSpecificFilter =
+      [...state.includeCompetitions].some(k => k.startsWith(event.sportKey + '::')) ||
+      [...state.includeEventTypes].some(k => k.startsWith(event.sportKey + '::')) ||
+      [...state.includeParticipants].some(k => k.startsWith(event.sportKey + '::'));
+
+    if (!hasMoreSpecificFilter) {
+      if (ck && state.excludeCompetitions.has(ck)) return false;
+      if (state.excludeEventTypes.has(etk)) return false;
+      if (event.participants.some(p =>
+        state.excludeParticipants.has(participantKey(event.sportKey, compName, p.id))
+      )) return false;
+      return true;
+    }
   }
 
-  const etk = eventTypeKey(event.sportKey, event.competitionName, event.eventType);
-  if (state.excludeEventTypes.has(etk)) return false;
+  // competition
+  if (ck !== null && state.includeCompetitions.has(ck)) {
+    const hasAnyParticipantFilterForThisCompetition =
+      [...state.includeParticipants].some(k =>
+        k.startsWith(ck + '::')
+      );
+    const hasAnyEventTypeFilterForThisCompetition =
+      [...state.includeEventTypes].some(k => k.startsWith(event.sportKey + '::'));
 
-  if (event.participants.length > 0) {
+    if (hasAnyParticipantFilterForThisCompetition) {
+      if (event.participants.length === 0) return false;
+      const hasParticipantForThisCompetition =
+        event.participants.some(p =>
+          state.includeParticipants.has(participantKey(event.sportKey, compName, p.id))
+        );
+      if (!hasParticipantForThisCompetition) return false;
+    }
+
+    if (hasAnyEventTypeFilterForThisCompetition) {
+      if (!state.includeEventTypes.has(etk)) return false;
+    }
+
+    if (state.excludeEventTypes.has(etk)) return false;
     if (event.participants.some(p =>
-      state.excludeParticipants.has(participantKey(event.sportKey, p.id))
+      state.excludeParticipants.has(participantKey(event.sportKey, compName, p.id))
     )) return false;
+    return true;
   }
 
-  return true;
+  // eventType
+  if (state.includeEventTypes.has(etk)) {
+    if (event.participants.some(p =>
+      state.excludeParticipants.has(participantKey(event.sportKey, compName, p.id))
+    )) return false;
+    return true;
+  }
+
+  // participant
+  if (event.participants.some(p =>
+    state.includeParticipants.has(participantKey(event.sportKey, compName, p.id))
+  )) {
+    if (state.excludeEventTypes.has(etk)) return false;
+    return true;
+  }
+
+  return false;
 }
 
 export function buildTree(events: SportEvent[]): SportNode[] {
@@ -220,7 +228,7 @@ export function buildTree(events: SportEvent[]): SportNode[] {
       for (const p of ev.participants) {
         const existing = comp.participants.get(p.id);
         if (existing) existing.count++;
-        else comp.participants.set(p.id, { id: p.id, sportKey: ev.sportKey, name: p.shortName ?? p.name, count: 1 });
+        else comp.participants.set(p.id, { id: p.id, sportKey: ev.sportKey, competitionName: ev.competitionName, name: p.shortName ?? p.name, count: 1 });
       }
     }
   }
@@ -381,22 +389,22 @@ export const EventFilterStore = signalStore(
         excludeEventTypes: withRemoved(store.excludeEventTypes(), key),
       });
     },
-    showOnlyParticipant(sportKey: string, id: number): void {
-      const key = participantKey(sportKey, id);
+    showOnlyParticipant(sportKey: string, competitionName: string, id: number): void {
+      const key = participantKey(sportKey, competitionName, id);
       patchState(store, {
         includeParticipants: withAdded(store.includeParticipants(), key),
         excludeParticipants: withRemoved(store.excludeParticipants(), key),
       });
     },
-    hideParticipant(sportKey: string, id: number): void {
-      const key = participantKey(sportKey, id);
+    hideParticipant(sportKey: string, competitionName: string, id: number): void {
+      const key = participantKey(sportKey, competitionName, id);
       patchState(store, {
         excludeParticipants: withAdded(store.excludeParticipants(), key),
         includeParticipants: withRemoved(store.includeParticipants(), key),
       });
     },
-    clearParticipant(sportKey: string, id: number): void {
-      const key = participantKey(sportKey, id);
+    clearParticipant(sportKey: string, competitionName: string, id: number): void {
+      const key = participantKey(sportKey, competitionName, id);
       patchState(store, {
         includeParticipants: withRemoved(store.includeParticipants(), key),
         excludeParticipants: withRemoved(store.excludeParticipants(), key),

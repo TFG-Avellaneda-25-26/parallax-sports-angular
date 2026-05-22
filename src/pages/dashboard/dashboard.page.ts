@@ -32,7 +32,10 @@ export class DashboardPage {
 
   protected readonly view = this.viewStore.view;
   protected readonly treeNodes = computed(() => buildTree(this.eventStore.events()));
-  protected readonly filteredEvents = computed(() => this.filterStore.applyFilters(this.eventStore.events()));
+  protected readonly filteredEvents = computed(() => {
+    this.filterStore.activeFilters();
+    return this.filterStore.applyFilters(this.eventStore.events());
+  });
 
   constructor () {
     afterNextRender(() => {

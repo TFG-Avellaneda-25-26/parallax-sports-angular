@@ -60,21 +60,82 @@ export class FilterTreeComponent {
     this.expandedCompetitions.update(set => toggle(set, key));
   }
 
+  protected isSportActive(sport: SportNode): boolean {
+  const f = this.filterState();
+  if (f.includeSports.has(sport.key)) return true;
+  return sport.competitions.some(comp =>
+    f.includeCompetitions.has(comp.key) ||
+    comp.eventTypes.some(et => f.includeEventTypes.has(et.key)) ||
+    comp.participants.some(p =>
+      f.includeParticipants.has(participantKey(p.sportKey, p.competitionName, p.id))
+    )
+  );
+}
+
+  protected isCompetitionActive(comp: CompetitionNode): boolean {
+  const f = this.filterState();
+  if (f.includeCompetitions.has(comp.key)) return true;
+  return comp.eventTypes.some(et => f.includeEventTypes.has(et.key)) ||
+    comp.participants.some(p =>
+      f.includeParticipants.has(participantKey(p.sportKey, p.competitionName, p.id))
+    );
+}
+
   protected onSportAction(sport: SportNode, action: FilterRowAction): void {
-    this.dispatch('sport', sport.key, action);
+    if (action === 'clear') {
+      // limpiar sport + todas sus competitions, eventTypes y participants
+      this.filterStore.clearSport(sport.key);
+      for (const comp of sport.competitions) {
+        this.filterStore.clearCompetition(comp.key);
+        for (const et of comp.eventTypes) {
+          this.filterStore.clearEventType(et.key);
+        }
+        for (const p of comp.participants) {
+          this.filterStore.clearParticipant(p.sportKey, p.competitionName, p.id);
+        }
+      }
+    } else {
+      this.dispatch('sport', sport.key, action);
+    }
   }
 
-  protected onCompetitionAction(competition: CompetitionNode, action: FilterRowAction): void {
-    this.dispatch('competition', competition.key, action);
+  protected onCompetitionAction(competition: CompetitionNode, sport: SportNode, action: FilterRowAction): void {
+    if (action === 'clear') {
+      this.filterStore.clearCompetition(competition.key);
+      for (const et of competition.eventTypes) {
+        this.filterStore.clearEventType(et.key);
+      }
+      for (const p of competition.participants) {
+        this.filterStore.clearParticipant(p.sportKey, p.competitionName, p.id);
+      }
+    } else {
+      // NO marcar el sport padre — solo la competition
+      this.dispatch('competition', competition.key, action);
+    }
   }
 
-  protected onEventTypeAction(eventType: EventTypeNode, action: FilterRowAction): void {
-    this.dispatch('eventType', eventType.key, action);
+  protected onEventTypeAction(eventType: EventTypeNode, competition: CompetitionNode, sport: SportNode, action: FilterRowAction): void {
+    if (action === 'clear') {
+      this.filterStore.clearEventType(eventType.key);
+    } else {
+      // solo marcar la competition padre, no el sport
+      this.filterStore.showOnlyCompetition(competition.key);
+      this.dispatch('eventType', eventType.key, action);
+    }
   }
 
-  protected onParticipantAction(participant: ParticipantNode, action: FilterRowAction): void {
-    this.dispatch('participant', { id: participant.id, sportKey: participant.sportKey}, action);
+  protected onParticipantAction(participant: ParticipantNode, competition: CompetitionNode, sport: SportNode, action: FilterRowAction): void {
+  if (action === 'clear') {
+    this.filterStore.clearParticipant(participant.sportKey, participant.competitionName, participant.id);
+  } else {
+    this.filterStore.showOnlyCompetition(competition.key);
+    this.dispatch('participant', {
+      id: participant.id,
+      sportKey: participant.sportKey,
+      competitionName: participant.competitionName
+    }, action);
   }
+}
 
   protected clearAll(): void {
     this.filterStore.clearAll();
@@ -84,7 +145,7 @@ export class FilterTreeComponent {
     return competitionKey(sportKey, name);
   }
 
-  private dispatch(level: FilterLevel, id: string | { id: number; sportKey: string }, action: FilterRowAction): void {
+  private dispatch(level: FilterLevel, id: string | { id: number; sportKey: string; competitionName: string }, action: FilterRowAction): void {
     if (level === 'sport') {
       const key = id as string;
       if (action === 'showOnly') this.filterStore.showOnlySport(key);
@@ -101,15 +162,15 @@ export class FilterTreeComponent {
       else if (action === 'hide') this.filterStore.hideEventType(key);
       else this.filterStore.clearEventType(key);
     } else {
-      const { id: pid, sportKey } = id as { id: number; sportKey: string };
-      if (action === 'showOnly') this.filterStore.showOnlyParticipant(sportKey, pid);
-      else if (action === 'hide') this.filterStore.hideParticipant(sportKey, pid);
-      else this.filterStore.clearParticipant(sportKey, pid);
+      const { id: pid, sportKey, competitionName } = id as { id: number; sportKey: string; competitionName: string };
+      if (action === 'showOnly') this.filterStore.showOnlyParticipant(sportKey, competitionName, pid);
+      else if (action === 'hide') this.filterStore.hideParticipant(sportKey, competitionName, pid);
+      else this.filterStore.clearParticipant(sportKey, competitionName, pid);
     }
   }
 
-  protected participantKey(sportKey: string, participantId: number): string {
-    return participantKey(sportKey, participantId);
+  protected participantKey(sportKey: string, competitionName: string, participantId: number): string {
+    return participantKey(sportKey, competitionName, participantId);
   }
 }
 
