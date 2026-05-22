@@ -142,7 +142,7 @@ export const UserStore = signalStore(
       try {
         await lastValueFrom(userService.updateTimeZone(timeZone));
         patchState(store, { user: {
-          ...user, settings: { ...user.settings, timeZone } as UserSettings
+          ...user, settings: { ...user.settings, timezone: timeZone } as UserSettings
         }
         });
       } catch (error) {

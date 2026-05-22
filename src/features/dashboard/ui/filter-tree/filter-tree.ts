@@ -26,14 +26,20 @@ export class FilterTreeComponent {
   private readonly expandedSports = signal<ReadonlySet<string>>(new Set());
   private readonly expandedCompetitions = signal<ReadonlySet<string>>(new Set());
 
-  protected readonly includeSports = this.filterStore.includeSports;
-  protected readonly excludeSports = this.filterStore.excludeSports;
-  protected readonly includeCompetitions = this.filterStore.includeCompetitions;
-  protected readonly excludeCompetitions = this.filterStore.excludeCompetitions;
-  protected readonly includeEventTypes = this.filterStore.includeEventTypes;
-  protected readonly excludeEventTypes = this.filterStore.excludeEventTypes;
-  protected readonly includeParticipants = this.filterStore.includeParticipants;
-  protected readonly excludeParticipants = this.filterStore.excludeParticipants;
+  // All 8 filter-set signals aggregated into one local computed so Angular's
+  // zoneless + OnPush reactive CD has a single, clean dependency node to track.
+  // Reading cross-component store signals directly in the template can cause
+  // the component to miss updates on the first CD pass after route activation.
+  protected readonly filterState = computed(() => ({
+    includeSports: this.filterStore.includeSports(),
+    excludeSports: this.filterStore.excludeSports(),
+    includeCompetitions: this.filterStore.includeCompetitions(),
+    excludeCompetitions: this.filterStore.excludeCompetitions(),
+    includeEventTypes: this.filterStore.includeEventTypes(),
+    excludeEventTypes: this.filterStore.excludeEventTypes(),
+    includeParticipants: this.filterStore.includeParticipants(),
+    excludeParticipants: this.filterStore.excludeParticipants(),
+  }));
 
   protected readonly hasNodes = computed(() => this.nodes().length > 0);
 

@@ -25,4 +25,8 @@ export class AuthService {
   logout() {
     return this.apiClient.post('/api/auth/logout', {});
   }
+
+  initSettings(body: { timezone: string; theme: string }) {
+    return this.apiClient.post('/api/users/settings/init', body);
+  }
 }

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 import { FormRoot, FormField } from '@angular/forms/signals';
 import { TIMEZONE_OPTIONS } from '@entities/timezone';
-import { UserStore } from '@entities/user';
 import { createTimeZoneForm } from './forms/timezone-form';
 import { StatefulComboxAutocompleteSelectComponent, StatefulComboboxSelectInputComponent, StatefulInput } from "@shared/ui";
 import { createDefaultViewForm } from './forms/default-view-form';
@@ -19,7 +18,6 @@ export class PreferencesComponent {
 
   readonly navStore = inject(SettingsNavStore);
   readonly timezonesOptions = TIMEZONE_OPTIONS;
-  readonly userStore = inject(UserStore);
 
   readonly timeZoneForm = createTimeZoneForm();
   readonly defaultViewForm = createDefaultViewForm();

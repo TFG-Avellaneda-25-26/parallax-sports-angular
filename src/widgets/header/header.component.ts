@@ -13,10 +13,11 @@ import { UserStore } from '@entities/user';
 import { LogoutButtonComponent, VerifyEmailComponent } from '@features/auth';
 import { ThemeToggleComponent } from '@features/theme-switch';
 import { gsap } from '@shared/lib';
+import { LogoComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, ThemeToggleComponent, LogoutButtonComponent, VerifyEmailComponent],
+  imports: [RouterLink, ThemeToggleComponent, LogoutButtonComponent, VerifyEmailComponent, LogoComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,6 +34,10 @@ export class HeaderComponent {
   // signals read across component boundaries can miss the first update.
   protected readonly shouldShowVerifyBadge = computed(
     () => this.userStore.isAuthenticated() && !this.userStore.isVerified(),
+  );
+
+  protected readonly shouldShowAuthActions = computed(
+    () => this.userStore.isAuthenticated(),
   );
 
   constructor() {
