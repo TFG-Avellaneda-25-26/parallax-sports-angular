@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined');
+
 :host {
   display: block;
   width: 100%;
@@ -45,4 +47,24 @@
   .dashboard__aside {
     display: none;
   }
+}
+
+.dashboard__sentinel {
+  height: 1px;
+  width: 100%;
+}
+
+.dashboard__loading {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+  color: var(--color-text-muted);
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
