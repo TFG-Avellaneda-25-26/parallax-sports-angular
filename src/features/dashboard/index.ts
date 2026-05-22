@@ -2,6 +2,7 @@ export { DashboardViewStore, type DashboardView } from './store/dashboard-view.s
 export { FilterDrawerStore } from './store/filter-drawer.store';
 export {
   EventFilterStore,
+  buildTree,
   type FilterLevel,
   type SportNode,
   type CompetitionNode,

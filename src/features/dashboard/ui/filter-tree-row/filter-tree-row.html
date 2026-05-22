@@ -4,7 +4,10 @@
   [class.row--hidden]="isHidden()"
   [attr.data-level]="level()"
   [style.--indent]="indent()"
+  tabindex="0"
   (click)="onPrimaryClick()"
+  (keydown.enter)="onPrimaryClick()"
+  (keydown.space)="$event.preventDefault(); onPrimaryClick()"
   (contextmenu)="onContextMenu($event)"
 >
   <button

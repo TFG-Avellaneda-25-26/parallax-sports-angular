@@ -1,5 +1,5 @@
 @if (isOpen()) {
-  <div #backdrop class="verify-backdrop" (click)="closeModal()">
+  <div #backdrop class="verify-backdrop" tabindex="0" (click)="closeModal()" (keydown.enter)="closeModal()" (keydown.space)="$event.preventDefault(); closeModal()">
     <div
       #panel
       class="verify-panel"

@@ -9,7 +9,7 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { FilterLevel } from '../../store/event-filter.store';
+import { FilterLevel } from '@features/dashboard/store/event-filter.store';
 
 export type FilterRowAction = 'showOnly' | 'hide' | 'clear';
 

@@ -1,6 +1,6 @@
 <section class="dashboard">
   <aside class="dashboard__aside">
-    <app-filter-tree/>
+    <app-filter-tree [nodes]="treeNodes()"/>
   </aside>
 
   <div class="dashboard__content">
@@ -15,5 +15,5 @@
     </main>
   </div>
 
-  <app-filter-drawer/>
+  <app-filter-drawer [nodes]="treeNodes()"/>
 </section>

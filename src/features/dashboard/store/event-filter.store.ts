@@ -1,7 +1,6 @@
-import { computed, effect, inject } from '@angular/core';
+import { computed, effect } from '@angular/core';
 import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
 import { SportEvent } from '@entities/event';
-import { EventStore } from '@features/event';
 
 export type FilterLevel = 'sport' | 'competition' | 'eventType' | 'participant';
 
@@ -108,7 +107,7 @@ function eventPasses(event: SportEvent, state: EventFilterState): boolean {
   return true;
 }
 
-function buildTree(events: SportEvent[]): SportNode[] {
+export function buildTree(events: SportEvent[]): SportNode[] {
   const sports = new Map<string, {
     key: string;
     name: string;
@@ -229,21 +228,7 @@ export const EventFilterStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
 
-  withComputed((store, eventStore = inject(EventStore)) => ({
-    treeNodes: computed(() => buildTree(eventStore.events())),
-    filteredEvents: computed(() => {
-      const snapshot: EventFilterState = {
-        includeSports: store.includeSports(),
-        excludeSports: store.excludeSports(),
-        includeCompetitions: store.includeCompetitions(),
-        excludeCompetitions: store.excludeCompetitions(),
-        includeEventTypes: store.includeEventTypes(),
-        excludeEventTypes: store.excludeEventTypes(),
-        includeParticipants: store.includeParticipants(),
-        excludeParticipants: store.excludeParticipants(),
-      };
-      return eventStore.events().filter(ev => eventPasses(ev, snapshot));
-    }),
+  withComputed((store) => ({
     isAnyFilterActive: computed(() =>
       store.includeSports().size > 0 ||
       store.excludeSports().size > 0 ||
@@ -257,6 +242,19 @@ export const EventFilterStore = signalStore(
   })),
 
   withMethods((store) => ({
+    applyFilters(events: SportEvent[]): SportEvent[] {
+      const snapshot: EventFilterState = {
+        includeSports: store.includeSports(),
+        excludeSports: store.excludeSports(),
+        includeCompetitions: store.includeCompetitions(),
+        excludeCompetitions: store.excludeCompetitions(),
+        includeEventTypes: store.includeEventTypes(),
+        excludeEventTypes: store.excludeEventTypes(),
+        includeParticipants: store.includeParticipants(),
+        excludeParticipants: store.excludeParticipants(),
+      };
+      return events.filter(ev => eventPasses(ev, snapshot));
+    },
     showOnlySport(key: string): void {
       patchState(store, {
         includeSports: withAdded(store.includeSports(), key),

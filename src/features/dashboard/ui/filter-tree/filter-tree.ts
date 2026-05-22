@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import {
   CompetitionNode,
   EventFilterStore,
@@ -7,7 +7,7 @@ import {
   ParticipantNode,
   SportNode,
   competitionKey,
-} from '../../store/event-filter.store';
+} from '@features/dashboard/store/event-filter.store';
 import { FilterRowAction, FilterTreeRowComponent } from '../filter-tree-row/filter-tree-row';
 
 @Component({
@@ -20,7 +20,7 @@ import { FilterRowAction, FilterTreeRowComponent } from '../filter-tree-row/filt
 export class FilterTreeComponent {
   private readonly filterStore = inject(EventFilterStore);
 
-  protected readonly nodes = this.filterStore.treeNodes;
+  readonly nodes = input.required<SportNode[]>();
   protected readonly isAnyFilterActive = this.filterStore.isAnyFilterActive;
 
   private readonly expandedSports = signal<ReadonlySet<string>>(new Set());
