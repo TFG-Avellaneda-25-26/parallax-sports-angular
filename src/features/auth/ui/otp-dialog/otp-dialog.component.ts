@@ -108,6 +108,13 @@ export class OtpDialogComponent {
     try {
       await lastValueFrom(this.authService.verifyEmail(code));
       this.userStore.markEmailVerified();
+
+      // Seed settings with browser-detected values right after verification.
+      // Silently ignore failures — the user can set preferences manually later.
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      await lastValueFrom(this.authService.initSettings({ timezone, theme })).catch(() => {});
+
       await this.playSuccess();
       this.verified.emit();
     } catch {

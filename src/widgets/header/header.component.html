@@ -19,7 +19,7 @@
 
     <div class="header__actions">
       <app-theme-toggle />
-      @if (userStore.isAuthenticated()) {
+      @if (shouldShowAuthActions()) {
         <app-logout-button />
         <a
           class="header__text-link"

@@ -28,7 +28,7 @@ export const UserStore = signalStore(
     email: computed(() => store.user()?.email ?? ''),
     identities: computed(() => store.user()?.identities ?? []),
     displayName: computed(() => store.user()?.displayName ?? ''),
-    timezone: computed(() => store.user()?.settings?.timezone ?? ''),
+    timezone: computed(() => store.user()?.settings?.timezone ?? 'UTC'),
     defaultView: computed(() => store.user()?.settings?.defaultView ?? ''),
     dateFormat: computed(() => store.user()?.settings?.dateFormat ?? ''),
     linkedProviders: computed(() => {
@@ -142,7 +142,7 @@ export const UserStore = signalStore(
       try {
         await lastValueFrom(userService.updateTimeZone(timeZone));
         patchState(store, { user: {
-          ...user, settings: { ...user.settings, timeZone } as UserSettings
+          ...user, settings: { ...user.settings, timezone: timeZone } as UserSettings
         }
         });
       } catch (error) {

@@ -36,6 +36,10 @@ export class HeaderComponent {
     () => this.userStore.isAuthenticated() && !this.userStore.isVerified(),
   );
 
+  protected readonly shouldShowAuthActions = computed(
+    () => this.userStore.isAuthenticated(),
+  );
+
   constructor() {
     afterNextRender(() => this.runIntro());
   }

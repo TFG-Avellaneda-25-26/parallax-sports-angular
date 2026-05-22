@@ -6,7 +6,6 @@ export const SettingsNavStore = signalStore(
   withState({
     tree: cloneTree(SETTINGS_TREE),
     selected: ['account'] as string[],
-    activeSection: null as string | null
   }),
 
   withComputed(({ tree, selected }) => ({
@@ -14,6 +13,7 @@ export const SettingsNavStore = signalStore(
     activeSectionId: computed(() => {
       const [value] = selected();
       if (!value) return null;
+      // Reuse flatNodes derivation by calling flatten once here.
       const node = flatten(tree()).find(n => n.value === value);
       return node?.section ?? null;
     })
