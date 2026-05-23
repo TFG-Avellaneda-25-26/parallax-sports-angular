@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { FormRoot, FormField } from '@angular/forms/signals';
 import { UserStore } from '@entities/user';
 import { StatefulInput } from "@shared/ui";
@@ -7,10 +7,12 @@ import { createPasswordForm } from './forms/password-form';
 import { createdisplayNameForm } from './forms/display-name-form';
 import { SettingsNavStore } from '@shared/stores';
 import { scrollToSection } from '@shared/lib';
+import { SUPPORTED_PROVIDERS } from '@entities/provider';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-settings-account',
-  imports: [FormRoot, StatefulInput, FormField],
+  imports: [FormRoot, StatefulInput, FormField, TitleCasePipe],
   templateUrl: './account.component.html',
   styleUrl: './account.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,7 +25,16 @@ export class AccountComponent {
   readonly displayNameForm = createdisplayNameForm();
   readonly emailForm = createEmailForm();
   readonly passwordForm = createPasswordForm();
-  readonly identites = this.userStore.linkedProviders;
+
+  readonly identities = computed(() => {
+  const linked = this.userStore.identities();
+  return SUPPORTED_PROVIDERS.map(provider => ({
+    provider: provider.id,
+    oauthProvider: provider,
+    identity: linked.find(i => i.provider === provider.id) ?? null,
+    isLinked: linked.some(i => i.provider === provider.id),
+  }));
+});
 
   constructor() {
     effect(() => {
@@ -34,7 +45,7 @@ export class AccountComponent {
       if (!el) return;
 
       // Defer one tick so the freshly-mounted view is in the DOM before we
-      // measure / scroll. Effects already run after CD but route transitions
+      // measure / scroll. Effects already run after CD but route transitionshttp://localhost:4200/dashboard
       // can race this.
       setTimeout(() => scrollToSection(el), 0);
     })

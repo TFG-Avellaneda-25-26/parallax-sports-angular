@@ -14,8 +14,6 @@ const initialState: UserState = {
   isLoading: false,
 }
 
-const SUPPORTED_PROVIDERS = ['google', 'discord'] as const;
-
 export const UserStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
@@ -31,14 +29,6 @@ export const UserStore = signalStore(
     timezone: computed(() => store.user()?.settings?.timezone ?? ''),
     defaultView: computed(() => store.user()?.settings?.defaultView ?? ''),
     dateFormat: computed(() => store.user()?.settings?.dateFormat ?? ''),
-    linkedProviders: computed(() => {
-      const linked = store.user()?.identities ?? [];
-      return SUPPORTED_PROVIDERS.map(provider => ({
-        provider,
-        identity: linked.find(i => i.provider === provider) ?? null,
-        isLinked: linked.some(i => i.provider === provider)
-      }))
-    }),
   })),
 
   withMethods((store, userService = inject(UserService), router = inject(Router)) => ({
