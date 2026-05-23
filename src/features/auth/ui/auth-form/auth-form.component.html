@@ -45,6 +45,24 @@
     </div>
   </form>
 
+  <div class="oauth-buttons">
+  @for (provider of SUPPORTED_PROVIDERS; track provider.id) {
+    <button class="oauth-btn" (click)="userStore.linkIdentity(provider.id)">
+      <svg
+        class="oauth-btn__icon"
+        [attr.viewBox]="provider.viewBox"
+        xmlns="http://www.w3.org/2000/svg"
+        [attr.fill]="provider.fixedColors ? undefined : 'currentColor'"
+      >
+        @for (path of provider.paths; track path.d) {
+          <path [attr.d]="path.d" [attr.fill]="path.fill ?? undefined" />
+        }
+      </svg>
+      <span>{{ provider.label }}</span>
+    </button>
+  }
+</div>
+
   <p class="auth-switch">
     {{ authStore.isRegisterMode() ? 'Already have an account?' : "Don't have an account?" }}
     <button class="switch-btn" (click)="switchMode()">
