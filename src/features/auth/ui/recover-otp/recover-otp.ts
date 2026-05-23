@@ -23,7 +23,7 @@ export class RecoverOtp {
     try {
       await lastValueFrom(this.authService.verifyOtpCode(email, code));
       await this.otpInput()?.confirmSuccess();
-      this.authModeStore.goToPasswordStep();
+      this.authModeStore.goToPasswordStep(code);
     } catch {
       this.otpInput()?.triggerError();
     }

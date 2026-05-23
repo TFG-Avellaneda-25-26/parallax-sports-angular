@@ -37,4 +37,8 @@ export class AuthService {
   verifyOtpCode(email: string, code: string) {
     return this.apiClient.post('/api/auth/verify-code', { email, code });
   }
+
+  resetPassword(email: string, code: string, password: string) {
+    return this.apiClient.post('/api/auth/reset-password', { email, code, password });
+  }
 }

@@ -8,6 +8,7 @@ interface AuthModeState {
   mode: AuthMode;
   recoverStep: RecoverStep;
   recoverEmail: string;
+  recoverOtp: string;
 }
 
 export const AuthModeStore = signalStore(
@@ -15,6 +16,7 @@ export const AuthModeStore = signalStore(
     mode: 'auth',
     recoverStep: 'email',
     recoverEmail: '',
+    recoverOtp: '',
   }),
 
   withComputed(({ mode, recoverStep }) => ({
@@ -38,8 +40,8 @@ export const AuthModeStore = signalStore(
     goToOtpStep(email: string): void {
       patchState(store, { mode: 'recover', recoverStep: 'otp', recoverEmail: email });
     },
-    goToPasswordStep(): void {
-      patchState(store, { mode: 'recover', recoverStep: 'password' });
+    goToPasswordStep(otp: string): void {
+      patchState(store, { mode: 'recover', recoverStep: 'password', recoverOtp: otp });
     },
     setRecoverEmail(email: string): void {
       patchState(store, { recoverEmail: email });
