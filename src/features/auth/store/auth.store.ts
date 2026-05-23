@@ -7,7 +7,7 @@ import { UserStore } from "@entities/user";
 import { apply, applyWhen, form } from "@angular/forms/signals";
 import { lastValueFrom } from "rxjs";
 
-type AuthMode = 'login' | 'register';
+type AuthFormMode = 'login' | 'register';
 
 const formModel = signal<AuthData>({
   displayName: '',
@@ -17,7 +17,7 @@ const formModel = signal<AuthData>({
 })
 
 export const AuthStore = signalStore(
-  withState({ mode: 'register' as AuthMode }),
+  withState({ mode: 'register' as AuthFormMode }),
 
   withComputed(({ mode }) => ({
     isRegisterMode: computed(() => mode() === 'register'),
