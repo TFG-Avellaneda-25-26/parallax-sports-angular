@@ -22,11 +22,12 @@
       @if (shouldShowAuthActions()) {
         <app-logout-button />
         <a
-          class="header__text-link"
+          class="header__text-link header__settings-link"
           routerLink="/settings"
           aria-label="Settings"
+          (click)="onSettingsClick($event)"
         >
-          Settings
+          <span #settingsLabel class="header__settings-label">Settings</span>
         </a>
       }
     </div>

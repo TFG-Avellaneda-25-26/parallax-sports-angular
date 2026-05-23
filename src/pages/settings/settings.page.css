@@ -5,23 +5,30 @@
 .settings-layout {
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
-    "search search"
-    "nav    content";
-  height: 100%;
-  gap: 1rem;
+  gap: 1.5rem;
   padding: 1rem;
+  align-items: start;
 }
 
-.settings-search {
-  grid-area: search;
+.settings-side {
+  position: sticky;
+  top: 1rem;
+  align-self: start;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.settings-nav {
-  grid-area: nav;
+.settings-side__search {
+  width: 100%;
+}
+
+.settings-side__nav {
+  width: 100%;
 }
 
 .settings-content {
-  grid-area: content;
+  min-width: 0;
 }

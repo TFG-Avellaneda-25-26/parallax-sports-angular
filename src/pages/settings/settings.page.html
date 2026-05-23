@@ -1,6 +1,8 @@
 <main class="settings-layout">
-  <app-settings-autocomplete class="settings-search" />
-  <app-settings-nav class="settings-nav" />
+  <aside class="settings-side">
+    <app-settings-autocomplete class="settings-side__search" />
+    <app-settings-nav class="settings-side__nav" />
+  </aside>
   <div class="settings-content">
     <router-outlet />
   </div>

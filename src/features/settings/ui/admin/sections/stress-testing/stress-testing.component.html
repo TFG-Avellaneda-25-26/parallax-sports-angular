@@ -1,0 +1,136 @@
+<div class="stress">
+  <div class="stress__panel">
+    <div class="stress__controls">
+      <label>
+        Scenario
+        <select
+          [value]="selectedScenarioId()"
+          (change)="onScenarioChange($any($event.target).value)"
+        >
+          @for (s of scenarios(); track s.id) {
+            <option [value]="s.id">{{ s.id }}{{ s.name ? ' — ' + s.name : '' }}</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        VUs override
+        <input
+          type="number"
+          min="1"
+          [placeholder]="selectedScenario()?.defaultVus ?? 'default'"
+          [value]="vusOverride()"
+          (input)="vusOverride.set($any($event.target).value)"
+        />
+      </label>
+
+      <label>
+        Duration override
+        <input
+          type="text"
+          [placeholder]="selectedScenario()?.defaultDuration ?? '5m'"
+          [value]="durationOverride()"
+          (input)="durationOverride.set($any($event.target).value)"
+        />
+      </label>
+
+      <div class="stress__actions">
+        <button
+          type="button"
+          class="accent-btn"
+          (click)="start()"
+          [disabled]="busy() || streaming()"
+        >
+          Start
+        </button>
+        <button
+          type="button"
+          class="accent-btn"
+          (click)="stop()"
+          [disabled]="busy() || !activeRun() || !streaming()"
+        >
+          Stop
+        </button>
+      </div>
+    </div>
+
+    @if (selectedScenario(); as s) {
+      <p class="stress__hint">
+        Defaults: {{ s.defaultVus ?? '—' }} VUs / {{ s.defaultDuration ?? '—' }}.
+        @if (s.description) {
+          {{ s.description }}
+        }
+      </p>
+    }
+
+    @if (errorMessage()) {
+      <p class="stress__error">{{ errorMessage() }}</p>
+    }
+
+    @if (activeRun(); as run) {
+      <div class="stress__active">
+        <strong>Active run:</strong>
+        <code>{{ run.runUuid }}</code>
+        <span>· status {{ run.status }}</span>
+        @if (streaming()) {
+          <span class="stress__streaming">· streaming</span>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="stress__logs">
+    <header><h4>Live logs</h4></header>
+    @if (logLines().length === 0) {
+      <p class="stress__empty">No active stream. Start a run to see logs here.</p>
+    } @else {
+      <pre>@for (line of logLines(); track $index) {{{ line }}
+}</pre>
+    }
+  </div>
+
+  <div class="stress__history">
+    <header><h4>History</h4></header>
+    <table class="stress__table">
+      <thead>
+        <tr>
+          <th>UUID</th>
+          <th>Scenario</th>
+          <th>Status</th>
+          <th>Started</th>
+          <th>Finished</th>
+          <th>VUs</th>
+          <th>Duration</th>
+          <th>Exit</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (r of historyRows(); track r.runUuid) {
+          <tr>
+            <td>
+              <code>{{ r.runUuid }}</code>
+            </td>
+            <td>{{ r.scenarioId }}</td>
+            <td>{{ r.status }}</td>
+            <td>{{ r.startedAt }}</td>
+            <td>{{ r.finishedAt ?? '—' }}</td>
+            <td>{{ r.vus ?? '—' }}</td>
+            <td>{{ r.duration ?? '—' }}</td>
+            <td>{{ r.exitCode ?? '—' }}</td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="8" class="stress__empty">No runs yet.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <div class="stress__pagination">
+      <button type="button" (click)="prevHistoryPage()" [disabled]="historyIsFirst()">
+        Previous
+      </button>
+      <span>Page {{ (runs()?.number ?? 0) + 1 }} / {{ historyTotalPages() || 1 }}</span>
+      <button type="button" (click)="nextHistoryPage()" [disabled]="historyIsLast()">Next</button>
+    </div>
+  </div>
+</div>

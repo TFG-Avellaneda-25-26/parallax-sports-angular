@@ -1,0 +1,40 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+:host[aria-checked='true'] {
+  color: var(--color-accent);
+}
+
+:host:hover:not(.disabled) {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-elevated);
+}
+
+:host[aria-checked='true']:hover:not(.disabled) {
+  color: var(--color-accent-hover);
+}
+
+:host.disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+:host:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+  outline-offset: 2px;
+}
+
+:host svg {
+  display: block;
+}
