@@ -1,0 +1,33 @@
+<div class="events">
+  <p class="events__hint">
+    Publish a synthetic event directly into the Redis alert pipeline without writing to the
+    database. Pick a sport, target user, channel, lead time, and up to three images. The downstream
+    dispatcher will treat it as any other alert.
+  </p>
+
+  <button type="button" class="accent-btn events__cta" (click)="open()">Create event</button>
+
+  @if (lastResult(); as r) {
+    <div class="events__result">
+      <strong>Last injection</strong>
+      <dl>
+        <dt>Stream</dt>
+        <dd>{{ r.streamName }}</dd>
+        <dt>Message id</dt>
+        <dd>
+          <code>{{ r.streamMessageId }}</code>
+        </dd>
+        <dt>Send at (UTC)</dt>
+        <dd>{{ r.sendAtUtc }}</dd>
+        <dt>Idempotency key</dt>
+        <dd>
+          <code>{{ r.idempotencyKey }}</code>
+        </dd>
+      </dl>
+    </div>
+  }
+
+  @if (modalOpen()) {
+    <app-event-injection-modal (closed)="onClosed($event)" />
+  }
+</div>

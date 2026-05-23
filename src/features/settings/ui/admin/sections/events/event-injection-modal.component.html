@@ -1,0 +1,135 @@
+<div class="modal-backdrop" (click)="close()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <header class="modal__header">
+      <h3>Inject manual event</h3>
+      <button type="button" class="modal__close" (click)="close()" aria-label="Close">×</button>
+    </header>
+
+    <form class="modal__form" (submit)="$event.preventDefault(); submit()">
+      <div class="modal__row">
+        <label>
+          Sport
+          <select
+            [value]="form().sportKey"
+            (change)="onField('sportKey', $any($event.target).value)"
+          >
+            @for (s of sports; track s.key) {
+              <option [value]="s.key">{{ s.label }}</option>
+            }
+          </select>
+        </label>
+        <label>
+          Channel
+          <select [value]="form().channel" (change)="onChannel($any($event.target).value)">
+            @for (c of channels; track c) {
+              <option [value]="c">{{ c }}</option>
+            }
+          </select>
+        </label>
+      </div>
+
+      <div class="modal__row">
+        <label class="modal__col-span">
+          Event name
+          <input
+            type="text"
+            [value]="form().eventName"
+            (input)="onField('eventName', $any($event.target).value)"
+            required
+          />
+        </label>
+      </div>
+
+      <div class="modal__row">
+        <label>
+          Event type
+          <input
+            type="text"
+            placeholder="match / race / qualifying"
+            [value]="form().eventType"
+            (input)="onField('eventType', $any($event.target).value)"
+            required
+          />
+        </label>
+        <label>
+          Competition (optional)
+          <input
+            type="text"
+            [value]="form().competitionName"
+            (input)="onField('competitionName', $any($event.target).value)"
+          />
+        </label>
+      </div>
+
+      <div class="modal__row">
+        <label>
+          Venue (optional)
+          <input
+            type="text"
+            [value]="form().venueName"
+            (input)="onField('venueName', $any($event.target).value)"
+          />
+        </label>
+        <label>
+          Venue timezone (optional)
+          <input
+            type="text"
+            placeholder="Europe/Madrid"
+            [value]="form().venueTimezone"
+            (input)="onField('venueTimezone', $any($event.target).value)"
+          />
+        </label>
+      </div>
+
+      <div class="modal__row">
+        <label>
+          Start time (UTC, local input)
+          <input
+            type="datetime-local"
+            [value]="form().startTimeUtc"
+            (change)="onField('startTimeUtc', $any($event.target).value)"
+            required
+          />
+        </label>
+        <label>
+          Lead time (min)
+          <input
+            type="number"
+            min="1"
+            [value]="form().leadTimeMinutes"
+            (input)="onField('leadTimeMinutes', +$any($event.target).value)"
+            required
+          />
+        </label>
+        <label>
+          Target user id
+          <input
+            type="number"
+            min="1"
+            [value]="form().targetUserId"
+            (input)="onField('targetUserId', $any($event.target).value)"
+            required
+          />
+        </label>
+      </div>
+
+      <div class="modal__images">
+        <span class="modal__images-label">Images (Event / Team 1 / Team 2)</span>
+        <app-image-drag-and-drop [slotLabels]="['Event', 'Team 1', 'Team 2']" [(value)]="images" />
+      </div>
+
+      @if (errorMessage()) {
+        <p class="modal__error">{{ errorMessage() }}</p>
+      }
+
+      <footer class="modal__footer">
+        <button type="button" class="accent-btn" (click)="close()" [disabled]="busy()">
+          Cancel
+        </button>
+        <button type="submit" class="accent-btn" [disabled]="busy() || !canSubmit()">
+          {{ busy() ? 'Publishing…' : 'Publish to alert stream' }}
+        </button>
+      </footer>
+    </form>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import { computed, inject } from "@angular/core";
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
-import { UserService, User } from "@entities/user";
+import { UserService, User, UserSettings } from "@entities/user";
 import { lastValueFrom } from "rxjs";
 import { Router } from "@angular/router";
 
@@ -14,8 +14,6 @@ const initialState: UserState = {
   isLoading: false,
 }
 
-const SUPPORTED_PROVIDERS = ['google', 'discord'] as const;
-
 export const UserStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
@@ -28,16 +26,9 @@ export const UserStore = signalStore(
     email: computed(() => store.user()?.email ?? ''),
     identities: computed(() => store.user()?.identities ?? []),
     displayName: computed(() => store.user()?.displayName ?? ''),
-    timeZone: computed(() => store.user()?.settings?.timeZone ?? 'UTC'),
-    locale: computed(() => store.user()?.settings?.locale ?? 'en'),
-    linkedProviders: computed(() => {
-      const linked = store.user()?.identities ?? [];
-      return SUPPORTED_PROVIDERS.map(provider => ({
-        provider,
-        identity: linked.find(i => i.provider === provider) ?? null,
-        isLinked: linked.some(i => i.provider === provider)
-      }))
-    }),
+    timezone: computed(() => store.user()?.settings?.timezone ?? ''),
+    defaultView: computed(() => store.user()?.settings?.defaultView ?? ''),
+    dateFormat: computed(() => store.user()?.settings?.dateFormat ?? ''),
   })),
 
   withMethods((store, userService = inject(UserService), router = inject(Router)) => ({
@@ -130,6 +121,52 @@ export const UserStore = signalStore(
         router.navigate(['/']);
       } catch (error) {
         console.error('Failed to delete account.');
+        throw error;
+      }
+    },
+
+    async updateTimeZone(timeZone: string): Promise<void> {
+      const user = store.user();
+      if (!user) return;
+
+      try {
+        await lastValueFrom(userService.updateTimeZone(timeZone));
+        patchState(store, { user: {
+          ...user, settings: { ...user.settings, timezone: timeZone } as UserSettings
+        }
+        });
+      } catch (error) {
+        console.error('Failed to update time zone.');
+        throw error;
+      }
+    },
+
+    async updateDefaultView(defaultView: string): Promise<void> {
+      const user = store.user();
+      if (!user) return;
+
+      try {
+        await lastValueFrom(userService.updateDefaultView(defaultView));
+        patchState(store, { user: {
+          ...user, settings: { ...user.settings, defaultView: defaultView.toLowerCase() } as UserSettings
+        }});
+      } catch (error) {
+        console.error('Failed to update default view.');
+        throw error;
+      }
+    },
+
+    async updateDateFormat(dateFormat: string): Promise<void> {
+      const user = store.user();
+      if (!user) return;
+
+      try {
+        await lastValueFrom(userService.updateDateFormat(dateFormat));
+        patchState(store, { user: {
+          ...user, settings: { ...user.settings, dateFormat } as UserSettings
+        }});
+      } catch (error) {
+        console.error('Failed to update date format.');
         throw error;
       }
     },

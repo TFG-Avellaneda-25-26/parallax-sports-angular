@@ -11,19 +11,13 @@
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
   --transition-slow: 350ms ease;
-  
 
-  /* Grid background — cell scales with viewport. The SVG draws the four
-     visible arm-stubs of a + crosshair at each tile corner; when tiled, four
-     adjacent tiles converge at every intersection to form a complete +. A
-     small centered dot fills the visual rhythm between intersections. */
   --grid-cell: clamp(110px, 9.5vw, 200px);
 }
 
 /* - Dark theme (IT IS THE DEFAULT) - */
 :root,
 [data-theme='dark'] {
-
   --stroke-logo: 2.4;
   --color-bg-primary: #011627;
   --color-bg-secondary: #021d34;
@@ -114,13 +108,17 @@ html[data-theme-transition='to-light']::view-transition-old(root) {
     clip-path: circle(0 at var(--theme-transition-x) var(--theme-transition-y));
   }
   to {
-    clip-path: circle(var(--theme-transition-end-radius) at var(--theme-transition-x) var(--theme-transition-y));
+    clip-path: circle(
+      var(--theme-transition-end-radius) at var(--theme-transition-x) var(--theme-transition-y)
+    );
   }
 }
 
 @keyframes theme-reveal-retract {
   from {
-    clip-path: circle(var(--theme-transition-end-radius) at var(--theme-transition-x) var(--theme-transition-y));
+    clip-path: circle(
+      var(--theme-transition-end-radius) at var(--theme-transition-x) var(--theme-transition-y)
+    );
   }
   to {
     clip-path: circle(0 at var(--theme-transition-x) var(--theme-transition-y));

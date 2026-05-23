@@ -58,8 +58,8 @@
 
 .header__brand-mark {
   display: inline-flex;
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   color: var(--color-accent);
 }
 
@@ -144,6 +144,19 @@
 .header__text-link:focus-visible {
   color: var(--color-text-primary);
   outline: none;
+}
+
+/* Settings link: lock width so the GSAP "VERIFY!" decode tween never pushes
+   adjacent header items left/right. Font + letterspacing stay inherited from
+   .header__text-link so it matches the LOGOUT button exactly. */
+.header__settings-link {
+  min-width: 6.5rem;
+  justify-content: center;
+  text-align: center;
+}
+
+.header__settings-label {
+  display: inline-block;
 }
 
 /* ── Compact layout ──────────────────────── */

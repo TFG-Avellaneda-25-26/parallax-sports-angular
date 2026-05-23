@@ -1,6 +1,6 @@
 <section class="dashboard">
   <aside class="dashboard__aside">
-    <app-filter-tree/>
+    <app-filter-tree [nodes]="treeNodes()"/>
   </aside>
 
   <div class="dashboard__content">
@@ -12,8 +12,16 @@
       } @else {
         <app-event-card-grid [events]="filteredEvents()" />
       }
+
+      <div #sentinel class="dashboard__sentinel"></div>
+
+       @if (eventStore.isLoading()) {
+        <div class="dashboard__loading">
+          <span class="material-symbols-outlined spinning">progress_activity</span>
+        </div>
+       }
     </main>
   </div>
 
-  <app-filter-drawer/>
+  <app-filter-drawer [nodes]="treeNodes()"/>
 </section>

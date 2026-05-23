@@ -20,8 +20,7 @@ export class EventTableComponent {
   readonly events = input.required<SportEvent[]>();
 
   private readonly userStore = inject(UserStore);
-  protected readonly locale = this.userStore.locale;
-  protected readonly timeZone = this.userStore.timeZone;
+  protected readonly timeZone = this.userStore.timezone;
 
   protected readonly groups = computed<EventGroup[]>(() => buildGroups(this.events()));
 }

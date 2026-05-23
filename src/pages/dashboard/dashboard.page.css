@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined');
+
 :host {
   display: block;
   width: 100%;
@@ -17,9 +19,13 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 0.75rem 0.5rem;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
+  /* Sticky: pins below the 64px sticky header with a comfortable gap.
+     align-self:start stops the grid from stretching it to the full row height
+     so the panel is exactly as tall as its content. No max-height/overflow
+     here — the page scrolls, not the panel. */
+  position: sticky;
+  top: calc(64px + 1.25rem);
+  align-self: start;
 }
 
 .dashboard__content {
@@ -40,9 +46,38 @@
 @media (max-width: 1023px) {
   .dashboard {
     grid-template-columns: 1fr;
+    padding: 0.75rem;
+    gap: 0.75rem;
   }
 
   .dashboard__aside {
     display: none;
   }
+}
+
+@media (max-width: 600px) {
+  .dashboard {
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+}
+
+.dashboard__sentinel {
+  height: 1px;
+  width: 100%;
+}
+
+.dashboard__loading {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+  color: var(--color-text-muted);
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }

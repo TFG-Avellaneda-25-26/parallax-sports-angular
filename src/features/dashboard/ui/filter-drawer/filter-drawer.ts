@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { FilterDrawerStore } from '@features/dashboard/store/filter-drawer.store';
+import { SportNode } from '@features/dashboard/store/event-filter.store';
 import { FilterTreeComponent } from '../filter-tree/filter-tree';
 
 @Component({
@@ -11,6 +12,8 @@ import { FilterTreeComponent } from '../filter-tree/filter-tree';
 })
 export class FilterDrawerComponent {
   private readonly drawerStore = inject(FilterDrawerStore);
+
+  readonly nodes = input.required<SportNode[]>();
 
   protected readonly isOpen = this.drawerStore.isOpen;
 

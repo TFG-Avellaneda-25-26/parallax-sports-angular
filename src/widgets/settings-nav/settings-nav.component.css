@@ -1,14 +1,16 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined');
 
 :host {
-  display: flex;
-  justify-content: center;
+  display: block;
   user-select: none;
   font-family: var(--font-body);
 }
 
 [ngTree] {
-  min-width: 24rem;
+  display: block;
+  width: max-content;
+  min-width: 18rem;
+  max-width: 100%;
   background-color: var(--color-bg-surface);
   border-radius: var(--radius-md);
   padding: 0.5rem;
@@ -24,12 +26,29 @@
   padding: 0.3rem 1rem;
   border-radius: var(--radius-md);
   color: var(--color-text-secondary);
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
 }
 
+/* Parent rows are aria-disabled so the Aria tree refuses to select them, but
+   we don't want them to look greyed out — they're still meaningful group
+   headers users can expand/collapse via the chevron. Keep them visually
+   identical to leaves; only the cursor signals they aren't a selection
+   target on the row body. */
 [ngTreeItem][aria-disabled='true'] {
-  opacity: 0.5;
+  opacity: 1;
   cursor: default;
+  color: var(--color-text-secondary);
+}
+
+[ngTreeItem][aria-disabled='true']:hover {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+}
+
+[ngTreeItem][aria-disabled='true'] .expand-icon {
+  cursor: pointer;
 }
 
 [ngTreeItem]:focus,
@@ -56,6 +75,11 @@
   width: 24px;
 }
 
+.node-icon {
+  flex: 0 0 auto;
+  color: currentColor;
+}
+
 .expand-icon {
   transition: transform 0.2s ease;
 }
@@ -77,4 +101,8 @@
 
 li[aria-expanded='false'] + ul[role='group'] {
   display: none;
+}
+
+ul[role='group'] {
+  padding-left: 1.25rem;
 }

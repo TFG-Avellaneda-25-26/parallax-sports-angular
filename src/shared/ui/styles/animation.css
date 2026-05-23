@@ -1,0 +1,15 @@
+.section--active > header {
+  animation: sectionPulse 1.5s var(--transition-slow) forwards;
+}
+
+@keyframes sectionPulse {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 40%, transparent); }
+  40%  { box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-accent) 20%, transparent); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section--active > header {
+    animation: none;
+  }
+}

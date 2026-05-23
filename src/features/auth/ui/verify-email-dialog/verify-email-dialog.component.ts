@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { gsap } from '@shared/lib';
 import { OtpDialogComponent } from '../otp-dialog/otp-dialog.component';
-import { VerifyEmailService } from '../../services/verify-email.service';
+import { VerifyEmailService } from '@features/auth/services/verify-email.service';
 
 const FOCUSABLE_SELECTOR = [
   'button:not([disabled])',
@@ -45,7 +45,6 @@ export class VerifyEmailDialogComponent {
   constructor() {
     effect(() => {
       const open = this.isOpen();
-      // eslint-disable-next-line no-console
       console.debug('[VerifyEmailDialog] isOpen ->', open);
       if (open) {
         this.previouslyFocused = (document.activeElement as HTMLElement | null) ?? null;

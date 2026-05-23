@@ -1,13 +1,18 @@
 :host {
   display: block;
   width: 100%;
+  /* Lets the table scroll horizontally on narrow viewports without
+     reflowing any column or breaking the fixed layout */
+  overflow-x: auto;
 }
 
 .event-table {
   width: 100%;
   table-layout: fixed;
   border-collapse: separate;
-  border-spacing: 0;
+  /* 3px vertical gap between every row — the page background bleeds
+     through those gaps giving each row a distinct "strip" look */
+  border-spacing: 0 5px;
   font-family: var(--font-body);
   font-size: 0.9rem;
   color: var(--color-text-primary);
@@ -31,26 +36,27 @@
 
 .event-table thead th {
   text-align: left;
-  font-weight: 600;
-  font-size: 0.7rem;
-  letter-spacing: 0.06em;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
   padding: 0.5rem 1rem;
   border-bottom: 1px solid var(--color-border);
-  background: var(--color-bg-primary);
+  background: transparent;
 }
 
 .event-table__group {
-  background: var(--color-bg-surface);
+  /* Transparent so the border-spacing gaps between rows inside show the
+     page background instead of the group's solid fill colour */
+  background: transparent;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
 }
 
-.event-table__group::before {
-  content: '';
-  display: block;
-  height: 0.5rem;
+/* Visual gap between consecutive groups */
+.event-table__group + .event-table__group > tr:first-child > td {
+  padding-top: 1.25rem;
 }
 
 .event-table__group-header td {
@@ -59,6 +65,7 @@
   font-size: 1rem;
   font-weight: 700;
   color: var(--color-text-primary);
+  /* Explicit background on the cell (tbody is now transparent) */
   background: var(--color-bg-secondary);
   border-bottom: 1px solid var(--color-border);
   border-top-left-radius: var(--radius-md);
@@ -73,16 +80,24 @@
 }
 
 .event-table__row td {
-  padding: 0.55rem 1rem;
-  border-bottom: 1px solid var(--color-border-subtle);
+  padding: 0.7rem 1rem;
+  /* Explicit background on the cell so the 3px border-spacing gaps
+     stay transparent (showing the page) while the cell area is opaque */
+  background: var(--color-bg-surface);
   vertical-align: middle;
+  /* border-bottom removed — the gap between rows replaces it */
 }
 
-.event-table__group .event-table__row:last-child td {
-  border-bottom: none;
+/* Last row: round the bottom corners to close the group card */
+.event-table__group .event-table__row:last-child td:first-child {
+  border-bottom-left-radius: var(--radius-md);
+}
+.event-table__group .event-table__row:last-child td:last-child {
+  border-bottom-right-radius: var(--radius-md);
 }
 
-.event-table__row:hover {
+/* Hover: must target td because the background lives on td now, not tr */
+.event-table__row:hover td {
   background: var(--color-accent-subtle);
 }
 

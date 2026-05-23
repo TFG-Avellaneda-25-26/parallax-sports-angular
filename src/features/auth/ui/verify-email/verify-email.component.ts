@@ -5,7 +5,7 @@ import {
   inject,
   viewChild,
 } from '@angular/core';
-import { VerifyEmailService } from '../../services/verify-email.service';
+import { VerifyEmailService } from '@features/auth/services/verify-email.service';
 
 /**
  * Thin trigger that lives in the header. Clicking the badge opens the global

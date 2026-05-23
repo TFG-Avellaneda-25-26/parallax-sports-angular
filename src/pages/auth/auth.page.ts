@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { AuthFormComponent, AuthStore } from '@features/auth';
+import { AuthModeStore, AuthStore, AuthContainer } from '@features/auth';
 
 @Component({
-  imports: [AuthFormComponent],
-  providers: [AuthStore],
+  imports: [AuthContainer],
+  providers: [AuthStore, AuthModeStore],
   templateUrl: './auth.page.html'
 })
 export class AuthPage {

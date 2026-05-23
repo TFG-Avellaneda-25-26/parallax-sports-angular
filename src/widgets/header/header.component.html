@@ -2,13 +2,8 @@
   <div class="header__bg" aria-hidden="true"></div>
   <div class="header__inner">
     <a class="header__brand" routerLink="/" aria-label="Parallax Sports — home">
-      <span class="header__brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="14" cy="14" r="11.5" fill="none" stroke="currentColor" stroke-width="1.5" />
-          <path d="M3 14 H25" fill="none" stroke="currentColor" stroke-width="1.5" />
-          <path d="M14 3 Q22 14 14 25 Q6 14 14 3 Z" fill="none" stroke="currentColor" stroke-width="1.5" />
-        </svg>
-      </span>
+      <app-logo class="header__brand-mark" aria-hidden="true" />
+
       <span class="header__brand-text">
         <span class="header__brand-primary">PARALLAX</span>
         <span class="header__brand-sep" aria-hidden="true">·</span>
@@ -24,14 +19,15 @@
 
     <div class="header__actions">
       <app-theme-toggle />
-      @if (userStore.isAuthenticated()) {
+      @if (shouldShowAuthActions()) {
         <app-logout-button />
         <a
-          class="header__text-link"
+          class="header__text-link header__settings-link"
           routerLink="/settings"
           aria-label="Settings"
+          (click)="onSettingsClick($event)"
         >
-          Settings
+          <span #settingsLabel class="header__settings-label">Settings</span>
         </a>
       }
     </div>

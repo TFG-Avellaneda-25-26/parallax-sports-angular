@@ -3,22 +3,50 @@
     <h2>Email</h2>
     <p>Changing it requires verification.</p>
     <form [formRoot]="emailForm">
-      <app-stateful-input type="email" label="Current Email" fieldId="currentEmail" [formField]="emailForm.currentEmail" />
-      <app-stateful-input type="email" label="New Email" fieldId="newEmail" [formField]="emailForm.newEmail" />
-      <button type="submit" [disabled]="emailForm().submitting()">Change Email</button>
+      <app-stateful-input
+        type="email"
+        label="Current Email"
+        fieldId="currentEmail"
+        [formField]="emailForm.currentEmail"
+      />
+      <app-stateful-input
+        type="email"
+        label="New Email"
+        fieldId="newEmail"
+        [formField]="emailForm.newEmail"
+      />
+      <button type="submit" class="accent-btn" [disabled]="emailForm().submitting()">
+        Change Email
+      </button>
     </form>
   </header>
-
 </section>
 
 <section id="password">
   <header>
     <h2>Password</h2>
     <form [formRoot]="passwordForm">
-      <app-stateful-input type="password" label="Current Password" fieldId="currentPassword" [formField]="passwordForm.currentPassword" />
-      <app-stateful-input type="password" label="New Password" fieldId="newPassword" [formField]="passwordForm.password" />
-      <app-stateful-input type="password" label="Confirm New Password" fieldId="confirmNewPassword" [formField]="passwordForm.confirmPassword" />
-      <button type="submit" [disabled]="passwordForm().submitting()">Change Password</button>
+      <app-stateful-input
+        type="password"
+        label="Current Password"
+        fieldId="currentPassword"
+        [formField]="passwordForm.currentPassword"
+      />
+      <app-stateful-input
+        type="password"
+        label="New Password"
+        fieldId="newPassword"
+        [formField]="passwordForm.password"
+      />
+      <app-stateful-input
+        type="password"
+        label="Confirm New Password"
+        fieldId="confirmNewPassword"
+        [formField]="passwordForm.confirmPassword"
+      />
+      <button type="submit" class="accent-btn" [disabled]="passwordForm().submitting()">
+        Change Password
+      </button>
     </form>
   </header>
 </section>
@@ -28,9 +56,21 @@
     <h2>Display name</h2>
     <p>Used for display purposes. Can be changed at any time.</p>
     <form [formRoot]="displayNameForm">
-      <app-stateful-input type="text" label="Current Display Name" fieldId="currentDisplayName" [formField]="displayNameForm.currentDisplayName" />
-      <app-stateful-input type="text" label="New Display Name" fieldId="newDisplayName" [formField]="displayNameForm.newDisplayName" />
-      <button type="submit" [disabled]="displayNameForm().submitting()">Change Display Name</button>
+      <app-stateful-input
+        type="text"
+        label="Current Display Name"
+        fieldId="currentDisplayName"
+        [formField]="displayNameForm.currentDisplayName"
+      />
+      <app-stateful-input
+        type="text"
+        label="New Display Name"
+        fieldId="newDisplayName"
+        [formField]="displayNameForm.newDisplayName"
+      />
+      <button type="submit" class="accent-btn" [disabled]="displayNameForm().submitting()">
+        Change Display Name
+      </button>
     </form>
   </header>
 </section>
@@ -39,16 +79,39 @@
   <header>
     <h2>Identities</h2>
     <p>Manage linked accounts and social logins.</p>
-    @for (item of identites(); track item.provider) {
-      <div>
-       <span>{{ item.provider }}</span>
-       @if (item.isLinked) {
-        <button (click)="userStore.disconnectIdentity(item.identity!.id)">Unlink</button>
-       } @else {
-        <button (click)="userStore.linkIdentity(item.provider)">Link</button>
-       }
-      </div>
+    <div class="identities-list">
+      @for (item of identities(); track item.provider) {
+  <div class="identity-row">
+    <div class="identity-info">
+      <svg
+        class="identity-icon"
+        [attr.viewBox]="item.oauthProvider.viewBox"
+        xmlns="http://www.w3.org/2000/svg"
+        [attr.fill]="item.oauthProvider.fixedColors ? undefined : 'currentColor'"
+      >
+        @for (path of item.oauthProvider.paths; track path.d) {
+          <path [attr.d]="path.d" [attr.fill]="path.fill ?? undefined" />
+        }
+      </svg>
+      <span class="identity-label">{{ item.provider | titlecase }}</span>
+      @if (item.isLinked) {
+        <span class="identity-badge identity-badge--linked">Connected</span>
+      } @else {
+        <span class="identity-badge identity-badge--unlinked">Not connected</span>
+      }
+    </div>
+    @if (item.isLinked) {
+      <button class="danger-btn--sm" (click)="userStore.disconnectIdentity(item.identity!.id)">
+        Unlink
+      </button>
+    } @else {
+      <button class="accent-btn--sm" (click)="userStore.linkIdentity(item.provider)">
+        Connect
+      </button>
     }
+  </div>
+}
+    </div>
   </header>
 </section>
 
@@ -56,5 +119,6 @@
   <header>
     <h2>Delete account</h2>
     <p>Deletes your account and all associated data. This action is irreversible.</p>
-    <button (click)="userStore.deleteAccount()">Delete Account</button>
+    <button class="danger-btn" (click)="userStore.deleteAccount()">Delete Account</button>
   </header>
+</section>

@@ -1,3 +1,124 @@
 :host {
   display: block;
+  padding: 1.5rem clamp(1rem, 3vw, 2rem);
+}
+
+section {
+  padding: 1rem 0 1.5rem;
+  border-bottom: 1px solid var(--color-border-subtle);
+  scroll-margin-top: 1rem;
+}
+
+section:last-child {
+  border-bottom: 0;
+}
+
+section header h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.4rem;
+}
+
+section header p {
+  color: var(--color-text-secondary);
+  margin: 0 0 1.25rem;
+  max-width: 60ch;
+}
+
+section form {
+  max-width: min(28rem, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+section form > button {
+  margin-top: 1rem;
+  align-self: flex-start;
+}
+
+.identities-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: min(28rem, 100%);
+}
+
+.identity-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  gap: 1rem;
+}
+
+.identity-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.identity-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+}
+
+.identity-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.identity-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.identity-badge--linked {
+  color: var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 12%, transparent);
+}
+
+.identity-badge--unlinked {
+  color: var(--color-text-muted);
+  background: color-mix(in srgb, var(--color-text-muted) 10%, transparent);
+}
+
+.accent-btn--sm,
+.danger-btn--sm {
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity var(--transition-fast), filter var(--transition-fast);
+}
+
+.accent-btn--sm {
+  background: var(--color-accent);
+  color: var(--color-bg-primary);
+}
+
+.danger-btn--sm {
+  background: color-mix(in srgb, var(--color-error) 12%, transparent);
+  color: var(--color-error);
+  border: 1px solid color-mix(in srgb, var(--color-error) 30%, transparent);
+}
+
+.accent-btn--sm:hover,
+.danger-btn--sm:hover {
+  filter: brightness(1.1);
 }

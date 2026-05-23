@@ -14,8 +14,8 @@
         level="sport"
         [label]="sport.name"
         [count]="sport.count"
-        [isShowOnly]="includeSports().has(sport.key)"
-        [isHidden]="excludeSports().has(sport.key)"
+        [isShowOnly]="isSportActive(sport)"
+        [isHidden]="filterState().excludeSports.has(sport.key)"
         [isExpandable]="sport.competitions.length > 0"
         [isExpanded]="isSportExpanded(sport.key)"
         (action)="onSportAction(sport, $event)"
@@ -28,11 +28,11 @@
             level="competition"
             [label]="comp.name"
             [count]="comp.count"
-            [isShowOnly]="includeCompetitions().has(comp.key)"
-            [isHidden]="excludeCompetitions().has(comp.key)"
+            [isShowOnly]="isCompetitionActive(comp)"
+            [isHidden]="filterState().excludeCompetitions.has(comp.key)"
             [isExpandable]="comp.eventTypes.length > 1 || comp.participants.length > 0"
             [isExpanded]="isCompetitionExpanded(comp.key)"
-            (action)="onCompetitionAction(comp, $event)"
+            (action)="onCompetitionAction(comp, sport, $event)"
             (toggleExpand)="toggleCompetition(comp.key)"
           />
 
@@ -43,11 +43,11 @@
                   level="eventType"
                   [label]="eventType.type"
                   [count]="eventType.count"
-                  [isShowOnly]="includeEventTypes().has(eventType.key)"
-                  [isHidden]="excludeEventTypes().has(eventType.key)"
+                  [isShowOnly]="filterState().includeEventTypes.has(eventType.key)"
+                  [isHidden]="filterState().excludeEventTypes.has(eventType.key)"
                   [isExpandable]="false"
                   [isExpanded]="false"
-                  (action)="onEventTypeAction(eventType, $event)"
+                  (action)="onEventTypeAction(eventType, comp, sport, $event)"
                 />
               }
             }
@@ -56,11 +56,11 @@
                 level="participant"
                 [label]="participant.name"
                 [count]="participant.count"
-                [isShowOnly]="includeParticipants().has(participant.id)"
-                [isHidden]="excludeParticipants().has(participant.id)"
+                [isShowOnly]="filterState().includeParticipants.has(participantKey(participant.sportKey, participant.competitionName, participant.id))"
+                [isHidden]="filterState().excludeParticipants.has(participantKey(participant.sportKey, participant.competitionName, participant.id))"
                 [isExpandable]="false"
                 [isExpanded]="false"
-                (action)="onParticipantAction(participant, $event)"
+                (action)="onParticipantAction(participant, comp, sport, $event)"
               />
             }
           }

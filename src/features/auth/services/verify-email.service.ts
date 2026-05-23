@@ -6,7 +6,6 @@ export class VerifyEmailService {
   private originRect: DOMRect | null = null;
 
   open(originRect?: DOMRect | null): void {
-    // eslint-disable-next-line no-console
     console.debug('[VerifyEmailService] open() called, route:', window.location.pathname);
     this.originRect = originRect ?? null;
     this.isOpen.set(true);

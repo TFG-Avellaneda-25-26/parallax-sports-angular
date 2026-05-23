@@ -1,54 +1,83 @@
-<div class="auth-card">
-  <div class="auth-header">
-    <h1 class="auth-title">
-      {{ authStore.isRegisterMode() ? 'Create account' : 'Welcome back' }}
-    </h1>
-    <p class="auth-subtitle">
-      {{ authStore.isRegisterMode() ? 'Fill in the details below to get started' : 'Sign in to continue' }}
-    </p>
-  </div>
-
-  <form [formRoot]="form" class="auth-form">
-    @if (authStore.isRegisterMode()) {
-      <div class="field">
-        <app-stateful-input label="Display Name" fieldId="displayName" [formField]="form.displayName" />
-      </div>
-    }
-
-    <div class="field">
-      <app-stateful-input type="email" label="Email" fieldId="email" [formField]="form.email" />
-    </div>
-
-    <div class="field">
-      <app-stateful-input type="password" label="Password" fieldId="password" [formField]="form.password" />
-    </div>
-
-    @if (authStore.isRegisterMode()) {
-      <div class="field">
-        <app-stateful-input type="password" label="Confirm Password" fieldId="confirmPassword" [formField]="form.confirmPassword" />
-      </div>
-    }
-
-    <div class="field">
-      <button class="btn-submit" type="submit" [disabled]="form().submitting() || form().invalid()">
-        @if (form().submitting()) {
-          <span class="spinner"></span>
-        } @else {
-          {{ authStore.formSubmissionText() }}
-        }
-      </button>
-      @if (form().errors(); as errs) {
-        @for (err of errs; track err) {
-          <p class="form-error">{{ err.message }}</p>
-        }
-      }
-    </div>
-  </form>
-
-  <p class="auth-switch">
-    {{ authStore.isRegisterMode() ? 'Already have an account?' : "Don't have an account?" }}
-    <button class="switch-btn" (click)="switchMode()">
-      {{ authStore.isRegisterMode() ? 'Sign in' : 'Register' }}
-    </button>
+<div class="auth-header">
+  <h1 class="auth-title">
+    {{ authStore.isRegisterMode() ? 'Create account' : 'Welcome back' }}
+  </h1>
+  <p class="auth-subtitle">
+    {{ authStore.isRegisterMode() ? 'Fill in the details below to get started' : 'Sign in to continue' }}
   </p>
 </div>
+
+<form [formRoot]="form" class="auth-form">
+  @if (authStore.isRegisterMode()) {
+    <div class="field">
+      <app-stateful-input label="Display Name" fieldId="displayName" [formField]="form.displayName" />
+    </div>
+  }
+
+  <div class="field">
+    <app-stateful-input type="email" label="Email" fieldId="email" [formField]="form.email" />
+  </div>
+
+  <div class="field">
+    <app-stateful-input type="password" label="Password" fieldId="password" [formField]="form.password" />
+    @if (!authStore.isRegisterMode()) {
+      <button type="button" class="forgot-btn" (click)="goToRecover()">
+        Forgot password?
+      </button>
+    }
+  </div>
+
+  @if (authStore.isRegisterMode()) {
+    <div class="field">
+      <app-stateful-input type="password" label="Confirm Password" fieldId="confirmPassword" [formField]="form.confirmPassword" />
+    </div>
+  }
+
+  <div class="field">
+    <button class="btn-submit" type="submit" [disabled]="form().submitting() || form().invalid()">
+      @if (form().submitting()) {
+        <span class="spinner"></span>
+      } @else {
+        {{ authStore.formSubmissionText() }}
+      }
+    </button>
+    @if (form().errors(); as errs) {
+      @for (err of errs; track err) {
+        <p class="form-error">{{ err.message }}</p>
+      }
+    }
+  </div>
+</form>
+
+<div class="oauth-section">
+  <div class="oauth-divider">
+    <span class="oauth-divider__line"></span>
+    <span class="oauth-divider__text">or continue with</span>
+    <span class="oauth-divider__line"></span>
+  </div>
+
+  <div class="oauth-buttons">
+  @for (provider of providers; track provider.id) {
+    <button class="oauth-btn" (click)="userStore.linkIdentity(provider.id)">
+      <svg
+        class="oauth-btn__icon"
+        [attr.viewBox]="provider.viewBox"
+        xmlns="http://www.w3.org/2000/svg"
+        [attr.fill]="provider.fixedColors ? undefined : 'currentColor'"
+      >
+        @for (path of provider.paths; track path.d) {
+          <path [attr.d]="path.d" [attr.fill]="path.fill ?? undefined" />
+        }
+      </svg>
+      <span>{{ provider.label }}</span>
+    </button>
+  }
+  </div>
+</div>
+
+<p class="auth-switch">
+  {{ authStore.isRegisterMode() ? 'Already have an account?' : "Don't have an account?" }}
+  <button class="switch-btn" (click)="switchMode()">
+    {{ authStore.isRegisterMode() ? 'Sign in' : 'Register' }}
+  </button>
+</p>

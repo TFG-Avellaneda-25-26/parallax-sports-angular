@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { DashboardViewStore, type DashboardView } from '../../store/dashboard-view.store';
-import { FilterDrawerStore } from '../../store/filter-drawer.store';
+import { DashboardViewStore, type DashboardView } from '@features/dashboard/store/dashboard-view.store';
+import { FilterDrawerStore } from '@features/dashboard/store/filter-drawer.store';
 
 @Component({
   selector: 'app-dashboard-toolbar',
