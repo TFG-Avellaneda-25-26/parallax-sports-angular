@@ -120,3 +120,102 @@
   cursor: not-allowed;
   box-shadow: none;
 }
+
+/* Semantic variants. Each mirrors .accent-btn's gradient + glow + hover lift
+   but swaps the colour root. All four reference theme tokens defined for
+   both dark and light themes in theme.css, so theme toggling keeps working. */
+.success-btn,
+.warning-btn,
+.danger-btn,
+.secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  outline: none;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-base),
+    filter var(--transition-fast);
+}
+
+.success-btn {
+  background: linear-gradient(135deg, var(--color-success), color-mix(in srgb, var(--color-success) 80%, black));
+  color: var(--color-bg-primary);
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--color-success) 30%, transparent);
+}
+
+.warning-btn {
+  background: linear-gradient(135deg, var(--color-warning), color-mix(in srgb, var(--color-warning) 80%, black));
+  color: var(--color-bg-primary);
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--color-warning) 30%, transparent);
+}
+
+.danger-btn {
+  background: linear-gradient(135deg, var(--color-error), color-mix(in srgb, var(--color-error) 80%, black));
+  color: var(--color-bg-primary);
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--color-error) 30%, transparent);
+}
+
+.secondary-btn {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.success-btn:hover:not(:disabled),
+.warning-btn:hover:not(:disabled),
+.danger-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.success-btn:hover:not(:disabled) {
+  box-shadow: 0 6px 24px color-mix(in srgb, var(--color-success) 45%, transparent);
+}
+.warning-btn:hover:not(:disabled) {
+  box-shadow: 0 6px 24px color-mix(in srgb, var(--color-warning) 45%, transparent);
+}
+.danger-btn:hover:not(:disabled) {
+  box-shadow: 0 6px 24px color-mix(in srgb, var(--color-error) 45%, transparent);
+}
+
+.secondary-btn:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  color: var(--color-text-primary);
+}
+
+.success-btn:focus-visible {
+  box-shadow:
+    0 4px 18px color-mix(in srgb, var(--color-success) 30%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--color-success) 35%, transparent);
+}
+.warning-btn:focus-visible {
+  box-shadow:
+    0 4px 18px color-mix(in srgb, var(--color-warning) 30%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--color-warning) 35%, transparent);
+}
+.danger-btn:focus-visible {
+  box-shadow:
+    0 4px 18px color-mix(in srgb, var(--color-error) 30%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--color-error) 35%, transparent);
+}
+.secondary-btn:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 30%, transparent);
+}
+
+.success-btn:disabled,
+.warning-btn:disabled,
+.danger-btn:disabled,
+.secondary-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}

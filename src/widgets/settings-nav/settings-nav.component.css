@@ -1,14 +1,16 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined');
 
 :host {
-  display: flex;
-  justify-content: center;
+  display: block;
   user-select: none;
   font-family: var(--font-body);
 }
 
 [ngTree] {
-  min-width: 24rem;
+  display: block;
+  width: max-content;
+  min-width: 18rem;
+  max-width: 100%;
   background-color: var(--color-bg-surface);
   border-radius: var(--radius-md);
   padding: 0.5rem;

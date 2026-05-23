@@ -1,0 +1,93 @@
+<div class="modal-backdrop" (click)="close(false)">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <header class="modal__header">
+      <h3>{{ activeUser().email }}</h3>
+      <button type="button" class="modal__close" (click)="close(false)" aria-label="Close">×</button>
+    </header>
+
+    <dl class="modal__summary">
+      <dt>ID</dt><dd>{{ activeUser().id }}</dd>
+      <dt>Display name</dt><dd>{{ activeUser().displayName ?? '—' }}</dd>
+      <dt>Role</dt><dd>{{ activeUser().role }}</dd>
+      <dt>Email verified</dt><dd>{{ activeUser().emailVerified ? 'yes' : 'no' }}</dd>
+      <dt>Created</dt><dd>{{ activeUser().createdAt }}</dd>
+      <dt>Last login</dt><dd>{{ activeUser().lastLoginAt ?? 'never' }}</dd>
+      <dt>Follows</dt><dd>{{ activeUser().sportFollowCount }}</dd>
+      <dt>Identities</dt>
+      <dd>
+        @if (activeUser().identities.length === 0) {
+          none
+        } @else {
+          @for (i of activeUser().identities; track i.id) {
+            <span class="modal__identity">{{ i.provider }}{{ i.providerUsername ? ' (' + i.providerUsername + ')' : '' }}</span>
+          }
+        }
+      </dd>
+    </dl>
+
+    @if (errorMessage()) {
+      <p class="modal__error">{{ errorMessage() }}</p>
+    }
+
+    <div class="modal__actions">
+      <form
+        class="modal__action"
+        (submit)="$event.preventDefault(); changeEmail($any($event.target).newEmail.value)"
+      >
+        <label>
+          Change email
+          <input name="newEmail" type="email" [value]="activeUser().email" />
+        </label>
+        <button type="submit" class="accent-btn" [disabled]="busy()">Update</button>
+      </form>
+
+      <form
+        class="modal__action"
+        (submit)="$event.preventDefault(); changeDisplayName($any($event.target).newName.value)"
+      >
+        <label>
+          Change display name
+          <input name="newName" type="text" [value]="activeUser().displayName ?? ''" />
+        </label>
+        <button type="submit" class="accent-btn" [disabled]="busy()">Update</button>
+      </form>
+
+      <div class="modal__action">
+        <span class="modal__action-label">Email verified</span>
+        <button
+          type="button"
+          class="success-btn"
+          (click)="markVerified()"
+          [disabled]="busy() || activeUser().emailVerified"
+        >
+          {{ activeUser().emailVerified ? 'Already verified' : 'Mark verified' }}
+        </button>
+      </div>
+
+      <div class="modal__action">
+        <span class="modal__action-label">Role</span>
+        <button
+          type="button"
+          class="secondary-btn"
+          (click)="setRole('USER')"
+          [disabled]="busy() || activeUser().role === 'USER'"
+        >
+          USER
+        </button>
+        <button
+          type="button"
+          class="warning-btn"
+          (click)="setRole('ADMIN')"
+          [disabled]="busy() || activeUser().role === 'ADMIN'"
+        >
+          ADMIN
+        </button>
+      </div>
+    </div>
+
+    <footer class="modal__footer">
+      <button type="button" class="secondary-btn" (click)="close(false)" [disabled]="busy()">Close</button>
+      <button type="button" class="danger-btn" (click)="deleteUser()" [disabled]="busy()">Delete user</button>
+    </footer>
+  </div>
+</div>

@@ -1,3 +1,39 @@
 :host {
   display: block;
+  padding: 1.5rem clamp(1rem, 3vw, 2rem);
+}
+
+section {
+  padding: 1rem 0 1.5rem;
+  border-bottom: 1px solid var(--color-border-subtle);
+  scroll-margin-top: 1rem;
+}
+
+section:last-child {
+  border-bottom: 0;
+}
+
+section header h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.4rem;
+}
+
+section header p {
+  color: var(--color-text-secondary);
+  margin: 0 0 1.25rem;
+  max-width: 60ch;
+}
+
+section form {
+  max-width: min(28rem, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+section form > button {
+  margin-top: 1rem;
+  align-self: flex-start;
 }

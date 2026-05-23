@@ -13,6 +13,7 @@ import {
   AdminUserService,
   UserRole,
 } from '@entities/admin-user';
+import { UserActionsModalComponent } from './user-actions-modal.component';
 
 interface SearchFilters {
   q: string;
@@ -25,7 +26,8 @@ const PAGE_SIZE = 25;
 
 @Component({
   selector: 'app-admin-users',
-  imports: [],
+  standalone: true,
+  imports: [UserActionsModalComponent],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,12 +41,9 @@ export class UsersComponent {
   protected readonly listError = signal<string | null>(null);
   protected readonly isLoading = signal(false);
 
-  protected readonly selectedId = signal<number | null>(null);
-  protected readonly detail = signal<AdminUserDetails | null>(null);
-  protected readonly detailError = signal<string | null>(null);
-  protected readonly detailLoading = signal(false);
-  protected readonly actionError = signal<string | null>(null);
-  protected readonly actionBusy = signal(false);
+  protected readonly modalUser = signal<AdminUserDetails | null>(null);
+  protected readonly modalError = signal<string | null>(null);
+  protected readonly modalLoadingFor = signal<number | null>(null);
 
   protected readonly rows = computed<AdminUserListItem[]>(() => this.result()?.content ?? []);
   protected readonly totalElements = computed(() => this.result()?.totalElements ?? 0);
@@ -83,83 +82,22 @@ export class UsersComponent {
     await this.search();
   }
 
-  protected async select(id: number): Promise<void> {
-    this.selectedId.set(id);
-    this.detail.set(null);
-    this.detailError.set(null);
-    this.actionError.set(null);
-    this.detailLoading.set(true);
+  protected async openUser(id: number): Promise<void> {
+    this.modalError.set(null);
+    this.modalLoadingFor.set(id);
     try {
-      this.detail.set(await lastValueFrom(this.service.get(id)));
+      const details = await lastValueFrom(this.service.get(id));
+      this.modalUser.set(details);
     } catch {
-      this.detailError.set('Failed to load user details.');
+      this.modalError.set('Failed to load user details.');
     } finally {
-      this.detailLoading.set(false);
+      this.modalLoadingFor.set(null);
     }
   }
 
-  protected clearSelection(): void {
-    this.selectedId.set(null);
-    this.detail.set(null);
-    this.detailError.set(null);
-    this.actionError.set(null);
-  }
-
-  protected async changeEmail(newEmail: string): Promise<void> {
-    const d = this.detail();
-    if (!d || !newEmail || newEmail === d.email) return;
-    await this.runAction(() => lastValueFrom(this.service.changeEmail(d.id, newEmail)));
-  }
-
-  protected async changeDisplayName(newName: string): Promise<void> {
-    const d = this.detail();
-    if (!d || !newName || newName === d.displayName) return;
-    await this.runAction(() => lastValueFrom(this.service.changeDisplayName(d.id, newName)));
-  }
-
-  protected async markVerified(): Promise<void> {
-    const d = this.detail();
-    if (!d || d.emailVerified) return;
-    await this.runAction(() => lastValueFrom(this.service.markVerified(d.id)));
-  }
-
-  protected async setRole(role: UserRole): Promise<void> {
-    const d = this.detail();
-    if (!d || d.role === role) return;
-    await this.runAction(() => lastValueFrom(this.service.changeRole(d.id, role)));
-  }
-
-  protected async deleteUser(): Promise<void> {
-    const d = this.detail();
-    if (!d) return;
-    if (!confirm(`Permanently delete ${d.email}? This cascades all of their data.`)) return;
-    this.actionBusy.set(true);
-    this.actionError.set(null);
-    try {
-      await lastValueFrom(this.service.delete(d.id));
-      this.clearSelection();
-      await this.search();
-    } catch {
-      this.actionError.set('Failed to delete user.');
-    } finally {
-      this.actionBusy.set(false);
-    }
-  }
-
-  private async runAction(op: () => Promise<unknown>): Promise<void> {
-    const d = this.detail();
-    if (!d) return;
-    this.actionBusy.set(true);
-    this.actionError.set(null);
-    try {
-      await op();
-      await this.select(d.id);
-      await this.search();
-    } catch {
-      this.actionError.set('Action failed. Please try again.');
-    } finally {
-      this.actionBusy.set(false);
-    }
+  protected async onModalClosed(event: { refreshed: boolean }): Promise<void> {
+    this.modalUser.set(null);
+    if (event.refreshed) await this.search();
   }
 
   private async search(): Promise<void> {

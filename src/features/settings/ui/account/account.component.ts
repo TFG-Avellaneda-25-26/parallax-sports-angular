@@ -33,9 +33,10 @@ export class AccountComponent {
       const el = document.getElementById(section);
       if (!el) return;
 
-      scrollToSection(el);
-      el.classList.add('section--active');
-      setTimeout(() => el.classList.remove('section--active'), 1500);
+      // Defer one tick so the freshly-mounted view is in the DOM before we
+      // measure / scroll. Effects already run after CD but route transitions
+      // can race this.
+      setTimeout(() => scrollToSection(el), 0);
     })
   }
 }

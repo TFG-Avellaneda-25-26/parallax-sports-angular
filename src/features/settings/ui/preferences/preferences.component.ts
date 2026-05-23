@@ -45,9 +45,7 @@ export class PreferencesComponent {
       const el = document.getElementById(section);
       if (!el) return;
 
-      scrollToSection(el);
-      el.classList.add('section--active');
-      setTimeout(() => el.classList.remove('section--active'), 1500);
+      setTimeout(() => scrollToSection(el), 0);
     })
   }
 }

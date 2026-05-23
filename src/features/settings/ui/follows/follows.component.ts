@@ -15,6 +15,7 @@ import {
   SUPPORTED_NOTIFICATION_CHANNELS,
 } from './models/notification-channel.model';
 import { NotificationChannelsService } from './services/notification-channels.service';
+import { CheckboxIconComponent } from '@shared/ui';
 
 interface ChannelRowState {
   enabled: boolean;
@@ -53,7 +54,7 @@ function buildSportRow(s: SportNotificationChannels): SportRow {
 
 @Component({
   selector: 'app-settings-follows',
-  imports: [],
+  imports: [CheckboxIconComponent],
   templateUrl: './follows.component.html',
   styleUrl: './follows.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -77,9 +78,7 @@ export class FollowsComponent {
       if (!section) return;
       const el = document.getElementById(section);
       if (!el) return;
-      scrollToSection(el);
-      el.classList.add('section--active');
-      setTimeout(() => el.classList.remove('section--active'), 1500);
+      setTimeout(() => scrollToSection(el), 0);
     });
   }
 

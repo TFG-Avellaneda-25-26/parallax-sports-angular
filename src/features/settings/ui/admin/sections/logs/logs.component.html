@@ -1,44 +1,42 @@
 <div class="logs">
   <form class="logs__filters" (submit)="$event.preventDefault(); applyFilters()">
     <label>
-      Actor user id
+      Actor (id or email)
       <input
-        type="number"
-        min="1"
-        [value]="filters().actorUserId"
-        (input)="onFilterChange('actorUserId', $any($event.target).value)"
+        type="text"
+        placeholder="e.g. 42 or jane@example.com"
+        [value]="filters().actor"
+        (input)="onFilterChange('actor', $any($event.target).value)"
       />
     </label>
     <label>
       Action
       <input
         type="text"
+        list="logs-action-options"
         placeholder="e.g. LOGIN_SUCCESS"
         [value]="filters().action"
         (input)="onFilterChange('action', $any($event.target).value)"
       />
+      <datalist id="logs-action-options">
+        @for (a of knownActions; track a) {
+          <option [value]="a"></option>
+        }
+      </datalist>
     </label>
     <label>
-      Entity type
+      Entity
       <input
         type="text"
-        placeholder="e.g. user"
-        [value]="filters().entityType"
-        (input)="onFilterChange('entityType', $any($event.target).value)"
-      />
-    </label>
-    <label>
-      Entity id
-      <input
-        type="number"
-        min="1"
-        [value]="filters().entityId"
-        (input)="onFilterChange('entityId', $any($event.target).value)"
+        placeholder="user or user#42"
+        [value]="filters().entity"
+        (input)="onFilterChange('entity', $any($event.target).value)"
       />
     </label>
     <label>
       From
       <input
+        #fromInput
         type="datetime-local"
         [value]="filters().from"
         (change)="onFilterChange('from', $any($event.target).value)"
@@ -47,6 +45,7 @@
     <label>
       To
       <input
+        #toInput
         type="datetime-local"
         [value]="filters().to"
         (change)="onFilterChange('to', $any($event.target).value)"
@@ -54,7 +53,7 @@
     </label>
     <div class="logs__filter-actions">
       <button type="submit" class="accent-btn" [disabled]="isLoading()">Apply</button>
-      <button type="button" class="accent-btn" (click)="resetFilters()" [disabled]="isLoading()">
+      <button type="button" class="secondary-btn" (click)="resetFilters(fromInput, toInput)" [disabled]="isLoading()">
         Reset
       </button>
     </div>
@@ -80,7 +79,6 @@
           <th>Actor</th>
           <th>Entity</th>
           <th>Source</th>
-          <th>IP</th>
           <th></th>
         </tr>
       </thead>
@@ -91,19 +89,22 @@
             <td>
               <code>{{ row.action }}</code>
             </td>
-            <td>{{ row.actorUserId ?? '—' }}</td>
+            <td>
+              @if (row.actorUserId != null) {
+                <button type="button" class="logs__actor-link" (click)="drillIntoActor(row.actorUserId)">
+                  {{ row.actorUserId }}
+                </button>
+              } @else { — }
+            </td>
             <td>
               @if (row.entityType) {
-                {{ row.entityType }}#{{ row.entityId ?? '—' }}
-              } @else {
-                —
-              }
+                {{ row.entityType }}@if (row.entityId != null) { #{{ row.entityId }} }
+              } @else { — }
             </td>
             <td>{{ row.source ?? '—' }}</td>
-            <td>{{ row.ipAddress ?? '—' }}</td>
             <td>
               @if (row.detail) {
-                <button type="button" class="accent-btn" (click)="toggleExpand(row.id)">
+                <button type="button" class="secondary-btn" (click)="toggleExpand(row.id)">
                   {{ expandedId() === row.id ? 'Hide' : 'Detail' }}
                 </button>
               }
@@ -111,14 +112,14 @@
           </tr>
           @if (expandedId() === row.id && row.detail) {
             <tr class="logs__detail-row">
-              <td colspan="7">
+              <td colspan="6">
                 <pre>{{ formatDetail(row.detail) }}</pre>
               </td>
             </tr>
           }
         } @empty {
           <tr>
-            <td colspan="7" class="logs__empty">No audit log entries match the current filters.</td>
+            <td colspan="6" class="logs__empty">No audit log entries match the current filters.</td>
           </tr>
         }
       </tbody>
@@ -126,21 +127,11 @@
   </div>
 
   <div class="logs__pagination">
-    <button
-      type="button"
-      class="accent-btn"
-      (click)="prevPage()"
-      [disabled]="isFirst() || isLoading()"
-    >
+    <button type="button" class="secondary-btn" (click)="prevPage()" [disabled]="isFirst() || isLoading()">
       Previous
     </button>
     <span>Page {{ (result()?.number ?? 0) + 1 }} / {{ totalPages() || 1 }}</span>
-    <button
-      type="button"
-      class="accent-btn"
-      (click)="nextPage()"
-      [disabled]="isLast() || isLoading()"
-    >
+    <button type="button" class="secondary-btn" (click)="nextPage()" [disabled]="isLast() || isLoading()">
       Next
     </button>
   </div>

@@ -19,20 +19,16 @@
           <div class="notify__channels">
             @for (channel of channels; track channel) {
               <div class="notify__channel">
+                <app-checkbox-icon
+                  class="notify__check"
+                  [checked]="sport.channels[channel].enabled"
+                  [disabled]="sport.channels[channel].saving"
+                  (toggled)="toggleEnabled(sport.sportId, channel, $event)"
+                />
+
                 <span class="notify__channel-label">{{ channel }}</span>
 
-                <label class="notify__toggle">
-                  <input
-                    type="checkbox"
-                    [checked]="sport.channels[channel].enabled"
-                    [disabled]="sport.channels[channel].saving"
-                    (change)="toggleEnabled(sport.sportId, channel, $any($event.target).checked)"
-                  />
-                  <span>{{ sport.channels[channel].enabled ? 'Enabled' : 'Disabled' }}</span>
-                </label>
-
                 <label class="notify__lead">
-                  Lead time
                   <input
                     type="number"
                     min="1"
