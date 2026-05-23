@@ -123,8 +123,8 @@
       }
 
       <footer class="modal__footer">
-        <button type="button" (click)="close()" [disabled]="busy()">Cancel</button>
-        <button type="submit" [disabled]="busy() || !canSubmit()">
+        <button type="button" class="accent-btn" (click)="close()" [disabled]="busy()">Cancel</button>
+        <button type="submit" class="accent-btn" [disabled]="busy() || !canSubmit()">
           {{ busy() ? 'Publishing…' : 'Publish to alert stream' }}
         </button>
       </footer>

@@ -78,3 +78,49 @@
 [data-theme='light'] .cta-btn {
   --plus-svg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M6 0 V12 M0 6 H12' stroke='%230891b2' stroke-width='1.4' fill='none'/></svg>");
 }
+
+/* Filled accent button — used in settings forms and anywhere a solid CTA is needed */
+.accent-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-hover));
+  color: var(--color-bg-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--color-accent) 30%, transparent);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-base),
+    filter var(--transition-fast);
+}
+
+.accent-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px color-mix(in srgb, var(--color-accent) 45%, transparent);
+  filter: brightness(1.05);
+}
+
+.accent-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--color-accent) 25%, transparent);
+}
+
+.accent-btn:focus-visible {
+  box-shadow:
+    0 4px 18px color-mix(in srgb, var(--color-accent) 30%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--color-accent) 35%, transparent);
+}
+
+.accent-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}

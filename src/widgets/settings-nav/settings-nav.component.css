@@ -98,3 +98,7 @@
 li[aria-expanded='false'] + ul[role='group'] {
   display: none;
 }
+
+ul[role='group'] {
+  padding-left: 1.25rem;
+}

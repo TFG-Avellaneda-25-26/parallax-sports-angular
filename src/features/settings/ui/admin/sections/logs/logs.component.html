@@ -53,8 +53,8 @@
       />
     </label>
     <div class="logs__filter-actions">
-      <button type="submit" [disabled]="isLoading()">Apply</button>
-      <button type="button" (click)="resetFilters()" [disabled]="isLoading()">Reset</button>
+      <button type="submit" class="accent-btn" [disabled]="isLoading()">Apply</button>
+      <button type="button" class="accent-btn" (click)="resetFilters()" [disabled]="isLoading()">Reset</button>
     </div>
   </form>
 
@@ -97,7 +97,7 @@
             <td>{{ row.ipAddress ?? '—' }}</td>
             <td>
               @if (row.detail) {
-                <button type="button" (click)="toggleExpand(row.id)">
+                <button type="button" class="accent-btn" (click)="toggleExpand(row.id)">
                   {{ expandedId() === row.id ? 'Hide' : 'Detail' }}
                 </button>
               }
@@ -116,8 +116,8 @@
   </div>
 
   <div class="logs__pagination">
-    <button type="button" (click)="prevPage()" [disabled]="isFirst() || isLoading()">Previous</button>
+    <button type="button" class="accent-btn" (click)="prevPage()" [disabled]="isFirst() || isLoading()">Previous</button>
     <span>Page {{ (result()?.number ?? 0) + 1 }} / {{ totalPages() || 1 }}</span>
-    <button type="button" (click)="nextPage()" [disabled]="isLast() || isLoading()">Next</button>
+    <button type="button" class="accent-btn" (click)="nextPage()" [disabled]="isLast() || isLoading()">Next</button>
   </div>
 </div>

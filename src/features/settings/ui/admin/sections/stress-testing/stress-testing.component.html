@@ -32,8 +32,8 @@
       </label>
 
       <div class="stress__actions">
-        <button type="button" (click)="start()" [disabled]="busy() || streaming()">Start</button>
-        <button type="button" (click)="stop()" [disabled]="busy() || !activeRun() || !streaming()">Stop</button>
+        <button type="button" class="accent-btn" (click)="start()" [disabled]="busy() || streaming()">Start</button>
+        <button type="button" class="accent-btn" (click)="stop()" [disabled]="busy() || !activeRun() || !streaming()">Stop</button>
       </div>
     </div>
 

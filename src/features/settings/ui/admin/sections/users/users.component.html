@@ -25,8 +25,8 @@
       </select>
     </label>
     <div class="users__filter-actions">
-      <button type="submit" [disabled]="isLoading()">Apply</button>
-      <button type="button" (click)="resetFilters()" [disabled]="isLoading()">Reset</button>
+      <button type="submit" class="accent-btn" [disabled]="isLoading()">Apply</button>
+      <button type="button" class="accent-btn" (click)="resetFilters()" [disabled]="isLoading()">Reset</button>
     </div>
   </form>
 
@@ -72,9 +72,9 @@
       </table>
 
       <div class="users__pagination">
-        <button type="button" (click)="prevPage()" [disabled]="isFirst() || isLoading()">Previous</button>
+        <button type="button" class="accent-btn" (click)="prevPage()" [disabled]="isFirst() || isLoading()">Previous</button>
         <span>Page {{ (result()?.number ?? 0) + 1 }} / {{ totalPages() || 1 }}</span>
-        <button type="button" (click)="nextPage()" [disabled]="isLast() || isLoading()">Next</button>
+        <button type="button" class="accent-btn" (click)="nextPage()" [disabled]="isLast() || isLoading()">Next</button>
       </div>
     </div>
 
@@ -116,7 +116,7 @@
               Change email
               <input name="newEmail" type="email" [value]="d.email" />
             </label>
-            <button type="submit" [disabled]="actionBusy()">Update</button>
+            <button type="submit" class="accent-btn" [disabled]="actionBusy()">Update</button>
           </form>
 
           <form class="users__action" (submit)="$event.preventDefault(); changeDisplayName($any($event.target).newName.value)">
@@ -124,24 +124,24 @@
               Change display name
               <input name="newName" type="text" [value]="d.displayName ?? ''" />
             </label>
-            <button type="submit" [disabled]="actionBusy()">Update</button>
+            <button type="submit" class="accent-btn" [disabled]="actionBusy()">Update</button>
           </form>
 
           <div class="users__action">
             <span>Email verified</span>
-            <button type="button" (click)="markVerified()" [disabled]="actionBusy() || d.emailVerified">
+            <button type="button" class="accent-btn" (click)="markVerified()" [disabled]="actionBusy() || d.emailVerified">
               {{ d.emailVerified ? 'Already verified' : 'Mark verified' }}
             </button>
           </div>
 
           <div class="users__action">
             <span>Role</span>
-            <button type="button" (click)="setRole('USER')" [disabled]="actionBusy() || d.role === 'USER'">USER</button>
-            <button type="button" (click)="setRole('ADMIN')" [disabled]="actionBusy() || d.role === 'ADMIN'">ADMIN</button>
+            <button type="button" class="accent-btn" (click)="setRole('USER')" [disabled]="actionBusy() || d.role === 'USER'">USER</button>
+            <button type="button" class="accent-btn" (click)="setRole('ADMIN')" [disabled]="actionBusy() || d.role === 'ADMIN'">ADMIN</button>
           </div>
 
           <div class="users__action users__action--danger">
-            <button type="button" (click)="deleteUser()" [disabled]="actionBusy()">Delete user</button>
+            <button type="button" class="accent-btn" (click)="deleteUser()" [disabled]="actionBusy()">Delete user</button>
           </div>
         </div>
       } @else {
