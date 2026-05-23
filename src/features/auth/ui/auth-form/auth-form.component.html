@@ -46,7 +46,7 @@
   </form>
 
   <div class="oauth-buttons">
-  @for (provider of SUPPORTED_PROVIDERS; track provider.id) {
+  @for (provider of providers; track provider.id) {
     <button class="oauth-btn" (click)="userStore.linkIdentity(provider.id)">
       <svg
         class="oauth-btn__icon"
