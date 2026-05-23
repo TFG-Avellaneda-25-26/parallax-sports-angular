@@ -54,7 +54,9 @@
     </label>
     <div class="logs__filter-actions">
       <button type="submit" class="accent-btn" [disabled]="isLoading()">Apply</button>
-      <button type="button" class="accent-btn" (click)="resetFilters()" [disabled]="isLoading()">Reset</button>
+      <button type="button" class="accent-btn" (click)="resetFilters()" [disabled]="isLoading()">
+        Reset
+      </button>
     </div>
   </form>
 
@@ -86,12 +88,16 @@
         @for (row of rows(); track row.id) {
           <tr>
             <td>{{ row.createdAt }}</td>
-            <td><code>{{ row.action }}</code></td>
+            <td>
+              <code>{{ row.action }}</code>
+            </td>
             <td>{{ row.actorUserId ?? '—' }}</td>
             <td>
               @if (row.entityType) {
                 {{ row.entityType }}#{{ row.entityId ?? '—' }}
-              } @else { — }
+              } @else {
+                —
+              }
             </td>
             <td>{{ row.source ?? '—' }}</td>
             <td>{{ row.ipAddress ?? '—' }}</td>
@@ -105,19 +111,37 @@
           </tr>
           @if (expandedId() === row.id && row.detail) {
             <tr class="logs__detail-row">
-              <td colspan="7"><pre>{{ formatDetail(row.detail) }}</pre></td>
+              <td colspan="7">
+                <pre>{{ formatDetail(row.detail) }}</pre>
+              </td>
             </tr>
           }
         } @empty {
-          <tr><td colspan="7" class="logs__empty">No audit log entries match the current filters.</td></tr>
+          <tr>
+            <td colspan="7" class="logs__empty">No audit log entries match the current filters.</td>
+          </tr>
         }
       </tbody>
     </table>
   </div>
 
   <div class="logs__pagination">
-    <button type="button" class="accent-btn" (click)="prevPage()" [disabled]="isFirst() || isLoading()">Previous</button>
+    <button
+      type="button"
+      class="accent-btn"
+      (click)="prevPage()"
+      [disabled]="isFirst() || isLoading()"
+    >
+      Previous
+    </button>
     <span>Page {{ (result()?.number ?? 0) + 1 }} / {{ totalPages() || 1 }}</span>
-    <button type="button" class="accent-btn" (click)="nextPage()" [disabled]="isLast() || isLoading()">Next</button>
+    <button
+      type="button"
+      class="accent-btn"
+      (click)="nextPage()"
+      [disabled]="isLast() || isLoading()"
+    >
+      Next
+    </button>
   </div>
 </div>

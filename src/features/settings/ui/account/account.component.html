@@ -3,22 +3,50 @@
     <h2>Email</h2>
     <p>Changing it requires verification.</p>
     <form [formRoot]="emailForm">
-      <app-stateful-input type="email" label="Current Email" fieldId="currentEmail" [formField]="emailForm.currentEmail" />
-      <app-stateful-input type="email" label="New Email" fieldId="newEmail" [formField]="emailForm.newEmail" />
-      <button type="submit" class="accent-btn" [disabled]="emailForm().submitting()">Change Email</button>
+      <app-stateful-input
+        type="email"
+        label="Current Email"
+        fieldId="currentEmail"
+        [formField]="emailForm.currentEmail"
+      />
+      <app-stateful-input
+        type="email"
+        label="New Email"
+        fieldId="newEmail"
+        [formField]="emailForm.newEmail"
+      />
+      <button type="submit" class="accent-btn" [disabled]="emailForm().submitting()">
+        Change Email
+      </button>
     </form>
   </header>
-
 </section>
 
 <section id="password">
   <header>
     <h2>Password</h2>
     <form [formRoot]="passwordForm">
-      <app-stateful-input type="password" label="Current Password" fieldId="currentPassword" [formField]="passwordForm.currentPassword" />
-      <app-stateful-input type="password" label="New Password" fieldId="newPassword" [formField]="passwordForm.password" />
-      <app-stateful-input type="password" label="Confirm New Password" fieldId="confirmNewPassword" [formField]="passwordForm.confirmPassword" />
-      <button type="submit" class="accent-btn" [disabled]="passwordForm().submitting()">Change Password</button>
+      <app-stateful-input
+        type="password"
+        label="Current Password"
+        fieldId="currentPassword"
+        [formField]="passwordForm.currentPassword"
+      />
+      <app-stateful-input
+        type="password"
+        label="New Password"
+        fieldId="newPassword"
+        [formField]="passwordForm.password"
+      />
+      <app-stateful-input
+        type="password"
+        label="Confirm New Password"
+        fieldId="confirmNewPassword"
+        [formField]="passwordForm.confirmPassword"
+      />
+      <button type="submit" class="accent-btn" [disabled]="passwordForm().submitting()">
+        Change Password
+      </button>
     </form>
   </header>
 </section>
@@ -28,9 +56,21 @@
     <h2>Display name</h2>
     <p>Used for display purposes. Can be changed at any time.</p>
     <form [formRoot]="displayNameForm">
-      <app-stateful-input type="text" label="Current Display Name" fieldId="currentDisplayName" [formField]="displayNameForm.currentDisplayName" />
-      <app-stateful-input type="text" label="New Display Name" fieldId="newDisplayName" [formField]="displayNameForm.newDisplayName" />
-      <button type="submit" class="accent-btn" [disabled]="displayNameForm().submitting()">Change Display Name</button>
+      <app-stateful-input
+        type="text"
+        label="Current Display Name"
+        fieldId="currentDisplayName"
+        [formField]="displayNameForm.currentDisplayName"
+      />
+      <app-stateful-input
+        type="text"
+        label="New Display Name"
+        fieldId="newDisplayName"
+        [formField]="displayNameForm.newDisplayName"
+      />
+      <button type="submit" class="accent-btn" [disabled]="displayNameForm().submitting()">
+        Change Display Name
+      </button>
     </form>
   </header>
 </section>
@@ -41,12 +81,14 @@
     <p>Manage linked accounts and social logins.</p>
     @for (item of identites(); track item.provider) {
       <div>
-       <span>{{ item.provider }}</span>
-       @if (item.isLinked) {
-        <button class="accent-btn" (click)="userStore.disconnectIdentity(item.identity!.id)">Unlink</button>
-       } @else {
-        <button class="accent-btn" (click)="userStore.linkIdentity(item.provider)">Link</button>
-       }
+        <span>{{ item.provider }}</span>
+        @if (item.isLinked) {
+          <button class="accent-btn" (click)="userStore.disconnectIdentity(item.identity!.id)">
+            Unlink
+          </button>
+        } @else {
+          <button class="accent-btn" (click)="userStore.linkIdentity(item.provider)">Link</button>
+        }
       </div>
     }
   </header>
@@ -58,3 +100,4 @@
     <p>Deletes your account and all associated data. This action is irreversible.</p>
     <button class="accent-btn" (click)="userStore.deleteAccount()">Delete Account</button>
   </header>
+</section>

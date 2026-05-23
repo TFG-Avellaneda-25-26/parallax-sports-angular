@@ -11,17 +11,13 @@
   padding: 1.4rem 3.4rem;
   border: 0;
   background-color: transparent;
-  background-image:
-    var(--plus-svg),
-    var(--plus-svg),
-    var(--plus-svg),
-    var(--plus-svg);
+  background-image: var(--plus-svg), var(--plus-svg), var(--plus-svg), var(--plus-svg);
   background-size: var(--plus-size) var(--plus-size);
   background-repeat: no-repeat;
   background-position:
-    left  calc(var(--plus-size) / -2) top    calc(var(--plus-size) / -2),
-    right calc(var(--plus-size) / -2) top    calc(var(--plus-size) / -2),
-    left  calc(var(--plus-size) / -2) bottom calc(var(--plus-size) / -2),
+    left calc(var(--plus-size) / -2) top calc(var(--plus-size) / -2),
+    right calc(var(--plus-size) / -2) top calc(var(--plus-size) / -2),
+    left calc(var(--plus-size) / -2) bottom calc(var(--plus-size) / -2),
     right calc(var(--plus-size) / -2) bottom calc(var(--plus-size) / -2);
   color: var(--color-text-primary);
   font-family: var(--font-display);
@@ -37,7 +33,7 @@
 }
 
 .cta-btn::before {
-  content: "";
+  content: '';
   position: absolute;
   top: var(--border-inset-y);
   right: var(--border-inset-x);

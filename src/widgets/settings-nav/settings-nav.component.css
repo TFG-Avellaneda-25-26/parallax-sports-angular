@@ -24,7 +24,9 @@
   padding: 0.3rem 1rem;
   border-radius: var(--radius-md);
   color: var(--color-text-secondary);
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
 }
 
 /* Parent rows are aria-disabled so the Aria tree refuses to select them, but

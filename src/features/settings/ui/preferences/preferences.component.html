@@ -3,7 +3,11 @@
     <h2>Timezone</h2>
     <p>Set your preferred timezone</p>
     <form [formRoot]="timeZoneForm">
-      <app-stateful-input type="text" label="Current Timezone" [formField]="timeZoneForm.currentTimezone" />
+      <app-stateful-input
+        type="text"
+        label="Current Timezone"
+        [formField]="timeZoneForm.currentTimezone"
+      />
       <app-stateful-combox-autocomplete-select
         label="Select Timezone"
         fieldId="TimezoneSelector"
@@ -21,7 +25,11 @@
     <h2>Date Format</h2>
     <p>Set your preferred date format</p>
     <form [formRoot]="dateFormatForm">
-      <app-stateful-input type="text" label="Current Date Format" [formField]="dateFormatForm.currentFormat" />
+      <app-stateful-input
+        type="text"
+        label="Current Date Format"
+        [formField]="dateFormatForm.currentFormat"
+      />
       <app-stateful-combobox-select-input
         label="Select Date Format"
         fieldId="DateFormatSelector"
@@ -39,7 +47,11 @@
     <h2>Default View</h2>
     <p>Set your preferred default view for the dashboard</p>
     <form [formRoot]="defaultViewForm">
-      <app-stateful-input type="text" label="Current Default View" [formField]="defaultViewForm.currentView" />
+      <app-stateful-input
+        type="text"
+        label="Current Default View"
+        [formField]="defaultViewForm.currentView"
+      />
       <app-stateful-combobox-select-input
         label="Select Default View"
         fieldId="DefaultViewSelector"

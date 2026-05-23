@@ -18,7 +18,10 @@
     </label>
     <label>
       Verified
-      <select [value]="filters().emailVerified" (change)="onFilterChange('emailVerified', $any($event.target).value)">
+      <select
+        [value]="filters().emailVerified"
+        (change)="onFilterChange('emailVerified', $any($event.target).value)"
+      >
         <option value="">Any</option>
         <option value="true">Verified</option>
         <option value="false">Not verified</option>
@@ -26,7 +29,9 @@
     </label>
     <div class="users__filter-actions">
       <button type="submit" class="accent-btn" [disabled]="isLoading()">Apply</button>
-      <button type="button" class="accent-btn" (click)="resetFilters()" [disabled]="isLoading()">Reset</button>
+      <button type="button" class="accent-btn" (click)="resetFilters()" [disabled]="isLoading()">
+        Reset
+      </button>
     </div>
   </form>
 
@@ -38,7 +43,9 @@
     <div class="users__list">
       <div class="users__meta">
         <span>{{ totalElements() }} user(s)</span>
-        @if (isLoading()) { <span class="users__loading">loading…</span> }
+        @if (isLoading()) {
+          <span class="users__loading">loading…</span>
+        }
       </div>
 
       <table class="users__table">
@@ -54,10 +61,7 @@
         </thead>
         <tbody>
           @for (row of rows(); track row.id) {
-            <tr
-              [class.users__row--selected]="selectedId() === row.id"
-              (click)="select(row.id)"
-            >
+            <tr [class.users__row--selected]="selectedId() === row.id" (click)="select(row.id)">
               <td>{{ row.id }}</td>
               <td>{{ row.email }}</td>
               <td>{{ row.displayName ?? '—' }}</td>
@@ -66,15 +70,31 @@
               <td>{{ row.createdAt }}</td>
             </tr>
           } @empty {
-            <tr><td colspan="6" class="users__empty">No users match.</td></tr>
+            <tr>
+              <td colspan="6" class="users__empty">No users match.</td>
+            </tr>
           }
         </tbody>
       </table>
 
       <div class="users__pagination">
-        <button type="button" class="accent-btn" (click)="prevPage()" [disabled]="isFirst() || isLoading()">Previous</button>
+        <button
+          type="button"
+          class="accent-btn"
+          (click)="prevPage()"
+          [disabled]="isFirst() || isLoading()"
+        >
+          Previous
+        </button>
         <span>Page {{ (result()?.number ?? 0) + 1 }} / {{ totalPages() || 1 }}</span>
-        <button type="button" class="accent-btn" (click)="nextPage()" [disabled]="isLast() || isLoading()">Next</button>
+        <button
+          type="button"
+          class="accent-btn"
+          (click)="nextPage()"
+          [disabled]="isLast() || isLoading()"
+        >
+          Next
+        </button>
       </div>
     </div>
 
@@ -89,18 +109,30 @@
           <button type="button" class="users__detail-close" (click)="clearSelection()">×</button>
         </header>
         <dl class="users__detail-list">
-          <dt>ID</dt><dd>{{ d.id }}</dd>
-          <dt>Display name</dt><dd>{{ d.displayName ?? '—' }}</dd>
-          <dt>Role</dt><dd>{{ d.role }}</dd>
-          <dt>Email verified</dt><dd>{{ d.emailVerified ? 'yes' : 'no' }}</dd>
-          <dt>Created</dt><dd>{{ d.createdAt }}</dd>
-          <dt>Last login</dt><dd>{{ d.lastLoginAt ?? 'never' }}</dd>
-          <dt>Follows</dt><dd>{{ d.sportFollowCount }}</dd>
-          <dt>Identities</dt><dd>
-            @if (d.identities.length === 0) { none }
-            @else {
+          <dt>ID</dt>
+          <dd>{{ d.id }}</dd>
+          <dt>Display name</dt>
+          <dd>{{ d.displayName ?? '—' }}</dd>
+          <dt>Role</dt>
+          <dd>{{ d.role }}</dd>
+          <dt>Email verified</dt>
+          <dd>{{ d.emailVerified ? 'yes' : 'no' }}</dd>
+          <dt>Created</dt>
+          <dd>{{ d.createdAt }}</dd>
+          <dt>Last login</dt>
+          <dd>{{ d.lastLoginAt ?? 'never' }}</dd>
+          <dt>Follows</dt>
+          <dd>{{ d.sportFollowCount }}</dd>
+          <dt>Identities</dt>
+          <dd>
+            @if (d.identities.length === 0) {
+              none
+            } @else {
               @for (i of d.identities; track i.id) {
-                <span class="users__identity">{{ i.provider }}{{ i.providerUsername ? ' (' + i.providerUsername + ')' : '' }}</span>
+                <span class="users__identity"
+                  >{{ i.provider
+                  }}{{ i.providerUsername ? ' (' + i.providerUsername + ')' : '' }}</span
+                >
               }
             }
           </dd>
@@ -111,7 +143,10 @@
         }
 
         <div class="users__actions">
-          <form class="users__action" (submit)="$event.preventDefault(); changeEmail($any($event.target).newEmail.value)">
+          <form
+            class="users__action"
+            (submit)="$event.preventDefault(); changeEmail($any($event.target).newEmail.value)"
+          >
             <label>
               Change email
               <input name="newEmail" type="email" [value]="d.email" />
@@ -119,7 +154,10 @@
             <button type="submit" class="accent-btn" [disabled]="actionBusy()">Update</button>
           </form>
 
-          <form class="users__action" (submit)="$event.preventDefault(); changeDisplayName($any($event.target).newName.value)">
+          <form
+            class="users__action"
+            (submit)="$event.preventDefault(); changeDisplayName($any($event.target).newName.value)"
+          >
             <label>
               Change display name
               <input name="newName" type="text" [value]="d.displayName ?? ''" />
@@ -129,19 +167,45 @@
 
           <div class="users__action">
             <span>Email verified</span>
-            <button type="button" class="accent-btn" (click)="markVerified()" [disabled]="actionBusy() || d.emailVerified">
+            <button
+              type="button"
+              class="accent-btn"
+              (click)="markVerified()"
+              [disabled]="actionBusy() || d.emailVerified"
+            >
               {{ d.emailVerified ? 'Already verified' : 'Mark verified' }}
             </button>
           </div>
 
           <div class="users__action">
             <span>Role</span>
-            <button type="button" class="accent-btn" (click)="setRole('USER')" [disabled]="actionBusy() || d.role === 'USER'">USER</button>
-            <button type="button" class="accent-btn" (click)="setRole('ADMIN')" [disabled]="actionBusy() || d.role === 'ADMIN'">ADMIN</button>
+            <button
+              type="button"
+              class="accent-btn"
+              (click)="setRole('USER')"
+              [disabled]="actionBusy() || d.role === 'USER'"
+            >
+              USER
+            </button>
+            <button
+              type="button"
+              class="accent-btn"
+              (click)="setRole('ADMIN')"
+              [disabled]="actionBusy() || d.role === 'ADMIN'"
+            >
+              ADMIN
+            </button>
           </div>
 
           <div class="users__action users__action--danger">
-            <button type="button" class="accent-btn" (click)="deleteUser()" [disabled]="actionBusy()">Delete user</button>
+            <button
+              type="button"
+              class="accent-btn"
+              (click)="deleteUser()"
+              [disabled]="actionBusy()"
+            >
+              Delete user
+            </button>
           </div>
         </div>
       } @else {
