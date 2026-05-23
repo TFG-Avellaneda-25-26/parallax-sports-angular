@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserStore } from '@entities/user';
 import { SettingsNavStore } from '@shared/stores';
@@ -21,16 +21,16 @@ export class SettingsNavComponent {
 
   readonly selected = this.navStore.selected;
 
-  constructor() {
-    effect(() => {
-      const [value] = this.selected();
-      if (!value) return;
+  onSelect(value: string[]) {
+    console.log('Selected:', value);
+    this.navStore.setSelected(value);
 
-      const [route, fragment] = value.split('/');
+    const [selected] = value;
+    if (!selected) return;
 
-      void this.router.navigate(['/settings', route], {
-        fragment: fragment ?? undefined
-      });
+    const [route, fragment] = selected.split('/');
+    void this.router.navigate(['/settings', route], {
+      fragment: fragment ?? undefined
     });
   }
 
