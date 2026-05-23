@@ -83,7 +83,6 @@ export class FilterTreeComponent {
 
   protected onSportAction(sport: SportNode, action: FilterRowAction): void {
     if (action === 'clear') {
-      // limpiar sport + todas sus competitions, eventTypes y participants
       this.filterStore.clearSport(sport.key);
       for (const comp of sport.competitions) {
         this.filterStore.clearCompetition(comp.key);
@@ -109,7 +108,6 @@ export class FilterTreeComponent {
         this.filterStore.clearParticipant(p.sportKey, p.competitionName, p.id);
       }
     } else {
-      // NO marcar el sport padre — solo la competition
       this.dispatch('competition', competition.key, action);
     }
   }
@@ -118,7 +116,6 @@ export class FilterTreeComponent {
     if (action === 'clear') {
       this.filterStore.clearEventType(eventType.key);
     } else {
-      // solo marcar la competition padre, no el sport
       this.filterStore.showOnlyCompetition(competition.key);
       this.dispatch('eventType', eventType.key, action);
     }

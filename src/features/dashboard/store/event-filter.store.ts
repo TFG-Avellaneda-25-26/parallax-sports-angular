@@ -13,14 +13,14 @@ export interface ParticipantNode {
 }
 
 export interface EventTypeNode {
-  key: string;          // `${sportKey}::${competitionName}::${eventType}`
+  key: string;
   competitionKey: string;
   type: string;
   count: number;
 }
 
 export interface CompetitionNode {
-  key: string;          // `${sportKey}::${competitionName}`
+  key: string;
   sportKey: string;
   name: string;
   count: number;
@@ -29,7 +29,7 @@ export interface CompetitionNode {
 }
 
 export interface SportNode {
-  key: string;          // sportKey
+  key: string;
   name: string;
   count: number;
   competitions: CompetitionNode[];
@@ -105,7 +105,6 @@ function eventPasses(event: SportEvent, state: EventFilterState): boolean {
     return true;
   }
 
-  // ¿hay algún filtro include para este deporte?
   const hasAnyFilterScopedToThisSport =
     state.includeSports.has(event.sportKey) ||
     [...state.includeCompetitions].some(k => k.startsWith(event.sportKey + '::')) ||
@@ -114,7 +113,6 @@ function eventPasses(event: SportEvent, state: EventFilterState): boolean {
 
   if (!hasAnyFilterScopedToThisSport) return false;
 
-  // sport seleccionado directamente sin hijos más específicos
   if (state.includeSports.has(event.sportKey)) {
     const hasMoreSpecificFilter =
       [...state.includeCompetitions].some(k => k.startsWith(event.sportKey + '::')) ||
