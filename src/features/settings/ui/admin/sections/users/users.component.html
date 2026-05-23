@@ -1,0 +1,100 @@
+<div class="users">
+  <form class="users__filters" (submit)="$event.preventDefault(); applyFilters()">
+    <label>
+      Search (email / display name)
+      <input
+        type="text"
+        [value]="filters().q"
+        (input)="onFilterChange('q', $any($event.target).value)"
+      />
+    </label>
+    <label>
+      Role
+      <select [value]="filters().role" (change)="onFilterChange('role', $any($event.target).value)">
+        <option value="">Any</option>
+        <option value="USER">USER</option>
+        <option value="ADMIN">ADMIN</option>
+      </select>
+    </label>
+    <label>
+      Verified
+      <select
+        [value]="filters().emailVerified"
+        (change)="onFilterChange('emailVerified', $any($event.target).value)"
+      >
+        <option value="">Any</option>
+        <option value="true">Verified</option>
+        <option value="false">Not verified</option>
+      </select>
+    </label>
+    <div class="users__filter-actions">
+      <button type="submit" class="accent-btn" [disabled]="isLoading()">Apply</button>
+      <button type="button" class="secondary-btn" (click)="resetFilters()" [disabled]="isLoading()">
+        Reset
+      </button>
+    </div>
+  </form>
+
+  @if (listError()) {
+    <p class="users__error">{{ listError() }}</p>
+  }
+  @if (modalError()) {
+    <p class="users__error">{{ modalError() }}</p>
+  }
+
+  <div class="users__meta">
+    <span>{{ totalElements() }} user(s)</span>
+    @if (isLoading()) {
+      <span class="users__loading">loading…</span>
+    }
+  </div>
+
+  <div class="users__table-wrap">
+    <table class="users__table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Email</th>
+          <th>Display</th>
+          <th>Role</th>
+          <th>Verified</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows(); track row.id) {
+          <tr
+            class="users__row"
+            [class.users__row--loading]="modalLoadingFor() === row.id"
+            (click)="openUser(row.id)"
+          >
+            <td>{{ row.id }}</td>
+            <td>{{ row.email }}</td>
+            <td>{{ row.displayName ?? '—' }}</td>
+            <td>{{ row.role }}</td>
+            <td>{{ row.emailVerified ? 'yes' : 'no' }}</td>
+            <td>{{ row.createdAt }}</td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="users__empty">No users match.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="users__pagination">
+    <button type="button" class="secondary-btn" (click)="prevPage()" [disabled]="isFirst() || isLoading()">
+      Previous
+    </button>
+    <span>Page {{ (result()?.number ?? 0) + 1 }} / {{ totalPages() || 1 }}</span>
+    <button type="button" class="secondary-btn" (click)="nextPage()" [disabled]="isLast() || isLoading()">
+      Next
+    </button>
+  </div>
+
+  @if (modalUser(); as u) {
+    <app-user-actions-modal [user]="u" (closed)="onModalClosed($event)" />
+  }
+</div>

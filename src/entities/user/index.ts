@@ -3,3 +3,4 @@ export { UserService } from './services/user.service';
 export { UserStore } from './store/user.store';
 export { authGuard } from './guards/auth.guard';
 export { redirectIfAuthenticatedGuard } from './guards/redirect-if-authenticated.guard';
+export { verifiedEmailGuard } from './guards/verified-email.guard';

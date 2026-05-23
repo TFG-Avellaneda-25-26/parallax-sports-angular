@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard, redirectIfAuthenticatedGuard } from '@entities/user';
+import { authGuard, redirectIfAuthenticatedGuard, verifiedEmailGuard } from '@entities/user';
 import { eventResolver } from '@features/event';
 
 
@@ -28,6 +28,7 @@ export const routes: Routes = [
       },
       {
         path: 'settings',
+        canActivate: [verifiedEmailGuard],
         loadComponent: () => import('@pages/settings').then(m => m.SettingsPage),
         children: [
           {

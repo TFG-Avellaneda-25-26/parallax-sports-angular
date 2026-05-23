@@ -1,0 +1,129 @@
+:host {
+  display: block;
+}
+
+.stress {
+  display: grid;
+  gap: 1rem;
+}
+
+.stress__panel,
+.stress__logs,
+.stress__history {
+  background: var(--color-bg-surface);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.stress__panel header,
+.stress__logs header,
+.stress__history header {
+  margin-bottom: 0.5rem;
+}
+
+.stress__controls {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 0.75rem;
+  align-items: end;
+}
+
+.stress__controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.stress__controls input,
+.stress__controls select {
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--radius-sm, 4px);
+  border: 1px solid var(--color-border, #444);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+}
+
+.stress__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.stress__hint {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  margin: 0.5rem 0 0;
+}
+
+.stress__error {
+  color: var(--color-danger, #d94a4a);
+  margin: 0.5rem 0 0;
+}
+
+.stress__active {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: var(--color-text-secondary);
+}
+
+.stress__active code {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.75rem;
+  background: var(--color-bg-elevated);
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-sm, 4px);
+}
+
+.stress__streaming { color: var(--color-accent); }
+
+.stress__logs pre {
+  background: var(--color-bg-elevated);
+  padding: 0.75rem;
+  border-radius: var(--radius-sm, 4px);
+  max-height: 24rem;
+  overflow: auto;
+  font-size: 0.75rem;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  color: var(--color-text-primary);
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+}
+
+.stress__empty {
+  color: var(--color-text-secondary);
+  font-style: italic;
+  margin: 0.5rem 0;
+}
+
+.stress__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.stress__table th,
+.stress__table td {
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid var(--color-border, #2a2a2a);
+}
+
+.stress__table code {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.7rem;
+}
+
+.stress__pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
