@@ -32,7 +32,7 @@ export const AuthStore = signalStore(
   withMethods((store, authService = inject(AuthService), router = inject(Router), apiBaseUrl = inject(API_BASE_URL), userStore = inject(UserStore)) => {
     const authForm = form(formModel, (schemaPath) => {
       apply(schemaPath.email, emailSchema);
-      applyWhen(schemaPath.email, () => store.isRegisterMode(), emailAsyncSchema(apiBaseUrl));
+      applyWhen(schemaPath.email, () => store.isRegisterMode(), emailAsyncSchema(apiBaseUrl, 'register'));
       applyWhen(schemaPath.password, () => !store.isRegisterMode(), loginPasswordSchema);
       applyWhen(schemaPath, () => store.isRegisterMode(), passwordSchema);
       applyWhen(schemaPath.displayName, () => store.isRegisterMode(), displayNameSchema);
