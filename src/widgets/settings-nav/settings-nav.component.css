@@ -27,9 +27,24 @@
   transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
+/* Parent rows are aria-disabled so the Aria tree refuses to select them, but
+   we don't want them to look greyed out — they're still meaningful group
+   headers users can expand/collapse via the chevron. Keep them visually
+   identical to leaves; only the cursor signals they aren't a selection
+   target on the row body. */
 [ngTreeItem][aria-disabled='true'] {
-  opacity: 0.5;
+  opacity: 1;
   cursor: default;
+  color: var(--color-text-secondary);
+}
+
+[ngTreeItem][aria-disabled='true']:hover {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+}
+
+[ngTreeItem][aria-disabled='true'] .expand-icon {
+  cursor: pointer;
 }
 
 [ngTreeItem]:focus,
@@ -54,6 +69,11 @@
 .material-symbols-outlined {
   margin: 0;
   width: 24px;
+}
+
+.node-icon {
+  flex: 0 0 auto;
+  color: currentColor;
 }
 
 .expand-icon {

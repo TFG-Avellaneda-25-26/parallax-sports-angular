@@ -4,11 +4,12 @@ import { UserStore } from '@entities/user';
 import { SettingsNavStore } from '@shared/stores';
 import { Tree, TreeItem, TreeItemGroup } from '@angular/aria/tree';
 import { NgTemplateOutlet } from '@angular/common';
+import { SettingsNavIconComponent } from '@shared/ui';
 
 
 @Component({
   selector: 'app-settings-nav',
-  imports: [Tree, TreeItem, TreeItemGroup, NgTemplateOutlet],
+  imports: [Tree, TreeItem, TreeItemGroup, NgTemplateOutlet, SettingsNavIconComponent],
   templateUrl: './settings-nav.component.html',
   styleUrl: './settings-nav.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

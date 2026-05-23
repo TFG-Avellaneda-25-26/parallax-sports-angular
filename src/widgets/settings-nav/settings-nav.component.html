@@ -11,15 +11,17 @@
       [parent]="parent"
       [value]="node.value"
       [label]="node.name"
+      [disabled]="!!node.disabled"
       [(expanded)]="node.expanded"
+      [class.tree-item--parent]="!!node.children"
       #treeItem="ngTreeItem"
     >
       <span aria-hidden="true" class="material-symbols-outlined expand-icon" translate="no">{{
         node.children ? 'chevron_right' : ''
       }}</span>
-      <span aria-hidden="true" class="material-symbols-outlined" translate="no">{{
-        node.children ? 'folder' : 'docs'
-      }}</span>
+      @if (node.icon) {
+        <app-settings-nav-icon class="node-icon" [name]="node.icon" />
+      }
       {{ node.name }}
       <span
         aria-hidden="true"

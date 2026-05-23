@@ -1,1 +1,60 @@
-<p>follows.component works!</p>,
+<section id="notifications">
+  <header>
+    <h2>Alerts</h2>
+    <p>Pick which channels deliver pre-event reminders, and how many minutes ahead of an event each one fires.</p>
+  </header>
+
+  @if (isLoading()) {
+    <p class="notify__status">Loading your preferences…</p>
+  } @else if (loadError()) {
+    <p class="notify__status notify__status--error">{{ loadError() }}</p>
+  } @else if (isEmpty()) {
+    <p class="notify__status">No sports are available yet. Once the catalogue syncs you'll be able to configure alerts here.</p>
+  } @else {
+    <ul class="notify__list">
+      @for (sport of sports(); track sport.sportId) {
+        <li class="notify__sport">
+          <h3 class="notify__sport-name">{{ sport.sportName }}</h3>
+
+          <div class="notify__channels">
+            @for (channel of channels; track channel) {
+              <div class="notify__channel">
+                <span class="notify__channel-label">{{ channel }}</span>
+
+                <label class="notify__toggle">
+                  <input
+                    type="checkbox"
+                    [checked]="sport.channels[channel].enabled"
+                    [disabled]="sport.channels[channel].saving"
+                    (change)="toggleEnabled(sport.sportId, channel, $any($event.target).checked)"
+                  />
+                  <span>{{ sport.channels[channel].enabled ? 'Enabled' : 'Disabled' }}</span>
+                </label>
+
+                <label class="notify__lead">
+                  Lead time
+                  <input
+                    type="number"
+                    min="1"
+                    step="1"
+                    [value]="sport.channels[channel].defaultLeadTimeMinutes"
+                    [disabled]="sport.channels[channel].saving || !sport.channels[channel].enabled"
+                    (change)="updateLeadTime(sport.sportId, channel, $any($event.target).value)"
+                  />
+                  <span class="notify__unit">min</span>
+                </label>
+
+                @if (sport.channels[channel].saving) {
+                  <span class="notify__hint">saving…</span>
+                }
+                @if (sport.channels[channel].error) {
+                  <span class="notify__hint notify__hint--error">{{ sport.channels[channel].error }}</span>
+                }
+              </div>
+            }
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</section>

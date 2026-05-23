@@ -6,6 +6,7 @@ import { createEmailForm } from './forms/email-form';
 import { createPasswordForm } from './forms/password-form';
 import { createdisplayNameForm } from './forms/display-name-form';
 import { SettingsNavStore } from '@shared/stores';
+import { scrollToSection } from '@shared/lib';
 
 @Component({
   selector: 'app-settings-account',
@@ -32,7 +33,7 @@ export class AccountComponent {
       const el = document.getElementById(section);
       if (!el) return;
 
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      scrollToSection(el);
       el.classList.add('section--active');
       setTimeout(() => el.classList.remove('section--active'), 1500);
     })

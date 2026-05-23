@@ -6,6 +6,7 @@ import { StatefulComboxAutocompleteSelectComponent, StatefulComboboxSelectInputC
 import { createDefaultViewForm } from './forms/default-view-form';
 import { createDateFormatForm } from './forms/date-format-form';
 import { SettingsNavStore } from '@shared/stores';
+import { scrollToSection } from '@shared/lib';
 
 @Component({
   selector: 'app-settings-preferences',
@@ -44,7 +45,7 @@ export class PreferencesComponent {
       const el = document.getElementById(section);
       if (!el) return;
 
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      scrollToSection(el);
       el.classList.add('section--active');
       setTimeout(() => el.classList.remove('section--active'), 1500);
     })
