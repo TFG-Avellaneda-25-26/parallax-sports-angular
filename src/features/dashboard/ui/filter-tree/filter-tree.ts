@@ -24,7 +24,10 @@ export class FilterTreeComponent {
   readonly nodes = input.required<SportNode[]>();
   protected readonly isAnyFilterActive = this.filterStore.isAnyFilterActive;
 
-  private readonly expandedSports = signal<ReadonlySet<string>>(new Set());
+  // Sports: tracked as a *collapsed* set → empty = all sports open by default.
+  private readonly collapsedSports = signal<ReadonlySet<string>>(new Set());
+  // Competitions: tracked as an *expanded* set → empty = all competitions
+  // closed by default (user sees sport→competition list, not the team drill-down).
   private readonly expandedCompetitions = signal<ReadonlySet<string>>(new Set());
 
   // All 8 filter-set signals aggregated into one local computed so Angular's
@@ -45,7 +48,7 @@ export class FilterTreeComponent {
   protected readonly hasNodes = computed(() => this.nodes().length > 0);
 
   protected isSportExpanded(key: string): boolean {
-    return this.expandedSports().has(key);
+    return !this.collapsedSports().has(key);
   }
 
   protected isCompetitionExpanded(key: string): boolean {
@@ -53,7 +56,7 @@ export class FilterTreeComponent {
   }
 
   protected toggleSport(key: string): void {
-    this.expandedSports.update(set => toggle(set, key));
+    this.collapsedSports.update(set => toggle(set, key));
   }
 
   protected toggleCompetition(key: string): void {

@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  height: 100%;
-  min-height: 0;
+  /* height is now driven by content; the parent aside handles sticky +
+     overflow-y scrolling if the tree overflows the viewport */
 }
 
 .tree-header {
@@ -40,13 +40,12 @@
 }
 
 .tree {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
   padding: 0.25rem;
+  /* No overflow-y here — the sticky aside scrolls as a unit when content
+     exceeds the viewport; no internal double-scroll needed */
 }
 
 .tree-empty {
