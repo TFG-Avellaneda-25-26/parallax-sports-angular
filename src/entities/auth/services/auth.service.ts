@@ -29,4 +29,8 @@ export class AuthService {
   initSettings(body: { timezone: string; theme: string }) {
     return this.apiClient.post('/api/users/settings/init', body);
   }
+
+  sendEmailRecovery(email: string) {
+    return this.apiClient.post('/api/auth/recover-email', { email: email });
+  }
 }
