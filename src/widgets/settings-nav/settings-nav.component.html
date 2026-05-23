@@ -15,9 +15,9 @@
       [(expanded)]="node.expanded"
       [class.tree-item--parent]="!!node.children"
       #treeItem="ngTreeItem"
-      (click)="!node.children && onSelect([node.value])"
-      (keydown.enter)="!node.children && onSelect([node.value])"
-      (expandedChange)="!node.children && onSelect([node.value])"
+      (click)="onSelect([node.value])"
+      (keydown.enter)="onSelect([node.value])"
+      (expandedChange)="onSelect([node.value])"
     >
       <span aria-hidden="true" class="material-symbols-outlined expand-icon" translate="no">{{
         node.children ? 'chevron_right' : ''

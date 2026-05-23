@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserStore } from '@entities/user';
 import { SettingsNavStore } from '@shared/stores';
@@ -39,4 +39,16 @@ export class SettingsNavComponent {
       ? this.navStore.tree()
       : this.navStore.tree().filter(node => node.name !== 'Admin')
   );
+
+  constructor() {
+    afterNextRender(() => {
+      const [value] = this.navStore.selected();
+      if (!value) return;
+
+      const [route, fragment] = value.split('/');
+      void this.router.navigate(['/settings', route], {
+        fragment: fragment ?? undefined
+      });
+    })
+  }
 }
