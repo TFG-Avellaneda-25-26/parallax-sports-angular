@@ -1,7 +1,9 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormField, FormRoot } from '@angular/forms/signals';
+import { UserStore } from '@entities/user';
 import { AuthStore } from '@features/auth/store/auth.store';
 import { StatefulInput } from '@shared/ui';
+import { SUPPORTED_PROVIDERS } from '@entities/provider';
 
 @Component({
   selector: 'app-auth-form',
@@ -12,7 +14,9 @@ import { StatefulInput } from '@shared/ui';
 })
 export class AuthFormComponent {
   readonly authStore = inject(AuthStore);
+  readonly userStore = inject(UserStore)
   readonly form = this.authStore.authForm;
+  readonly providers = SUPPORTED_PROVIDERS;
 
   switchMode(): void {
     this.authStore.toggleMode();
