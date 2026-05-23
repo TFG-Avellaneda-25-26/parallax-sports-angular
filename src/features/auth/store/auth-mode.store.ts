@@ -41,5 +41,8 @@ export const AuthModeStore = signalStore(
     goToPasswordStep(): void {
       patchState(store, { mode: 'recover', recoverStep: 'password' });
     },
+    setRecoverEmail(email: string): void {
+      patchState(store, { recoverEmail: email });
+    },
   })),
 );

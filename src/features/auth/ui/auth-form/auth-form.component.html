@@ -1,49 +1,60 @@
-<div class="auth-card">
-  <div class="auth-header">
-    <h1 class="auth-title">
-      {{ authStore.isRegisterMode() ? 'Create account' : 'Welcome back' }}
-    </h1>
-    <p class="auth-subtitle">
-      {{ authStore.isRegisterMode() ? 'Fill in the details below to get started' : 'Sign in to continue' }}
-    </p>
+<div class="auth-header">
+  <h1 class="auth-title">
+    {{ authStore.isRegisterMode() ? 'Create account' : 'Welcome back' }}
+  </h1>
+  <p class="auth-subtitle">
+    {{ authStore.isRegisterMode() ? 'Fill in the details below to get started' : 'Sign in to continue' }}
+  </p>
+</div>
+
+<form [formRoot]="form" class="auth-form">
+  @if (authStore.isRegisterMode()) {
+    <div class="field">
+      <app-stateful-input label="Display Name" fieldId="displayName" [formField]="form.displayName" />
+    </div>
+  }
+
+  <div class="field">
+    <app-stateful-input type="email" label="Email" fieldId="email" [formField]="form.email" />
   </div>
 
-  <form [formRoot]="form" class="auth-form">
-    @if (authStore.isRegisterMode()) {
-      <div class="field">
-        <app-stateful-input label="Display Name" fieldId="displayName" [formField]="form.displayName" />
-      </div>
-    }
-
-    <div class="field">
-      <app-stateful-input type="email" label="Email" fieldId="email" [formField]="form.email" />
-    </div>
-
-    <div class="field">
-      <app-stateful-input type="password" label="Password" fieldId="password" [formField]="form.password" />
-    </div>
-
-    @if (authStore.isRegisterMode()) {
-      <div class="field">
-        <app-stateful-input type="password" label="Confirm Password" fieldId="confirmPassword" [formField]="form.confirmPassword" />
-      </div>
-    }
-
-    <div class="field">
-      <button class="btn-submit" type="submit" [disabled]="form().submitting() || form().invalid()">
-        @if (form().submitting()) {
-          <span class="spinner"></span>
-        } @else {
-          {{ authStore.formSubmissionText() }}
-        }
+  <div class="field">
+    <app-stateful-input type="password" label="Password" fieldId="password" [formField]="form.password" />
+    @if (!authStore.isRegisterMode()) {
+      <button type="button" class="forgot-btn" (click)="authModeStore.goToRecover()">
+        Forgot password?
       </button>
-      @if (form().errors(); as errs) {
-        @for (err of errs; track err) {
-          <p class="form-error">{{ err.message }}</p>
-        }
-      }
+    }
+  </div>
+
+  @if (authStore.isRegisterMode()) {
+    <div class="field">
+      <app-stateful-input type="password" label="Confirm Password" fieldId="confirmPassword" [formField]="form.confirmPassword" />
     </div>
-  </form>
+  }
+
+  <div class="field">
+    <button class="btn-submit" type="submit" [disabled]="form().submitting() || form().invalid()">
+      @if (form().submitting()) {
+        <span class="spinner"></span>
+      } @else {
+        {{ authStore.formSubmissionText() }}
+      }
+    </button>
+    @if (form().errors(); as errs) {
+      @for (err of errs; track err) {
+        <p class="form-error">{{ err.message }}</p>
+      }
+    }
+  </div>
+</form>
+
+<div class="oauth-section">
+  <div class="oauth-divider">
+    <span class="oauth-divider__line"></span>
+    <span class="oauth-divider__text">or continue with</span>
+    <span class="oauth-divider__line"></span>
+  </div>
 
   <div class="oauth-buttons">
   @for (provider of providers; track provider.id) {
@@ -61,12 +72,12 @@
       <span>{{ provider.label }}</span>
     </button>
   }
+  </div>
 </div>
 
-  <p class="auth-switch">
-    {{ authStore.isRegisterMode() ? 'Already have an account?' : "Don't have an account?" }}
-    <button class="switch-btn" (click)="switchMode()">
-      {{ authStore.isRegisterMode() ? 'Sign in' : 'Register' }}
-    </button>
-  </p>
-</div>
+<p class="auth-switch">
+  {{ authStore.isRegisterMode() ? 'Already have an account?' : "Don't have an account?" }}
+  <button class="switch-btn" (click)="switchMode()">
+    {{ authStore.isRegisterMode() ? 'Sign in' : 'Register' }}
+  </button>
+</p>
