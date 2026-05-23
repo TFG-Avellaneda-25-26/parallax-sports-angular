@@ -33,4 +33,8 @@ export class AuthService {
   sendEmailRecovery(email: string) {
     return this.apiClient.post('/api/auth/recover-email', { email: email });
   }
+
+  verifyOtpCode(email: string, code: string) {
+    return this.apiClient.post('/api/auth/verify-code', { email, code });
+  }
 }
