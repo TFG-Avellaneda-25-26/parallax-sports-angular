@@ -5,6 +5,7 @@ import { Listbox, Option } from '@angular/aria/listbox';
 import { Combobox, ComboboxInput, ComboboxPopupContainer } from '@angular/aria/combobox';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings-autocomplete',
@@ -19,6 +20,8 @@ export class AutocompleteComponent {
   listBox = viewChild<Listbox<TreeNode>>(Listbox);
   options = viewChildren<Option<TreeNode>>(Option);
   comboBox = viewChild<Combobox<TreeNode>>(Combobox);
+
+  readonly router = inject(Router);
 
   query = signal('');
 
@@ -42,7 +45,13 @@ export class AutocompleteComponent {
   onSelect(nodes: TreeNode[]) {
     const [node] = nodes;
     if (!node) return;
+
     this.navStore.setSelected([node.value]);
     this.query.set('');
+
+    const [route, fragment] = node.value.split('/');
+    void this.router.navigate(['/settings', route], {
+      fragment: fragment ?? undefined
+    });
   }
 }
