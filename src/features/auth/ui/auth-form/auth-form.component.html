@@ -21,7 +21,7 @@
   <div class="field">
     <app-stateful-input type="password" label="Password" fieldId="password" [formField]="form.password" />
     @if (!authStore.isRegisterMode()) {
-      <button type="button" class="forgot-btn" (click)="authModeStore.goToRecover()">
+      <button type="button" class="forgot-btn" (click)="goToRecover()">
         Forgot password?
       </button>
     }

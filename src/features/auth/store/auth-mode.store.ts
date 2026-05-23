@@ -34,8 +34,8 @@ export const AuthModeStore = signalStore(
     goToAuth(): void {
       patchState(store, { mode: 'auth', recoverStep: 'email', recoverEmail: '' });
     },
-    goToRecover(): void {
-      patchState(store, { mode: 'recover', recoverStep: 'email', recoverEmail: '' });
+    goToRecover(email: string): void {
+      patchState(store, { mode: 'recover', recoverStep: 'email', recoverEmail: email });
     },
     goToOtpStep(email: string): void {
       patchState(store, { mode: 'recover', recoverStep: 'otp', recoverEmail: email });

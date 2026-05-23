@@ -36,7 +36,7 @@ export class RecoverEmail {
           if (!email) return null;
 
           try {
-            lastValueFrom(this.authService.sendEmailRecovery(email));
+            await lastValueFrom(this.authService.sendEmailRecovery(email));
             this.authModeStore.goToOtpStep(email);
             return null;
           } catch {
@@ -46,5 +46,5 @@ export class RecoverEmail {
         ignoreValidators: 'none'
       }
     }
-  )
+  );
 }

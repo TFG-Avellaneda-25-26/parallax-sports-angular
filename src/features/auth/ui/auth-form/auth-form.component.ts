@@ -25,9 +25,13 @@ export class AuthFormComponent {
   }
 
   goToRecover(): void {
-    if (this.authStore.authForm.email().valid()) {
-      this.authModeStore.setRecoverEmail(this.authStore.authForm.email().value());
+    let email = this.form.email().value();
+    const isValid = this.form.email().valid();
+
+    if (!isValid) {
+      email = '';
     }
-    this.authModeStore.goToRecover();
+
+    this.authModeStore.goToRecover(email);
   }
 }
