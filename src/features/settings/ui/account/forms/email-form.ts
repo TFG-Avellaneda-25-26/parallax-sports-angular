@@ -13,7 +13,7 @@ export const createEmailForm = () =>  {
     (schemaPath) => {
       readonly(schemaPath.currentEmail);
       apply(schemaPath.newEmail, emailSchema);
-      apply(schemaPath.newEmail, emailAsyncSchema(apiBaseUrl));
+      apply(schemaPath.newEmail, emailAsyncSchema(apiBaseUrl, 'register'));
       validate(schemaPath.newEmail, ({ value, valueOf }) => {
         const newEmail = value();
         const currentEmail = valueOf(schemaPath.currentEmail);

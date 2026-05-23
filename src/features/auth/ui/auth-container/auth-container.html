@@ -1,0 +1,8 @@
+<div class="auth-card">
+  @switch (authModeStore.activeView()) {
+    @case ('auth') { <app-auth-form /> }
+    @case ('email') { <app-recover-email /> }
+    @case ('otp') { <app-recover-otp /> }
+    @case ('password') { <app-recover-password /> }
+  }
+</div>

@@ -29,4 +29,16 @@ export class AuthService {
   initSettings(body: { timezone: string; theme: string }) {
     return this.apiClient.post('/api/users/settings/init', body);
   }
+
+  sendEmailRecovery(email: string) {
+    return this.apiClient.post('/api/auth/recover-email', { email: email });
+  }
+
+  verifyOtpCode(email: string, code: string) {
+    return this.apiClient.post('/api/auth/verify-code', { email, code });
+  }
+
+  resetPassword(email: string, code: string, password: string) {
+    return this.apiClient.post('/api/auth/reset-password', { email, code, password });
+  }
 }

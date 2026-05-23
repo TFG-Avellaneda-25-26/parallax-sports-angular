@@ -1,0 +1,42 @@
+<div class="auth-header">
+  <h1 class="auth-title">Recover password</h1>
+  <p class="auth-subtitle">Enter your email and we'll send you a recovery code</p>
+</div>
+
+<form [formRoot]="emailForm" class="auth-form">
+  <div class="field">
+    <app-stateful-input
+      type="email"
+      label="Email"
+      fieldId="recoverEmail"
+      [formField]="emailForm.email"
+    />
+  </div>
+
+  <div class="field">
+    <button
+      class="btn-submit"
+      type="submit"
+      [disabled]="emailForm().submitting() || emailForm().invalid()"
+    >
+      @if (emailForm().submitting()) {
+        <span class="spinner"></span>
+      } @else {
+        Send recovery code
+      }
+    </button>
+
+    @if (emailForm().errors(); as errs) {
+      @for (err of errs; track err) {
+        <p class="form-error">{{ err.message }}</p>
+      }
+    }
+  </div>
+</form>
+<p class="auth-switch">
+  Remember your password?
+  <button class="switch-btn" (click)="goBack()">
+    Sign in
+  </button>
+</p>
+

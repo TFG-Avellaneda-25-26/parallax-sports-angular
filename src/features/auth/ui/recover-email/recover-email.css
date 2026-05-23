@@ -1,0 +1,5 @@
+@import '../auth-form/auth-form.component.css';
+
+:host {
+  display: block;
+}

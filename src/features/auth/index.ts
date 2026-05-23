@@ -5,3 +5,8 @@ export { AuthFormComponent } from './ui/auth-form/auth-form.component';
 export { LogoutButtonComponent } from './ui/logout-button/logout-button.component';
 export { OtpDialogComponent } from './ui/otp-dialog/otp-dialog.component';
 export { AuthStore } from './store/auth.store';
+export { AuthContainer } from './ui/auth-container/auth-container';
+export { RecoverEmail } from './ui/recover-email/recover-email';
+export { RecoverOtp } from './ui/recover-otp/recover-otp';
+export { RecoverPassword } from './ui/recover-password/recover-password';
+export { AuthModeStore } from './store/auth-mode.store';

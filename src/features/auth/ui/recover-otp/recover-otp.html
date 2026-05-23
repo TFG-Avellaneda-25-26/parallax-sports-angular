@@ -1,0 +1,22 @@
+<div class="auth-header">
+  <h1 class="auth-title">Check your email</h1>
+  <p class="auth-subtitle">
+    We sent a 6-digit code to <strong>{{ authModeStore.recoverEmail() }}</strong>
+  </p>
+</div>
+
+<app-otp-input
+  #otpInput
+  [showClose]="false"
+  [showResend]="true"
+  [isResending]="isResending()"
+  (verified)="onVerified($event)"
+  (resendRequested)="onResend()"
+/>
+
+<p class="auth-switch">
+  Wrong email?
+  <button class="switch-btn" (click)="authModeStore.goToRecover(authModeStore.recoverEmail())">
+    Go back
+  </button>
+</p>

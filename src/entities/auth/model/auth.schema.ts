@@ -9,7 +9,7 @@ export const displayNameSchema = schema<string>((displayNamePath) => {
 
 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-export const emailAsyncSchema = (API_BASE_URL: string) => schema<string>((emailPath) => {
+export const emailAsyncSchema = (API_BASE_URL: string, mode: 'register' | 'recover') => schema<string>((emailPath) => {
   debounce(emailPath, 1000);
   validateHttp<string, EmailAvailabilityResponse>(emailPath, {
     request: ({value}) => {
@@ -22,12 +22,15 @@ export const emailAsyncSchema = (API_BASE_URL: string) => schema<string>((emailP
       return undefined;
     },
     onSuccess: (response) => {
-      return !response
-      ? null
-      : {
-        kind: 'emailTaken',
-        message: 'Email is already taken'
-      };
+      if (mode === 'register') {
+        return !response
+        ? null
+        : { kind: 'emailTaken', message: 'Email is already taken' };
+      } else {
+        return response
+        ? null
+        : { kind: 'emailNotFound', message: 'No account found with this email' };
+      }
     },
     onError: (error) => {
       console.error('Error validating email', error);
