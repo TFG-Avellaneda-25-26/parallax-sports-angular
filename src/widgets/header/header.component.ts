@@ -4,6 +4,7 @@ import {
   DestroyRef,
   ElementRef,
   afterNextRender,
+  computed,
   inject,
   viewChild,
 } from '@angular/core';
@@ -12,10 +13,11 @@ import { UserStore } from '@entities/user';
 import { LogoutButtonComponent, VerifyEmailComponent } from '@features/auth';
 import { ThemeToggleComponent } from '@features/theme-switch';
 import { gsap } from '@shared/lib';
+import { LogoComponent } from '@shared/ui';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, ThemeToggleComponent, LogoutButtonComponent, VerifyEmailComponent],
+  imports: [RouterLink, ThemeToggleComponent, LogoutButtonComponent, VerifyEmailComponent, LogoComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,6 +26,19 @@ export class HeaderComponent {
   protected readonly userStore = inject(UserStore);
   private readonly destroyRef = inject(DestroyRef);
   private readonly borderRef = viewChild.required<ElementRef<SVGPathElement>>('borderPath');
+
+  // Local computed signal that aggregates the cross-component @ngrx
+  // signalStore signals. Reading a *local* computed in the OnPush template
+  // makes Angular's reactive CD reliably re-render this component when either
+  // source flips — works around a quirk in zoneless + OnPush where store
+  // signals read across component boundaries can miss the first update.
+  protected readonly shouldShowVerifyBadge = computed(
+    () => this.userStore.isAuthenticated() && !this.userStore.isVerified(),
+  );
+
+  protected readonly shouldShowAuthActions = computed(
+    () => this.userStore.isAuthenticated(),
+  );
 
   constructor() {
     afterNextRender(() => this.runIntro());

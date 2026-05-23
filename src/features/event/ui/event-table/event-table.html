@@ -30,7 +30,7 @@
         }
         @for (ev of group.children; track ev.id) {
           <tr class="event-table__row">
-            <td class="event-table__time">{{ ev.startTimeUtc | eventTime: locale() : timeZone() }}</td>
+            <td class="event-table__time">{{ ev.startTimeUtc | eventTime: timeZone() }}</td>
             <td>{{ ev.sportName }}</td>
             <td>{{ ev.competitionName ?? '—' }}</td>
             <td class="event-table__name" [class.event-table__name--bold]="!group.parent">{{ ev.name }}</td>

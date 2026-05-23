@@ -37,4 +37,8 @@ export class AuthService {
   resetPassword(email: string, code: string, password: string) {
     return this.apiClient.post('/api/auth/forgot-password/reset', { email, code, password });
   }
+
+  initSettings(body: { timezone: string; theme: string }) {
+    return this.apiClient.post('/api/users/settings/init', body);
+  }
 }

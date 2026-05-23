@@ -14,8 +14,7 @@ export class EventCardComponent {
   readonly event = input.required<SportEvent>();
 
   private readonly userStore = inject(UserStore);
-  protected readonly locale = this.userStore.locale;
-  protected readonly timeZone = this.userStore.timeZone;
+  protected readonly timeZone = this.userStore.timezone;
 
   protected readonly circuitMask = computed(() => {
     const url = this.event().venueImageUrl;
