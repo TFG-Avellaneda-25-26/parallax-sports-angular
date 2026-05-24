@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { apply, form, FormField, FormRoot } from '@angular/forms/signals';
 import { AuthService, emailAsyncSchema, emailSchema } from '@entities/auth';
-import { AuthModeStore } from '@features/auth';
+import { authI18n, AuthModeStore } from '@features/auth';
 import { API_BASE_URL } from '@shared/config';
 import { StatefulInput } from '@shared/ui';
 import { lastValueFrom } from 'rxjs';
@@ -17,6 +17,8 @@ export class RecoverEmail {
   readonly apiBaseUrl = inject(API_BASE_URL);
   readonly authModeStore = inject(AuthModeStore);
   readonly authService = inject(AuthService);
+
+  readonly i18n = authI18n.recover;
 
   goBack() {
     this.authModeStore.goToAuth();
@@ -40,7 +42,7 @@ export class RecoverEmail {
             this.authModeStore.goToOtpStep(email);
             return null;
           } catch {
-            return { kind: 'serverError', message: 'Failed to send recovery email. Please try again later' };
+            return { kind: 'serverError', message: this.i18n.submitError };
           }
         },
         ignoreValidators: 'none'

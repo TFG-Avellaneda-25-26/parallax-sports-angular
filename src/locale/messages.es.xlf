@@ -91,5 +91,47 @@
         <target>O continuar con</target>
       </segment>
     </unit>
+  <unit id="auth.recover.email.title">
+      <segment>
+        <source>Recover password</source>
+        <target>Recuperar contraseña</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.subtitle">
+      <segment>
+        <source>Enter your email and we&apos;ll send you a recovery code</source>
+        <target>Ingresa tu correo electrónico y te enviaremos un código de recuperación</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.button">
+      <segment>
+        <source>Send recovery email</source>
+        <target>Enviar correo de recuperación</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.remember">
+      <segment>
+        <source>Remember your password?</source>
+        <target>¿Recuerdas tu contraseña?</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.sign-in">
+      <segment>
+        <source>Sign in</source>
+        <target>Iniciar sesión</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.submit-error">
+      <segment>
+        <source>Failed to send recovery email. Please try again later</source>
+        <target>No se pudo enviar el correo de recuperación. Por favor, inténtalo de nuevo más tarde</target>
+      </segment>
+    </unit>
+    <unit id="logout.button">
+      <segment>
+        <source>Logout</source>
+        <target>Cerrar sesión</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

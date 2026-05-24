@@ -81,6 +81,63 @@
         <source>Or continue with</source>
       </segment>
     </unit>
+    <unit id="auth.recover.email.title">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:15</note>
+      </notes>
+      <segment>
+        <source>Recover password</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.subtitle">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:16</note>
+      </notes>
+      <segment>
+        <source>Enter your email and we&apos;ll send you a recovery code</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.button">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:17</note>
+      </notes>
+      <segment>
+        <source>Send recovery email</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.remember">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:18</note>
+      </notes>
+      <segment>
+        <source>Remember your password?</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.sign-in">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:19</note>
+      </notes>
+      <segment>
+        <source>Sign in</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.submit-error">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:20</note>
+      </notes>
+      <segment>
+        <source>Failed to send recovery email. Please try again later</source>
+      </segment>
+    </unit>
+    <unit id="logout.button">
+      <notes>
+        <note category="location">src/features/auth/ui/logout-button/logout-button.component.html:8,10</note>
+      </notes>
+      <segment>
+        <source> Logout
+</source>
+      </segment>
+    </unit>
     <unit id="landing.title">
       <notes>
         <note category="location">src/pages/landing/landing-page.html:13,15</note>
