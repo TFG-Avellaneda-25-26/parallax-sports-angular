@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "start:local": "NG_API_URL=http://localhost:8080 ng serve",
+    "start:es": "NG_API_URL=http://localhost:8080 ng serve --configuration es",
+    "start:en-US": "NG_API_URL=http://localhost:8080 ng serve --configuration en-US",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
