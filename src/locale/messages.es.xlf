@@ -217,5 +217,95 @@
         <target>No hay eventos cargados.</target>
       </segment>
     </unit>
+  <unit id="error.unknown">
+      <segment>
+        <source>Unknown Error</source>
+        <target>Error desconocido</target>
+      </segment>
+    </unit>
+    <unit id="error.go-home">
+      <segment>
+        <source>Go Home</source>
+        <target>Ir a la página principal</target>
+      </segment>
+    </unit>
+    <unit id="error.go-home.aria">
+      <segment>
+        <source>Go Home</source>
+        <target>Ir a la página principal</target>
+      </segment>
+    </unit>
+    <unit id="error.status.0">
+      <segment>
+        <source>Network Error</source>
+        <target>Error de red</target>
+      </segment>
+    </unit>
+    <unit id="error.status.400">
+      <segment>
+        <source>Bad Request</source>
+        <target>Solicitud incorrecta</target>
+      </segment>
+    </unit>
+    <unit id="error.status.401">
+      <segment>
+        <source>Unauthorized</source>
+        <target>No autorizado</target>
+      </segment>
+    </unit>
+    <unit id="error.status.403">
+      <segment>
+        <source>Forbidden</source>
+        <target>Prohibido</target>
+      </segment>
+    </unit>
+    <unit id="error.status.404">
+      <segment>
+        <source>Not Found</source>
+        <target>No encontrado</target>
+      </segment>
+    </unit>
+    <unit id="error.status.409">
+      <segment>
+        <source>Conflict</source>
+        <target>Conflicto</target>
+      </segment>
+    </unit>
+    <unit id="error.status.500">
+      <segment>
+        <source>Internal Server Error</source>
+        <target>Error interno del servidor</target>
+      </segment>
+    </unit>
+    <unit id="error.status.502">
+      <segment>
+        <source>Bad Gateway</source>
+        <target>Bad Gateway</target>
+      </segment>
+    </unit>
+    <unit id="error.status.503">
+      <segment>
+        <source>Service Unavailable</source>
+        <target>Servicio no disponible</target>
+      </segment>
+    </unit>
+    <unit id="error.status.unknown">
+      <segment>
+        <source>Unknown Error</source>
+        <target>Error desconocido</target>
+      </segment>
+    </unit>
+  <unit id="error.network-detail">
+      <segment>
+        <source>Unable to reach the server</source>
+        <target>No se puede alcanzar el servidor</target>
+      </segment>
+    </unit>
+    <unit id="error.unexpected-detail">
+      <segment>
+        <source>An unexpected error occurred</source>
+        <target>Ha ocurrido un error inesperado</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

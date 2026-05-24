@@ -1,6 +1,7 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { errorI18n, errorStatusTitles } from '@shared/i18n';
 import { ProblemDetails } from '@shared/models';
 import { ErrorStore } from '@shared/stores';
 import { catchError, throwError } from 'rxjs';
@@ -9,6 +10,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
   const router = inject(Router);
   const errorStore = inject(ErrorStore);
+  const i18n = errorI18n;
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -17,12 +19,20 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       if (error.error && typeof error.error == 'object' && 'type' in error.error) {
         console.log("error.error: ", error.error);
         problem = error.error as ProblemDetails;
+
+        problem = {
+          ...problem,
+          title: errorStatusTitles[problem.status] ?? problem.title,
+          detail: problem.status >= 500
+            ? errorI18n.unexpectedDetail
+            : problem.detail,
+        }
       } else if (error.status === 0) {
         problem = {
           type: 'about:blank',
-          title: 'Network Error',
+          title: errorStatusTitles[0],
           status: 0,
-          detail: 'Unable to reach the server.',
+          detail: i18n.networkDetail,
           instance: req.url
         };
       } else {
@@ -30,7 +40,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           type: 'about:blank',
           title: getTitleByStatus(error.status),
           status: error.status,
-          detail: 'An unexpected error occurred.',
+          detail: i18n.unexpectedDetail,
           instance: req.url
         };
       }
@@ -55,16 +65,5 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 };
 
 function getTitleByStatus(status: number): string {
-  const statusTitles: Record<number, string> = {
-    0: 'Network Error',
-    400: 'Bad Request',
-    401: 'Unauthorized',
-    403: 'Forbidden',
-    404: 'Not Found',
-    409: 'Conflict',
-    500: 'Internal Server Error',
-    502: 'Bad Gateway',
-    503: 'Service Unavailable'
-  };
-  return statusTitles[status] || 'An error occurred';
+  return errorStatusTitles[status] ?? $localize`:@@error.status.unknown:Unknown Error`;
 }

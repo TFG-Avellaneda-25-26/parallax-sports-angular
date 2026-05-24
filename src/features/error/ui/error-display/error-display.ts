@@ -11,6 +11,7 @@ import {
 import { Router } from '@angular/router';
 import { ErrorStore } from '@shared/stores';
 import { gsap } from '@shared/lib';
+import { errorI18n } from '@shared/i18n';
 
 @Component({
   selector: 'app-error-display',
@@ -22,6 +23,8 @@ export class ErrorDisplay {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   readonly errorStore = inject(ErrorStore);
+
+  readonly i18n = errorI18n
 
   readonly statusText = computed(() => {
     const status = this.errorStore.status();

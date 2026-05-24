@@ -290,5 +290,125 @@
         <source>Get Started</source>
       </segment>
     </unit>
+    <unit id="error.unknown">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:2</note>
+      </notes>
+      <segment>
+        <source>Unknown Error</source>
+      </segment>
+    </unit>
+    <unit id="error.go-home">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:3</note>
+      </notes>
+      <segment>
+        <source>Go Home</source>
+      </segment>
+    </unit>
+    <unit id="error.go-home.aria">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:4</note>
+      </notes>
+      <segment>
+        <source>Go Home</source>
+      </segment>
+    </unit>
+    <unit id="error.network-detail">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:5</note>
+      </notes>
+      <segment>
+        <source>Unable to reach the server</source>
+      </segment>
+    </unit>
+    <unit id="error.unexpected-detail">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:6</note>
+      </notes>
+      <segment>
+        <source>An unexpected error occurred</source>
+      </segment>
+    </unit>
+    <unit id="error.status.0">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:10</note>
+      </notes>
+      <segment>
+        <source>Network Error</source>
+      </segment>
+    </unit>
+    <unit id="error.status.400">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:11</note>
+      </notes>
+      <segment>
+        <source>Bad Request</source>
+      </segment>
+    </unit>
+    <unit id="error.status.401">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:12</note>
+      </notes>
+      <segment>
+        <source>Unauthorized</source>
+      </segment>
+    </unit>
+    <unit id="error.status.403">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:13</note>
+      </notes>
+      <segment>
+        <source>Forbidden</source>
+      </segment>
+    </unit>
+    <unit id="error.status.404">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:14</note>
+      </notes>
+      <segment>
+        <source>Not Found</source>
+      </segment>
+    </unit>
+    <unit id="error.status.409">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:15</note>
+      </notes>
+      <segment>
+        <source>Conflict</source>
+      </segment>
+    </unit>
+    <unit id="error.status.500">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:16</note>
+      </notes>
+      <segment>
+        <source>Internal Server Error</source>
+      </segment>
+    </unit>
+    <unit id="error.status.502">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:17</note>
+      </notes>
+      <segment>
+        <source>Bad Gateway</source>
+      </segment>
+    </unit>
+    <unit id="error.status.503">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:18</note>
+      </notes>
+      <segment>
+        <source>Service Unavailable</source>
+      </segment>
+    </unit>
+    <unit id="error.status.unknown">
+      <notes>
+        <note category="location">src/shared/interceptors/error.interceptor.ts:60</note>
+      </notes>
+      <segment>
+        <source>Unknown Error</source>
+      </segment>
+    </unit>
   </file>
 </xliff>
