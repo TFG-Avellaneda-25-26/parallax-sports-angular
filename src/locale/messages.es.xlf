@@ -193,5 +193,11 @@
         <target>Filtros</target>
       </segment>
     </unit>
+  <unit id="dashboard.filter.drawer.title">
+      <segment>
+        <source>Filters</source>
+        <target>Filtros</target>
+      </segment>
+    </unit>
   </file>
 </xliff>
