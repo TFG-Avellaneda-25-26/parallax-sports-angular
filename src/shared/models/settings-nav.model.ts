@@ -40,7 +40,7 @@ export const SETTINGS_TREE: TreeNode[] = [
   },
   {
     name: settingsTreeI18n.notifications,
-    value: 'notifications',
+    value: 'follows',
     icon: 'bell-ring',
     disabled: true,
     children: [
