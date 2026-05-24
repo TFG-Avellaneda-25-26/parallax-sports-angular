@@ -157,5 +157,29 @@
         <target>Volver</target>
       </segment>
     </unit>
+  <unit id="auth.recover.password.title">
+      <segment>
+        <source>New password</source>
+        <target>Contraseña nueva</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.password.subtitle">
+      <segment>
+        <source>Choose a strong password for your account</source>
+        <target>Elige una contraseña fuerte para tu cuenta</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.password.button">
+      <segment>
+        <source>Reset password</source>
+        <target>Restablecer contraseña</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.password.submit-error">
+      <segment>
+        <source>Failed to reset password. Please try again.</source>
+        <target>No se pudo restablecer la contraseña. Por favor, inténtalo de nuevo.</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

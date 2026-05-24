@@ -161,6 +161,38 @@
         <source>Go back</source>
       </segment>
     </unit>
+    <unit id="auth.recover.password.title">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:29</note>
+      </notes>
+      <segment>
+        <source>New password</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.password.subtitle">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:30</note>
+      </notes>
+      <segment>
+        <source>Choose a strong password for your account</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.password.button">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:31</note>
+      </notes>
+      <segment>
+        <source>Reset password</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.password.submit-error">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:32</note>
+      </notes>
+      <segment>
+        <source>Failed to reset password. Please try again.</source>
+      </segment>
+    </unit>
     <unit id="logout.button">
       <notes>
         <note category="location">src/features/auth/ui/logout-button/logout-button.component.html:8,10</note>

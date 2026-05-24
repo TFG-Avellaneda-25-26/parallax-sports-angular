@@ -28,5 +28,11 @@ export const authI18n = {
     otpSubtitle: $localize`:@@auth.recover.otp.subtitle:We sent a 6-digit code to`,
     otpWrongEmail: $localize`:@@auth.recover.otp.wrong-email:Wrong email?`,
     otpGoBack: $localize`:@@auth.recover.otp.go-back:Go back`,
+  },
+  'recover-password': {
+    passwordTitle: $localize`:@@auth.recover.password.title:New password`,
+    passwordSubtitle: $localize`:@@auth.recover.password.subtitle:Choose a strong password for your account`,
+    passwordButton: $localize`:@@auth.recover.password.button:Reset password`,
+    submitError: $localize`:@@auth.recover.password.submit-error:Failed to reset password. Please try again.`,
   }
 }
