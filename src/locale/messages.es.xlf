@@ -181,5 +181,11 @@
         <target>No se pudo restablecer la contraseña. Por favor, inténtalo de nuevo.</target>
       </segment>
     </unit>
+  <unit id="auth.verify.email.button">
+      <segment>
+        <source>Verify</source>
+        <target>Verificar</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

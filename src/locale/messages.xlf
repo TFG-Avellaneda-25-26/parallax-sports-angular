@@ -202,6 +202,14 @@
 </source>
       </segment>
     </unit>
+    <unit id="auth.verify.email.button">
+      <notes>
+        <note category="location">src/features/auth/ui/verify-email/verify-email.component.html:11,14</note>
+      </notes>
+      <segment>
+        <source> Verify </source>
+      </segment>
+    </unit>
     <unit id="landing.title">
       <notes>
         <note category="location">src/pages/landing/landing-page.html:13,15</note>
