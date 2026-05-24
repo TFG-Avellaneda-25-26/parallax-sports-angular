@@ -12,6 +12,14 @@
   "projects": {
     "parallax-sports": {
       "projectType": "application",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "es": {
+            "translation": "src/locale/messages.es.xlf"
+          }
+        }
+      },
       "schematics": {
         "@schematics/angular:class": {
           "skipTests": true
@@ -55,6 +63,9 @@
             ],
             "styles": [
               "src/styles.css"
+            ],
+            "polyfills": [
+              "@angular/localize/init"
             ]
           },
           "configurations": {
@@ -92,6 +103,12 @@
             },
             "development": {
               "buildTarget": "parallax-sports:build:development"
+            },
+            "es": {
+              "buildTarget": "parallax-sports:build:es"
+            },
+            "en-US": {
+              "buildTarget": "parallax-sports:build:en-US"
             }
           },
           "defaultConfiguration": "development"
