@@ -250,6 +250,54 @@
         <source>No events loaded.</source>
       </segment>
     </unit>
+    <unit id="event.card.grid.empty">
+      <notes>
+        <note category="location">src/features/event/ui/event-card-grid/event-card-grid.html:2,4</note>
+      </notes>
+      <segment>
+        <source>No events match the current filters.</source>
+      </segment>
+    </unit>
+    <unit id="event.table.empty">
+      <notes>
+        <note category="location">src/features/event/ui/event-table/event-table.html:2,4</note>
+      </notes>
+      <segment>
+        <source>No events match the current filters.</source>
+      </segment>
+    </unit>
+    <unit id="event.table.col.time">
+      <notes>
+        <note category="location">src/features/event/ui/event-table/event-table.html:13,14</note>
+      </notes>
+      <segment>
+        <source>Start</source>
+      </segment>
+    </unit>
+    <unit id="event.table.col.sport">
+      <notes>
+        <note category="location">src/features/event/ui/event-table/event-table.html:14,15</note>
+      </notes>
+      <segment>
+        <source>Sport</source>
+      </segment>
+    </unit>
+    <unit id="event.table.col.comp">
+      <notes>
+        <note category="location">src/features/event/ui/event-table/event-table.html:15,16</note>
+      </notes>
+      <segment>
+        <source>Competition</source>
+      </segment>
+    </unit>
+    <unit id="event.table.col.event">
+      <notes>
+        <note category="location">src/features/event/ui/event-table/event-table.html:16,19</note>
+      </notes>
+      <segment>
+        <source>Event</source>
+      </segment>
+    </unit>
     <unit id="landing.title">
       <notes>
         <note category="location">src/pages/landing/landing-page.html:13,15</note>
@@ -404,7 +452,7 @@
     </unit>
     <unit id="error.status.unknown">
       <notes>
-        <note category="location">src/shared/interceptors/error.interceptor.ts:60</note>
+        <note category="location">src/shared/interceptors/error.interceptor.ts:68</note>
       </notes>
       <segment>
         <source>Unknown Error</source>

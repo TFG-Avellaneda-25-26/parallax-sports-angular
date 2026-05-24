@@ -307,5 +307,41 @@
         <target>Ha ocurrido un error inesperado</target>
       </segment>
     </unit>
+  <unit id="event.card.grid.empty">
+      <segment>
+        <source>No events match the current filters.</source>
+        <target>No hay eventos que coincidan con los filtros actuales.</target>
+      </segment>
+    </unit>
+    <unit id="event.table.empty">
+      <segment>
+        <source>No events match the current filters.</source>
+        <target>No hay eventos que coincidan con los filtros actuales.</target>
+      </segment>
+    </unit>
+    <unit id="event.table.col.time">
+      <segment>
+        <source>Start</source>
+        <target>Inicio</target>
+      </segment>
+    </unit>
+    <unit id="event.table.col.sport">
+      <segment>
+        <source>Sport</source>
+        <target>Deporte</target>
+      </segment>
+    </unit>
+    <unit id="event.table.col.comp">
+      <segment>
+        <source>Competition</source>
+        <target>Competición</target>
+      </segment>
+    </unit>
+    <unit id="event.table.col.event">
+      <segment>
+        <source>Event</source>
+        <target>Evento</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

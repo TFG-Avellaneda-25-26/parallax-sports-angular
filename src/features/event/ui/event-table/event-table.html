@@ -1,5 +1,5 @@
 @if (groups().length === 0) {
-  <p class="event-table__empty">No events match the current filters.</p>
+  <p class="event-table__empty" i18n="@@event.table.empty">No events match the current filters.</p>
 } @else {
   <table class="event-table">
     <colgroup>
@@ -10,10 +10,10 @@
     </colgroup>
     <thead>
       <tr>
-        <th scope="col">Start</th>
-        <th scope="col">Sport</th>
-        <th scope="col">Competition</th>
-        <th scope="col">Event</th>
+        <th scope="col" i18n="@@event.table.col.time">Start</th>
+        <th scope="col" i18n="@@event.table.col.sport">Sport</th>
+        <th scope="col" i18n="@@event.table.col.comp">Competition</th>
+        <th scope="col" i18n="@@event.table.col.event">Event</th>
       </tr>
     </thead>
     @for (group of groups(); track group.id) {
