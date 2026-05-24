@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="es" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="landing.title" datatype="html">
+        <source>Parallax-Sports</source>
+        <target>Parallax-Sports</target>
+      </trans-unit>
+      <trans-unit id="landing.desc.track" datatype="html">
+        <source>Track sports.</source>
+        <target>Sigue el deporte.</target>
+      </trans-unit>
+      <trans-unit id="landing.desc.alerts" datatype="html">
+        <source>Get alerts.</source>
+        <target>Recibe alertas.</target>
+      </trans-unit>
+      <trans-unit id="landing.desc.moment" datatype="html">
+        <source>Never miss a moment.</source>
+        <target>No te pierdas ningún momento.</target>
+      </trans-unit>
+      <trans-unit id="landing.cta" datatype="html">
+        <source>Get Started</source>
+        <target>Comenzar</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
