@@ -31,5 +31,65 @@
         <target>Comenzar</target>
       </segment>
     </unit>
+  <unit id="auth.title.register">
+      <segment>
+        <source>Create account</source>
+        <target>Crear cuenta</target>
+      </segment>
+    </unit>
+    <unit id="auth.title.login">
+      <segment>
+        <source>Welcome back</source>
+        <target>Bienvenido de nuevo</target>
+      </segment>
+    </unit>
+    <unit id="auth.subtitle.register">
+      <segment>
+        <source>Fill in the details below to get started</source>
+        <target>Rellena los detalles a continuación para empezar</target>
+      </segment>
+    </unit>
+    <unit id="auth.subtitle.login">
+      <segment>
+        <source>Sign in to continue</source>
+        <target>Ingresa para continuar</target>
+      </segment>
+    </unit>
+    <unit id="auth.switch.have-account">
+      <segment>
+        <source>Already have an account?</source>
+        <target>¿Ya tienes una cuenta?</target>
+      </segment>
+    </unit>
+    <unit id="auth.switch.no-account">
+      <segment>
+        <source>Don&apos;t have an account?</source>
+        <target>¿No tienes una cuenta?</target>
+      </segment>
+    </unit>
+    <unit id="auth.button.sign-in">
+      <segment>
+        <source>Sign in</source>
+        <target>Iniciar sesión</target>
+      </segment>
+    </unit>
+    <unit id="auth.button.register">
+      <segment>
+        <source>Register</source>
+        <target>Registrarse</target>
+      </segment>
+    </unit>
+    <unit id="auth.forgot-password">
+      <segment>
+        <source>Forgot password?</source>
+        <target>¿Olvidaste tu contraseña?</target>
+      </segment>
+    </unit>
+    <unit id="auth.oauth.divider">
+      <segment>
+        <source>Or continue with</source>
+        <target>O continuar con</target>
+      </segment>
+    </unit>
   </file>
 </xliff>
