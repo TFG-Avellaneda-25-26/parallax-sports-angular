@@ -3,7 +3,7 @@ import { apply, debounce, form, validate, validateHttp } from "@angular/forms/si
 import { loginPasswordSchema, passwordSchema } from "@entities/auth";
 import { UserStore } from "@entities/user";
 import { API_BASE_URL } from "@shared/config";
-
+import { accountI18n } from "@features/settings";
 
 export const createPasswordForm = () => {
   const userStore = inject(UserStore);
@@ -32,14 +32,14 @@ export const createPasswordForm = () => {
           ? null
           : {
             kind: 'wrongPassword',
-            message: 'Current password is incorrect'
+            message: accountI18n.password.errorWrong
            };
         },
         onError: (error) => {
           console.error('Error validating password', error);
           return {
             kind: 'serverError',
-            message: 'Could not verify password at this time. Please try again later'
+            message: accountI18n.password.errorServer
           };
         }
       });
@@ -50,7 +50,7 @@ export const createPasswordForm = () => {
         if (newPassword && currentPassword && newPassword === currentPassword) {
           return {
             kind: 'sameAsCurrent',
-              message: 'New password must be different from current password'
+              message: accountI18n.password.errorSame
             };
           }
 
@@ -71,7 +71,7 @@ export const createPasswordForm = () => {
           } catch {
             return {
               kind: 'updateError',
-              message: 'Failed to update password. Please try again.'
+              message: accountI18n.password.errorUpdate
             }
           }
         },
