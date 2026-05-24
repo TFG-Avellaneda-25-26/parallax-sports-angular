@@ -1,42 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en-US" datatype="plaintext" original="ng2.template">
-    <body>
-      <trans-unit id="landing.title" datatype="html">
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US">
+  <file id="ngi18n" original="ng.template">
+    <unit id="landing.title">
+      <notes>
+        <note category="location">src/pages/landing/landing-page.html:13,15</note>
+      </notes>
+      <segment>
         <source>Parallax-Sports</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/pages/landing/landing-page.html</context>
-          <context context-type="linenumber">13,15</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="landing.desc.track" datatype="html">
+      </segment>
+    </unit>
+    <unit id="landing.desc.track">
+      <notes>
+        <note category="location">src/pages/landing/landing-page.html:16,17</note>
+      </notes>
+      <segment>
         <source>Track sports.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/pages/landing/landing-page.html</context>
-          <context context-type="linenumber">16,17</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="landing.desc.alerts" datatype="html">
+      </segment>
+    </unit>
+    <unit id="landing.desc.alerts">
+      <notes>
+        <note category="location">src/pages/landing/landing-page.html:17,18</note>
+      </notes>
+      <segment>
         <source>Get alerts.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/pages/landing/landing-page.html</context>
-          <context context-type="linenumber">17,18</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="landing.desc.moment" datatype="html">
+      </segment>
+    </unit>
+    <unit id="landing.desc.moment">
+      <notes>
+        <note category="location">src/pages/landing/landing-page.html:18,21</note>
+      </notes>
+      <segment>
         <source>Never miss a moment.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/pages/landing/landing-page.html</context>
-          <context context-type="linenumber">18,21</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="landing.cta" datatype="html">
+      </segment>
+    </unit>
+    <unit id="landing.cta">
+      <notes>
+        <note category="location">src/pages/landing/landing-page.html:22,25</note>
+      </notes>
+      <segment>
         <source>Get Started</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/pages/landing/landing-page.html</context>
-          <context context-type="linenumber">22,25</context>
-        </context-group>
-      </trans-unit>
-    </body>
+      </segment>
+    </unit>
   </file>
 </xliff>

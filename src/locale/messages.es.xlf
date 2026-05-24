@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="es" datatype="plaintext" original="ng2.template">
-    <body>
-      <trans-unit id="landing.title" datatype="html">
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US" trgLang="es">
+  <file id="ngi18n" original="ng.template">
+    <unit id="landing.title">
+      <segment>
         <source>Parallax-Sports</source>
         <target>Parallax-Sports</target>
-      </trans-unit>
-      <trans-unit id="landing.desc.track" datatype="html">
+      </segment>
+    </unit>
+    <unit id="landing.desc.track">
+      <segment>
         <source>Track sports.</source>
-        <target>Sigue el deporte.</target>
-      </trans-unit>
-      <trans-unit id="landing.desc.alerts" datatype="html">
+        <target>Seguir deportes.</target>
+      </segment>
+    </unit>
+    <unit id="landing.desc.alerts">
+      <segment>
         <source>Get alerts.</source>
-        <target>Recibe alertas.</target>
-      </trans-unit>
-      <trans-unit id="landing.desc.moment" datatype="html">
+        <target>Recibir alertas.</target>
+      </segment>
+    </unit>
+    <unit id="landing.desc.moment">
+      <segment>
         <source>Never miss a moment.</source>
-        <target>No te pierdas ningún momento.</target>
-      </trans-unit>
-      <trans-unit id="landing.cta" datatype="html">
+        <target>Nunca te pierdas un momento.</target>
+      </segment>
+    </unit>
+    <unit id="landing.cta">
+      <segment>
         <source>Get Started</source>
         <target>Comenzar</target>
-      </trans-unit>
-    </body>
+      </segment>
+    </unit>
   </file>
 </xliff>
