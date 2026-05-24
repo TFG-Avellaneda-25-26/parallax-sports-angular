@@ -16,7 +16,7 @@
     >
       <div class="popup">
         @if (filtered().length === 0) {
-          <div class="no-results">No results found</div>
+          <div class="no-results" i18n="@@settings.autocomplete.no-results">No results found</div>
         }
         <div ngListbox (valuesChange)="onSelect($event)">
           @for (node of filtered(); track node.value) {

@@ -42,3 +42,15 @@ export const accountI18n = {
     button: $localize`:@@settings.account.deleteAccount.button:Delete my account`,
   },
 }
+
+export const followsI18n = {
+  title: $localize`:@@settings.follows.title:Alerts`,
+  subtitle: $localize`:@@settings.follows.subtitle:Pick which channels deliver pre-event reminders, and how many minutes ahead of an event each one fires.`,
+  loading: $localize`:@@settings.follows.loading:Loading your preferences...`,
+  empty: $localize`:@@settings.follows.empty:No sports are avaliable yet. Once the catalogue syncs you'll be able to configure alerts here.`,
+  saving: $localize`:@@settings.follows.saving:Saving...`,
+  unit: $localize`:@@settings.follows.unit:min`,
+  errorLoad: $localize`:@@settings.follows.error.load:Failed to load preferences.`,
+  errorSave: $localize`:@@settings.follows.error.save:Failed to save preferences. Please try again.`,
+  errorLeadTime: $localize`:@@settings.follows.error.lead-time:Lead time must be at least 1 minute.`,
+}

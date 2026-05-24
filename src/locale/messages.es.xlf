@@ -535,5 +535,65 @@
         <target>Borrar mi cuenta</target>
       </segment>
     </unit>
+  <unit id="settings.follows.title">
+      <segment>
+        <source>Alerts</source>
+        <target>Alertas</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.subtitle">
+      <segment>
+        <source>Pick which channels deliver pre-event reminders, and how many minutes ahead of an event each one fires.</source>
+        <target>Elige qué canales entregan recordatorios previos al evento, y cuántos minutos antes de un evento cada uno se dispara.</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.loading">
+      <segment>
+        <source>Loading your preferences...</source>
+        <target>Cargando tus preferencias...</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.empty">
+      <segment>
+        <source>No sports are avaliable yet. Once the catalogue syncs you&apos;ll be able to configure alerts here.</source>
+        <target>No hay deportes disponibles todavía. Una vez que se sincronice el catálogo, podrás configurar las alertas aquí.</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.saving">
+      <segment>
+        <source>Saving...</source>
+        <target>Guardando...</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.unit">
+      <segment>
+        <source>min</source>
+        <target>min</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.error.load">
+      <segment>
+        <source>Failed to load preferences.</source>
+        <target>No se pudieron cargar las preferencias.</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.error.save">
+      <segment>
+        <source>Failed to save preferences. Please try again.</source>
+        <target>No se pudieron guardar las preferencias. Por favor, inténtalo de nuevo.</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.error.lead-time">
+      <segment>
+        <source>Lead time must be at least 1 minute.</source>
+        <target>El tiempo de antelación debe ser de al menos 1 minuto.</target>
+      </segment>
+    </unit>
+    <unit id="settings.autocomplete.no-results">
+      <segment>
+        <source>No results found</source>
+        <target>No se encontraron resultados</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

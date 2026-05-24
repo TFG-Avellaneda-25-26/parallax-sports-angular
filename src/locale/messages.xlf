@@ -554,6 +554,86 @@
         <source>Delete my account</source>
       </segment>
     </unit>
+    <unit id="settings.follows.title">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:47</note>
+      </notes>
+      <segment>
+        <source>Alerts</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.subtitle">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:48</note>
+      </notes>
+      <segment>
+        <source>Pick which channels deliver pre-event reminders, and how many minutes ahead of an event each one fires.</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.loading">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:49</note>
+      </notes>
+      <segment>
+        <source>Loading your preferences...</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.empty">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:50</note>
+      </notes>
+      <segment>
+        <source>No sports are avaliable yet. Once the catalogue syncs you&apos;ll be able to configure alerts here.</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.saving">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:51</note>
+      </notes>
+      <segment>
+        <source>Saving...</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.unit">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:52</note>
+      </notes>
+      <segment>
+        <source>min</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.error.load">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:53</note>
+      </notes>
+      <segment>
+        <source>Failed to load preferences.</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.error.save">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:54</note>
+      </notes>
+      <segment>
+        <source>Failed to save preferences. Please try again.</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.error.lead-time">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:55</note>
+      </notes>
+      <segment>
+        <source>Lead time must be at least 1 minute.</source>
+      </segment>
+    </unit>
+    <unit id="settings.autocomplete.no-results">
+      <notes>
+        <note category="location">src/features/settings/ui/auto-complete/auto-complete.component.html:19,21</note>
+      </notes>
+      <segment>
+        <source>No results found</source>
+      </segment>
+    </unit>
     <unit id="landing.title">
       <notes>
         <note category="location">src/pages/landing/landing-page.html:13,15</note>

@@ -1,15 +1,15 @@
 <section id="notifications">
   <header>
-    <h2>Alerts</h2>
-    <p>Pick which channels deliver pre-event reminders, and how many minutes ahead of an event each one fires.</p>
+    <h2>{{ i18n.title }}</h2>
+    <p>{{ i18n.subtitle }}</p>
   </header>
 
   @if (isLoading()) {
-    <p class="notify__status">Loading your preferences…</p>
+    <p class="notify__status">{{ i18n.loading }}</p>
   } @else if (loadError()) {
     <p class="notify__status notify__status--error">{{ loadError() }}</p>
   } @else if (isEmpty()) {
-    <p class="notify__status">No sports are available yet. Once the catalogue syncs you'll be able to configure alerts here.</p>
+    <p class="notify__status">{{ i18n.empty }}</p>
   } @else {
     <ul class="notify__list">
       @for (sport of sports(); track sport.sportId) {
@@ -37,7 +37,7 @@
                     [disabled]="sport.channels[channel].saving || !sport.channels[channel].enabled"
                     (change)="updateLeadTime(sport.sportId, channel, $any($event.target).value)"
                   />
-                  <span class="notify__unit">min</span>
+                  <span class="notify__unit">{{ i18n.unit }}</span>
                 </label>
 
                 @if (sport.channels[channel].saving) {
