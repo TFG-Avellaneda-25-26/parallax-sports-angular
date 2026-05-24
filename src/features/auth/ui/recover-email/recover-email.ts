@@ -18,7 +18,7 @@ export class RecoverEmail {
   readonly authModeStore = inject(AuthModeStore);
   readonly authService = inject(AuthService);
 
-  readonly i18n = authI18n.recover;
+  readonly i18n = authI18n['recover-email'];
 
   goBack() {
     this.authModeStore.goToAuth();
