@@ -1,16 +1,18 @@
 import { inject, signal } from "@angular/core";
 import { form, readonly, required, validate } from "@angular/forms/signals";
 import { UserStore } from "@entities/user";
+import { preferencesI18n } from "@features/settings/i18n/settings.i18n";
 
 export const createTimeZoneForm = () =>{
 
   const userStore = inject(UserStore);
+  const i18n = preferencesI18n['timezone'];
 
   return form(
     signal({ currentTimezone: userStore.timezone(), timeZone: '' }),
     (schemaPath) => {
       readonly(schemaPath.currentTimezone);
-      required(schemaPath.timeZone, { message: 'Time zone is required' });
+      required(schemaPath.timeZone, { message: i18n.errorRequired });
       validate(schemaPath.timeZone, ({ value, valueOf }) => {
         const timeZone = value();
         const currentTimeZone = valueOf(schemaPath.currentTimezone);
@@ -20,7 +22,7 @@ export const createTimeZoneForm = () =>{
         if (timeZone && currentTimeZone && timeZone === currentTimeZone) {
           return {
             kind: 'timeZoneUnchanged',
-            message: 'New time zone must be different from current time zone'
+            message: i18n.errorUnchanged
           };
         }
         return null;
@@ -38,7 +40,7 @@ export const createTimeZoneForm = () =>{
             field().reset();
             return null;
           } catch {
-            return { kind: 'updateError', message: 'Failed to update time zone. Please try again.' };
+            return { kind: 'updateError', message: i18n.errorUpdate };
           }
         },
         ignoreValidators: 'none'

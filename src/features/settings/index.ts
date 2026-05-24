@@ -3,4 +3,4 @@ export { PreferencesComponent } from './ui/preferences/preferences.component';
 export { FollowsComponent } from './ui/follows/follows.component';
 export { AdminComponent } from './ui/admin/admin.component';
 export { AutocompleteComponent } from './ui/auto-complete/auto-complete.component';
-export { accountI18n, followsI18n } from './i18n/settings.i18n';
+export { accountI18n, followsI18n, preferencesI18n } from './i18n/settings.i18n';

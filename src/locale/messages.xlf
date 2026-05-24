@@ -626,6 +626,198 @@
         <source>Lead time must be at least 1 minute.</source>
       </segment>
     </unit>
+    <unit id="settings.preferences.timezone.title">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:60</note>
+      </notes>
+      <segment>
+        <source>Timezone</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.subtitle">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:61</note>
+      </notes>
+      <segment>
+        <source>Set your preferred timezone</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.current">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:62</note>
+      </notes>
+      <segment>
+        <source>Current timezone</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.select-label">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:63</note>
+      </notes>
+      <segment>
+        <source>Select a timezone</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.button">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:64</note>
+      </notes>
+      <segment>
+        <source>Change timezone</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.error.required">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:65</note>
+      </notes>
+      <segment>
+        <source>Timezone is required</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.error.unchanged">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:66</note>
+      </notes>
+      <segment>
+        <source>New timezone must be different from current timezone</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.error.update">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:67</note>
+      </notes>
+      <segment>
+        <source>Failed to update timezone. Please try again later.</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.title">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:70</note>
+      </notes>
+      <segment>
+        <source>Date Format</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.subtitle">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:71</note>
+      </notes>
+      <segment>
+        <source>Set your preferred date format</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.current">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:72</note>
+      </notes>
+      <segment>
+        <source>Current date format</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.select-label">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:73</note>
+      </notes>
+      <segment>
+        <source>Select a date format</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.button">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:74</note>
+      </notes>
+      <segment>
+        <source>Change date format</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.error.required">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:75</note>
+      </notes>
+      <segment>
+        <source>Date format is required</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.error.unchanged">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:76</note>
+      </notes>
+      <segment>
+        <source>New date format must be different from current date format</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.error.update">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:77</note>
+      </notes>
+      <segment>
+        <source>Failed to update date format. Please try again later.</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.title">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:80</note>
+      </notes>
+      <segment>
+        <source>Default View</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.subtitle">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:81</note>
+      </notes>
+      <segment>
+        <source>Set your preferred default view for the dashboard</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.current">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:82</note>
+      </notes>
+      <segment>
+        <source>Current default view</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.select-label">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:83</note>
+      </notes>
+      <segment>
+        <source>Select a default view</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.button">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:84</note>
+      </notes>
+      <segment>
+        <source>Change default view</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.error.required">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:85</note>
+      </notes>
+      <segment>
+        <source>Default view is required</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.error.unchanged">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:86</note>
+      </notes>
+      <segment>
+        <source>New default view must be different from current default view</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.error.update">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:87</note>
+      </notes>
+      <segment>
+        <source>Failed to update default view. Please try again later.</source>
+      </segment>
+    </unit>
     <unit id="settings.autocomplete.no-results">
       <notes>
         <note category="location">src/features/settings/ui/auto-complete/auto-complete.component.html:19,21</note>

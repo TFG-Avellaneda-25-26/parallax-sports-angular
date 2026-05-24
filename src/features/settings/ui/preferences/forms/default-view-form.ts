@@ -1,16 +1,18 @@
 import { inject, signal } from "@angular/core"
 import { form, readonly, required, validate } from "@angular/forms/signals";
 import { UserStore } from "@entities/user"
+import { preferencesI18n } from "@features/settings/i18n/settings.i18n";
 
 export const createDefaultViewForm = () => {
 
   const userStore = inject(UserStore);
+  const i18n = preferencesI18n['defaultView'];
 
   return form(
     signal({ currentView: userStore.defaultView().toUpperCase(), newView: '' }),
     (schemePath) => {
       readonly(schemePath.currentView);
-      required(schemePath.newView, { message: 'Default view is required' });
+      required(schemePath.newView, { message: i18n.errorRequired });
       validate(schemePath.newView, ({ value, valueOf }) => {
 
         const newView = value();
@@ -19,7 +21,7 @@ export const createDefaultViewForm = () => {
         if (newView && currentView && newView === currentView) {
           return {
             kind: 'viewUnchanged',
-            message: 'New default view must be different from current default view'
+            message: i18n.errorUnchanged
           };
         }
 
@@ -41,7 +43,7 @@ export const createDefaultViewForm = () => {
           } catch {
             return {
               kind: 'updateError',
-              message: 'Failed to update default view. Please try again.'
+              message: i18n.errorUpdate
             }
           }
         },

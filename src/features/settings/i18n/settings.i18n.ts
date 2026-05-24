@@ -54,3 +54,37 @@ export const followsI18n = {
   errorSave: $localize`:@@settings.follows.error.save:Failed to save preferences. Please try again.`,
   errorLeadTime: $localize`:@@settings.follows.error.lead-time:Lead time must be at least 1 minute.`,
 }
+
+export const preferencesI18n = {
+  timezone: {
+    title: $localize`:@@settings.preferences.timezone.title:Timezone`,
+    subtitle: $localize`:@@settings.preferences.timezone.subtitle:Set your preferred timezone`,
+    currentLabel: $localize`:@@settings.preferences.timezone.current:Current timezone`,
+    selectLabel: $localize`:@@settings.preferences.timezone.select-label:Select a timezone`,
+    button: $localize`:@@settings.preferences.timezone.button:Change timezone`,
+    errorRequired: $localize`:@@settings.preferences.timezone.error.required:Timezone is required`,
+    errorUnchanged: $localize`:@@settings.preferences.timezone.error.unchanged:New timezone must be different from current timezone`,
+    errorUpdate: $localize`:@@settings.preferences.timezone.error.update:Failed to update timezone. Please try again later.`
+  },
+  dateFormat: {
+    title: $localize`:@@settings.preferences.dateFormat.title:Date Format`,
+    subtitle: $localize`:@@settings.preferences.dateFormat.subtitle:Set your preferred date format`,
+    currentLabel: $localize`:@@settings.preferences.dateFormat.current:Current date format`,
+    selectLabel: $localize`:@@settings.preferences.dateFormat.select-label:Select a date format`,
+    button: $localize`:@@settings.preferences.dateFormat.button:Change date format`,
+    errorRequired: $localize`:@@settings.preferences.dateFormat.error.required:Date format is required`,
+    errorUnchanged: $localize`:@@settings.preferences.dateFormat.error.unchanged:New date format must be different from current date format`,
+    errorUpdate: $localize`:@@settings.preferences.dateFormat.error.update:Failed to update date format. Please try again later.`
+  },
+  defaultView: {
+    title: $localize`:@@settings.preferences.defaultView.title:Default View`,
+    subtitle: $localize`:@@settings.preferences.defaultView.subtitle:Set your preferred default view for the dashboard`,
+    currentLabel: $localize`:@@settings.preferences.defaultView.current:Current default view`,
+    selectLabel: $localize`:@@settings.preferences.defaultView.select-label:Select a default view`,
+    button: $localize`:@@settings.preferences.defaultView.button:Change default view`,
+    errorRequired: $localize`:@@settings.preferences.defaultView.error.required:Default view is required`,
+    errorUnchanged: $localize`:@@settings.preferences.defaultView.error.unchanged:New default view must be different from current default view`,
+    errorUpdate: $localize`:@@settings.preferences.defaultView.error.update:Failed to update default view. Please try again later.`
+  }
+}
+

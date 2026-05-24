@@ -595,5 +595,149 @@
         <target>No se encontraron resultados</target>
       </segment>
     </unit>
+  <unit id="settings.preferences.timezone.title">
+      <segment>
+        <source>Timezone</source>
+        <target>Zona horaria</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.subtitle">
+      <segment>
+        <source>Set your preferred timezone</source>
+        <target>Establece tu zona horaria preferida</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.current">
+      <segment>
+        <source>Current timezone</source>
+        <target>Zona horaria actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.select-label">
+      <segment>
+        <source>Select a timezone</source>
+        <target>Seleccionar una zona horaria</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.button">
+      <segment>
+        <source>Change timezone</source>
+        <target>Cambiar zona horaria</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.error.required">
+      <segment>
+        <source>Timezone is required</source>
+        <target>Zona horaria es requerida</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.error.update">
+      <segment>
+        <source>Failed to update timezone. Please try again later.</source>
+        <target>No se pudo actualizar la zona horaria. Por favor, inténtalo de nuevo más tarde.</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.title">
+      <segment>
+        <source>Date Format</source>
+        <target>Formato de fecha</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.subtitle">
+      <segment>
+        <source>Set your preferred date format</source>
+        <target>Establece tu formato de fecha preferido</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.current">
+      <segment>
+        <source>Current date format</source>
+        <target>Formato de fecha actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.select-label">
+      <segment>
+        <source>Select a date format</source>
+        <target>Seleccionar un formato de fecha</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.button">
+      <segment>
+        <source>Change date format</source>
+        <target>Cambiar formato de fecha</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.error.required">
+      <segment>
+        <source>Date format is required</source>
+        <target>Formato de fecha es requerido</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.error.unchanged">
+      <segment>
+        <source>New date format must be different from current date format</source>
+        <target>El nuevo formato de fecha debe ser diferente del formato de fecha actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.error.update">
+      <segment>
+        <source>Failed to update date format. Please try again later.</source>
+        <target>No se pudo actualizar el formato de fecha. Por favor, inténtalo de nuevo más tarde.</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.title">
+      <segment>
+        <source>Default View</source>
+        <target>Vista predeterminada</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.subtitle">
+      <segment>
+        <source>Set your preferred default view for the dashboard</source>
+        <target>Establece tu vista predeterminada preferida para el tablero</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.current">
+      <segment>
+        <source>Current default view</source>
+        <target>Vista predeterminada actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.select-label">
+      <segment>
+        <source>Select a default view</source>
+        <target>Seleccionar una vista predeterminada</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.button">
+      <segment>
+        <source>Change default view</source>
+        <target>Cambiar vista predeterminada</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.error.required">
+      <segment>
+        <source>Default view is required</source>
+        <target>La vista predeterminada es requerida</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.error.unchanged">
+      <segment>
+        <source>New default view must be different from current default view</source>
+        <target>La nueva vista predeterminada debe ser diferente de la vista predeterminada actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.error.update">
+      <segment>
+        <source>Failed to update default view. Please try again later.</source>
+        <target>No se pudo actualizar la vista predeterminada. Por favor, inténtalo de nuevo más tarde.</target>
+      </segment>
+    </unit>
+  <unit id="settings.preferences.timezone.error.unchanged">
+      <segment>
+        <source>New timezone must be different from current timezone</source>
+        <target>El nueva zona horaria debe ser diferente de la zona horaria actual</target>
+      </segment>
+    </unit>
   </file>
 </xliff>
