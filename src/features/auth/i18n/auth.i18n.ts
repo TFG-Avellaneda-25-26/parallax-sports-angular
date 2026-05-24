@@ -22,5 +22,11 @@ export const authI18n = {
     rememberPassword: $localize`:@@auth.recover.email.remember:Remember your password?`,
     signIn: $localize`:@@auth.recover.email.sign-in:Sign in`,
     submitError: $localize`:@@auth.recover.email.submit-error:Failed to send recovery email. Please try again later`,
+  },
+  'recover-otp': {
+    otpTitle: $localize`:@@auth.recover.otp.title:Check your email`,
+    otpSubtitle: $localize`:@@auth.recover.otp.subtitle:We sent a 6-digit code to`,
+    otpWrongEmail: $localize`:@@auth.recover.otp.wrong-email:Wrong email?`,
+    otpGoBack: $localize`:@@auth.recover.otp.go-back:Go back`,
   }
 }

@@ -133,5 +133,29 @@
         <target>Cerrar sesión</target>
       </segment>
     </unit>
+  <unit id="auth.recover.otp.title">
+      <segment>
+        <source>Check your email</source>
+        <target>Verifica tu correo electrónico</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.otp.subtitle">
+      <segment>
+        <source>We sent a 6-digit code to</source>
+        <target>Te hemos enviado un código de 6 dígitos a</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.otp.wrong-email">
+      <segment>
+        <source>Wrong email?</source>
+        <target>¿Correo electrónico incorrecto?</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.otp.go-back">
+      <segment>
+        <source>Go back</source>
+        <target>Volver</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

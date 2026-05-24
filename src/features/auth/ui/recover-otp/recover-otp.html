@@ -1,7 +1,7 @@
 <div class="auth-header">
-  <h1 class="auth-title">Check your email</h1>
+  <h1 class="auth-title">{{ i18n.otpTitle }}</h1>
   <p class="auth-subtitle">
-    We sent a 6-digit code to <strong>{{ authModeStore.recoverEmail() }}</strong>
+    {{ i18n.otpSubtitle }} <strong>{{ authModeStore.recoverEmail() }}</strong>
   </p>
 </div>
 
@@ -15,8 +15,8 @@
 />
 
 <p class="auth-switch">
-  Wrong email?
+  {{ i18n.otpWrongEmail }}
   <button class="switch-btn" (click)="authModeStore.goToRecover(authModeStore.recoverEmail())">
-    Go back
+    {{ i18n.otpGoBack }}
   </button>
 </p>

@@ -129,6 +129,38 @@
         <source>Failed to send recovery email. Please try again later</source>
       </segment>
     </unit>
+    <unit id="auth.recover.otp.title">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:23</note>
+      </notes>
+      <segment>
+        <source>Check your email</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.otp.subtitle">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:24</note>
+      </notes>
+      <segment>
+        <source>We sent a 6-digit code to</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.otp.wrong-email">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:25</note>
+      </notes>
+      <segment>
+        <source>Wrong email?</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.otp.go-back">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:26</note>
+      </notes>
+      <segment>
+        <source>Go back</source>
+      </segment>
+    </unit>
     <unit id="logout.button">
       <notes>
         <note category="location">src/features/auth/ui/logout-button/logout-button.component.html:8,10</note>
