@@ -739,5 +739,113 @@
         <target>El nueva zona horaria debe ser diferente de la zona horaria actual</target>
       </segment>
     </unit>
+  <unit id="settings.nav.account">
+      <segment>
+        <source>Account</source>
+        <target>Cuenta</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.email">
+      <segment>
+        <source>Email</source>
+        <target>Correo Electrónico</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.password">
+      <segment>
+        <source>Password</source>
+        <target>Contraseña</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.display-name">
+      <segment>
+        <source>Display Name</source>
+        <target>Nombre para mostrar</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.identities">
+      <segment>
+        <source>Identities</source>
+        <target>Identidades</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.delete">
+      <segment>
+        <source>Delete Account</source>
+        <target>Eliminar Cuenta</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences">
+      <segment>
+        <source>Preferences</source>
+        <target>Preferencias</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences.timezone">
+      <segment>
+        <source>Timezone</source>
+        <target>Zona Horaria</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences.date-format">
+      <segment>
+        <source>Date Format</source>
+        <target>Formato de Fecha</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences.default-view">
+      <segment>
+        <source>Default View</source>
+        <target>Vista Predeterminada</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.notifications">
+      <segment>
+        <source>Notifications</source>
+        <target>Notificaciones</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.notifications.alerts">
+      <segment>
+        <source>Alerts</source>
+        <target>Alertas</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin">
+      <segment>
+        <source>Admin</source>
+        <target>Admin</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.logs">
+      <segment>
+        <source>Logs</source>
+        <target>Logs</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.users">
+      <segment>
+        <source>Users</source>
+        <target>Usuarios</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.events">
+      <segment>
+        <source>Events</source>
+        <target>Eventos</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.stress-testing">
+      <segment>
+        <source>Stress Testing</source>
+        <target>Pruebas de Estrés</target>
+      </segment>
+    </unit>
+    <unit id="header.settings.button">
+      <segment>
+        <source>Settings</source>
+        <target>Configuración</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

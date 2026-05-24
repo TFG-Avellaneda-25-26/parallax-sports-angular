@@ -978,12 +978,156 @@
         <source>Service Unavailable</source>
       </segment>
     </unit>
+    <unit id="settings.nav.account">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:2</note>
+      </notes>
+      <segment>
+        <source>Account</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.email">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:3</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.password">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:4</note>
+      </notes>
+      <segment>
+        <source>Password</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.display-name">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:5</note>
+      </notes>
+      <segment>
+        <source>Display Name</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.identities">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:6</note>
+      </notes>
+      <segment>
+        <source>Identities</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.delete">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:7</note>
+      </notes>
+      <segment>
+        <source>Delete Account</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:8</note>
+      </notes>
+      <segment>
+        <source>Preferences</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences.timezone">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:9</note>
+      </notes>
+      <segment>
+        <source>Timezone</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences.date-format">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:10</note>
+      </notes>
+      <segment>
+        <source>Date Format</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences.default-view">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:11</note>
+      </notes>
+      <segment>
+        <source>Default View</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.notifications">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:12</note>
+      </notes>
+      <segment>
+        <source>Notifications</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.notifications.alerts">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:13</note>
+      </notes>
+      <segment>
+        <source>Alerts</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:14</note>
+      </notes>
+      <segment>
+        <source>Admin</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.logs">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:15</note>
+      </notes>
+      <segment>
+        <source>Logs</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.users">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:16</note>
+      </notes>
+      <segment>
+        <source>Users</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.events">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:17</note>
+      </notes>
+      <segment>
+        <source>Events</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.stress-testing">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:18</note>
+      </notes>
+      <segment>
+        <source>Stress Testing</source>
+      </segment>
+    </unit>
     <unit id="error.status.unknown">
       <notes>
         <note category="location">src/shared/interceptors/error.interceptor.ts:68</note>
       </notes>
       <segment>
         <source>Unknown Error</source>
+      </segment>
+    </unit>
+    <unit id="header.settings.button">
+      <notes>
+        <note category="location">src/widgets/header/header.component.html:30,33</note>
+      </notes>
+      <segment>
+        <source>Settings</source>
       </segment>
     </unit>
   </file>
