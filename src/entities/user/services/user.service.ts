@@ -50,4 +50,8 @@ export class UserService {
   updateDateFormat(dateFormat: string): Observable<void> {
     return this.apiClient.put<void>('/api/users/settings/date-format', dateFormat);
   }
+
+  updateLang(lang: string): Observable<void> {
+    return this.apiClient.put<void>('/api/users/settings/lang', lang);
+  }
 }

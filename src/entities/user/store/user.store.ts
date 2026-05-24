@@ -29,6 +29,7 @@ export const UserStore = signalStore(
     timezone: computed(() => store.user()?.settings?.timezone ?? ''),
     defaultView: computed(() => store.user()?.settings?.defaultView ?? ''),
     dateFormat: computed(() => store.user()?.settings?.dateFormat ?? ''),
+    lang: computed(() => store.user()?.settings?.lang ?? 'en-US'),
   })),
 
   withMethods((store, userService = inject(UserService), router = inject(Router)) => ({
@@ -167,6 +168,25 @@ export const UserStore = signalStore(
         }});
       } catch (error) {
         console.error('Failed to update date format.');
+        throw error;
+      }
+    },
+
+    async updateLang(lang: string): Promise<void> {
+      const user = store.user();
+      if (!user) return;
+
+      try {
+        await lastValueFrom(userService.updateLang(lang));
+        patchState(store, { user: {
+          ...user, settings: { ...user.settings, lang } as UserSettings
+        }});
+
+        const currentPath = window.location.pathname;
+        const pathWithoutLocale = currentPath.replace(/^\/([a-z]{2}-[A-Z]{2}|[a-z]{2})(?=\/|$)/, '');
+        window.location.href = `/${lang}${pathWithoutLocale}`;
+      } catch (error) {
+        console.error('Failed to update language.');
         throw error;
       }
     },
