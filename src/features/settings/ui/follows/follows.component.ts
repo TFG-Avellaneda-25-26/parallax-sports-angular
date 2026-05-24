@@ -16,6 +16,7 @@ import {
 } from './models/notification-channel.model';
 import { NotificationChannelsService } from './services/notification-channels.service';
 import { CheckboxIconComponent } from '@shared/ui';
+import { followsI18n } from '@features/settings';
 
 interface ChannelRowState {
   enabled: boolean;
@@ -68,6 +69,8 @@ export class FollowsComponent {
   protected readonly isLoading = signal(true);
   protected readonly loadError = signal<string | null>(null);
 
+  readonly i18n = followsI18n;
+
   protected readonly isEmpty = computed(() => this.sports().length === 0);
 
   constructor() {
@@ -90,7 +93,7 @@ export class FollowsComponent {
   protected async updateLeadTime(sportId: number, channel: NotificationChannelKey, raw: string): Promise<void> {
     const minutes = Number.parseInt(raw, 10);
     if (!Number.isFinite(minutes) || minutes < 1) {
-      this.patchChannel(sportId, channel, { error: 'Lead time must be at least 1 minute' });
+      this.patchChannel(sportId, channel, { error: this.i18n.errorLeadTime });
       return;
     }
     this.patchChannel(sportId, channel, { defaultLeadTimeMinutes: minutes, error: null });
@@ -104,7 +107,7 @@ export class FollowsComponent {
       const list = await lastValueFrom(this.service.list());
       this.sports.set(list.map(buildSportRow));
     } catch {
-      this.loadError.set('Failed to load notification preferences.');
+      this.loadError.set(this.i18n.errorLoad);
     } finally {
       this.isLoading.set(false);
     }
@@ -125,7 +128,7 @@ export class FollowsComponent {
     } catch {
       this.patchChannel(sportId, channel, {
         saving: false,
-        error: 'Failed to save. Please try again.',
+        error: this.i18n.errorSave,
       });
     }
   }

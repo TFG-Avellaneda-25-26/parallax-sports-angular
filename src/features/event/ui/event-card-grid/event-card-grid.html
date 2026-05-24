@@ -1,5 +1,5 @@
 @if (events().length === 0) {
-  <p class="event-card-grid__empty">No events match the current filters.</p>
+  <p class="event-card-grid__empty" i18n="@@event.card.grid.empty">No events match the current filters.</p>
 } @else {
   <div class="event-card-grid">
     @for (ev of events(); track ev.id) {

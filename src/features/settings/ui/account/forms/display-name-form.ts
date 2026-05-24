@@ -2,6 +2,7 @@ import { inject, signal } from "@angular/core";
 import { apply, form, readonly, validate } from "@angular/forms/signals";
 import { displayNameSchema } from "@entities/auth";
 import { UserStore } from "@entities/user";
+import { accountI18n } from "@features/settings";
 
 export const createdisplayNameForm = () => {
 
@@ -19,7 +20,7 @@ export const createdisplayNameForm = () => {
         if (newDisplayName && currentDisplayName && newDisplayName === currentDisplayName) {
           return {
             kind: 'displayNameUnchanged',
-            message: 'New display name must be different from current display name'
+            message: accountI18n.displayName.errorUnchanged
           };
         }
 
@@ -38,7 +39,7 @@ export const createdisplayNameForm = () => {
             field().reset();
             return null;
           } catch {
-            return { kind: 'updateError', message: 'Failed to update display name. Please try again.' };
+            return { kind: 'updateError', message: accountI18n.displayName.errorUpdate };
           }
         },
         ignoreValidators: 'none'

@@ -12,6 +12,14 @@
   "projects": {
     "parallax-sports": {
       "projectType": "application",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "es": {
+            "translation": "src/locale/messages.es.xlf"
+          }
+        }
+      },
       "schematics": {
         "@schematics/angular:class": {
           "skipTests": true
@@ -55,10 +63,14 @@
             ],
             "styles": [
               "src/styles.css"
+            ],
+            "polyfills": [
+              "@angular/localize/init"
             ]
           },
           "configurations": {
             "production": {
+              "localize": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -77,6 +89,12 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "es": {
+              "localize": ["es"]
+            },
+            "en-US": {
+              "localize": ["en-US"]
             }
           },
           "defaultConfiguration": "production"
@@ -92,9 +110,22 @@
             },
             "development": {
               "buildTarget": "parallax-sports:build:development"
+            },
+            "es": {
+              "buildTarget": "parallax-sports:build:es"
+            },
+            "en-US": {
+              "buildTarget": "parallax-sports:build:en-US"
             }
           },
           "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n",
+          "options": {
+            "format": "xliff2",
+            "outputPath": "src/locale"
+          }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",

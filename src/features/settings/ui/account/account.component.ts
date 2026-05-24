@@ -9,6 +9,7 @@ import { SettingsNavStore } from '@shared/stores';
 import { scrollToSection } from '@shared/lib';
 import { SUPPORTED_PROVIDERS } from '@entities/provider';
 import { TitleCasePipe } from '@angular/common';
+import { accountI18n } from '@features/settings';
 
 @Component({
   selector: 'app-settings-account',
@@ -19,6 +20,7 @@ import { TitleCasePipe } from '@angular/common';
 })
 export class AccountComponent {
 
+  readonly i18n = accountI18n;
   readonly navStore = inject(SettingsNavStore);
   readonly userStore = inject(UserStore);
 

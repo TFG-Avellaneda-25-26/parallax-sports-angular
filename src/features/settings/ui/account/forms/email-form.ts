@@ -3,6 +3,7 @@ import { apply, form, readonly, validate } from "@angular/forms/signals";
 import { emailAsyncSchema, emailSchema } from "@entities/auth";
 import { UserStore } from "@entities/user"
 import { API_BASE_URL } from "@shared/config";
+import { accountI18n } from "@features/settings";
 
 export const createEmailForm = () =>  {
   const userStore = inject(UserStore);
@@ -21,7 +22,7 @@ export const createEmailForm = () =>  {
         if (newEmail && currentEmail && newEmail === currentEmail) {
           return {
             kind: 'emailUnchanged',
-            message: 'New email must be different from current email'
+            message: accountI18n.email.errorUnchanged
           };
         }
 
@@ -40,7 +41,7 @@ export const createEmailForm = () =>  {
             field().reset();
             return null;
           } catch {
-            return { kind: 'updateError', message: 'Failed to update email. Please try again.' };
+            return { kind: 'updateError', message: accountI18n.email.errorUpdate };
           }
         },
         ignoreValidators: 'none'

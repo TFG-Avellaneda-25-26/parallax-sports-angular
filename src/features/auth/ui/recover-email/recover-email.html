@@ -1,6 +1,6 @@
 <div class="auth-header">
-  <h1 class="auth-title">Recover password</h1>
-  <p class="auth-subtitle">Enter your email and we'll send you a recovery code</p>
+  <h1 class="auth-title">{{ i18n.emailTitle }}</h1>
+  <p class="auth-subtitle">{{ i18n.emailSubtitle }}</p>
 </div>
 
 <form [formRoot]="emailForm" class="auth-form">
@@ -22,7 +22,7 @@
       @if (emailForm().submitting()) {
         <span class="spinner"></span>
       } @else {
-        Send recovery code
+        {{ i18n.emailButton }}
       }
     </button>
 
@@ -34,9 +34,9 @@
   </div>
 </form>
 <p class="auth-switch">
-  Remember your password?
+  {{ i18n.rememberPassword }}
   <button class="switch-btn" (click)="goBack()">
-    Sign in
+    {{ i18n.signIn }}
   </button>
 </p>
 

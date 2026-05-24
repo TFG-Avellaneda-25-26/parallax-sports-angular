@@ -4,6 +4,7 @@ import { AuthService, passwordSchema } from '@entities/auth';
 import { AuthModeStore } from '@features/auth/store/auth-mode.store';
 import { lastValueFrom } from 'rxjs';
 import { StatefulInput } from "@shared/ui";
+import { authI18n } from '@features/auth';
 
 @Component({
   selector: 'app-recover-password',
@@ -16,6 +17,8 @@ export class RecoverPassword {
 
   readonly authModeStore = inject(AuthModeStore);
   readonly authService = inject(AuthService);
+
+  readonly i18n = authI18n['recover-password'];
 
   readonly passwordForm = form(
     signal({ password: '', confirmPassword: '' }),
@@ -34,7 +37,7 @@ export class RecoverPassword {
             this.authModeStore.goToAuth();
             return null;
           } catch {
-            return { kind: 'resetError', message: 'Failed to reset password. Please try again.' };
+            return { kind: 'resetError', message: this.i18n.submitError };
           }
         }
       }
