@@ -1,6 +1,102 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US">
   <file id="ngi18n" original="ng.template">
+    <unit id="schema.display-name.required">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:3</note>
+      </notes>
+      <segment>
+        <source>Display name required</source>
+      </segment>
+    </unit>
+    <unit id="schema.display-name.min-length">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:4</note>
+      </notes>
+      <segment>
+        <source>Display name must be at least 2 characters</source>
+      </segment>
+    </unit>
+    <unit id="schema.display-name.max-length">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:5</note>
+      </notes>
+      <segment>
+        <source>Display name must be less than 50 characters</source>
+      </segment>
+    </unit>
+    <unit id="schema.email.required">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:8</note>
+      </notes>
+      <segment>
+        <source>Email required</source>
+      </segment>
+    </unit>
+    <unit id="schema.email.pattern">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:9</note>
+      </notes>
+      <segment>
+        <source>Invalid email format</source>
+      </segment>
+    </unit>
+    <unit id="schema.email.taken">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:10</note>
+      </notes>
+      <segment>
+        <source>Email is already taken</source>
+      </segment>
+    </unit>
+    <unit id="schema.email.not-found">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:11</note>
+      </notes>
+      <segment>
+        <source>No account found with this email</source>
+      </segment>
+    </unit>
+    <unit id="schema.email.server-error">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:12</note>
+      </notes>
+      <segment>
+        <source>Could not verify email at this time. Please try again later</source>
+      </segment>
+    </unit>
+    <unit id="schema.password.required">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:15</note>
+      </notes>
+      <segment>
+        <source>Password required</source>
+      </segment>
+    </unit>
+    <unit id="schema.password.confirm-required">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:16</note>
+      </notes>
+      <segment>
+        <source>Confirm password required</source>
+      </segment>
+    </unit>
+    <unit id="schema.password.min-length">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:17</note>
+      </notes>
+      <segment>
+        <source>Password must be at least 8 characters</source>
+      </segment>
+    </unit>
+    <unit id="schema.password.no-match">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:18</note>
+      </notes>
+      <segment>
+        <source>Passwords do not match</source>
+      </segment>
+    </unit>
     <unit id="auth.title.register">
       <notes>
         <note category="location">src/features/auth/i18n/auth.i18n.ts:3</note>

@@ -847,5 +847,77 @@
         <target>Configuración</target>
       </segment>
     </unit>
+  <unit id="schema.display-name.required">
+      <segment>
+        <source>Display name required</source>
+        <target>Nombre requerido</target>
+      </segment>
+    </unit>
+    <unit id="schema.display-name.min-length">
+      <segment>
+        <source>Display name must be at least 2 characters</source>
+        <target>El nombre debe tener al menos 2 caracteres</target>
+      </segment>
+    </unit>
+    <unit id="schema.display-name.max-length">
+      <segment>
+        <source>Display name must be less than 50 characters</source>
+        <target>El nombre debe tener menos de 50 caracteres</target>
+      </segment>
+    </unit>
+    <unit id="schema.email.required">
+      <segment>
+        <source>Email required</source>
+        <target>Correo electrónico requerido</target>
+      </segment>
+    </unit>
+    <unit id="schema.email.pattern">
+      <segment>
+        <source>Invalid email format</source>
+        <target>Formato de correo electrónico inválido</target>
+      </segment>
+    </unit>
+    <unit id="schema.email.taken">
+      <segment>
+        <source>Email is already taken</source>
+        <target>El correo electrónico ya está en uso</target>
+      </segment>
+    </unit>
+    <unit id="schema.email.not-found">
+      <segment>
+        <source>No account found with this email</source>
+        <target>No se encontró ninguna cuenta con este correo electrónico</target>
+      </segment>
+    </unit>
+    <unit id="schema.email.server-error">
+      <segment>
+        <source>Could not verify email at this time. Please try again later</source>
+        <target>No se pudo verificar el correo electrónico en este momento. Por favor, inténtalo de nuevo más tarde</target>
+      </segment>
+    </unit>
+    <unit id="schema.password.required">
+      <segment>
+        <source>Password required</source>
+        <target>Contraseña requerida</target>
+      </segment>
+    </unit>
+    <unit id="schema.password.confirm-required">
+      <segment>
+        <source>Confirm password required</source>
+        <target>Confirmar contraseña requerida</target>
+      </segment>
+    </unit>
+    <unit id="schema.password.min-length">
+      <segment>
+        <source>Password must be at least 8 characters</source>
+        <target>La contraseña debe tener al menos 8 caracteres</target>
+      </segment>
+    </unit>
+    <unit id="schema.password.no-match">
+      <segment>
+        <source>Passwords do not match</source>
+        <target>Las contraseñas no coinciden</target>
+      </segment>
+    </unit>
   </file>
 </xliff>
