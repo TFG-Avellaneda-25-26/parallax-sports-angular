@@ -187,5 +187,11 @@
         <target>Verificar</target>
       </segment>
     </unit>
+  <unit id="dashboard.toolbar.filters">
+      <segment>
+        <source>Filters</source>
+        <target>Filtros</target>
+      </segment>
+    </unit>
   </file>
 </xliff>
