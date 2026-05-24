@@ -1,7 +1,7 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormField, FormRoot } from '@angular/forms/signals';
 import { UserStore } from '@entities/user';
-import { AuthStore } from '@features/auth';
+import { authFormI18n, AuthStore } from '@features/auth';
 import { StatefulInput } from '@shared/ui';
 import { SUPPORTED_PROVIDERS } from '@entities/provider';
 import { AuthModeStore } from '@features/auth';
@@ -19,6 +19,7 @@ export class AuthFormComponent {
   readonly userStore = inject(UserStore)
   readonly form = this.authStore.authForm;
   readonly providers = SUPPORTED_PROVIDERS;
+  readonly i18n = authFormI18n;
 
   switchMode(): void {
     this.authStore.toggleMode();
