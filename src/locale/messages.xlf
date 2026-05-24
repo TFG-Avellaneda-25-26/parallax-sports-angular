@@ -226,6 +226,30 @@
         <source>Filters</source>
       </segment>
     </unit>
+    <unit id="dashboard.filter.tree.title">
+      <notes>
+        <note category="location">src/features/dashboard/ui/filter-tree/filter-tree.html:2,4</note>
+      </notes>
+      <segment>
+        <source>Filters</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.filter.tree.clear">
+      <notes>
+        <note category="location">src/features/dashboard/ui/filter-tree/filter-tree.html:4,8</note>
+      </notes>
+      <segment>
+        <source>Clear all</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.filter.tree.empty">
+      <notes>
+        <note category="location">src/features/dashboard/ui/filter-tree/filter-tree.html:9,11</note>
+      </notes>
+      <segment>
+        <source>No events loaded.</source>
+      </segment>
+    </unit>
     <unit id="landing.title">
       <notes>
         <note category="location">src/pages/landing/landing-page.html:13,15</note>

@@ -199,5 +199,23 @@
         <target>Filtros</target>
       </segment>
     </unit>
+  <unit id="dashboard.filter.tree.title">
+      <segment>
+        <source>Filters</source>
+        <target>Filtros</target>
+      </segment>
+    </unit>
+    <unit id="dashboard.filter.tree.clear">
+      <segment>
+        <source>Clear all</source>
+        <target>Limpiar todo</target>
+      </segment>
+    </unit>
+    <unit id="dashboard.filter.tree.empty">
+      <segment>
+        <source>No events loaded.</source>
+        <target>No hay eventos cargados.</target>
+      </segment>
+    </unit>
   </file>
 </xliff>
