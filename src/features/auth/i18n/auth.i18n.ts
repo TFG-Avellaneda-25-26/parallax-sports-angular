@@ -11,11 +11,7 @@ export const authI18n = {
     forgotPassword: $localize`:@@auth.forgot-password:Forgot password?`,
     orContinueWith: $localize`:@@auth.oauth.divider:Or continue with`,
   },
-<<<<<<< HEAD
-  recover: {
-=======
   'recover-email': {
->>>>>>> b245829 (i18n: recover email and logout button)
     emailTitle: $localize`:@@auth.recover.email.title:Recover password`,
     emailSubtitle: $localize`:@@auth.recover.email.subtitle:Enter your email and we'll send you a recovery code`,
     emailButton: $localize`:@@auth.recover.email.button:Send recovery email`,
