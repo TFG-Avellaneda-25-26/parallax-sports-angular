@@ -760,7 +760,7 @@
     <unit id="settings.nav.account.display-name">
       <segment>
         <source>Display Name</source>
-        <target>Nombre para mostrar</target>
+        <target>Nombre</target>
       </segment>
     </unit>
     <unit id="settings.nav.account.identities">
@@ -965,6 +965,12 @@
       <segment>
         <source>Failed to update language. Please try again later.</source>
         <target>No se pudo actualizar el idioma. Por favor, inténtalo de nuevo más tarde.</target>
+      </segment>
+    </unit>
+  <unit id="settings.nav.preferences.language">
+      <segment>
+        <source>Language</source>
+        <target>Idioma</target>
       </segment>
     </unit>
   </file>
