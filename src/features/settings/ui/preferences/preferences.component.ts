@@ -8,10 +8,11 @@ import { createDateFormatForm } from './forms/date-format-form';
 import { SettingsNavStore } from '@shared/stores';
 import { scrollToSection } from '@shared/lib';
 import { preferencesI18n } from '@features/settings';
+import { Lang } from "./section/lang/lang";
 
 @Component({
   selector: 'app-settings-preferences',
-  imports: [FormRoot, FormField, StatefulComboxAutocompleteSelectComponent, StatefulComboboxSelectInputComponent, StatefulInput],
+  imports: [FormRoot, FormField, StatefulComboxAutocompleteSelectComponent, StatefulComboboxSelectInputComponent, StatefulInput, Lang],
   templateUrl: './preferences.component.html',
   styleUrl: './preferences.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

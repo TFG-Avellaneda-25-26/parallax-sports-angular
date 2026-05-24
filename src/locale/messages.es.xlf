@@ -919,5 +919,53 @@
         <target>Las contraseñas no coinciden</target>
       </segment>
     </unit>
+  <unit id="settings.preferences.lang.title">
+      <segment>
+        <source>Language</source>
+        <target>Idioma</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.subtitle">
+      <segment>
+        <source>Set your preferred language for the application</source>
+        <target>Establece tu idioma preferido para la aplicación</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.current">
+      <segment>
+        <source>Current language</source>
+        <target>Idioma actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.select-label">
+      <segment>
+        <source>Select a language</source>
+        <target>Seleccionar un idioma</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.button">
+      <segment>
+        <source>Change language</source>
+        <target>Cambiar idioma</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.error.required">
+      <segment>
+        <source>Language is required</source>
+        <target>El idioma es requerido</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.error.unchanged">
+      <segment>
+        <source>New language must be different from current language</source>
+        <target>El nuevo idioma debe ser diferente del idioma actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.error.update">
+      <segment>
+        <source>Failed to update language. Please try again later.</source>
+        <target>No se pudo actualizar el idioma. Por favor, inténtalo de nuevo más tarde.</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

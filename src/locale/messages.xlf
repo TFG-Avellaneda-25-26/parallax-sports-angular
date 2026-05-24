@@ -679,7 +679,7 @@
         <note category="location">src/features/settings/i18n/settings.i18n.ts:50</note>
       </notes>
       <segment>
-        <source>No sports are avaliable yet. Once the catalogue syncs you&apos;ll be able to configure alerts here.</source>
+        <source>No sports are available yet. Once the catalogue syncs you&apos;ll be able to configure alerts here.</source>
       </segment>
     </unit>
     <unit id="settings.follows.saving">
@@ -912,6 +912,70 @@
       </notes>
       <segment>
         <source>Failed to update default view. Please try again later.</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.title">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:90</note>
+      </notes>
+      <segment>
+        <source>Language</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.subtitle">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:91</note>
+      </notes>
+      <segment>
+        <source>Set your preferred language for the application</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.current">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:92</note>
+      </notes>
+      <segment>
+        <source>Current language</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.select-label">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:93</note>
+      </notes>
+      <segment>
+        <source>Select a language</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.button">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:94</note>
+      </notes>
+      <segment>
+        <source>Change language</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.error.required">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:95</note>
+      </notes>
+      <segment>
+        <source>Language is required</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.error.unchanged">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:96</note>
+      </notes>
+      <segment>
+        <source>New language must be different from current language</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.error.update">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:97</note>
+      </notes>
+      <segment>
+        <source>Failed to update language. Please try again later.</source>
       </segment>
     </unit>
     <unit id="settings.autocomplete.no-results">

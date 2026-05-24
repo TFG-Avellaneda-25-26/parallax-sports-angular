@@ -85,6 +85,16 @@ export const preferencesI18n = {
     errorRequired: $localize`:@@settings.preferences.defaultView.error.required:Default view is required`,
     errorUnchanged: $localize`:@@settings.preferences.defaultView.error.unchanged:New default view must be different from current default view`,
     errorUpdate: $localize`:@@settings.preferences.defaultView.error.update:Failed to update default view. Please try again later.`
-  }
+  },
+  lang: {
+    title: $localize`:@@settings.preferences.lang.title:Language`,
+    subtitle: $localize`:@@settings.preferences.lang.subtitle:Set your preferred language for the application`,
+    currentLabel: $localize`:@@settings.preferences.lang.current:Current language`,
+    selectLabel: $localize`:@@settings.preferences.lang.select-label:Select a language`,
+    button: $localize`:@@settings.preferences.lang.button:Change language`,
+    errorRequired: $localize`:@@settings.preferences.lang.error.required:Language is required`,
+    errorUnchanged: $localize`:@@settings.preferences.lang.error.unchanged:New language must be different from current language`,
+    errorUpdate: $localize`:@@settings.preferences.lang.error.update:Failed to update language. Please try again later.`
+  },
 }
 
