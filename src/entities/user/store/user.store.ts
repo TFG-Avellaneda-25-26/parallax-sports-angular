@@ -41,6 +41,14 @@ export const UserStore = signalStore(
       try {
         const user = await lastValueFrom(userService.fetchCurrentUser());
         patchState(store, { user, isLoading: false });
+
+        const lang = user.settings?.lang ?? 'en-US';
+        const currentPath = window.location.pathname;
+
+        if (!currentPath.startsWith(`/${lang}/`)) {
+          const pathWithoutLocale = currentPath.replace(/^\/([a-z]{2}-[A-Z]{2}|[a-z]{2})(?=\/|$)/, '');
+          window.location.href = `/${lang}${pathWithoutLocale}`;
+        }
       } catch (error) {
         patchState(store, { user: null, isLoading: false });
         throw error;
