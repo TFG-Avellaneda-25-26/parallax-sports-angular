@@ -1,9 +1,9 @@
 <div class="auth-header">
   <h1 class="auth-title">
-    {{ authStore.isRegisterMode() ? 'Create account' : 'Welcome back' }}
+    {{ authStore.isRegisterMode() ? i18n.titleRegister : i18n.titleLogin }}
   </h1>
   <p class="auth-subtitle">
-    {{ authStore.isRegisterMode() ? 'Fill in the details below to get started' : 'Sign in to continue' }}
+    {{ authStore.isRegisterMode() ? i18n.subtitleRegister : i18n.subtitleLogin }}
   </p>
 </div>
 
@@ -22,7 +22,7 @@
     <app-stateful-input type="password" label="Password" fieldId="password" [formField]="form.password" />
     @if (!authStore.isRegisterMode()) {
       <button type="button" class="forgot-btn" (click)="goToRecover()">
-        Forgot password?
+        {{ i18n.forgotPassword }}
       </button>
     }
   </div>
@@ -52,7 +52,7 @@
 <div class="oauth-section">
   <div class="oauth-divider">
     <span class="oauth-divider__line"></span>
-    <span class="oauth-divider__text">or continue with</span>
+    <span class="oauth-divider__text">{{ i18n.orContinueWith }}</span>
     <span class="oauth-divider__line"></span>
   </div>
 
@@ -76,8 +76,8 @@
 </div>
 
 <p class="auth-switch">
-  {{ authStore.isRegisterMode() ? 'Already have an account?' : "Don't have an account?" }}
+  {{ authStore.isRegisterMode() ? i18n.alreadyHaveAccount : i18n.dontHaveAccount }}
   <button class="switch-btn" (click)="switchMode()">
-    {{ authStore.isRegisterMode() ? 'Sign in' : 'Register' }}
+    {{ authStore.isRegisterMode() ? i18n.signIn : i18n.register }}
   </button>
 </p>

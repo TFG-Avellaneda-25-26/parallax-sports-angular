@@ -1,0 +1,923 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US" trgLang="es">
+  <file id="ngi18n" original="ng.template">
+    <unit id="landing.title">
+      <segment>
+        <source>Parallax-Sports</source>
+        <target>Parallax-Sports</target>
+      </segment>
+    </unit>
+    <unit id="landing.desc.track">
+      <segment>
+        <source>Track sports.</source>
+        <target>Seguir deportes.</target>
+      </segment>
+    </unit>
+    <unit id="landing.desc.alerts">
+      <segment>
+        <source>Get alerts.</source>
+        <target>Recibir alertas.</target>
+      </segment>
+    </unit>
+    <unit id="landing.desc.moment">
+      <segment>
+        <source>Never miss a moment.</source>
+        <target>Nunca te pierdas un momento.</target>
+      </segment>
+    </unit>
+    <unit id="landing.cta">
+      <segment>
+        <source>Get Started</source>
+        <target>Comenzar</target>
+      </segment>
+    </unit>
+  <unit id="auth.title.register">
+      <segment>
+        <source>Create account</source>
+        <target>Crear cuenta</target>
+      </segment>
+    </unit>
+    <unit id="auth.title.login">
+      <segment>
+        <source>Welcome back</source>
+        <target>Bienvenido de nuevo</target>
+      </segment>
+    </unit>
+    <unit id="auth.subtitle.register">
+      <segment>
+        <source>Fill in the details below to get started</source>
+        <target>Rellena los detalles a continuación para empezar</target>
+      </segment>
+    </unit>
+    <unit id="auth.subtitle.login">
+      <segment>
+        <source>Sign in to continue</source>
+        <target>Ingresa para continuar</target>
+      </segment>
+    </unit>
+    <unit id="auth.switch.have-account">
+      <segment>
+        <source>Already have an account?</source>
+        <target>¿Ya tienes una cuenta?</target>
+      </segment>
+    </unit>
+    <unit id="auth.switch.no-account">
+      <segment>
+        <source>Don&apos;t have an account?</source>
+        <target>¿No tienes una cuenta?</target>
+      </segment>
+    </unit>
+    <unit id="auth.button.sign-in">
+      <segment>
+        <source>Sign in</source>
+        <target>Iniciar sesión</target>
+      </segment>
+    </unit>
+    <unit id="auth.button.register">
+      <segment>
+        <source>Register</source>
+        <target>Registrarse</target>
+      </segment>
+    </unit>
+    <unit id="auth.forgot-password">
+      <segment>
+        <source>Forgot password?</source>
+        <target>¿Olvidaste tu contraseña?</target>
+      </segment>
+    </unit>
+    <unit id="auth.oauth.divider">
+      <segment>
+        <source>Or continue with</source>
+        <target>O continuar con</target>
+      </segment>
+    </unit>
+  <unit id="auth.recover.email.title">
+      <segment>
+        <source>Recover password</source>
+        <target>Recuperar contraseña</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.subtitle">
+      <segment>
+        <source>Enter your email and we&apos;ll send you a recovery code</source>
+        <target>Ingresa tu correo electrónico y te enviaremos un código de recuperación</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.button">
+      <segment>
+        <source>Send recovery email</source>
+        <target>Enviar correo de recuperación</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.remember">
+      <segment>
+        <source>Remember your password?</source>
+        <target>¿Recuerdas tu contraseña?</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.sign-in">
+      <segment>
+        <source>Sign in</source>
+        <target>Iniciar sesión</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.submit-error">
+      <segment>
+        <source>Failed to send recovery email. Please try again later</source>
+        <target>No se pudo enviar el correo de recuperación. Por favor, inténtalo de nuevo más tarde</target>
+      </segment>
+    </unit>
+    <unit id="logout.button">
+      <segment>
+        <source>Logout</source>
+        <target>Cerrar sesión</target>
+      </segment>
+    </unit>
+  <unit id="auth.recover.otp.title">
+      <segment>
+        <source>Check your email</source>
+        <target>Verifica tu correo electrónico</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.otp.subtitle">
+      <segment>
+        <source>We sent a 6-digit code to</source>
+        <target>Te hemos enviado un código de 6 dígitos a</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.otp.wrong-email">
+      <segment>
+        <source>Wrong email?</source>
+        <target>¿Correo electrónico incorrecto?</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.otp.go-back">
+      <segment>
+        <source>Go back</source>
+        <target>Volver</target>
+      </segment>
+    </unit>
+  <unit id="auth.recover.password.title">
+      <segment>
+        <source>New password</source>
+        <target>Contraseña nueva</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.password.subtitle">
+      <segment>
+        <source>Choose a strong password for your account</source>
+        <target>Elige una contraseña fuerte para tu cuenta</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.password.button">
+      <segment>
+        <source>Reset password</source>
+        <target>Restablecer contraseña</target>
+      </segment>
+    </unit>
+    <unit id="auth.recover.password.submit-error">
+      <segment>
+        <source>Failed to reset password. Please try again.</source>
+        <target>No se pudo restablecer la contraseña. Por favor, inténtalo de nuevo.</target>
+      </segment>
+    </unit>
+  <unit id="auth.verify.email.button">
+      <segment>
+        <source>Verify</source>
+        <target>Verificar</target>
+      </segment>
+    </unit>
+  <unit id="dashboard.toolbar.filters">
+      <segment>
+        <source>Filters</source>
+        <target>Filtros</target>
+      </segment>
+    </unit>
+  <unit id="dashboard.filter.drawer.title">
+      <segment>
+        <source>Filters</source>
+        <target>Filtros</target>
+      </segment>
+    </unit>
+  <unit id="dashboard.filter.tree.title">
+      <segment>
+        <source>Filters</source>
+        <target>Filtros</target>
+      </segment>
+    </unit>
+    <unit id="dashboard.filter.tree.clear">
+      <segment>
+        <source>Clear all</source>
+        <target>Limpiar todo</target>
+      </segment>
+    </unit>
+    <unit id="dashboard.filter.tree.empty">
+      <segment>
+        <source>No events loaded.</source>
+        <target>No hay eventos cargados.</target>
+      </segment>
+    </unit>
+  <unit id="error.unknown">
+      <segment>
+        <source>Unknown Error</source>
+        <target>Error desconocido</target>
+      </segment>
+    </unit>
+    <unit id="error.go-home">
+      <segment>
+        <source>Go Home</source>
+        <target>Ir a la página principal</target>
+      </segment>
+    </unit>
+    <unit id="error.go-home.aria">
+      <segment>
+        <source>Go Home</source>
+        <target>Ir a la página principal</target>
+      </segment>
+    </unit>
+    <unit id="error.status.0">
+      <segment>
+        <source>Network Error</source>
+        <target>Error de red</target>
+      </segment>
+    </unit>
+    <unit id="error.status.400">
+      <segment>
+        <source>Bad Request</source>
+        <target>Solicitud incorrecta</target>
+      </segment>
+    </unit>
+    <unit id="error.status.401">
+      <segment>
+        <source>Unauthorized</source>
+        <target>No autorizado</target>
+      </segment>
+    </unit>
+    <unit id="error.status.403">
+      <segment>
+        <source>Forbidden</source>
+        <target>Prohibido</target>
+      </segment>
+    </unit>
+    <unit id="error.status.404">
+      <segment>
+        <source>Not Found</source>
+        <target>No encontrado</target>
+      </segment>
+    </unit>
+    <unit id="error.status.409">
+      <segment>
+        <source>Conflict</source>
+        <target>Conflicto</target>
+      </segment>
+    </unit>
+    <unit id="error.status.500">
+      <segment>
+        <source>Internal Server Error</source>
+        <target>Error interno del servidor</target>
+      </segment>
+    </unit>
+    <unit id="error.status.502">
+      <segment>
+        <source>Bad Gateway</source>
+        <target>Bad Gateway</target>
+      </segment>
+    </unit>
+    <unit id="error.status.503">
+      <segment>
+        <source>Service Unavailable</source>
+        <target>Servicio no disponible</target>
+      </segment>
+    </unit>
+    <unit id="error.status.unknown">
+      <segment>
+        <source>Unknown Error</source>
+        <target>Error desconocido</target>
+      </segment>
+    </unit>
+  <unit id="error.network-detail">
+      <segment>
+        <source>Unable to reach the server</source>
+        <target>No se puede alcanzar el servidor</target>
+      </segment>
+    </unit>
+    <unit id="error.unexpected-detail">
+      <segment>
+        <source>An unexpected error occurred</source>
+        <target>Ha ocurrido un error inesperado</target>
+      </segment>
+    </unit>
+  <unit id="event.card.grid.empty">
+      <segment>
+        <source>No events match the current filters.</source>
+        <target>No hay eventos que coincidan con los filtros actuales.</target>
+      </segment>
+    </unit>
+    <unit id="event.table.empty">
+      <segment>
+        <source>No events match the current filters.</source>
+        <target>No hay eventos que coincidan con los filtros actuales.</target>
+      </segment>
+    </unit>
+    <unit id="event.table.col.time">
+      <segment>
+        <source>Start</source>
+        <target>Inicio</target>
+      </segment>
+    </unit>
+    <unit id="event.table.col.sport">
+      <segment>
+        <source>Sport</source>
+        <target>Deporte</target>
+      </segment>
+    </unit>
+    <unit id="event.table.col.comp">
+      <segment>
+        <source>Competition</source>
+        <target>Competición</target>
+      </segment>
+    </unit>
+    <unit id="event.table.col.event">
+      <segment>
+        <source>Event</source>
+        <target>Evento</target>
+      </segment>
+    </unit>
+  <unit id="settings.account.email.title">
+      <segment>
+        <source>Email</source>
+        <target>Correo electrónico</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.email.subtitle">
+      <segment>
+        <source>Changing it requires verification.</source>
+        <target>Cambiarlo requiere verificación.</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.email.current">
+      <segment>
+        <source>Current email</source>
+        <target>Correo electrónico actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.email.new-label">
+      <segment>
+        <source>New email</source>
+        <target>Nuevo correo electrónico</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.email.button">
+      <segment>
+        <source>Change email</source>
+        <target>Cambiar correo electrónico</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.email.error.unchanged">
+      <segment>
+        <source>New email must be different from current email</source>
+        <target>Nuevo correo electrónico debe ser diferente del correo electrónico actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.email.error.update">
+      <segment>
+        <source>Failed to update email. Please try again later.</source>
+        <target>Fallo al actualizar el correo electrónico. Por favor, inténtelo de nuevo más tarde.</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.title">
+      <segment>
+        <source>Password</source>
+        <target>Contraseña</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.current">
+      <segment>
+        <source>Current password</source>
+        <target>Contraseña actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.new-label">
+      <segment>
+        <source>New password</source>
+        <target>Nueva contraseña</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.confirm-label">
+      <segment>
+        <source>Confirm new password</source>
+        <target>Confirmar nueva contraseña</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.button">
+      <segment>
+        <source>Change password</source>
+        <target>Cambiar contraseña</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.error.wrong">
+      <segment>
+        <source>Current password is incorrect</source>
+        <target>La contraseña actual es incorrecta</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.error.server">
+      <segment>
+        <source>Could not verify password at this time. Please try again later.</source>
+        <target>No se pudo verificar la contraseña en este momento. Por favor, inténtelo de nuevo más tarde.</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.error.same">
+      <segment>
+        <source>New password must be different from current password</source>
+        <target>La nueva contraseña debe ser diferente de la contraseña actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.error.update">
+      <segment>
+        <source>Failed to update password. Please try again.</source>
+        <target>Fallo al actualizar la contraseña. Por favor, inténtelo de nuevo.</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.displayName.title">
+      <segment>
+        <source>Display Name</source>
+        <target>Nombre</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.displayName.subtitle">
+      <segment>
+        <source>Used for display purposes only.</source>
+        <target>Usado solo para fines de visualización.</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.displayName.current">
+      <segment>
+        <source>Current display name</source>
+        <target>Nombre actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.displayName.new-label">
+      <segment>
+        <source>New display name</source>
+        <target>Nuevo nombre</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.displayName.button">
+      <segment>
+        <source>Change display name</source>
+        <target>Cambiar nombre</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.displayName.error.unchanged">
+      <segment>
+        <source>New display name must be different from current display name</source>
+        <target>El nuevo nombre debe ser diferente del nombre actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.displayName.error.update">
+      <segment>
+        <source>Failed to update display name. Please try again later.</source>
+        <target>Fallo al actualizar el nombre. Por favor, inténtelo de nuevo más tarde.</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.identities.title">
+      <segment>
+        <source>Identities</source>
+        <target>Identidades</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.identities.subtitle">
+      <segment>
+        <source>Manage linked accounts and social logins.</source>
+        <target>Administrar cuentas vinculadas y accesos sociales.</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.identities.connected">
+      <segment>
+        <source>Connected</source>
+        <target>Conectado</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.identities.notConnected">
+      <segment>
+        <source>Not connected</source>
+        <target>No conectado</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.identities.unlink">
+      <segment>
+        <source>Unlink</source>
+        <target>Desvincular</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.identities.connect">
+      <segment>
+        <source>Connect</source>
+        <target>Conectar</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.deleteAccount.title">
+      <segment>
+        <source>Delete Account</source>
+        <target>Borrar Cuenta</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.deleteAccount.subtitle">
+      <segment>
+        <source>Deletes your account and all associated data. This action is irreversible.</source>
+        <target>Borra tu cuenta y todos los datos asociados. Esta acción es irreversible.</target>
+      </segment>
+    </unit>
+    <unit id="settings.account.deleteAccount.button">
+      <segment>
+        <source>Delete my account</source>
+        <target>Borrar mi cuenta</target>
+      </segment>
+    </unit>
+  <unit id="settings.follows.title">
+      <segment>
+        <source>Alerts</source>
+        <target>Alertas</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.subtitle">
+      <segment>
+        <source>Pick which channels deliver pre-event reminders, and how many minutes ahead of an event each one fires.</source>
+        <target>Elige qué canales entregan recordatorios previos al evento, y cuántos minutos antes de un evento cada uno se dispara.</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.loading">
+      <segment>
+        <source>Loading your preferences...</source>
+        <target>Cargando tus preferencias...</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.empty">
+      <segment>
+        <source>No sports are avaliable yet. Once the catalogue syncs you&apos;ll be able to configure alerts here.</source>
+        <target>No hay deportes disponibles todavía. Una vez que se sincronice el catálogo, podrás configurar las alertas aquí.</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.saving">
+      <segment>
+        <source>Saving...</source>
+        <target>Guardando...</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.unit">
+      <segment>
+        <source>min</source>
+        <target>min</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.error.load">
+      <segment>
+        <source>Failed to load preferences.</source>
+        <target>No se pudieron cargar las preferencias.</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.error.save">
+      <segment>
+        <source>Failed to save preferences. Please try again.</source>
+        <target>No se pudieron guardar las preferencias. Por favor, inténtalo de nuevo.</target>
+      </segment>
+    </unit>
+    <unit id="settings.follows.error.lead-time">
+      <segment>
+        <source>Lead time must be at least 1 minute.</source>
+        <target>El tiempo de antelación debe ser de al menos 1 minuto.</target>
+      </segment>
+    </unit>
+    <unit id="settings.autocomplete.no-results">
+      <segment>
+        <source>No results found</source>
+        <target>No se encontraron resultados</target>
+      </segment>
+    </unit>
+  <unit id="settings.preferences.timezone.title">
+      <segment>
+        <source>Timezone</source>
+        <target>Zona horaria</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.subtitle">
+      <segment>
+        <source>Set your preferred timezone</source>
+        <target>Establece tu zona horaria preferida</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.current">
+      <segment>
+        <source>Current timezone</source>
+        <target>Zona horaria actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.select-label">
+      <segment>
+        <source>Select a timezone</source>
+        <target>Seleccionar una zona horaria</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.button">
+      <segment>
+        <source>Change timezone</source>
+        <target>Cambiar zona horaria</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.error.required">
+      <segment>
+        <source>Timezone is required</source>
+        <target>Zona horaria es requerida</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.error.update">
+      <segment>
+        <source>Failed to update timezone. Please try again later.</source>
+        <target>No se pudo actualizar la zona horaria. Por favor, inténtalo de nuevo más tarde.</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.title">
+      <segment>
+        <source>Date Format</source>
+        <target>Formato de fecha</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.subtitle">
+      <segment>
+        <source>Set your preferred date format</source>
+        <target>Establece tu formato de fecha preferido</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.current">
+      <segment>
+        <source>Current date format</source>
+        <target>Formato de fecha actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.select-label">
+      <segment>
+        <source>Select a date format</source>
+        <target>Seleccionar un formato de fecha</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.button">
+      <segment>
+        <source>Change date format</source>
+        <target>Cambiar formato de fecha</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.error.required">
+      <segment>
+        <source>Date format is required</source>
+        <target>Formato de fecha es requerido</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.error.unchanged">
+      <segment>
+        <source>New date format must be different from current date format</source>
+        <target>El nuevo formato de fecha debe ser diferente del formato de fecha actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.error.update">
+      <segment>
+        <source>Failed to update date format. Please try again later.</source>
+        <target>No se pudo actualizar el formato de fecha. Por favor, inténtalo de nuevo más tarde.</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.title">
+      <segment>
+        <source>Default View</source>
+        <target>Vista predeterminada</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.subtitle">
+      <segment>
+        <source>Set your preferred default view for the dashboard</source>
+        <target>Establece tu vista predeterminada preferida para el tablero</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.current">
+      <segment>
+        <source>Current default view</source>
+        <target>Vista predeterminada actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.select-label">
+      <segment>
+        <source>Select a default view</source>
+        <target>Seleccionar una vista predeterminada</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.button">
+      <segment>
+        <source>Change default view</source>
+        <target>Cambiar vista predeterminada</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.error.required">
+      <segment>
+        <source>Default view is required</source>
+        <target>La vista predeterminada es requerida</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.error.unchanged">
+      <segment>
+        <source>New default view must be different from current default view</source>
+        <target>La nueva vista predeterminada debe ser diferente de la vista predeterminada actual</target>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.error.update">
+      <segment>
+        <source>Failed to update default view. Please try again later.</source>
+        <target>No se pudo actualizar la vista predeterminada. Por favor, inténtalo de nuevo más tarde.</target>
+      </segment>
+    </unit>
+  <unit id="settings.preferences.timezone.error.unchanged">
+      <segment>
+        <source>New timezone must be different from current timezone</source>
+        <target>El nueva zona horaria debe ser diferente de la zona horaria actual</target>
+      </segment>
+    </unit>
+  <unit id="settings.nav.account">
+      <segment>
+        <source>Account</source>
+        <target>Cuenta</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.email">
+      <segment>
+        <source>Email</source>
+        <target>Correo Electrónico</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.password">
+      <segment>
+        <source>Password</source>
+        <target>Contraseña</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.display-name">
+      <segment>
+        <source>Display Name</source>
+        <target>Nombre para mostrar</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.identities">
+      <segment>
+        <source>Identities</source>
+        <target>Identidades</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.delete">
+      <segment>
+        <source>Delete Account</source>
+        <target>Eliminar Cuenta</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences">
+      <segment>
+        <source>Preferences</source>
+        <target>Preferencias</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences.timezone">
+      <segment>
+        <source>Timezone</source>
+        <target>Zona Horaria</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences.date-format">
+      <segment>
+        <source>Date Format</source>
+        <target>Formato de Fecha</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences.default-view">
+      <segment>
+        <source>Default View</source>
+        <target>Vista Predeterminada</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.notifications">
+      <segment>
+        <source>Notifications</source>
+        <target>Notificaciones</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.notifications.alerts">
+      <segment>
+        <source>Alerts</source>
+        <target>Alertas</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin">
+      <segment>
+        <source>Admin</source>
+        <target>Admin</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.logs">
+      <segment>
+        <source>Logs</source>
+        <target>Logs</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.users">
+      <segment>
+        <source>Users</source>
+        <target>Usuarios</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.events">
+      <segment>
+        <source>Events</source>
+        <target>Eventos</target>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.stress-testing">
+      <segment>
+        <source>Stress Testing</source>
+        <target>Pruebas de Estrés</target>
+      </segment>
+    </unit>
+    <unit id="header.settings.button">
+      <segment>
+        <source>Settings</source>
+        <target>Configuración</target>
+      </segment>
+    </unit>
+  <unit id="schema.display-name.required">
+      <segment>
+        <source>Display name required</source>
+        <target>Nombre requerido</target>
+      </segment>
+    </unit>
+    <unit id="schema.display-name.min-length">
+      <segment>
+        <source>Display name must be at least 2 characters</source>
+        <target>El nombre debe tener al menos 2 caracteres</target>
+      </segment>
+    </unit>
+    <unit id="schema.display-name.max-length">
+      <segment>
+        <source>Display name must be less than 50 characters</source>
+        <target>El nombre debe tener menos de 50 caracteres</target>
+      </segment>
+    </unit>
+    <unit id="schema.email.required">
+      <segment>
+        <source>Email required</source>
+        <target>Correo electrónico requerido</target>
+      </segment>
+    </unit>
+    <unit id="schema.email.pattern">
+      <segment>
+        <source>Invalid email format</source>
+        <target>Formato de correo electrónico inválido</target>
+      </segment>
+    </unit>
+    <unit id="schema.email.taken">
+      <segment>
+        <source>Email is already taken</source>
+        <target>El correo electrónico ya está en uso</target>
+      </segment>
+    </unit>
+    <unit id="schema.email.not-found">
+      <segment>
+        <source>No account found with this email</source>
+        <target>No se encontró ninguna cuenta con este correo electrónico</target>
+      </segment>
+    </unit>
+    <unit id="schema.email.server-error">
+      <segment>
+        <source>Could not verify email at this time. Please try again later</source>
+        <target>No se pudo verificar el correo electrónico en este momento. Por favor, inténtalo de nuevo más tarde</target>
+      </segment>
+    </unit>
+    <unit id="schema.password.required">
+      <segment>
+        <source>Password required</source>
+        <target>Contraseña requerida</target>
+      </segment>
+    </unit>
+    <unit id="schema.password.confirm-required">
+      <segment>
+        <source>Confirm password required</source>
+        <target>Confirmar contraseña requerida</target>
+      </segment>
+    </unit>
+    <unit id="schema.password.min-length">
+      <segment>
+        <source>Password must be at least 8 characters</source>
+        <target>La contraseña debe tener al menos 8 caracteres</target>
+      </segment>
+    </unit>
+    <unit id="schema.password.no-match">
+      <segment>
+        <source>Passwords do not match</source>
+        <target>Las contraseñas no coinciden</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

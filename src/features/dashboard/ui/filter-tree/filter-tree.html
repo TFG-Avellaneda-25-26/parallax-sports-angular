@@ -1,12 +1,12 @@
 <header class="tree-header">
-  <h3 class="tree-header__title">Filters</h3>
+  <h3 class="tree-header__title" i18n="@@dashboard.filter.tree.title">Filters</h3>
   @if (isAnyFilterActive()) {
-    <button type="button" class="tree-header__clear" (click)="clearAll()">Clear all</button>
+    <button type="button" class="tree-header__clear" (click)="clearAll()" i18n="@@dashboard.filter.tree.clear">Clear all</button>
   }
 </header>
 
 @if (!hasNodes()) {
-  <p class="tree-empty">No events loaded.</p>
+  <p class="tree-empty" i18n="@@dashboard.filter.tree.empty">No events loaded.</p>
 } @else {
   <div class="tree" role="tree">
     @for (sport of nodes(); track sport.key) {

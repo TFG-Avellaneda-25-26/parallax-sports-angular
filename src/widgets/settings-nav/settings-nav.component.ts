@@ -37,7 +37,7 @@ export class SettingsNavComponent {
   visibleTree = computed(() =>
     this.userStore.isAdmin()
       ? this.navStore.tree()
-      : this.navStore.tree().filter(node => node.name !== 'Admin')
+      : this.navStore.tree().filter(node => node.value !== 'admin')
   );
 
   constructor() {

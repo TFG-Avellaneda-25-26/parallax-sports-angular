@@ -7,6 +7,7 @@ import { createDefaultViewForm } from './forms/default-view-form';
 import { createDateFormatForm } from './forms/date-format-form';
 import { SettingsNavStore } from '@shared/stores';
 import { scrollToSection } from '@shared/lib';
+import { preferencesI18n } from '@features/settings';
 
 @Component({
   selector: 'app-settings-preferences',
@@ -16,6 +17,8 @@ import { scrollToSection } from '@shared/lib';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PreferencesComponent {
+
+  readonly i18n = preferencesI18n;
 
   readonly navStore = inject(SettingsNavStore);
   readonly timezonesOptions = TIMEZONE_OPTIONS;

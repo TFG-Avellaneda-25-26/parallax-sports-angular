@@ -10,3 +10,5 @@ export { RecoverEmail } from './ui/recover-email/recover-email';
 export { RecoverOtp } from './ui/recover-otp/recover-otp';
 export { RecoverPassword } from './ui/recover-password/recover-password';
 export { AuthModeStore } from './store/auth-mode.store';
+
+export { authI18n } from './i18n/auth.i18n';

@@ -1,7 +1,7 @@
 <section id="email">
   <header>
-    <h2>Email</h2>
-    <p>Changing it requires verification.</p>
+    <h2>{{ i18n.email.email }}</h2>
+    <p>{{ i18n.email.subtitle }}</p>
     <form [formRoot]="emailForm">
       <app-stateful-input
         type="email"
@@ -16,7 +16,7 @@
         [formField]="emailForm.newEmail"
       />
       <button type="submit" class="accent-btn" [disabled]="emailForm().submitting()">
-        Change Email
+        {{ i18n.email.button }}
       </button>
     </form>
   </header>
@@ -24,7 +24,7 @@
 
 <section id="password">
   <header>
-    <h2>Password</h2>
+    <h2>{{ i18n.password.title }}</h2>
     <form [formRoot]="passwordForm">
       <app-stateful-input
         type="password"
@@ -45,7 +45,7 @@
         [formField]="passwordForm.confirmPassword"
       />
       <button type="submit" class="accent-btn" [disabled]="passwordForm().submitting()">
-        Change Password
+        {{ i18n.password.button }}
       </button>
     </form>
   </header>
@@ -53,8 +53,8 @@
 
 <section id="display-name">
   <header>
-    <h2>Display name</h2>
-    <p>Used for display purposes. Can be changed at any time.</p>
+    <h2>{{ i18n.displayName.title }}</h2>
+    <p>{{ i18n.displayName.subtitle }}</p>
     <form [formRoot]="displayNameForm">
       <app-stateful-input
         type="text"
@@ -69,7 +69,7 @@
         [formField]="displayNameForm.newDisplayName"
       />
       <button type="submit" class="accent-btn" [disabled]="displayNameForm().submitting()">
-        Change Display Name
+        {{ i18n.displayName.button }}
       </button>
     </form>
   </header>
@@ -77,8 +77,8 @@
 
 <section id="identities">
   <header>
-    <h2>Identities</h2>
-    <p>Manage linked accounts and social logins.</p>
+    <h2>{{ i18n.identities.title }}</h2>
+    <p>{{ i18n.identities.subtitle }}</p>
     <div class="identities-list">
       @for (item of identities(); track item.provider) {
   <div class="identity-row">
@@ -95,18 +95,18 @@
       </svg>
       <span class="identity-label">{{ item.provider | titlecase }}</span>
       @if (item.isLinked) {
-        <span class="identity-badge identity-badge--linked">Connected</span>
+        <span class="identity-badge identity-badge--linked">{{ i18n.identities.connected }}</span>
       } @else {
-        <span class="identity-badge identity-badge--unlinked">Not connected</span>
+        <span class="identity-badge identity-badge--unlinked">{{ i18n.identities.notConnected }}</span>
       }
     </div>
     @if (item.isLinked) {
       <button class="danger-btn--sm" (click)="userStore.disconnectIdentity(item.identity!.id)">
-        Unlink
+        {{ i18n.identities.unlink}}
       </button>
     } @else {
       <button class="accent-btn--sm" (click)="userStore.linkIdentity(item.provider)">
-        Connect
+        {{ i18n.identities.link }}
       </button>
     }
   </div>
@@ -117,8 +117,10 @@
 
 <section id="delete-account">
   <header>
-    <h2>Delete account</h2>
-    <p>Deletes your account and all associated data. This action is irreversible.</p>
-    <button class="danger-btn" (click)="userStore.deleteAccount()">Delete Account</button>
+    <h2>{{ i18n.deleteAccount.title }}</h2>
+    <p>{{ i18n.deleteAccount.subtitle }}</p>
+    <button class="danger-btn" (click)="userStore.deleteAccount()">
+      {{ i18n.deleteAccount.button }}
+    </button>
   </header>
 </section>

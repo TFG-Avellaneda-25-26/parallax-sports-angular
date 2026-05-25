@@ -1,65 +1,65 @@
 <section id="timezone">
   <header>
-    <h2>Timezone</h2>
-    <p>Set your preferred timezone</p>
+    <h2>{{ i18n.timezone.title }}</h2>
+    <p>{{ i18n.timezone.subtitle }}</p>
     <form [formRoot]="timeZoneForm">
       <app-stateful-input
         type="text"
-        label="Current Timezone"
+        label="{{ i18n.timezone.currentLabel }}"
         [formField]="timeZoneForm.currentTimezone"
       />
       <app-stateful-combox-autocomplete-select
-        label="Select Timezone"
+        label="{{ i18n.timezone.title }}"
         fieldId="TimezoneSelector"
-        displayLabel="Select a timezone"
+        displayLabel="{{ i18n.timezone.selectLabel }}"
         [list]="timezonesOptions"
         [formField]="timeZoneForm.timeZone"
       />
-      <button type="submit" class="accent-btn">Change Timezone</button>
+      <button type="submit" class="accent-btn">{{ i18n.timezone.button }}</button>
     </form>
   </header>
 </section>
 
 <section id="date-format">
   <header>
-    <h2>Date Format</h2>
-    <p>Set your preferred date format</p>
+    <h2>{{ i18n.dateFormat.title }}</h2>
+    <p>{{ i18n.dateFormat.subtitle }}</p>
     <form [formRoot]="dateFormatForm">
       <app-stateful-input
         type="text"
-        label="Current Date Format"
+        label="{{ i18n.dateFormat.currentLabel }}"
         [formField]="dateFormatForm.currentFormat"
       />
       <app-stateful-combobox-select-input
-        label="Select Date Format"
+        label="{{ i18n.dateFormat.selectLabel }}"
         fieldId="DateFormatSelector"
-        displayLabel="Select a date format"
+        displayLabel="{{ i18n.dateFormat.selectLabel }}"
         [list]="formats"
         [formField]="dateFormatForm.newFormat"
       />
-      <button type="submit" class="accent-btn">Change Date Format</button>
+      <button type="submit" class="accent-btn">{{ i18n.dateFormat.button }}</button>
     </form>
   </header>
 </section>
 
 <section id="default-view">
   <header>
-    <h2>Default View</h2>
-    <p>Set your preferred default view for the dashboard</p>
+    <h2>{{ i18n.defaultView.title }}</h2>
+    <p>{{ i18n.defaultView.subtitle }}</p>
     <form [formRoot]="defaultViewForm">
       <app-stateful-input
         type="text"
-        label="Current Default View"
+        label="{{ i18n.defaultView.currentLabel }}"
         [formField]="defaultViewForm.currentView"
       />
       <app-stateful-combobox-select-input
-        label="Select Default View"
+        label="{{ i18n.defaultView.selectLabel }}"
         fieldId="DefaultViewSelector"
-        displayLabel="Select a default view"
+        displayLabel="{{ i18n.defaultView.selectLabel }}"
         [list]="defaultViewOptions"
         [formField]="defaultViewForm.newView"
       />
-      <button type="submit" class="accent-btn">Change Default View</button>
+      <button type="submit" class="accent-btn">{{ i18n.defaultView.button }}</button>
     </form>
   </header>
 </section>

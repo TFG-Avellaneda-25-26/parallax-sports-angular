@@ -1,22 +1,24 @@
 import { inject, signal } from "@angular/core";
 import { form, readonly, required, validate } from "@angular/forms/signals";
 import { UserStore } from "@entities/user";
+import { preferencesI18n } from "@features/settings/i18n/settings.i18n";
 
 export const createDateFormatForm = () => {
 
   const userStore = inject(UserStore);
+  const i18n = preferencesI18n['dateFormat'];
 
   return form(
     signal({ currentFormat: userStore.dateFormat(), newFormat: '' }),
     (schemaPath) => {
-      required(schemaPath.newFormat, { message: 'Date format is required' });
+      required(schemaPath.newFormat, { message: i18n.errorRequired });
       readonly(schemaPath.currentFormat);
       validate(schemaPath.newFormat, ({value, valueOf}) => {
         const newFormat = value();
         const currentFormat = valueOf(schemaPath.currentFormat);
 
         if (newFormat && currentFormat && newFormat === currentFormat) {
-          return { kind: 'formatUnchanged', message: 'New date format must be different from current date format' };
+          return { kind: 'formatUnchanged', message: i18n.errorUnchanged };
         }
 
         return null;
@@ -34,7 +36,7 @@ export const createDateFormatForm = () => {
             field().reset();
             return null;
           } catch {
-            return { kind: 'updateError', message: 'Failed to update date format. Please try again.' }
+            return { kind: 'updateError', message: i18n.errorUpdate }
           }
       },
       ignoreValidators: 'none'

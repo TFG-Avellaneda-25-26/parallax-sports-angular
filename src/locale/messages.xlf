@@ -1,0 +1,1230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US">
+  <file id="ngi18n" original="ng.template">
+    <unit id="schema.display-name.required">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:3</note>
+      </notes>
+      <segment>
+        <source>Display name required</source>
+      </segment>
+    </unit>
+    <unit id="schema.display-name.min-length">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:4</note>
+      </notes>
+      <segment>
+        <source>Display name must be at least 2 characters</source>
+      </segment>
+    </unit>
+    <unit id="schema.display-name.max-length">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:5</note>
+      </notes>
+      <segment>
+        <source>Display name must be less than 50 characters</source>
+      </segment>
+    </unit>
+    <unit id="schema.email.required">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:8</note>
+      </notes>
+      <segment>
+        <source>Email required</source>
+      </segment>
+    </unit>
+    <unit id="schema.email.pattern">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:9</note>
+      </notes>
+      <segment>
+        <source>Invalid email format</source>
+      </segment>
+    </unit>
+    <unit id="schema.email.taken">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:10</note>
+      </notes>
+      <segment>
+        <source>Email is already taken</source>
+      </segment>
+    </unit>
+    <unit id="schema.email.not-found">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:11</note>
+      </notes>
+      <segment>
+        <source>No account found with this email</source>
+      </segment>
+    </unit>
+    <unit id="schema.email.server-error">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:12</note>
+      </notes>
+      <segment>
+        <source>Could not verify email at this time. Please try again later</source>
+      </segment>
+    </unit>
+    <unit id="schema.password.required">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:15</note>
+      </notes>
+      <segment>
+        <source>Password required</source>
+      </segment>
+    </unit>
+    <unit id="schema.password.confirm-required">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:16</note>
+      </notes>
+      <segment>
+        <source>Confirm password required</source>
+      </segment>
+    </unit>
+    <unit id="schema.password.min-length">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:17</note>
+      </notes>
+      <segment>
+        <source>Password must be at least 8 characters</source>
+      </segment>
+    </unit>
+    <unit id="schema.password.no-match">
+      <notes>
+        <note category="location">src/entities/auth/i18n/auth-schemas.i18n.ts:18</note>
+      </notes>
+      <segment>
+        <source>Passwords do not match</source>
+      </segment>
+    </unit>
+    <unit id="auth.title.register">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:3</note>
+      </notes>
+      <segment>
+        <source>Create account</source>
+      </segment>
+    </unit>
+    <unit id="auth.title.login">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:4</note>
+      </notes>
+      <segment>
+        <source>Welcome back</source>
+      </segment>
+    </unit>
+    <unit id="auth.subtitle.register">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:5</note>
+      </notes>
+      <segment>
+        <source>Fill in the details below to get started</source>
+      </segment>
+    </unit>
+    <unit id="auth.subtitle.login">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:6</note>
+      </notes>
+      <segment>
+        <source>Sign in to continue</source>
+      </segment>
+    </unit>
+    <unit id="auth.switch.have-account">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:7</note>
+      </notes>
+      <segment>
+        <source>Already have an account?</source>
+      </segment>
+    </unit>
+    <unit id="auth.switch.no-account">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:8</note>
+      </notes>
+      <segment>
+        <source>Don&apos;t have an account?</source>
+      </segment>
+    </unit>
+    <unit id="auth.button.sign-in">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:9</note>
+      </notes>
+      <segment>
+        <source>Sign in</source>
+      </segment>
+    </unit>
+    <unit id="auth.button.register">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:10</note>
+      </notes>
+      <segment>
+        <source>Register</source>
+      </segment>
+    </unit>
+    <unit id="auth.forgot-password">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:11</note>
+      </notes>
+      <segment>
+        <source>Forgot password?</source>
+      </segment>
+    </unit>
+    <unit id="auth.oauth.divider">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:12</note>
+      </notes>
+      <segment>
+        <source>Or continue with</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.title">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:15</note>
+      </notes>
+      <segment>
+        <source>Recover password</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.subtitle">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:16</note>
+      </notes>
+      <segment>
+        <source>Enter your email and we&apos;ll send you a recovery code</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.button">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:17</note>
+      </notes>
+      <segment>
+        <source>Send recovery email</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.remember">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:18</note>
+      </notes>
+      <segment>
+        <source>Remember your password?</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.sign-in">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:19</note>
+      </notes>
+      <segment>
+        <source>Sign in</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.email.submit-error">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:20</note>
+      </notes>
+      <segment>
+        <source>Failed to send recovery email. Please try again later</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.otp.title">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:23</note>
+      </notes>
+      <segment>
+        <source>Check your email</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.otp.subtitle">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:24</note>
+      </notes>
+      <segment>
+        <source>We sent a 6-digit code to</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.otp.wrong-email">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:25</note>
+      </notes>
+      <segment>
+        <source>Wrong email?</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.otp.go-back">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:26</note>
+      </notes>
+      <segment>
+        <source>Go back</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.password.title">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:29</note>
+      </notes>
+      <segment>
+        <source>New password</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.password.subtitle">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:30</note>
+      </notes>
+      <segment>
+        <source>Choose a strong password for your account</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.password.button">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:31</note>
+      </notes>
+      <segment>
+        <source>Reset password</source>
+      </segment>
+    </unit>
+    <unit id="auth.recover.password.submit-error">
+      <notes>
+        <note category="location">src/features/auth/i18n/auth.i18n.ts:32</note>
+      </notes>
+      <segment>
+        <source>Failed to reset password. Please try again.</source>
+      </segment>
+    </unit>
+    <unit id="logout.button">
+      <notes>
+        <note category="location">src/features/auth/ui/logout-button/logout-button.component.html:8,10</note>
+      </notes>
+      <segment>
+        <source> Logout
+</source>
+      </segment>
+    </unit>
+    <unit id="auth.verify.email.button">
+      <notes>
+        <note category="location">src/features/auth/ui/verify-email/verify-email.component.html:11,14</note>
+      </notes>
+      <segment>
+        <source> Verify </source>
+      </segment>
+    </unit>
+    <unit id="dashboard.toolbar.filters">
+      <notes>
+        <note category="location">src/features/dashboard/ui/dashboard-toolbar/dashboard-toolbar.html:11,14</note>
+      </notes>
+      <segment>
+        <source>Filters</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.filter.drawer.title">
+      <notes>
+        <note category="location">src/features/dashboard/ui/filter-drawer/filter-drawer.html:5,6</note>
+      </notes>
+      <segment>
+        <source>Filters</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.filter.tree.title">
+      <notes>
+        <note category="location">src/features/dashboard/ui/filter-tree/filter-tree.html:2,4</note>
+      </notes>
+      <segment>
+        <source>Filters</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.filter.tree.clear">
+      <notes>
+        <note category="location">src/features/dashboard/ui/filter-tree/filter-tree.html:4,8</note>
+      </notes>
+      <segment>
+        <source>Clear all</source>
+      </segment>
+    </unit>
+    <unit id="dashboard.filter.tree.empty">
+      <notes>
+        <note category="location">src/features/dashboard/ui/filter-tree/filter-tree.html:9,11</note>
+      </notes>
+      <segment>
+        <source>No events loaded.</source>
+      </segment>
+    </unit>
+    <unit id="event.card.grid.empty">
+      <notes>
+        <note category="location">src/features/event/ui/event-card-grid/event-card-grid.html:2,4</note>
+      </notes>
+      <segment>
+        <source>No events match the current filters.</source>
+      </segment>
+    </unit>
+    <unit id="event.table.empty">
+      <notes>
+        <note category="location">src/features/event/ui/event-table/event-table.html:2,4</note>
+      </notes>
+      <segment>
+        <source>No events match the current filters.</source>
+      </segment>
+    </unit>
+    <unit id="event.table.col.time">
+      <notes>
+        <note category="location">src/features/event/ui/event-table/event-table.html:13,14</note>
+      </notes>
+      <segment>
+        <source>Start</source>
+      </segment>
+    </unit>
+    <unit id="event.table.col.sport">
+      <notes>
+        <note category="location">src/features/event/ui/event-table/event-table.html:14,15</note>
+      </notes>
+      <segment>
+        <source>Sport</source>
+      </segment>
+    </unit>
+    <unit id="event.table.col.comp">
+      <notes>
+        <note category="location">src/features/event/ui/event-table/event-table.html:15,16</note>
+      </notes>
+      <segment>
+        <source>Competition</source>
+      </segment>
+    </unit>
+    <unit id="event.table.col.event">
+      <notes>
+        <note category="location">src/features/event/ui/event-table/event-table.html:16,19</note>
+      </notes>
+      <segment>
+        <source>Event</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.email.title">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:3</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.email.subtitle">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:4</note>
+      </notes>
+      <segment>
+        <source>Changing it requires verification.</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.email.current">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:5</note>
+      </notes>
+      <segment>
+        <source>Current email</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.email.new-label">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:6</note>
+      </notes>
+      <segment>
+        <source>New email</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.email.button">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:7</note>
+      </notes>
+      <segment>
+        <source>Change email</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.email.error.unchanged">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:8</note>
+      </notes>
+      <segment>
+        <source>New email must be different from current email</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.email.error.update">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:9</note>
+      </notes>
+      <segment>
+        <source>Failed to update email. Please try again later.</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.title">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:12</note>
+      </notes>
+      <segment>
+        <source>Password</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.current">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:13</note>
+      </notes>
+      <segment>
+        <source>Current password</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.new-label">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:14</note>
+      </notes>
+      <segment>
+        <source>New password</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.confirm-label">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:15</note>
+      </notes>
+      <segment>
+        <source>Confirm new password</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.button">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:16</note>
+      </notes>
+      <segment>
+        <source>Change password</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.error.wrong">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:17</note>
+      </notes>
+      <segment>
+        <source>Current password is incorrect</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.error.server">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:18</note>
+      </notes>
+      <segment>
+        <source>Could not verify password at this time. Please try again later.</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.error.same">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:19</note>
+      </notes>
+      <segment>
+        <source>New password must be different from current password</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.password.error.update">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:20</note>
+      </notes>
+      <segment>
+        <source>Failed to update password. Please try again.</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.displayName.title">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:23</note>
+      </notes>
+      <segment>
+        <source>Display Name</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.displayName.subtitle">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:24</note>
+      </notes>
+      <segment>
+        <source>Used for display purposes only.</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.displayName.current">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:25</note>
+      </notes>
+      <segment>
+        <source>Current display name</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.displayName.new-label">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:26</note>
+      </notes>
+      <segment>
+        <source>New display name</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.displayName.button">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:27</note>
+      </notes>
+      <segment>
+        <source>Change display name</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.displayName.error.unchanged">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:28</note>
+      </notes>
+      <segment>
+        <source>New display name must be different from current display name</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.displayName.error.update">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:29</note>
+      </notes>
+      <segment>
+        <source>Failed to update display name. Please try again later.</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.identities.title">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:32</note>
+      </notes>
+      <segment>
+        <source>Identities</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.identities.subtitle">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:33</note>
+      </notes>
+      <segment>
+        <source>Manage linked accounts and social logins.</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.identities.connected">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:34</note>
+      </notes>
+      <segment>
+        <source>Connected</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.identities.notConnected">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:35</note>
+      </notes>
+      <segment>
+        <source>Not connected</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.identities.unlink">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:36</note>
+      </notes>
+      <segment>
+        <source>Unlink</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.identities.connect">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:37</note>
+      </notes>
+      <segment>
+        <source>Connect</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.deleteAccount.title">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:40</note>
+      </notes>
+      <segment>
+        <source>Delete Account</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.deleteAccount.subtitle">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:41</note>
+      </notes>
+      <segment>
+        <source>Deletes your account and all associated data. This action is irreversible.</source>
+      </segment>
+    </unit>
+    <unit id="settings.account.deleteAccount.button">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:42</note>
+      </notes>
+      <segment>
+        <source>Delete my account</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.title">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:47</note>
+      </notes>
+      <segment>
+        <source>Alerts</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.subtitle">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:48</note>
+      </notes>
+      <segment>
+        <source>Pick which channels deliver pre-event reminders, and how many minutes ahead of an event each one fires.</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.loading">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:49</note>
+      </notes>
+      <segment>
+        <source>Loading your preferences...</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.empty">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:50</note>
+      </notes>
+      <segment>
+        <source>No sports are avaliable yet. Once the catalogue syncs you&apos;ll be able to configure alerts here.</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.saving">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:51</note>
+      </notes>
+      <segment>
+        <source>Saving...</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.unit">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:52</note>
+      </notes>
+      <segment>
+        <source>min</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.error.load">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:53</note>
+      </notes>
+      <segment>
+        <source>Failed to load preferences.</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.error.save">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:54</note>
+      </notes>
+      <segment>
+        <source>Failed to save preferences. Please try again.</source>
+      </segment>
+    </unit>
+    <unit id="settings.follows.error.lead-time">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:55</note>
+      </notes>
+      <segment>
+        <source>Lead time must be at least 1 minute.</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.title">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:60</note>
+      </notes>
+      <segment>
+        <source>Timezone</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.subtitle">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:61</note>
+      </notes>
+      <segment>
+        <source>Set your preferred timezone</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.current">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:62</note>
+      </notes>
+      <segment>
+        <source>Current timezone</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.select-label">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:63</note>
+      </notes>
+      <segment>
+        <source>Select a timezone</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.button">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:64</note>
+      </notes>
+      <segment>
+        <source>Change timezone</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.error.required">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:65</note>
+      </notes>
+      <segment>
+        <source>Timezone is required</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.error.unchanged">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:66</note>
+      </notes>
+      <segment>
+        <source>New timezone must be different from current timezone</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.timezone.error.update">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:67</note>
+      </notes>
+      <segment>
+        <source>Failed to update timezone. Please try again later.</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.title">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:70</note>
+      </notes>
+      <segment>
+        <source>Date Format</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.subtitle">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:71</note>
+      </notes>
+      <segment>
+        <source>Set your preferred date format</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.current">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:72</note>
+      </notes>
+      <segment>
+        <source>Current date format</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.select-label">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:73</note>
+      </notes>
+      <segment>
+        <source>Select a date format</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.button">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:74</note>
+      </notes>
+      <segment>
+        <source>Change date format</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.error.required">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:75</note>
+      </notes>
+      <segment>
+        <source>Date format is required</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.error.unchanged">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:76</note>
+      </notes>
+      <segment>
+        <source>New date format must be different from current date format</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.dateFormat.error.update">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:77</note>
+      </notes>
+      <segment>
+        <source>Failed to update date format. Please try again later.</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.title">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:80</note>
+      </notes>
+      <segment>
+        <source>Default View</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.subtitle">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:81</note>
+      </notes>
+      <segment>
+        <source>Set your preferred default view for the dashboard</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.current">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:82</note>
+      </notes>
+      <segment>
+        <source>Current default view</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.select-label">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:83</note>
+      </notes>
+      <segment>
+        <source>Select a default view</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.button">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:84</note>
+      </notes>
+      <segment>
+        <source>Change default view</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.error.required">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:85</note>
+      </notes>
+      <segment>
+        <source>Default view is required</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.error.unchanged">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:86</note>
+      </notes>
+      <segment>
+        <source>New default view must be different from current default view</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.defaultView.error.update">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:87</note>
+      </notes>
+      <segment>
+        <source>Failed to update default view. Please try again later.</source>
+      </segment>
+    </unit>
+    <unit id="settings.autocomplete.no-results">
+      <notes>
+        <note category="location">src/features/settings/ui/auto-complete/auto-complete.component.html:19,21</note>
+      </notes>
+      <segment>
+        <source>No results found</source>
+      </segment>
+    </unit>
+    <unit id="landing.title">
+      <notes>
+        <note category="location">src/pages/landing/landing-page.html:13,15</note>
+      </notes>
+      <segment>
+        <source>Parallax-Sports</source>
+      </segment>
+    </unit>
+    <unit id="landing.desc.track">
+      <notes>
+        <note category="location">src/pages/landing/landing-page.html:16,17</note>
+      </notes>
+      <segment>
+        <source>Track sports.</source>
+      </segment>
+    </unit>
+    <unit id="landing.desc.alerts">
+      <notes>
+        <note category="location">src/pages/landing/landing-page.html:17,18</note>
+      </notes>
+      <segment>
+        <source>Get alerts.</source>
+      </segment>
+    </unit>
+    <unit id="landing.desc.moment">
+      <notes>
+        <note category="location">src/pages/landing/landing-page.html:18,21</note>
+      </notes>
+      <segment>
+        <source>Never miss a moment.</source>
+      </segment>
+    </unit>
+    <unit id="landing.cta">
+      <notes>
+        <note category="location">src/pages/landing/landing-page.html:22,25</note>
+      </notes>
+      <segment>
+        <source>Get Started</source>
+      </segment>
+    </unit>
+    <unit id="error.unknown">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:2</note>
+      </notes>
+      <segment>
+        <source>Unknown Error</source>
+      </segment>
+    </unit>
+    <unit id="error.go-home">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:3</note>
+      </notes>
+      <segment>
+        <source>Go Home</source>
+      </segment>
+    </unit>
+    <unit id="error.go-home.aria">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:4</note>
+      </notes>
+      <segment>
+        <source>Go Home</source>
+      </segment>
+    </unit>
+    <unit id="error.network-detail">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:5</note>
+      </notes>
+      <segment>
+        <source>Unable to reach the server</source>
+      </segment>
+    </unit>
+    <unit id="error.unexpected-detail">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:6</note>
+      </notes>
+      <segment>
+        <source>An unexpected error occurred</source>
+      </segment>
+    </unit>
+    <unit id="error.status.0">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:10</note>
+      </notes>
+      <segment>
+        <source>Network Error</source>
+      </segment>
+    </unit>
+    <unit id="error.status.400">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:11</note>
+      </notes>
+      <segment>
+        <source>Bad Request</source>
+      </segment>
+    </unit>
+    <unit id="error.status.401">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:12</note>
+      </notes>
+      <segment>
+        <source>Unauthorized</source>
+      </segment>
+    </unit>
+    <unit id="error.status.403">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:13</note>
+      </notes>
+      <segment>
+        <source>Forbidden</source>
+      </segment>
+    </unit>
+    <unit id="error.status.404">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:14</note>
+      </notes>
+      <segment>
+        <source>Not Found</source>
+      </segment>
+    </unit>
+    <unit id="error.status.409">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:15</note>
+      </notes>
+      <segment>
+        <source>Conflict</source>
+      </segment>
+    </unit>
+    <unit id="error.status.500">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:16</note>
+      </notes>
+      <segment>
+        <source>Internal Server Error</source>
+      </segment>
+    </unit>
+    <unit id="error.status.502">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:17</note>
+      </notes>
+      <segment>
+        <source>Bad Gateway</source>
+      </segment>
+    </unit>
+    <unit id="error.status.503">
+      <notes>
+        <note category="location">src/shared/i18n/error.i18n.ts:18</note>
+      </notes>
+      <segment>
+        <source>Service Unavailable</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:2</note>
+      </notes>
+      <segment>
+        <source>Account</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.email">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:3</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.password">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:4</note>
+      </notes>
+      <segment>
+        <source>Password</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.display-name">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:5</note>
+      </notes>
+      <segment>
+        <source>Display Name</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.identities">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:6</note>
+      </notes>
+      <segment>
+        <source>Identities</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.account.delete">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:7</note>
+      </notes>
+      <segment>
+        <source>Delete Account</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:8</note>
+      </notes>
+      <segment>
+        <source>Preferences</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences.timezone">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:9</note>
+      </notes>
+      <segment>
+        <source>Timezone</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences.date-format">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:10</note>
+      </notes>
+      <segment>
+        <source>Date Format</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.preferences.default-view">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:11</note>
+      </notes>
+      <segment>
+        <source>Default View</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.notifications">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:12</note>
+      </notes>
+      <segment>
+        <source>Notifications</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.notifications.alerts">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:13</note>
+      </notes>
+      <segment>
+        <source>Alerts</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:14</note>
+      </notes>
+      <segment>
+        <source>Admin</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.logs">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:15</note>
+      </notes>
+      <segment>
+        <source>Logs</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.users">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:16</note>
+      </notes>
+      <segment>
+        <source>Users</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.events">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:17</note>
+      </notes>
+      <segment>
+        <source>Events</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.admin.stress-testing">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:18</note>
+      </notes>
+      <segment>
+        <source>Stress Testing</source>
+      </segment>
+    </unit>
+    <unit id="error.status.unknown">
+      <notes>
+        <note category="location">src/shared/interceptors/error.interceptor.ts:68</note>
+      </notes>
+      <segment>
+        <source>Unknown Error</source>
+      </segment>
+    </unit>
+    <unit id="header.settings.button">
+      <notes>
+        <note category="location">src/widgets/header/header.component.html:30,33</note>
+      </notes>
+      <segment>
+        <source>Settings</source>
+      </segment>
+    </unit>
+  </file>
+</xliff>

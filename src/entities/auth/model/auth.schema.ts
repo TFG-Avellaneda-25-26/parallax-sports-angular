@@ -1,10 +1,11 @@
 import { debounce, maxLength, minLength, pattern, required, schema, validate, validateHttp } from "@angular/forms/signals";
 import { EmailAvailabilityResponse, PasswordData } from "./auth.model";
+import { authSchemasI18n } from "../i18n/auth-schemas.i18n";
 
 export const displayNameSchema = schema<string>((displayNamePath) => {
-  required(displayNamePath, { message: 'Display name required' });
-  minLength(displayNamePath, 2, { message: 'Display name must be at least 2 characters' });
-  maxLength(displayNamePath, 50, { message: 'Display name must be less than 50 characters' });
+  required(displayNamePath, { message:  authSchemasI18n.displayName.required });
+  minLength(displayNamePath, 2, { message: authSchemasI18n.displayName.minLength });
+  maxLength(displayNamePath, 50, { message: authSchemasI18n.displayName.maxLength });
 });
 
 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -25,36 +26,36 @@ export const emailAsyncSchema = (API_BASE_URL: string, mode: 'register' | 'recov
       if (mode === 'register') {
         return !response
         ? null
-        : { kind: 'emailTaken', message: 'Email is already taken' };
+        : { kind: 'emailTaken', message: authSchemasI18n.email.taken };
       } else {
         return response
         ? null
-        : { kind: 'emailNotFound', message: 'No account found with this email' };
+        : { kind: 'emailNotFound', message: authSchemasI18n.email.notFound };
       }
     },
     onError: (error) => {
       console.error('Error validating email', error);
       return {
         kind: 'serverError',
-        message: 'Could not verify email at this time. Please try again later'
+        message: authSchemasI18n.email.serverError
       };
     }
   });
 });
 
 export const emailSchema = schema<string>((emailPath) => {
-  required(emailPath, { message: 'Email required' });
-  pattern(emailPath, emailPattern, { message: 'Invalid email format' });
+  required(emailPath, { message: authSchemasI18n.email.required });
+  pattern(emailPath, emailPattern, { message: authSchemasI18n.email.pattern });
 });
 
 export const loginPasswordSchema = schema<string>((passwordPath) => {
-  required(passwordPath, { message: 'Password required' });
+  required(passwordPath, { message: authSchemasI18n.password.required });
 });
 
 export const passwordSchema = schema<PasswordData>((passwordPath) => {
-  required(passwordPath.password, { message: 'Password required' });
-  required(passwordPath.confirmPassword, { message: 'Confirm password required' });
-  minLength(passwordPath.password, 8, { message: 'Password must be at least 8 characters' });
+  required(passwordPath.password, { message: authSchemasI18n.password.required });
+  required(passwordPath.confirmPassword, { message: authSchemasI18n.password.confirmRequired });
+  minLength(passwordPath.password, 8, { message: authSchemasI18n.password.minLength });
 
   validate(passwordPath.confirmPassword, ({value, valueOf}) => {
 
@@ -64,7 +65,7 @@ export const passwordSchema = schema<PasswordData>((passwordPath) => {
     if (confirmPassword !== password) {
       return {
         kind: 'error',
-        message: 'Passwords do not match'
+        message: authSchemasI18n.password.noMatch
       };
     }
 
