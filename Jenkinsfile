@@ -22,9 +22,6 @@ pipeline {
         }
 
         stage('Build Docker image') {
-            // The multi-stage Dockerfile runs `npm ci` + `npx ng build` inside the
-            // node:22-alpine builder stage, so Jenkins itself doesn't need Node
-            // installed. Lint moved into the Dockerfile (or skip it for now).
             steps {
                 sh """
                     docker build \
