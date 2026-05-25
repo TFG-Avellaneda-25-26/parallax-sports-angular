@@ -7,11 +7,11 @@ import { UserStore } from '@entities/user';
 @Component({
   selector: 'app-lang',
   imports: [StatefulComboboxSelectInputComponent, FormRoot, FormField, StatefulInput],
-  templateUrl: './lang.html',
-  styleUrl: './lang.css',
+  templateUrl: './lang.component.html',
+  styleUrl: './lang.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Lang {
+export class LangComponent {
 
   readonly i18n = preferencesI18n['lang'];
   readonly userStore = inject(UserStore);
@@ -45,6 +45,7 @@ export class Lang {
 
           try {
             await this.userStore.updateLang(newLang);
+            field().value.set({ currentLang: newLang, newLang: '' });
             field().reset();
             return null;
           } catch {

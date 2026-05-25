@@ -29,7 +29,7 @@ export const UserStore = signalStore(
     timezone: computed(() => store.user()?.settings?.timezone ?? ''),
     defaultView: computed(() => store.user()?.settings?.defaultView ?? ''),
     dateFormat: computed(() => store.user()?.settings?.dateFormat ?? ''),
-    lang: computed(() => store.user()?.settings?.lang ?? 'en-US'),
+    lang: computed(() => store.user()?.settings?.lang ?? ''),
   })),
 
   withMethods((store, userService = inject(UserService), router = inject(Router)) => ({
