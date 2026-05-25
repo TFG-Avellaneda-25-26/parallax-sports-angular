@@ -44,7 +44,7 @@ export class LangComponent {
           if (!newLang) return;
 
           try {
-            await this.userStore.updateLang(newLang);
+            await this.userStore.updateSettings({ lang: newLang });
             field().value.set({ currentLang: newLang, newLang: '' });
             field().reset();
             return null;

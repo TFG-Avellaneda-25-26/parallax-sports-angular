@@ -47,7 +47,7 @@ export class DateFormatComponent {
           if (!newFormat) return null;
 
           try {
-            await this.userStore.updateDateFormat(newFormat);
+            await this.userStore.updateSettings({ dateFormat: newFormat });
             field().value.set({ currentFormat: newFormat, newFormat: '' });
             field().reset();
             return null;

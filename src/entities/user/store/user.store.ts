@@ -1,5 +1,5 @@
-import { computed, inject } from "@angular/core";
-import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
+import { computed, effect, inject } from "@angular/core";
+import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from "@ngrx/signals";
 import { UserService, User, UserSettings } from "@entities/user";
 import { lastValueFrom } from "rxjs";
 import { Router } from "@angular/router";
@@ -41,14 +41,6 @@ export const UserStore = signalStore(
       try {
         const user = await lastValueFrom(userService.fetchCurrentUser());
         patchState(store, { user, isLoading: false });
-
-        const lang = user.settings?.lang ?? 'en-US';
-        const currentPath = window.location.pathname;
-
-        if (!currentPath.startsWith(`/${lang}/`)) {
-          const pathWithoutLocale = currentPath.replace(/^\/([a-z]{2}-[A-Z]{2}|[a-z]{2})(?=\/|$)/, '');
-          window.location.href = `/${lang}${pathWithoutLocale}`;
-        }
       } catch (error) {
         patchState(store, { user: null, isLoading: false });
         throw error;
@@ -134,67 +126,20 @@ export const UserStore = signalStore(
       }
     },
 
-    async updateTimeZone(timeZone: string): Promise<void> {
+    async updateSettings(settings: Partial<UserSettings>): Promise<void> {
       const user = store.user();
       if (!user) return;
 
       try {
-        await lastValueFrom(userService.updateTimeZone(timeZone));
-        patchState(store, { user: {
-          ...user, settings: { ...user.settings, timezone: timeZone } as UserSettings
-        }
+        await lastValueFrom(userService.updateSettings(settings));
+        patchState(store, {
+          user: {
+            ...user,
+            settings: { ...user.settings, ...settings } as UserSettings
+          }
         });
       } catch (error) {
-        console.error('Failed to update time zone.');
-        throw error;
-      }
-    },
-
-    async updateDefaultView(defaultView: string): Promise<void> {
-      const user = store.user();
-      if (!user) return;
-
-      try {
-        await lastValueFrom(userService.updateDefaultView(defaultView));
-        patchState(store, { user: {
-          ...user, settings: { ...user.settings, defaultView: defaultView.toLowerCase() } as UserSettings
-        }});
-      } catch (error) {
-        console.error('Failed to update default view.');
-        throw error;
-      }
-    },
-
-    async updateDateFormat(dateFormat: string): Promise<void> {
-      const user = store.user();
-      if (!user) return;
-
-      try {
-        await lastValueFrom(userService.updateDateFormat(dateFormat));
-        patchState(store, { user: {
-          ...user, settings: { ...user.settings, dateFormat } as UserSettings
-        }});
-      } catch (error) {
-        console.error('Failed to update date format.');
-        throw error;
-      }
-    },
-
-    async updateLang(lang: string): Promise<void> {
-      const user = store.user();
-      if (!user) return;
-
-      try {
-        await lastValueFrom(userService.updateLang(lang));
-        patchState(store, { user: {
-          ...user, settings: { ...user.settings, lang } as UserSettings
-        }});
-
-        const currentPath = window.location.pathname;
-        const pathWithoutLocale = currentPath.replace(/^\/([a-z]{2}-[A-Z]{2}|[a-z]{2})(?=\/|$)/, '');
-        window.location.href = `/${lang}${pathWithoutLocale}`;
-      } catch (error) {
-        console.error('Failed to update language.');
+        console.error('Failed to update settings.');
         throw error;
       }
     },
@@ -202,5 +147,22 @@ export const UserStore = signalStore(
     clearUser(): void {
       patchState(store, initialState);
     }
-  }))
+  })),
+
+  withHooks({
+    onInit: (store) => {
+      effect(() => {
+        const lang = store.lang();
+        if (!lang) return;
+
+        const currentPath = window.location.pathname;
+
+        if (!currentPath.startsWith(`/${lang}/`)) {
+          const pathWithoutLocale = currentPath.replace(/^\/([a-z]{2}-[A-Z]{2}|[a-z]{2})(?=\/|$)/, '');
+
+          window.location.href = `/${lang}${pathWithoutLocale}`;
+        }
+      });
+    }
+  })
 );

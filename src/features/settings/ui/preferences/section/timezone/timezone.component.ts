@@ -44,7 +44,7 @@ export class TimezoneComponent {
           if (!timeZone) return null;
 
           try {
-            await this.userStore.updateTimeZone(timeZone);
+            await this.userStore.updateSettings({ timezone: timeZone });
             field().value.set({ currentTimezone: timeZone, timeZone: '' });
             field().reset();
             return null;

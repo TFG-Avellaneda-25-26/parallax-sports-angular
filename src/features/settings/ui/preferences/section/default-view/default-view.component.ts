@@ -17,12 +17,12 @@ export class DefaultViewComponent {
   readonly i18n = preferencesI18n['defaultView'];
 
   readonly defaultViewOptions = [
-    { value: 'CARDS' },
-    { value: 'TABLE' },
+    { value: 'cards' },
+    { value: 'table' },
   ];
 
   readonly defaultViewForm = form(
-    signal({ currentView: this.userStore.defaultView().toUpperCase(), newView: '' }),
+    signal({ currentView: this.userStore.defaultView(), newView: '' }),
     (schemePath) => {
       readonly(schemePath.currentView);
       required(schemePath.newView, { message: this.i18n.errorRequired });
@@ -49,8 +49,8 @@ export class DefaultViewComponent {
           if (!newView) return null;
 
           try {
-            await this.userStore.updateDefaultView(newView);
-            field().value.set({ currentView: newView.toUpperCase(), newView: '' });
+            await this.userStore.updateSettings({ defaultView: newView as 'cards' | 'table' });
+            field().value.set({ currentView: newView, newView: '' });
             field().reset();
             return null;
           } catch {
