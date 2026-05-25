@@ -2,9 +2,10 @@ pipeline {
     agent any
 
     environment {
-        REGISTRY    = 'localhost:5000'
-        IMAGE_NAME  = 'parallax-angular'
-        STACK_PATH  = '/opt/stack'
+        REGISTRY        = 'localhost:5000'
+        IMAGE_NAME      = 'parallax-angular'
+        STACK_PATH      = '/opt/stack'
+        DOCKERHUB_USER  = 'diegokoes'
     }
 
     options {
@@ -40,6 +41,23 @@ pipeline {
                     docker push ${REGISTRY}/${IMAGE_NAME}:latest
                     docker push ${REGISTRY}/${IMAGE_NAME}:${BUILD_NUMBER}
                 """
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-credentials',
+                    usernameVariable: 'DH_USER',
+                    passwordVariable: 'DH_PASS'
+                )]) {
+                    sh """
+                        echo "\$DH_PASS" | docker login -u "\$DH_USER" --password-stdin
+                        docker tag ${REGISTRY}/${IMAGE_NAME}:latest ${DOCKERHUB_USER}/parallax-angular:latest
+                        docker push ${DOCKERHUB_USER}/parallax-angular:latest
+                        docker logout
+                    """
+                }
             }
         }
 
