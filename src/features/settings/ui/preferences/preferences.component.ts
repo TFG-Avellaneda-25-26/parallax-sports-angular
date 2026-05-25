@@ -4,7 +4,7 @@ import { scrollToSection } from '@shared/lib';
 import { preferencesI18n } from '@features/settings';
 import { LangComponent } from "./section/lang/lang.component";
 import { DefaultViewComponent } from "./section/default-view/default-view.component";
-import { DateFormatComponent } from "./section/date-format/date-format";
+import { DateFormatComponent } from "./section/date-format/date-format.component";
 import { TimezoneComponent } from "./section/timezone/timezone.component";
 
 @Component({
@@ -17,7 +17,6 @@ import { TimezoneComponent } from "./section/timezone/timezone.component";
 export class PreferencesComponent {
 
   readonly i18n = preferencesI18n;
-
   readonly navStore = inject(SettingsNavStore);
 
   constructor() {
