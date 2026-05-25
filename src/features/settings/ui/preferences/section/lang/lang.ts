@@ -17,7 +17,7 @@ export class Lang {
   readonly userStore = inject(UserStore);
 
   readonly langOptions = [
-    { value: 'en-US', example: 'English (United States)' },
+    { value: 'en', example: 'English' },
     { value: 'es', example: 'Español' },
   ];
 
