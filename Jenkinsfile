@@ -60,6 +60,13 @@ pipeline {
         }
         success {
             echo "Deployed Angular build #${BUILD_NUMBER}"
+            sh """
+                docker images --format '{{.Repository}}:{{.Tag}}' \\
+                  | grep '^${REGISTRY}/${IMAGE_NAME}:' \\
+                  | grep -v ':latest\$' \\
+                  | grep -v ':${BUILD_NUMBER}\$' \\
+                  | xargs -r docker rmi 2>/dev/null || true
+            """
         }
         failure {
             echo "Build #${BUILD_NUMBER} failed"
