@@ -1,19 +1,20 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { form, readonly, required, validate } from '@angular/forms/signals';
+import { form, readonly, required, validate, FormRoot, FormField } from '@angular/forms/signals';
 import { TIMEZONE_OPTIONS } from '@entities/timezone';
 import { UserStore } from '@entities/user';
 import { preferencesI18n } from '@features/settings';
+import { StatefulInput, StatefulComboxAutocompleteSelectComponent } from "@shared/ui";
 
 @Component({
   selector: 'app-timezone',
-  imports: [],
+  imports: [FormRoot, StatefulInput, StatefulComboxAutocompleteSelectComponent, FormField],
   templateUrl: './timezone.component.html',
   styleUrl: './timezone.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimezoneComponent {
 
-  readonly timezonesOptions = TIMEZONE_OPTIONS;
+  readonly timezoneOptions = TIMEZONE_OPTIONS;
   readonly userStore = inject(UserStore);
   readonly i18n = preferencesI18n['timezone'];
 
