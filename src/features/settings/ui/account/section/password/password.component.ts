@@ -1,15 +1,25 @@
-import { inject, signal } from "@angular/core";
-import { apply, debounce, form, validate, validateHttp } from "@angular/forms/signals";
-import { loginPasswordSchema, passwordSchema } from "@entities/auth";
-import { UserStore } from "@entities/user";
-import { API_BASE_URL } from "@shared/config";
-import { accountI18n } from "@features/settings";
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { apply, debounce, form, validate, validateHttp, FormRoot, FormField } from '@angular/forms/signals';
+import { loginPasswordSchema, passwordSchema } from '@entities/auth';
+import { UserStore } from '@entities/user';
+import { accountI18n } from '@features/settings';
+import { API_BASE_URL } from '@shared/config';
+import { StatefulInput } from "@shared/ui";
 
-export const createPasswordForm = () => {
-  const userStore = inject(UserStore);
-  const apiBaseUrl = inject(API_BASE_URL);
+@Component({
+  selector: 'app-account-password',
+  imports: [FormRoot, StatefulInput, FormField],
+  templateUrl: './password.component.html',
+  styleUrl: './password.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class PasswordComponent {
 
-  return form(
+  readonly userStore = inject(UserStore);
+  readonly apiBaseUrl = inject(API_BASE_URL);
+  readonly i18n = accountI18n['password'];
+
+  readonly passwordForm = form(
     signal({ currentPassword: '', password: '', confirmPassword: '' }),
     (schemaPath) => {
       apply(schemaPath.currentPassword, loginPasswordSchema);
@@ -21,7 +31,7 @@ export const createPasswordForm = () => {
           if (!currentPassword) return undefined;
 
           return {
-            url: `${apiBaseUrl}/api/users/validate-password`,
+            url: `${this.apiBaseUrl}/api/users/validate-password`,
             method: 'POST',
             body: currentPassword,
             withCredentials: true
@@ -60,11 +70,11 @@ export const createPasswordForm = () => {
     {
       submission: {
         action: async (field) => {
-          const password = field().value().password;
-          if (!password) return null;
+          const { currentPassword, password } = field().value();
+          if (!password || !currentPassword) return null;
 
           try {
-            await userStore.updatePassword(password);
+            await this.userStore.updatePassword(currentPassword, password);
             field().value.set({ currentPassword: '', password: '', confirmPassword: '' });
             field().reset();
             return null;

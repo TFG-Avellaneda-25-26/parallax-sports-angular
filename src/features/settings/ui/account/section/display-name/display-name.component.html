@@ -1,0 +1,17 @@
+<form [formRoot]="displayNameForm">
+  <app-stateful-input
+    type="text"
+    label="{{ i18n.currentLabel}}"
+    fieldId="currentDisplayName"
+    [formField]="displayNameForm.currentDisplayName"
+  />
+  <app-stateful-input
+    type="text"
+    label="{{ i18n.newLabel}}"
+    fieldId="newDisplayName"
+    [formField]="displayNameForm.newDisplayName"
+  />
+  <button type="submit" class="accent-btn" [disabled]="displayNameForm().submitting()">
+    {{ i18n.button }}
+  </button>
+</form>

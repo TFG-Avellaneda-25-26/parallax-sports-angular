@@ -13,7 +13,7 @@
     "parallax-sports": {
       "projectType": "application",
       "i18n": {
-        "sourceLocale": "en-US",
+        "sourceLocale": "en",
         "locales": {
           "es": {
             "translation": "src/locale/messages.es.xlf"
@@ -93,8 +93,8 @@
             "es": {
               "localize": ["es"]
             },
-            "en-US": {
-              "localize": ["en-US"]
+            "en": {
+              "localize": ["en"]
             }
           },
           "defaultConfiguration": "production"
@@ -114,8 +114,8 @@
             "es": {
               "buildTarget": "parallax-sports:build:es"
             },
-            "en-US": {
-              "buildTarget": "parallax-sports:build:en-US"
+            "en": {
+              "buildTarget": "parallax-sports:build:en"
             }
           },
           "defaultConfiguration": "development"

@@ -1,0 +1,17 @@
+<form [formRoot]="emailForm">
+  <app-stateful-input
+    type="email"
+    label="{{ i18n.currentLabel}}"
+    fieldId="currentEmail"
+    [formField]="emailForm.currentEmail"
+  />
+  <app-stateful-input
+    type="email"
+    label="{{ i18n.newLabel }}"
+    fieldId="newEmail"
+    [formField]="emailForm.newEmail"
+  />
+  <button type="submit" class="accent-btn" [disabled]="emailForm().submitting()">
+    {{ i18n.button }}
+  </button>
+</form>

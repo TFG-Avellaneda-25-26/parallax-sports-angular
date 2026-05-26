@@ -6,7 +6,7 @@
     "start": "ng serve",
     "start:local": "NG_API_URL=http://localhost:8080 ng serve",
     "start:es": "NG_API_URL=http://localhost:8080 ng serve --configuration es",
-    "start:en-US": "NG_API_URL=http://localhost:8080 ng serve --configuration en-US",
+    "start:en": "NG_API_URL=http://localhost:8080 ng serve --configuration en",
     "extract-i18n": "ng extract-i18n && node scripts/merge-i18n.mjs",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

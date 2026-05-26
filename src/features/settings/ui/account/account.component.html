@@ -2,52 +2,14 @@
   <header>
     <h2>{{ i18n.email.email }}</h2>
     <p>{{ i18n.email.subtitle }}</p>
-    <form [formRoot]="emailForm">
-      <app-stateful-input
-        type="email"
-        label="Current Email"
-        fieldId="currentEmail"
-        [formField]="emailForm.currentEmail"
-      />
-      <app-stateful-input
-        type="email"
-        label="New Email"
-        fieldId="newEmail"
-        [formField]="emailForm.newEmail"
-      />
-      <button type="submit" class="accent-btn" [disabled]="emailForm().submitting()">
-        {{ i18n.email.button }}
-      </button>
-    </form>
+    <app-account-email />
   </header>
 </section>
 
 <section id="password">
   <header>
     <h2>{{ i18n.password.title }}</h2>
-    <form [formRoot]="passwordForm">
-      <app-stateful-input
-        type="password"
-        label="Current Password"
-        fieldId="currentPassword"
-        [formField]="passwordForm.currentPassword"
-      />
-      <app-stateful-input
-        type="password"
-        label="New Password"
-        fieldId="newPassword"
-        [formField]="passwordForm.password"
-      />
-      <app-stateful-input
-        type="password"
-        label="Confirm New Password"
-        fieldId="confirmNewPassword"
-        [formField]="passwordForm.confirmPassword"
-      />
-      <button type="submit" class="accent-btn" [disabled]="passwordForm().submitting()">
-        {{ i18n.password.button }}
-      </button>
-    </form>
+    <app-account-password />
   </header>
 </section>
 
@@ -55,23 +17,7 @@
   <header>
     <h2>{{ i18n.displayName.title }}</h2>
     <p>{{ i18n.displayName.subtitle }}</p>
-    <form [formRoot]="displayNameForm">
-      <app-stateful-input
-        type="text"
-        label="Current Display Name"
-        fieldId="currentDisplayName"
-        [formField]="displayNameForm.currentDisplayName"
-      />
-      <app-stateful-input
-        type="text"
-        label="New Display Name"
-        fieldId="newDisplayName"
-        [formField]="displayNameForm.newDisplayName"
-      />
-      <button type="submit" class="accent-btn" [disabled]="displayNameForm().submitting()">
-        {{ i18n.displayName.button }}
-      </button>
-    </form>
+    <app-account-display-name />
   </header>
 </section>
 
@@ -79,39 +25,7 @@
   <header>
     <h2>{{ i18n.identities.title }}</h2>
     <p>{{ i18n.identities.subtitle }}</p>
-    <div class="identities-list">
-      @for (item of identities(); track item.provider) {
-  <div class="identity-row">
-    <div class="identity-info">
-      <svg
-        class="identity-icon"
-        [attr.viewBox]="item.oauthProvider.viewBox"
-        xmlns="http://www.w3.org/2000/svg"
-        [attr.fill]="item.oauthProvider.fixedColors ? undefined : 'currentColor'"
-      >
-        @for (path of item.oauthProvider.paths; track path.d) {
-          <path [attr.d]="path.d" [attr.fill]="path.fill ?? undefined" />
-        }
-      </svg>
-      <span class="identity-label">{{ item.provider | titlecase }}</span>
-      @if (item.isLinked) {
-        <span class="identity-badge identity-badge--linked">{{ i18n.identities.connected }}</span>
-      } @else {
-        <span class="identity-badge identity-badge--unlinked">{{ i18n.identities.notConnected }}</span>
-      }
-    </div>
-    @if (item.isLinked) {
-      <button class="danger-btn--sm" (click)="userStore.disconnectIdentity(item.identity!.id)">
-        {{ i18n.identities.unlink}}
-      </button>
-    } @else {
-      <button class="accent-btn--sm" (click)="userStore.linkIdentity(item.provider)">
-        {{ i18n.identities.link }}
-      </button>
-    }
-  </div>
-}
-    </div>
+    <app-account-identities />
   </header>
 </section>
 
@@ -119,8 +33,6 @@
   <header>
     <h2>{{ i18n.deleteAccount.title }}</h2>
     <p>{{ i18n.deleteAccount.subtitle }}</p>
-    <button class="danger-btn" (click)="userStore.deleteAccount()">
-      {{ i18n.deleteAccount.button }}
-    </button>
+    <app-account-delete-account />
   </header>
 </section>

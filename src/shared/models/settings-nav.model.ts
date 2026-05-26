@@ -35,6 +35,7 @@ export const SETTINGS_TREE: TreeNode[] = [
       { name: settingsTreeI18n.preferencesTimezone, value: 'preferences/timezone', section: 'timezone', icon: 'clock-10' },
       { name: settingsTreeI18n.preferencesDateFormat, value: 'preferences/date-format', section: 'date-format', icon: 'calendar-1' },
       { name: settingsTreeI18n.preferencesDefaultView, value: 'preferences/default-view', section: 'default-view', icon: 'chart-no-axes-gantt' },
+      { name: settingsTreeI18n.preferencesLanguage, value: 'preferences/language', section: 'language', icon: 'trophy' },
     ],
     expanded: true
   },

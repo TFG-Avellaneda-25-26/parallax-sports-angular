@@ -2,21 +2,7 @@
   <header>
     <h2>{{ i18n.timezone.title }}</h2>
     <p>{{ i18n.timezone.subtitle }}</p>
-    <form [formRoot]="timeZoneForm">
-      <app-stateful-input
-        type="text"
-        label="{{ i18n.timezone.currentLabel }}"
-        [formField]="timeZoneForm.currentTimezone"
-      />
-      <app-stateful-combox-autocomplete-select
-        label="{{ i18n.timezone.title }}"
-        fieldId="TimezoneSelector"
-        displayLabel="{{ i18n.timezone.selectLabel }}"
-        [list]="timezonesOptions"
-        [formField]="timeZoneForm.timeZone"
-      />
-      <button type="submit" class="accent-btn">{{ i18n.timezone.button }}</button>
-    </form>
+    <app-timezone />
   </header>
 </section>
 
@@ -24,21 +10,7 @@
   <header>
     <h2>{{ i18n.dateFormat.title }}</h2>
     <p>{{ i18n.dateFormat.subtitle }}</p>
-    <form [formRoot]="dateFormatForm">
-      <app-stateful-input
-        type="text"
-        label="{{ i18n.dateFormat.currentLabel }}"
-        [formField]="dateFormatForm.currentFormat"
-      />
-      <app-stateful-combobox-select-input
-        label="{{ i18n.dateFormat.selectLabel }}"
-        fieldId="DateFormatSelector"
-        displayLabel="{{ i18n.dateFormat.selectLabel }}"
-        [list]="formats"
-        [formField]="dateFormatForm.newFormat"
-      />
-      <button type="submit" class="accent-btn">{{ i18n.dateFormat.button }}</button>
-    </form>
+    <app-date-format />
   </header>
 </section>
 
@@ -46,20 +18,15 @@
   <header>
     <h2>{{ i18n.defaultView.title }}</h2>
     <p>{{ i18n.defaultView.subtitle }}</p>
-    <form [formRoot]="defaultViewForm">
-      <app-stateful-input
-        type="text"
-        label="{{ i18n.defaultView.currentLabel }}"
-        [formField]="defaultViewForm.currentView"
-      />
-      <app-stateful-combobox-select-input
-        label="{{ i18n.defaultView.selectLabel }}"
-        fieldId="DefaultViewSelector"
-        displayLabel="{{ i18n.defaultView.selectLabel }}"
-        [list]="defaultViewOptions"
-        [formField]="defaultViewForm.newView"
-      />
-      <button type="submit" class="accent-btn">{{ i18n.defaultView.button }}</button>
-    </form>
+    <app-default-view />
   </header>
+</section>
+
+<section id="language">
+  <header>
+    <h2>{{ i18n.lang.title }}</h2>
+    <p>{{ i18n.lang.subtitle }}</p>
+    <app-lang />
+  </header>
+
 </section>

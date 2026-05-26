@@ -1,0 +1,36 @@
+<div class="identities-list">
+  @for (item of identities(); track item.provider) {
+  <div class="identity-row">
+    <div class="identity-info">
+      <svg
+        class="identity-icon"
+        [attr.viewBox]="item.oauthProvider.viewBox"
+        xmlns="http://www.w3.org/2000/svg"
+        [attr.fill]="item.oauthProvider.fixedColors ? undefined : 'currentColor'"
+      >
+        @for (path of item.oauthProvider.paths; track path.d) {
+          <path [attr.d]="path.d" [attr.fill]="path.fill ?? undefined" />
+        }
+      </svg>
+
+      <span class="identity-label">{{ item.provider | titlecase }}</span>
+
+      @if (item.isLinked) {
+        <span class="identity-badge identity-badge--linked">{{ i18n.connected }}</span>
+      } @else {
+        <span class="identity-badge identity-badge--unlinked">{{ i18n.notConnected }}</span>
+      }
+
+    </div>
+    @if (item.isLinked) {
+      <button class="danger-btn--sm" (click)="userStore.disconnectIdentity(item.identity!.id)">
+        {{ i18n.unlink}}
+      </button>
+    } @else {
+      <button class="accent-btn--sm" (click)="userStore.linkIdentity(item.provider)">
+        {{ i18n.link }}
+      </button>
+    }
+  </div>
+  }
+</div>

@@ -30,6 +30,7 @@ export interface UserSettings {
   dateFormat: string;
   timezone: string;
   updatedAt: string;
+  lang: string;
 }
 
 export interface UserSportSettings {
