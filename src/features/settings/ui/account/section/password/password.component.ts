@@ -70,11 +70,11 @@ export class PasswordComponent {
     {
       submission: {
         action: async (field) => {
-          const password = field().value().password;
-          if (!password) return null;
+          const { currentPassword, password } = field().value();
+          if (!password || !currentPassword) return null;
 
           try {
-            await this.userStore.updatePassword(password);
+            await this.userStore.updatePassword(currentPassword, password);
             field().value.set({ currentPassword: '', password: '', confirmPassword: '' });
             field().reset();
             return null;

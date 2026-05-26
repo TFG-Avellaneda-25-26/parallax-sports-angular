@@ -59,7 +59,7 @@ export const UserStore = signalStore(
       if (!user) return;
 
       try {
-        await lastValueFrom(userService.updateEmail(store.email(),newEmail));
+        await lastValueFrom(userService.updateEmail(newEmail));
         patchState(store, { user: { ...user, email: newEmail, emailVerified: false } });
       } catch (error) {
         console.error('Failed to update email. Reverting to previous state.');
@@ -67,12 +67,12 @@ export const UserStore = signalStore(
       }
     },
 
-    async updatePassword(password: string): Promise<void> {
+    async updatePassword(currentPassword: string, newPassword: string): Promise<void> {
       const user = store.user();
       if (!user) return;
 
       try {
-        await lastValueFrom(userService.updatePassword(password));
+        await lastValueFrom(userService.updatePassword(currentPassword, newPassword));
       } catch (error) {
         console.error('Failed to update password.');
         throw error;
