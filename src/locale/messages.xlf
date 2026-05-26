@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US">
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
   <file id="ngi18n" original="ng.template">
     <unit id="schema.display-name.required">
       <notes>
@@ -679,7 +679,7 @@
         <note category="location">src/features/settings/i18n/settings.i18n.ts:50</note>
       </notes>
       <segment>
-        <source>No sports are avaliable yet. Once the catalogue syncs you&apos;ll be able to configure alerts here.</source>
+        <source>No sports are available yet. Once the catalogue syncs you&apos;ll be able to configure alerts here.</source>
       </segment>
     </unit>
     <unit id="settings.follows.saving">
@@ -912,6 +912,70 @@
       </notes>
       <segment>
         <source>Failed to update default view. Please try again later.</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.title">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:90</note>
+      </notes>
+      <segment>
+        <source>Language</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.subtitle">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:91</note>
+      </notes>
+      <segment>
+        <source>Set your preferred language for the application</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.current">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:92</note>
+      </notes>
+      <segment>
+        <source>Current language</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.select-label">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:93</note>
+      </notes>
+      <segment>
+        <source>Select a language</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.button">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:94</note>
+      </notes>
+      <segment>
+        <source>Change language</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.error.required">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:95</note>
+      </notes>
+      <segment>
+        <source>Language is required</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.error.unchanged">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:96</note>
+      </notes>
+      <segment>
+        <source>New language must be different from current language</source>
+      </segment>
+    </unit>
+    <unit id="settings.preferences.lang.error.update">
+      <notes>
+        <note category="location">src/features/settings/i18n/settings.i18n.ts:97</note>
+      </notes>
+      <segment>
+        <source>Failed to update language. Please try again later.</source>
       </segment>
     </unit>
     <unit id="settings.autocomplete.no-results">
@@ -1154,9 +1218,17 @@
         <source>Default View</source>
       </segment>
     </unit>
-    <unit id="settings.nav.notifications">
+    <unit id="settings.nav.preferences.language">
       <notes>
         <note category="location">src/shared/i18n/settings-tree.i18n.ts:12</note>
+      </notes>
+      <segment>
+        <source>Language</source>
+      </segment>
+    </unit>
+    <unit id="settings.nav.notifications">
+      <notes>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:13</note>
       </notes>
       <segment>
         <source>Notifications</source>
@@ -1164,7 +1236,7 @@
     </unit>
     <unit id="settings.nav.notifications.alerts">
       <notes>
-        <note category="location">src/shared/i18n/settings-tree.i18n.ts:13</note>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:14</note>
       </notes>
       <segment>
         <source>Alerts</source>
@@ -1172,7 +1244,7 @@
     </unit>
     <unit id="settings.nav.admin">
       <notes>
-        <note category="location">src/shared/i18n/settings-tree.i18n.ts:14</note>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:15</note>
       </notes>
       <segment>
         <source>Admin</source>
@@ -1180,7 +1252,7 @@
     </unit>
     <unit id="settings.nav.admin.logs">
       <notes>
-        <note category="location">src/shared/i18n/settings-tree.i18n.ts:15</note>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:16</note>
       </notes>
       <segment>
         <source>Logs</source>
@@ -1188,7 +1260,7 @@
     </unit>
     <unit id="settings.nav.admin.users">
       <notes>
-        <note category="location">src/shared/i18n/settings-tree.i18n.ts:16</note>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:17</note>
       </notes>
       <segment>
         <source>Users</source>
@@ -1196,7 +1268,7 @@
     </unit>
     <unit id="settings.nav.admin.events">
       <notes>
-        <note category="location">src/shared/i18n/settings-tree.i18n.ts:17</note>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:18</note>
       </notes>
       <segment>
         <source>Events</source>
@@ -1204,7 +1276,7 @@
     </unit>
     <unit id="settings.nav.admin.stress-testing">
       <notes>
-        <note category="location">src/shared/i18n/settings-tree.i18n.ts:18</note>
+        <note category="location">src/shared/i18n/settings-tree.i18n.ts:19</note>
       </notes>
       <segment>
         <source>Stress Testing</source>

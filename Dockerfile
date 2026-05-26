@@ -15,7 +15,7 @@ RUN npm ci --no-audit --no-fund --prefer-offline
 # Copy the rest of the project and build the production bundle.
 # defaultConfiguration in angular.json is "production" → optimization + AOT + hashing on.
 COPY . .
-RUN npx ng build
+RUN npx ng build --localize
 
 # ──────────────────────────────────────────────
 # Stage 2 — runtime

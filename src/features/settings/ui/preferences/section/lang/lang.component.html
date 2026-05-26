@@ -1,0 +1,16 @@
+<form [formRoot]="langForm">
+  <app-stateful-input
+  label="{{ i18n.currentLabel}}"
+  type="text"
+  [formField]="langForm.currentLang"
+  />
+
+  <app-stateful-combobox-select-input
+    label="{{ i18n.selectLabel }}"
+    fieldId="LangSelector"
+    displayLabel="{{ i18n.selectLabel }}"
+    [list]="langOptions"
+    [formField]="langForm.newLang"
+  />
+  <button type="submit" class="accent-btn">{{ i18n.button }}</button>
+</form>

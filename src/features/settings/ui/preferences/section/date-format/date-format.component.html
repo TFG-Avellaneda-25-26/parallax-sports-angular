@@ -1,0 +1,15 @@
+<form [formRoot]="dateFormatForm">
+  <app-stateful-input
+    type="text"
+    label="{{ i18n.currentLabel }}"
+    [formField]="dateFormatForm.currentFormat"
+  />
+  <app-stateful-combobox-select-input
+    label="{{ i18n.selectLabel }}"
+    fieldId="DateFormatSelector"
+    displayLabel="{{ i18n.selectLabel }}"
+    [list]="dateFormatOptions"
+    [formField]="dateFormatForm.newFormat"
+  />
+  <button type="submit" class="accent-btn">{{ i18n.button }}</button>
+</form>

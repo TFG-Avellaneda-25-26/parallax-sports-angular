@@ -1,0 +1,15 @@
+<form [formRoot]="defaultViewForm">
+  <app-stateful-input
+    type="text"
+    label="{{ i18n.currentLabel }}"
+    [formField]="defaultViewForm.currentView"
+  />
+  <app-stateful-combobox-select-input
+    label="{{ i18n.selectLabel }}"
+    fieldId="DefaultViewSelector"
+    displayLabel="{{ i18n.selectLabel }}"
+    [list]="defaultViewOptions"
+    [formField]="defaultViewForm.newView"
+  />
+  <button type="submit" class="accent-btn">{{ i18n.button }}</button>
+</form>

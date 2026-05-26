@@ -1,0 +1,15 @@
+<form [formRoot]="timezoneForm">
+  <app-stateful-input
+    type="text"
+    label="{{ i18n.currentLabel }}"
+    [formField]="timezoneForm.currentTimezone"
+  />
+  <app-stateful-combox-autocomplete-select
+    label="{{ i18n.title }}"
+    fieldId="TimezoneSelector"
+    displayLabel="{{ i18n.selectLabel }}"
+    [list]="timezoneOptions"
+    [formField]="timezoneForm.timeZone"
+  />
+  <button type="submit" class="accent-btn">{{ i18n.button }}</button>
+</form>

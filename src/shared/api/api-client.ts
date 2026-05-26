@@ -20,6 +20,10 @@ export class ApiClient {
     return this.http.put<T>(`${this.baseUrl}${path}`, body, this.options);
   }
 
+  patch<T>(path: string, body: unknown) {
+    return this.http.patch<T>(`${this.baseUrl}${path}`, body, this.options);
+  }
+
   delete<T>(path: string) {
     return this.http.delete<T>(`${this.baseUrl}${path}`, this.options);
   }

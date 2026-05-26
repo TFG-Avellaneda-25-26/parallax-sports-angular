@@ -9,6 +9,7 @@ export const settingsTreeI18n = {
   preferencesTimezone: $localize`:@@settings.nav.preferences.timezone:Timezone`,
   preferencesDateFormat: $localize`:@@settings.nav.preferences.date-format:Date Format`,
   preferencesDefaultView: $localize`:@@settings.nav.preferences.default-view:Default View`,
+  preferencesLanguage: $localize`:@@settings.nav.preferences.language:Language`,
   notifications: $localize`:@@settings.nav.notifications:Notifications`,
   notificationsAlerts: $localize`:@@settings.nav.notifications.alerts:Alerts`,
   admin: $localize`:@@settings.nav.admin:Admin`,
