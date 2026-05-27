@@ -113,14 +113,6 @@
         <source>Welcome back</source>
       </segment>
     </unit>
-    <unit id="auth.subtitle.login">
-      <notes>
-        <note category="location">src/features/auth/i18n/auth.i18n.ts:6</note>
-      </notes>
-      <segment>
-        <source>Sign in to continue</source>
-      </segment>
-    </unit>
     <unit id="auth.switch.have-account">
       <notes>
         <note category="location">src/features/auth/i18n/auth.i18n.ts:7</note>

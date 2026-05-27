@@ -43,12 +43,6 @@
         <target>Bienvenido de nuevo</target>
       </segment>
     </unit>
-    <unit id="auth.subtitle.login">
-      <segment>
-        <source>Sign in to continue</source>
-        <target>Ingresa para continuar</target>
-      </segment>
-    </unit>
     <unit id="auth.switch.have-account">
       <segment>
         <source>Already have an account?</source>
