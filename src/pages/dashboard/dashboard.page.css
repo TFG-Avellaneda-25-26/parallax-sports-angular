@@ -19,10 +19,7 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 0.75rem 0.5rem;
-  /* Sticky: pins below the 64px sticky header with a comfortable gap.
-     align-self:start stops the grid from stretching it to the full row height
-     so the panel is exactly as tall as its content. No max-height/overflow
-     here — the page scrolls, not the panel. */
+
   position: sticky;
   top: calc(64px + 1.25rem);
   align-self: start;
@@ -79,5 +76,7 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }

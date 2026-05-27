@@ -43,12 +43,6 @@
         <target>Bienvenido de nuevo</target>
       </segment>
     </unit>
-    <unit id="auth.subtitle.register">
-      <segment>
-        <source>Fill in the details below to get started</source>
-        <target>Rellena los detalles a continuación para empezar</target>
-      </segment>
-    </unit>
     <unit id="auth.subtitle.login">
       <segment>
         <source>Sign in to continue</source>
