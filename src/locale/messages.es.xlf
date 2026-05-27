@@ -973,5 +973,11 @@
         <target>Idioma</target>
       </segment>
     </unit>
+  <unit id="settings.autoComplete.placeholder">
+      <segment>
+        <source>Search settings</source>
+        <target>Buscar configuraciones</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

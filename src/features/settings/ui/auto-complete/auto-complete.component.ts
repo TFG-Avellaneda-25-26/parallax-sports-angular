@@ -15,6 +15,8 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutocompleteComponent {
+
+  readonly placeholder =  $localize`:@@settings.autoComplete.placeholder:Search settings`;
   readonly navStore = inject(SettingsNavStore);
 
   listBox = viewChild<Listbox<TreeNode>>(Listbox);
