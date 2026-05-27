@@ -3,7 +3,7 @@ import { formatEventTime } from './format-event-time';
 
 @Pipe({ name: 'eventTime' })
 export class EventTimePipe implements PipeTransform {
-  transform(iso: string | null | undefined, timeZone: string): string {
-    return formatEventTime(iso, timeZone);
+  transform(iso: string | null | undefined, timeZone: string, dateFormat?: string): string {
+    return formatEventTime(iso, timeZone, dateFormat);
   }
 }

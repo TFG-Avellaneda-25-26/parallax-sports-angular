@@ -21,6 +21,7 @@ export class EventTableComponent {
 
   private readonly userStore = inject(UserStore);
   protected readonly timeZone = this.userStore.timezone;
+  protected readonly dateFormat = this.userStore.dateFormat;
 
   protected readonly groups = computed<EventGroup[]>(() => buildGroups(this.events()));
 }
