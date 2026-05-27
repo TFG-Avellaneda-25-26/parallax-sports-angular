@@ -113,22 +113,6 @@
         <source>Welcome back</source>
       </segment>
     </unit>
-    <unit id="auth.subtitle.register">
-      <notes>
-        <note category="location">src/features/auth/i18n/auth.i18n.ts:5</note>
-      </notes>
-      <segment>
-        <source>Fill in the details below to get started</source>
-      </segment>
-    </unit>
-    <unit id="auth.subtitle.login">
-      <notes>
-        <note category="location">src/features/auth/i18n/auth.i18n.ts:6</note>
-      </notes>
-      <segment>
-        <source>Sign in to continue</source>
-      </segment>
-    </unit>
     <unit id="auth.switch.have-account">
       <notes>
         <note category="location">src/features/auth/i18n/auth.i18n.ts:7</note>
@@ -984,6 +968,14 @@
       </notes>
       <segment>
         <source>No results found</source>
+      </segment>
+    </unit>
+    <unit id="settings.autoComplete.placeholder">
+      <notes>
+        <note category="location">src/features/settings/ui/auto-complete/auto-complete.component.ts:19</note>
+      </notes>
+      <segment>
+        <source>Search settings</source>
       </segment>
     </unit>
     <unit id="landing.title">

@@ -15,6 +15,7 @@ export class EventCardComponent {
 
   private readonly userStore = inject(UserStore);
   protected readonly timeZone = this.userStore.timezone;
+  protected readonly dateFormat = this.userStore.dateFormat;
 
   protected readonly circuitMask = computed(() => {
     const url = this.event().venueImageUrl;

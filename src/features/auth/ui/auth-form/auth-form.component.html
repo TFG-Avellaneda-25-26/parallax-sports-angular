@@ -2,15 +2,16 @@
   <h1 class="auth-title">
     {{ authStore.isRegisterMode() ? i18n.titleRegister : i18n.titleLogin }}
   </h1>
-  <p class="auth-subtitle">
-    {{ authStore.isRegisterMode() ? i18n.subtitleRegister : i18n.subtitleLogin }}
-  </p>
 </div>
 
 <form [formRoot]="form" class="auth-form">
   @if (authStore.isRegisterMode()) {
     <div class="field">
-      <app-stateful-input label="Display Name" fieldId="displayName" [formField]="form.displayName" />
+      <app-stateful-input
+        label="Display Name"
+        fieldId="displayName"
+        [formField]="form.displayName"
+      />
     </div>
   }
 
@@ -19,7 +20,12 @@
   </div>
 
   <div class="field">
-    <app-stateful-input type="password" label="Password" fieldId="password" [formField]="form.password" />
+    <app-stateful-input
+      type="password"
+      label="Password"
+      fieldId="password"
+      [formField]="form.password"
+    />
     @if (!authStore.isRegisterMode()) {
       <button type="button" class="forgot-btn" (click)="goToRecover()">
         {{ i18n.forgotPassword }}
@@ -29,7 +35,12 @@
 
   @if (authStore.isRegisterMode()) {
     <div class="field">
-      <app-stateful-input type="password" label="Confirm Password" fieldId="confirmPassword" [formField]="form.confirmPassword" />
+      <app-stateful-input
+        type="password"
+        label="Confirm Password"
+        fieldId="confirmPassword"
+        [formField]="form.confirmPassword"
+      />
     </div>
   }
 
@@ -57,21 +68,21 @@
   </div>
 
   <div class="oauth-buttons">
-  @for (provider of providers; track provider.id) {
-    <button class="oauth-btn" (click)="userStore.linkIdentity(provider.id)">
-      <svg
-        class="oauth-btn__icon"
-        [attr.viewBox]="provider.viewBox"
-        xmlns="http://www.w3.org/2000/svg"
-        [attr.fill]="provider.fixedColors ? undefined : 'currentColor'"
-      >
-        @for (path of provider.paths; track path.d) {
-          <path [attr.d]="path.d" [attr.fill]="path.fill ?? undefined" />
-        }
-      </svg>
-      <span>{{ provider.label }}</span>
-    </button>
-  }
+    @for (provider of providers; track provider.id) {
+      <button class="oauth-btn" (click)="userStore.linkIdentity(provider.id)">
+        <svg
+          class="oauth-btn__icon"
+          [attr.viewBox]="provider.viewBox"
+          xmlns="http://www.w3.org/2000/svg"
+          [attr.fill]="provider.fixedColors ? undefined : 'currentColor'"
+        >
+          @for (path of provider.paths; track path.d) {
+            <path [attr.d]="path.d" [attr.fill]="path.fill ?? undefined" />
+          }
+        </svg>
+        <span>{{ provider.label }}</span>
+      </button>
+    }
   </div>
 </div>
 
