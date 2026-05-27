@@ -9,10 +9,11 @@ import { Observable } from 'rxjs';
 export class EventService {
   private readonly apiClient = inject(ApiClient);
 
-  fetchEvents(from: string, to: string, after?: number, size?: number): Observable<EventFeedResponse> {
-    let path = `/api/events?from=${from}&to=${to}`;
-    if (after != null) path += `&after=${after}`;
-    if (size != null) path += `&size=${size}`;
+  fetchEvents(after?: number, size?: number): Observable<EventFeedResponse> {
+    const params: string[] = [];
+    if (after != null) params.push(`after=${after}`);
+    if (size != null) params.push(`size=${size}`);
+    const path = params.length > 0 ? `/api/events?${params.join('&')}` : '/api/events';
     return this.apiClient.get<EventFeedResponse>(path);
   }
 }
