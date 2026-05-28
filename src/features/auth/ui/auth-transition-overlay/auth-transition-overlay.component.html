@@ -1,0 +1,6 @@
+@if (transitionStore.isTransitioning()) {
+  <div class="auth-transition" role="status" aria-live="polite">
+    <span class="auth-transition__loader" aria-hidden="true"></span>
+    <span class="auth-transition__sr-only" i18n="@@auth.transition.loading">Loading your account…</span>
+  </div>
+}

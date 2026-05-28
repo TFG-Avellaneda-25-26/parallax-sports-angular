@@ -7,7 +7,7 @@
     <app-dashboard-toolbar/>
 
     <main class="dashboard__main">
-      @if (view() === 'table') {
+      @if (effectiveView() === 'table') {
         <app-event-table [events]="filteredEvents()" />
       } @else {
         <app-event-card-grid [events]="filteredEvents()" />

@@ -6,6 +6,9 @@ import { patchState, signalStore, withComputed, withMethods, withState } from "@
 import { UserStore } from "@entities/user";
 import { apply, applyWhen, form } from "@angular/forms/signals";
 import { lastValueFrom } from "rxjs";
+import { AuthTransitionStore } from "./auth-transition.store";
+
+const AUTH_TRANSITION_MS = 700;
 
 type AuthFormMode = 'login' | 'register';
 
@@ -29,7 +32,7 @@ export const AuthStore = signalStore(
     )
   })),
 
-  withMethods((store, authService = inject(AuthService), router = inject(Router), apiBaseUrl = inject(API_BASE_URL), userStore = inject(UserStore)) => {
+  withMethods((store, authService = inject(AuthService), router = inject(Router), apiBaseUrl = inject(API_BASE_URL), userStore = inject(UserStore), transitionStore = inject(AuthTransitionStore)) => {
     const authForm = form(formModel, (schemaPath) => {
       apply(schemaPath.email, emailSchema);
       applyWhen(schemaPath.email, () => store.isRegisterMode(), emailAsyncSchema(apiBaseUrl, 'register'));
@@ -48,9 +51,16 @@ export const AuthStore = signalStore(
             // Cargar el usuario ANTES de navegar para que el header (OnPush)
             // ya tenga isAuthenticated() = true en el primer render.
             await userStore.loadUser();
-            router.navigate(['/dashboard']);
+            // Brief transition overlay so the jump to the dashboard doesn't
+            // feel instant. Safe to delay here — userStore.user() is already
+            // populated, so authGuard will see an authenticated user.
+            transitionStore.start();
+            await new Promise(resolve => setTimeout(resolve, AUTH_TRANSITION_MS));
+            await router.navigate(['/dashboard']);
+            transitionStore.stop();
             return null;
           } catch {
+            transitionStore.stop();
             return { kind: 'authError', message: store.authErrorSubmitMessage() };
           }
         },

@@ -1,4 +1,4 @@
-import { afterNextRender, afterRenderEffect, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, viewChild } from '@angular/core';
+import { afterNextRender, afterRenderEffect, ChangeDetectionStrategy, Component, computed, DestroyRef, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { EventCardGridComponent, EventStore, EventTableComponent } from '@features/event';
 import {
   DashboardToolbarComponent,
@@ -30,7 +30,10 @@ export class DashboardPage {
   private readonly destroyRef = inject(DestroyRef);
   sentinel = viewChild<ElementRef>('sentinel');
 
-  protected readonly view = this.viewStore.view;
+  private readonly isNarrow = signal(false);
+  protected readonly effectiveView = computed(() =>
+    this.isNarrow() ? 'cards' : this.viewStore.view(),
+  );
   protected readonly treeNodes = computed(() => buildTree(this.eventStore.events()));
   protected readonly filteredEvents = computed(() => {
     this.filterStore.activeFilters();
@@ -38,6 +41,14 @@ export class DashboardPage {
   });
 
   constructor () {
+    if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
+      const mql = window.matchMedia('(max-width: 720px)');
+      this.isNarrow.set(mql.matches);
+      const onChange = (e: MediaQueryListEvent) => this.isNarrow.set(e.matches);
+      mql.addEventListener('change', onChange);
+      this.destroyRef.onDestroy(() => mql.removeEventListener('change', onChange));
+    }
+
     afterNextRender(() => {
       const trigger = ScrollTrigger.create({
         trigger: this.sentinel()?.nativeElement,

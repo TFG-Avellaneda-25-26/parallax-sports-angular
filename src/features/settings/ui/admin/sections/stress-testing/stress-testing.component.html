@@ -35,22 +35,21 @@
       </label>
 
       <div class="stress__actions">
-        <button
-          type="button"
-          class="accent-btn"
-          (click)="start()"
-          [disabled]="busy() || streaming()"
-        >
-          Start
-        </button>
-        <button
-          type="button"
-          class="accent-btn"
-          (click)="stop()"
-          [disabled]="busy() || !activeRun() || !streaming()"
-        >
-          Stop
-        </button>
+        <label class="switch" [class.is-disabled]="busy()" [attr.aria-label]="running() ? 'Stop run' : 'Start run'">
+          <input
+            type="checkbox"
+            [checked]="running()"
+            [disabled]="busy()"
+            (change)="onSwitchToggle($event)"
+          />
+          <div class="button">
+            <div class="light"></div>
+            <div class="dots"></div>
+            <div class="characters"></div>
+            <div class="shine"></div>
+            <div class="shadow"></div>
+          </div>
+        </label>
       </div>
     </div>
 
@@ -84,8 +83,7 @@
     @if (logLines().length === 0) {
       <p class="stress__empty">No active stream. Start a run to see logs here.</p>
     } @else {
-      <pre>@for (line of logLines(); track $index) {{{ line }}
-}</pre>
+      <pre class="stress__console"><code [innerHTML]="logLinesHtml()"></code></pre>
     }
   </div>
 
