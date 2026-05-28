@@ -83,7 +83,8 @@
     @if (logLines().length === 0) {
       <p class="stress__empty">No active stream. Start a run to see logs here.</p>
     } @else {
-      <pre class="stress__console"><code [innerHTML]="logLinesHtml()"></code></pre>
+      <pre #consoleEl class="stress__console"><code>@for (line of logLinesHtml(); track $index) {<span #lineEl class="stress__line" [innerHTML]="line"></span>
+}</code></pre>
     }
   </div>
 
