@@ -243,6 +243,10 @@
   color: inherit;
 }
 
+.stress__line {
+  display: inline;
+}
+
 /* ANSI palette mapped to theme tokens. Bright variants get the same hue at
    slightly higher contrast so both light and dark themes stay readable. */
 .ansi-bold { font-weight: 700; }

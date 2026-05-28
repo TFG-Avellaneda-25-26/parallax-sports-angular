@@ -2,9 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
+  ElementRef,
   computed,
+  effect,
   inject,
   signal,
+  viewChild,
+  viewChildren,
 } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import {
@@ -15,7 +19,9 @@ import {
   LoadTestStartRequest,
 } from '@entities/loadtest';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ansiToHtml } from '@shared/lib';
+import { ansiToHtml, gsap } from '@shared/lib';
+
+const TYPEWRITER_DURATION = 0.15;
 
 @Component({
   selector: 'app-admin-stress-testing',
@@ -50,8 +56,8 @@ export class StressTestingComponent {
   // ansiToHtml emits only escaped text inside <span class="ansi-*"> wrappers
   // we generate ourselves, so bypassing the sanitizer here is safe and avoids
   // it stripping the class attributes we rely on for theming.
-  protected readonly logLinesHtml = computed<SafeHtml>(() =>
-    this.sanitizer.bypassSecurityTrustHtml(this.logLines().map(ansiToHtml).join('\n')),
+  protected readonly logLinesHtml = computed<SafeHtml[]>(() =>
+    this.logLines().map(l => this.sanitizer.bypassSecurityTrustHtml(ansiToHtml(l))),
   );
 
   // Whether the run is active enough to consider the analog switch "on".
@@ -64,11 +70,58 @@ export class StressTestingComponent {
   protected readonly historyIsFirst = computed(() => this.runs()?.first ?? true);
   protected readonly historyIsLast = computed(() => this.runs()?.last ?? true);
 
+  private readonly consoleEl = viewChild<ElementRef<HTMLPreElement>>('consoleEl');
+  private readonly lineEls = viewChildren<ElementRef<HTMLSpanElement>>('lineEl');
   private eventSource: EventSource | null = null;
+  private previousLineCount = 0;
+  private typewriterTween: gsap.core.Tween | null = null;
 
   constructor() {
     void this.bootstrap();
-    this.destroyRef.onDestroy(() => this.closeStream());
+    this.destroyRef.onDestroy(() => {
+      this.closeStream();
+      this.typewriterTween?.kill();
+    });
+    effect(() => {
+      const lines = this.logLines();
+      const prev = this.previousLineCount;
+      const isSingleArrival = lines.length - prev === 1;
+      this.previousLineCount = lines.length;
+
+      setTimeout(() => {
+        const el = this.consoleEl()?.nativeElement;
+        if (el) el.scrollTop = el.scrollHeight;
+        if (isSingleArrival) this.animateLastLine();
+      }, 0);
+    });
+  }
+
+  // Type out the most recent line. A burst of lines arriving in one tick
+  // collapses to a single effect run with delta > 1, so this only fires when
+  // exactly one new line landed — keeps the console readable during fast
+  // streams instead of queueing tweens behind each line.
+  private animateLastLine(): void {
+    const els = this.lineEls();
+    const lastRef = els[els.length - 1];
+    if (!lastRef) return;
+
+    const el = lastRef.nativeElement;
+    const styledHtml = el.innerHTML;
+    const rawText = el.textContent ?? '';
+    if (!rawText) return;
+
+    this.typewriterTween?.kill();
+    el.textContent = '';
+    this.typewriterTween = gsap.to(el, {
+      duration: TYPEWRITER_DURATION,
+      // `text: string` is the type-out form (no scramble). When done we swap
+      // the styled HTML back in so ANSI colors return.
+      text: rawText,
+      ease: 'none',
+      onComplete: () => {
+        el.innerHTML = styledHtml;
+      },
+    });
   }
 
   protected onScenarioChange(id: string): void {
