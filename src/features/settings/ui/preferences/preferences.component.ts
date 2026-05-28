@@ -23,11 +23,9 @@ export class PreferencesComponent {
     effect(() => {
       const section = this.navStore.activeSectionId();
       if (!section) return;
-
       const el = document.getElementById(section);
       if (!el) return;
-
-      setTimeout(() => scrollToSection(el), 0);
+      scrollToSection(el);
     })
   }
 }

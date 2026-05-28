@@ -14,6 +14,8 @@ import {
   LoadTestService,
   LoadTestStartRequest,
 } from '@entities/loadtest';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ansiToHtml } from '@shared/lib';
 
 @Component({
   selector: 'app-admin-stress-testing',
@@ -25,6 +27,7 @@ import {
 export class StressTestingComponent {
   private readonly service = inject(LoadTestService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly sanitizer = inject(DomSanitizer);
 
   protected readonly scenarios = signal<LoadTestScenario[]>([]);
   protected readonly selectedScenarioId = signal<string>('');
@@ -44,6 +47,18 @@ export class StressTestingComponent {
     this.scenarios().find(s => s.id === this.selectedScenarioId()) ?? null
   );
 
+  // ansiToHtml emits only escaped text inside <span class="ansi-*"> wrappers
+  // we generate ourselves, so bypassing the sanitizer here is safe and avoids
+  // it stripping the class attributes we rely on for theming.
+  protected readonly logLinesHtml = computed<SafeHtml>(() =>
+    this.sanitizer.bypassSecurityTrustHtml(this.logLines().map(ansiToHtml).join('\n')),
+  );
+
+  // Whether the run is active enough to consider the analog switch "on".
+  // A click while busy is ignored at the handler level so the toggle can't
+  // race with an in-flight start/stop.
+  protected readonly running = computed(() => this.streaming() || this.activeRun()?.status === 'running');
+
   protected readonly historyRows = computed<LoadTestRun[]>(() => this.runs()?.content ?? []);
   protected readonly historyTotalPages = computed(() => this.runs()?.totalPages ?? 0);
   protected readonly historyIsFirst = computed(() => this.runs()?.first ?? true);
@@ -58,6 +73,21 @@ export class StressTestingComponent {
 
   protected onScenarioChange(id: string): void {
     this.selectedScenarioId.set(id);
+  }
+
+  protected onSwitchToggle(event: Event): void {
+    const checked = (event.target as HTMLInputElement).checked;
+    if (this.busy()) {
+      // Reset the checkbox to match running state so the UI doesn't drift
+      // from the actual run.
+      (event.target as HTMLInputElement).checked = this.running();
+      return;
+    }
+    if (checked) {
+      void this.start();
+    } else {
+      void this.stop();
+    }
   }
 
   protected async start(): Promise<void> {

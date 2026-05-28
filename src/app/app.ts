@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '@widgets/header';
-import { VerifyEmailDialogComponent } from '@features/auth';
+import { AuthTransitionOverlayComponent, VerifyEmailDialogComponent } from '@features/auth';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, VerifyEmailDialogComponent],
+  imports: [RouterOutlet, HeaderComponent, VerifyEmailDialogComponent, AuthTransitionOverlayComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

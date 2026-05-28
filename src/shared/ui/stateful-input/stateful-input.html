@@ -5,12 +5,20 @@
       [type]="effectiveType()"
       [id]="fieldId()"
       [value]="value()"
+      [class.is-decoding]="decoding()"
       (input)="value.set($any($event.target).value)"
       (blur)="touched.set(true)"
       [readonly]="readonly()"
     />
 
     @if (type() === 'password') {
+      <span
+        #decodeOverlay
+        class="decode-overlay"
+        [class.is-active]="decoding()"
+        aria-hidden="true"
+      ></span>
+
       <button
         type="button"
         class="visibility-toggle"

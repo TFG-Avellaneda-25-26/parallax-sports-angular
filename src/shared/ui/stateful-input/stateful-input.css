@@ -31,6 +31,41 @@ label {
   padding-right: 46px;
 }
 
+/* Overlay used for the GSAP "matrix decode" effect when toggling password
+   visibility. Matches the input's typography and padding so the scrambled
+   chars sit exactly where the masked dots / real value would appear. */
+.decode-overlay {
+  position: absolute;
+  inset: 0;
+  padding: 12px 14px;
+  padding-right: 46px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--color-accent);
+  background: transparent;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  border-radius: var(--radius-md);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  text-shadow: 0 0 8px color-mix(in srgb, var(--color-accent) 55%, transparent);
+  z-index: 1;
+}
+
+.decode-overlay.is-active {
+  opacity: 1;
+}
+
+input.is-decoding {
+  color: transparent !important;
+  caret-color: transparent !important;
+  text-shadow: none !important;
+}
+
 .visibility-toggle {
   position: absolute;
   top: 50%;

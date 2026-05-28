@@ -81,7 +81,7 @@ export class FollowsComponent {
       if (!section) return;
       const el = document.getElementById(section);
       if (!el) return;
-      setTimeout(() => scrollToSection(el), 0);
+      scrollToSection(el);
     });
   }
 
